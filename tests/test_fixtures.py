@@ -1,8 +1,8 @@
 """Fixture integrity.
 
 These do not check classification. They check that every fixture is a complete,
-valid profile, so that when a rule fails you know the fault is in the rule and
-not in the fixture.
+valid product profile, so that when a rule fails you know the fault is in the
+rule and not in the fixture.
 """
 
 import json
@@ -10,7 +10,15 @@ from pathlib import Path
 
 import pytest
 
-from reguide.profile import DeviceKind, DeviceProfile
+from reguide.profile import (
+    DeviceKind,
+    DeviceProfile,
+    GeneralDeviceProfile,
+    IvdProfile,
+    highest_class,
+    relevant_general_fields,
+    relevant_ivd_fields,
+)
 
 FIXTURE_DIR = Path(__file__).parent / "fixtures"
 FIXTURES = sorted(FIXTURE_DIR.glob("*.json"))
@@ -29,46 +37,90 @@ def verified() -> list[Path]:
     return [p for p in FIXTURES if load(p)["verified"]]
 
 
+def multi_function() -> list[Path]:
+    return [p for p in FIXTURES if len(load(p)["functions"]) > 1]
+
+
 def test_fixtures_exist():
     assert FIXTURES, "run: python scripts/build_fixtures.py"
 
 
 def test_most_fixtures_are_verified():
-    """Unverified fixtures are allowed, but they must stay the minority."""
     assert len(verified()) > len(FIXTURES) * 0.7
+
+
+def test_multi_function_products_are_represented():
+    """The schema exists for these. An empty set means untested machinery."""
+    assert len(multi_function()) >= 3
 
 
 @pytest.mark.parametrize("path", FIXTURES, ids=lambda p: p.stem)
 class TestFixture:
     def test_has_required_keys(self, path):
         data = load(path)
-        for key in ("expected_class", "expected_rule", "source", "verified", "profile"):
+        for key in ("expected_classes", "functions", "source", "verified", "profile"):
             assert key in data, f"{path.name} is missing {key}"
 
     def test_profile_validates(self, path):
         DeviceProfile.model_validate(load(path)["profile"])
 
-    def test_expected_class_is_known(self, path):
-        assert load(path)["expected_class"] in KNOWN_CLASSES
-
-    def test_branch_matches_populated_section(self, path):
+    def test_has_at_least_one_function(self, path):
         profile = DeviceProfile.model_validate(load(path)["profile"])
-        kind = profile.branch()
-        assert kind is not None, "every fixture must establish its kind"
-        if kind is DeviceKind.IVD:
-            assert profile.ivd is not None and profile.general is None
-        else:
-            assert profile.general is not None and profile.ivd is None
+        assert profile.functions, "a product with no functions cannot be classified"
+
+    def test_expectations_line_up_with_functions(self, path):
+        data = load(path)
+        profile = DeviceProfile.model_validate(data["profile"])
+        assert len(data["functions"]) == len(profile.functions)
+        for expected, function in zip(data["functions"], profile.functions):
+            assert expected["name"] == function.name.value
+
+    def test_every_expected_class_is_known(self, path):
+        for function in load(path)["functions"]:
+            assert function["expected_class"] in KNOWN_CLASSES
+
+    def test_product_class_is_the_highest_per_family(self, path):
+        """Derived, never asserted separately, so it cannot drift."""
+        data = load(path)
+        expected = highest_class(f["expected_class"] for f in data["functions"])
+        assert data["expected_classes"] == expected
+
+    def test_every_function_declares_its_branch(self, path):
+        profile = DeviceProfile.model_validate(load(path)["profile"])
+        for function in profile.functions:
+            kind = function.branch()
+            assert kind is not None
+            if kind is DeviceKind.IVD:
+                assert function.ivd is not None and function.general is None
+            else:
+                assert function.general is not None and function.ivd is None
+
+    def test_function_class_matches_function_branch(self, path):
+        data = load(path)
+        profile = DeviceProfile.model_validate(data["profile"])
+        for expected, function in zip(data["functions"], profile.functions):
+            is_ivd_class = "IVD" in expected["expected_class"]
+            assert is_ivd_class == (function.branch() is DeviceKind.IVD)
 
     def test_nothing_relevant_is_unresolved(self, path):
-        """A fixture with gaps would fail classification for the wrong reason."""
         profile = DeviceProfile.model_validate(load(path)["profile"])
         assert profile.missing() == []
 
-    def test_expected_class_matches_the_branch(self, path):
-        data = load(path)
-        profile = DeviceProfile.model_validate(data["profile"])
-        assert ("IVD" in data["expected_class"]) == (profile.branch() is DeviceKind.IVD)
+    def test_no_function_answers_a_question_nobody_asked(self, path):
+        """An over-filled fixture would pass even if gating were broken."""
+        profile = DeviceProfile.model_validate(load(path)["profile"])
+        for index, function in enumerate(profile.functions):
+            if function.branch() is DeviceKind.IVD:
+                asked, section = set(relevant_ivd_fields(function.ivd)), function.ivd
+            else:
+                asked, section = set(relevant_general_fields(function)), function.general
+            extra = [n for n in type(section).model_fields
+                     if getattr(section, n).resolved and n not in asked]
+            assert not extra, f"function {index} answers unasked fields: {extra}"
+
+    def test_all_evidence_is_quoted_from_the_source(self, path):
+        profile = DeviceProfile.model_validate(load(path)["profile"])
+        assert profile.untraceable_evidence() == []
 
     def test_an_unverified_fixture_explains_itself(self, path):
         data = load(path)
@@ -80,10 +132,10 @@ class TestBoundaryFamilies:
     """The families exist to isolate one variable. Guard that they still do."""
 
     def test_the_screw_family_differs_only_in_route_and_duration(self):
-        screws = {p.stem: DeviceProfile.model_validate(load(p)["profile"])
-                  for p in FIXTURES if p.stem.startswith("screw_")}
-        assert len(screws) == 4
-        classes = {load(FIXTURE_DIR / f"{n}.json")["expected_class"] for n in screws}
+        names = [p.stem for p in FIXTURES if p.stem.startswith("screw_")]
+        assert len(names) == 4
+        classes = {load(FIXTURE_DIR / f"{n}.json")["functions"][0]["expected_class"]
+                   for n in names}
         assert classes == {"Class IIa", "Class IIb", "Class III"}
 
     def test_the_dressing_family_differs_only_in_intended_function(self):
@@ -91,24 +143,82 @@ class TestBoundaryFamilies:
                  "dressing_secondary_intent"]
         profiles = {n: DeviceProfile.model_validate(
             load(FIXTURE_DIR / f"{n}.json")["profile"]) for n in names}
-        for profile in profiles.values():
-            assert profile.general.contacts_injured_skin.value.value == "yes"
-        functions = {p.general.wound_function.value for p in profiles.values()}
-        assert len(functions) == 3
-        classes = {load(FIXTURE_DIR / f"{n}.json")["expected_class"] for n in names}
+        functions = {n: p.functions[0].general for n, p in profiles.items()}
+        for general in functions.values():
+            assert general.contacts_injured_skin.value.value == "yes"
+        assert len({g.wound_function.value for g in functions.values()}) == 3
+        classes = {load(FIXTURE_DIR / f"{n}.json")["functions"][0]["expected_class"]
+                   for n in names}
         assert classes == {"Class I", "Class IIa", "Class IIb"}
 
     def test_the_software_pairs_share_a_rule_family(self):
         pairs = [("melanoma_screening_app", "emphysema_ct_software", "4.5"),
                  ("spect_cardiac_monitoring", "emg_dystrophy_monitoring", "4.6")]
         for high, low, family in pairs:
-            hi, lo = load(FIXTURE_DIR / f"{high}.json"), load(FIXTURE_DIR / f"{low}.json")
+            hi = load(FIXTURE_DIR / f"{high}.json")["functions"][0]
+            lo = load(FIXTURE_DIR / f"{low}.json")["functions"][0]
             assert hi["expected_rule"].startswith(family)
             assert lo["expected_rule"].startswith(family)
             assert hi["expected_class"] != lo["expected_class"]
 
-    def test_the_prothrombin_pack_is_split_not_merged(self):
-        meter = load(FIXTURE_DIR / "prothrombin_meter.json")
-        strips = load(FIXTURE_DIR / "prothrombin_self_test.json")
-        assert meter["expected_class"] == "Class 1 IVD"
-        assert strips["expected_class"] == "Class 3 IVD"
+
+class TestMultiFunction:
+    def test_a_pack_can_hold_two_rule_families(self):
+        """The prothrombin pack is IVD and general at once. Two ARTG answers."""
+        data = load(FIXTURE_DIR / "prothrombin_self_test_pack.json")
+        profile = DeviceProfile.model_validate(data["profile"])
+        assert profile.kinds() == {DeviceKind.IVD, DeviceKind.GENERAL}
+        assert set(data["expected_classes"]) == {"ivd", "general"}
+
+    def test_the_pack_does_not_collapse_into_one_class(self):
+        data = load(FIXTURE_DIR / "prothrombin_self_test_pack.json")
+        assert data["expected_classes"]["ivd"] == "Class 3 IVD"
+        assert data["expected_classes"]["general"] == "Class IIa"
+
+    def test_the_meter_and_strips_stay_separate(self):
+        """Same pack, same family, different classes. The reason for functions."""
+        data = load(FIXTURE_DIR / "prothrombin_self_test_pack.json")
+        by_name = {f["name"]: f["expected_class"] for f in data["functions"]}
+        assert by_name["Portable prothrombin time meter"] == "Class 1 IVD"
+        assert by_name["Prothrombin time test strips"] == "Class 3 IVD"
+
+    def test_one_regulated_function_governs_the_product(self):
+        data = load(FIXTURE_DIR / "wellness_app_with_symptom_checker.json")
+        assert data["expected_classes"]["general"] == "Class IIa"
+
+    def test_every_function_of_a_product_is_asked_separately(self):
+        profile = DeviceProfile.model_validate(
+            load(FIXTURE_DIR / "imaging_platform.json")["profile"])
+        blanked = profile.model_copy(deep=True)
+        blanked.functions[1].general.decision_maker = type(
+            blanked.functions[1].general.decision_maker)()
+        missing = blanked.missing()
+        assert missing == ["functions.1.general.decision_maker"]
+
+
+class TestSchemaCoverage:
+    """Every schema field must be reachable, or it is dead weight.
+
+    A field the interview never asks for would always read UNKNOWN at rule
+    time, and the rule that depends on it would never fire. Better to find
+    that here than after writing the rule.
+    """
+
+    def _asked(self):
+        general, ivd = set(), set()
+        for path in FIXTURES:
+            profile = DeviceProfile.model_validate(load(path)["profile"])
+            for function in profile.functions:
+                if function.branch() is DeviceKind.IVD:
+                    ivd |= set(relevant_ivd_fields(function.ivd))
+                else:
+                    general |= set(relevant_general_fields(function))
+        return general, ivd
+
+    def test_every_general_field_is_reached_by_some_fixture(self):
+        general, _ = self._asked()
+        assert set(GeneralDeviceProfile.model_fields) - general == set()
+
+    def test_every_ivd_field_is_reached_by_some_fixture(self):
+        _, ivd = self._asked()
+        assert set(IvdProfile.model_fields) - ivd == set()

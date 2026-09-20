@@ -1,28 +1,26 @@
 {
-  "expected_class": "Class IIb",
-  "expected_rule": "3.4(2)",
+  "expected_classes": {
+    "general": "Class IIb"
+  },
+  "functions": [
+    {
+      "name": "Metal fixation screw, permanent",
+      "expected_class": "Class IIb",
+      "expected_rule": "3.4(2)"
+    }
+  ],
   "source": "TGA, Classifying medical devices that are not IVDs",
   "verified": true,
   "note": "Crossing 30 days moves the class. The duration band is load-bearing.",
   "profile": {
     "core": {
-      "device_name": {
+      "product_name": {
         "value": "Metal fixation screw, permanent",
         "basis": "stated",
         "evidence": "Metal fixation screw, permanent"
       },
       "intended_purpose": {
         "value": "Holds bone together for longer than 30 days, permanently implanted.",
-        "basis": "stated",
-        "evidence": "Holds bone together for longer than 30 days, permanently implanted."
-      },
-      "kind": {
-        "value": "general_device",
-        "basis": "stated",
-        "evidence": "Holds bone together for longer than 30 days, permanently implanted."
-      },
-      "is_software_only": {
-        "value": "no",
         "basis": "stated",
         "evidence": "Holds bone together for longer than 30 days, permanently implanted."
       },
@@ -35,143 +33,172 @@
         "value": "no",
         "basis": "stated",
         "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+      },
+      "functions_confirmed": {
+        "value": "yes",
+        "basis": "stated",
+        "evidence": "fixture decomposition is fixed by hand"
       }
     },
-    "general": {
-      "invasiveness": {
-        "value": "implantable",
-        "basis": "stated",
-        "evidence": "Holds bone together for longer than 30 days, permanently implanted."
-      },
-      "duration": {
-        "value": "long_term",
-        "basis": "stated",
-        "evidence": "Holds bone together for longer than 30 days, permanently implanted."
-      },
-      "body_contact": {
-        "value": "breached_skin_or_wound",
-        "basis": "stated",
-        "evidence": "Holds bone together for longer than 30 days, permanently implanted."
-      },
-      "orifice_site": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "contacts_injured_skin": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Holds bone together for longer than 30 days, permanently implanted."
-      },
-      "wound_function": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "breaches_dermis": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "fluid_handling": {
-        "value": "none",
-        "basis": "stated",
-        "evidence": "Holds bone together for longer than 30 days, permanently implanted."
-      },
-      "connected_to_active_device": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "reusable_surgical_instrument": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "absorbed_or_chemically_changed": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Holds bone together for longer than 30 days, permanently implanted."
-      },
-      "delivers_ionising_radiation": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "active_type": {
-        "value": "not_active",
-        "basis": "stated",
-        "evidence": "Holds bone together for longer than 30 days, permanently implanted."
-      },
-      "is_active_implantable": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Holds bone together for longer than 30 days, permanently implanted."
-      },
-      "clinical_function": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "delivers_hazardous_energy": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "administers_or_removes_medicine": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "decision_maker": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "condition_severity": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "public_health_risk": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "records_diagnostic_images": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "incorporates_medicine": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Holds bone together for longer than 30 days, permanently implanted."
-      },
-      "animal_or_microbial_origin": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Holds bone together for longer than 30 days, permanently implanted."
-      },
-      "human_blood_derivative": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Holds bone together for longer than 30 days, permanently implanted."
-      },
-      "contraceptive_or_sti_prevention": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Holds bone together for longer than 30 days, permanently implanted."
-      },
-      "disinfects_another_device": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+    "functions": [
+      {
+        "name": {
+          "value": "Metal fixation screw, permanent",
+          "basis": "stated",
+          "evidence": "Metal fixation screw, permanent"
+        },
+        "description": {
+          "value": "Holds bone together for longer than 30 days, permanently implanted.",
+          "basis": "stated",
+          "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+        },
+        "kind": {
+          "value": "general_device",
+          "basis": "stated",
+          "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+        },
+        "is_software": {
+          "value": "no",
+          "basis": "stated",
+          "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+        },
+        "general": {
+          "invasiveness": {
+            "value": "implantable",
+            "basis": "stated",
+            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+          },
+          "duration": {
+            "value": "long_term",
+            "basis": "stated",
+            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+          },
+          "body_contact": {
+            "value": "breached_skin_or_wound",
+            "basis": "stated",
+            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+          },
+          "orifice_site": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contacts_injured_skin": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "wound_function": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "breaches_dermis": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "fluid_handling": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "connected_to_active_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "reusable_surgical_instrument": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "absorbed_or_chemically_changed": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+          },
+          "delivers_ionising_radiation": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "active_type": {
+            "value": "not_active",
+            "basis": "stated",
+            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+          },
+          "is_active_implantable": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+          },
+          "clinical_function": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "delivers_hazardous_energy": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "administers_or_removes_medicine": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "decision_maker": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "condition_severity": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "public_health_risk": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "records_diagnostic_images": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "incorporates_medicine": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+          },
+          "animal_or_microbial_origin": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+          },
+          "human_blood_derivative": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+          },
+          "contraceptive_or_sti_prevention": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+          },
+          "disinfects_another_device": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+          }
+        },
+        "ivd": null
       }
-    },
-    "ivd": null,
+    ],
     "funding": null,
-    "source_text": "Holds bone together for longer than 30 days, permanently implanted.",
-    "schema_version": "0.2"
+    "source_text": "Metal fixation screw, permanent Holds bone together for longer than 30 days, permanently implanted. Metal fixation screw, permanent Holds bone together for longer than 30 days, permanently implanted. fixture decomposition is fixed by hand",
+    "schema_version": "0.3"
   }
 }

@@ -1,0 +1,375 @@
+{
+  "expected_classes": {
+    "general": "Class IIa",
+    "ivd": "Class 3 IVD"
+  },
+  "functions": [
+    {
+      "name": "Portable prothrombin time meter",
+      "expected_class": "Class 1 IVD",
+      "expected_rule": "1.6"
+    },
+    {
+      "name": "Prothrombin time test strips",
+      "expected_class": "Class 3 IVD",
+      "expected_rule": "1.4"
+    },
+    {
+      "name": "Lancet",
+      "expected_class": "Class IIa",
+      "expected_rule": "3.2"
+    }
+  ],
+  "source": "TGA, Classifying IVDs for supply in Australia",
+  "verified": true,
+  "note": "A procedure pack holding three functions in two rule families. The pack does not take one class: the meter and strips classify separately as IVDs and the lancet as a general device.",
+  "profile": {
+    "core": {
+      "product_name": {
+        "value": "Prothrombin time self-testing pack",
+        "basis": "stated",
+        "evidence": "Prothrombin time self-testing pack"
+      },
+      "intended_purpose": {
+        "value": "Procedure pack for prothrombin time self-testing at home, containing a portable meter, test strips and a lancet.",
+        "basis": "stated",
+        "evidence": "Procedure pack for prothrombin time self-testing at home, containing a portable meter, test strips and a lancet."
+      },
+      "supplied_sterile": {
+        "value": "yes",
+        "basis": "stated",
+        "evidence": "Procedure pack for prothrombin time self-testing at home, containing a portable meter, test strips and a lancet."
+      },
+      "has_measuring_function": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Procedure pack for prothrombin time self-testing at home, containing a portable meter, test strips and a lancet."
+      },
+      "functions_confirmed": {
+        "value": "yes",
+        "basis": "stated",
+        "evidence": "fixture decomposition is fixed by hand"
+      }
+    },
+    "functions": [
+      {
+        "name": {
+          "value": "Portable prothrombin time meter",
+          "basis": "stated",
+          "evidence": "Portable prothrombin time meter"
+        },
+        "description": {
+          "value": "Instrument that reads prothrombin time test strips.",
+          "basis": "stated",
+          "evidence": "Instrument that reads prothrombin time test strips."
+        },
+        "kind": {
+          "value": "ivd",
+          "basis": "stated",
+          "evidence": "Instrument that reads prothrombin time test strips."
+        },
+        "is_software": {
+          "value": "no",
+          "basis": "stated",
+          "evidence": "Instrument that reads prothrombin time test strips."
+        },
+        "general": null,
+        "ivd": {
+          "purpose": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_self_test": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_near_patient_test": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "detects_transmissible_agent": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "transmission_risk_to_population": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "disease_is_life_threatening": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "result_drives_critical_decision": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_instrument_or_receptacle": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Instrument that reads prothrombin time test strips."
+          },
+          "is_quality_control_material": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Instrument that reads prothrombin time test strips."
+          },
+          "is_export_only": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Instrument that reads prothrombin time test strips."
+          },
+          "sample_type": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          }
+        }
+      },
+      {
+        "name": {
+          "value": "Prothrombin time test strips",
+          "basis": "stated",
+          "evidence": "Prothrombin time test strips"
+        },
+        "description": {
+          "value": "Test strips for prothrombin time self-testing by a lay person.",
+          "basis": "stated",
+          "evidence": "Test strips for prothrombin time self-testing by a lay person."
+        },
+        "kind": {
+          "value": "ivd",
+          "basis": "stated",
+          "evidence": "Test strips for prothrombin time self-testing by a lay person."
+        },
+        "is_software": {
+          "value": "no",
+          "basis": "stated",
+          "evidence": "Test strips for prothrombin time self-testing by a lay person."
+        },
+        "general": null,
+        "ivd": {
+          "purpose": {
+            "value": "therapy_or_disease_monitoring",
+            "basis": "stated",
+            "evidence": "Test strips for prothrombin time self-testing by a lay person."
+          },
+          "is_self_test": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Test strips for prothrombin time self-testing by a lay person."
+          },
+          "is_near_patient_test": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "detects_transmissible_agent": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Test strips for prothrombin time self-testing by a lay person."
+          },
+          "transmission_risk_to_population": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "disease_is_life_threatening": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "result_drives_critical_decision": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Test strips for prothrombin time self-testing by a lay person."
+          },
+          "is_instrument_or_receptacle": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Test strips for prothrombin time self-testing by a lay person."
+          },
+          "is_quality_control_material": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Test strips for prothrombin time self-testing by a lay person."
+          },
+          "is_export_only": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Test strips for prothrombin time self-testing by a lay person."
+          },
+          "sample_type": {
+            "value": "capillary whole blood",
+            "basis": "stated",
+            "evidence": "Test strips for prothrombin time self-testing by a lay person."
+          }
+        }
+      },
+      {
+        "name": {
+          "value": "Lancet",
+          "basis": "stated",
+          "evidence": "Lancet"
+        },
+        "description": {
+          "value": "Single-use lancet for obtaining a capillary blood specimen.",
+          "basis": "stated",
+          "evidence": "Single-use lancet for obtaining a capillary blood specimen."
+        },
+        "kind": {
+          "value": "general_device",
+          "basis": "stated",
+          "evidence": "Single-use lancet for obtaining a capillary blood specimen."
+        },
+        "is_software": {
+          "value": "no",
+          "basis": "stated",
+          "evidence": "Single-use lancet for obtaining a capillary blood specimen."
+        },
+        "general": {
+          "invasiveness": {
+            "value": "surgically_invasive",
+            "basis": "stated",
+            "evidence": "Single-use lancet for obtaining a capillary blood specimen."
+          },
+          "duration": {
+            "value": "transient",
+            "basis": "stated",
+            "evidence": "Single-use lancet for obtaining a capillary blood specimen."
+          },
+          "body_contact": {
+            "value": "breached_skin_or_wound",
+            "basis": "stated",
+            "evidence": "Single-use lancet for obtaining a capillary blood specimen."
+          },
+          "orifice_site": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contacts_injured_skin": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "wound_function": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "breaches_dermis": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "fluid_handling": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "connected_to_active_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "reusable_surgical_instrument": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Single-use lancet for obtaining a capillary blood specimen."
+          },
+          "absorbed_or_chemically_changed": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Single-use lancet for obtaining a capillary blood specimen."
+          },
+          "delivers_ionising_radiation": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "active_type": {
+            "value": "not_active",
+            "basis": "stated",
+            "evidence": "Single-use lancet for obtaining a capillary blood specimen."
+          },
+          "is_active_implantable": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "clinical_function": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "delivers_hazardous_energy": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "administers_or_removes_medicine": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "decision_maker": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "condition_severity": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "public_health_risk": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "records_diagnostic_images": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "incorporates_medicine": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Single-use lancet for obtaining a capillary blood specimen."
+          },
+          "animal_or_microbial_origin": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Single-use lancet for obtaining a capillary blood specimen."
+          },
+          "human_blood_derivative": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Single-use lancet for obtaining a capillary blood specimen."
+          },
+          "contraceptive_or_sti_prevention": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Single-use lancet for obtaining a capillary blood specimen."
+          },
+          "disinfects_another_device": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Single-use lancet for obtaining a capillary blood specimen."
+          }
+        },
+        "ivd": null
+      }
+    ],
+    "funding": null,
+    "source_text": "Prothrombin time self-testing pack Procedure pack for prothrombin time self-testing at home, containing a portable meter, test strips and a lancet. Portable prothrombin time meter Instrument that reads prothrombin time test strips. Prothrombin time test strips Test strips for prothrombin time self-testing by a lay person. Lancet Single-use lancet for obtaining a capillary blood specimen. fixture decomposition is fixed by hand",
+    "schema_version": "0.3"
+  }
+}

@@ -1,28 +1,26 @@
 {
-  "expected_class": "Class IIa",
-  "expected_rule": "3.2(2)",
+  "expected_classes": {
+    "general": "Class IIa"
+  },
+  "functions": [
+    {
+      "name": "Metal fixation screw, intraoperative",
+      "expected_class": "Class IIa",
+      "expected_rule": "3.2(2)"
+    }
+  ],
   "source": "TGA, Classifying medical devices that are not IVDs",
   "verified": true,
   "note": "Transient use during surgery.",
   "profile": {
     "core": {
-      "device_name": {
+      "product_name": {
         "value": "Metal fixation screw, intraoperative",
         "basis": "stated",
         "evidence": "Metal fixation screw, intraoperative"
       },
       "intended_purpose": {
         "value": "Holds bone together temporarily during surgery.",
-        "basis": "stated",
-        "evidence": "Holds bone together temporarily during surgery."
-      },
-      "kind": {
-        "value": "general_device",
-        "basis": "stated",
-        "evidence": "Holds bone together temporarily during surgery."
-      },
-      "is_software_only": {
-        "value": "no",
         "basis": "stated",
         "evidence": "Holds bone together temporarily during surgery."
       },
@@ -35,143 +33,172 @@
         "value": "no",
         "basis": "stated",
         "evidence": "Holds bone together temporarily during surgery."
+      },
+      "functions_confirmed": {
+        "value": "yes",
+        "basis": "stated",
+        "evidence": "fixture decomposition is fixed by hand"
       }
     },
-    "general": {
-      "invasiveness": {
-        "value": "surgically_invasive",
-        "basis": "stated",
-        "evidence": "Holds bone together temporarily during surgery."
-      },
-      "duration": {
-        "value": "transient",
-        "basis": "stated",
-        "evidence": "Holds bone together temporarily during surgery."
-      },
-      "body_contact": {
-        "value": "breached_skin_or_wound",
-        "basis": "stated",
-        "evidence": "Holds bone together temporarily during surgery."
-      },
-      "orifice_site": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "contacts_injured_skin": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Holds bone together temporarily during surgery."
-      },
-      "wound_function": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "breaches_dermis": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "fluid_handling": {
-        "value": "none",
-        "basis": "stated",
-        "evidence": "Holds bone together temporarily during surgery."
-      },
-      "connected_to_active_device": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "reusable_surgical_instrument": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Holds bone together temporarily during surgery."
-      },
-      "absorbed_or_chemically_changed": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Holds bone together temporarily during surgery."
-      },
-      "delivers_ionising_radiation": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "active_type": {
-        "value": "not_active",
-        "basis": "stated",
-        "evidence": "Holds bone together temporarily during surgery."
-      },
-      "is_active_implantable": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "clinical_function": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "delivers_hazardous_energy": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "administers_or_removes_medicine": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "decision_maker": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "condition_severity": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "public_health_risk": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "records_diagnostic_images": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "incorporates_medicine": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Holds bone together temporarily during surgery."
-      },
-      "animal_or_microbial_origin": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Holds bone together temporarily during surgery."
-      },
-      "human_blood_derivative": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Holds bone together temporarily during surgery."
-      },
-      "contraceptive_or_sti_prevention": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Holds bone together temporarily during surgery."
-      },
-      "disinfects_another_device": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Holds bone together temporarily during surgery."
+    "functions": [
+      {
+        "name": {
+          "value": "Metal fixation screw, intraoperative",
+          "basis": "stated",
+          "evidence": "Metal fixation screw, intraoperative"
+        },
+        "description": {
+          "value": "Holds bone together temporarily during surgery.",
+          "basis": "stated",
+          "evidence": "Holds bone together temporarily during surgery."
+        },
+        "kind": {
+          "value": "general_device",
+          "basis": "stated",
+          "evidence": "Holds bone together temporarily during surgery."
+        },
+        "is_software": {
+          "value": "no",
+          "basis": "stated",
+          "evidence": "Holds bone together temporarily during surgery."
+        },
+        "general": {
+          "invasiveness": {
+            "value": "surgically_invasive",
+            "basis": "stated",
+            "evidence": "Holds bone together temporarily during surgery."
+          },
+          "duration": {
+            "value": "transient",
+            "basis": "stated",
+            "evidence": "Holds bone together temporarily during surgery."
+          },
+          "body_contact": {
+            "value": "breached_skin_or_wound",
+            "basis": "stated",
+            "evidence": "Holds bone together temporarily during surgery."
+          },
+          "orifice_site": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contacts_injured_skin": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "wound_function": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "breaches_dermis": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "fluid_handling": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "connected_to_active_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "reusable_surgical_instrument": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Holds bone together temporarily during surgery."
+          },
+          "absorbed_or_chemically_changed": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Holds bone together temporarily during surgery."
+          },
+          "delivers_ionising_radiation": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "active_type": {
+            "value": "not_active",
+            "basis": "stated",
+            "evidence": "Holds bone together temporarily during surgery."
+          },
+          "is_active_implantable": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "clinical_function": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "delivers_hazardous_energy": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "administers_or_removes_medicine": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "decision_maker": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "condition_severity": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "public_health_risk": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "records_diagnostic_images": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "incorporates_medicine": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Holds bone together temporarily during surgery."
+          },
+          "animal_or_microbial_origin": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Holds bone together temporarily during surgery."
+          },
+          "human_blood_derivative": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Holds bone together temporarily during surgery."
+          },
+          "contraceptive_or_sti_prevention": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Holds bone together temporarily during surgery."
+          },
+          "disinfects_another_device": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Holds bone together temporarily during surgery."
+          }
+        },
+        "ivd": null
       }
-    },
-    "ivd": null,
+    ],
     "funding": null,
-    "source_text": "Holds bone together temporarily during surgery.",
-    "schema_version": "0.2"
+    "source_text": "Metal fixation screw, intraoperative Holds bone together temporarily during surgery. Metal fixation screw, intraoperative Holds bone together temporarily during surgery. fixture decomposition is fixed by hand",
+    "schema_version": "0.3"
   }
 }

@@ -1,38 +1,38 @@
 {
   "expected_classes": {
-    "general": "Class Im"
+    "general": "Class IIb"
   },
   "functions": [
     {
-      "name": "Non-invasive clinical thermometer",
-      "expected_class": "Class Im",
-      "expected_rule": "2.1 with measuring function"
+      "name": "Volumetric infusion pump",
+      "expected_class": "Class IIb",
+      "expected_rule": "4.4(2)"
     }
   ],
-  "source": "Reasoned from Schedule 2 rule text, not a worked example",
+  "source": "TGA, Classifying active medical devices in Australia",
   "verified": false,
-  "note": "Exercises has_measuring_function, which nothing else in the set touches.",
+  "note": "Reaches administers_or_removes_medicine, which nothing else touches. Potentially hazardous administration lifts it above the 4.4 baseline.",
   "profile": {
     "core": {
       "product_name": {
-        "value": "Non-invasive clinical thermometer",
+        "value": "Volumetric infusion pump",
         "basis": "stated",
-        "evidence": "Non-invasive clinical thermometer"
+        "evidence": "Volumetric infusion pump"
       },
       "intended_purpose": {
-        "value": "Measures body temperature by contact with intact skin.",
+        "value": "Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous.",
         "basis": "stated",
-        "evidence": "Measures body temperature by contact with intact skin."
+        "evidence": "Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous."
       },
       "supplied_sterile": {
         "value": "no",
         "basis": "stated",
-        "evidence": "Measures body temperature by contact with intact skin."
+        "evidence": "Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous."
       },
       "has_measuring_function": {
-        "value": "yes",
+        "value": "no",
         "basis": "stated",
-        "evidence": "Measures body temperature by contact with intact skin."
+        "evidence": "Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous."
       },
       "functions_confirmed": {
         "value": "yes",
@@ -43,30 +43,30 @@
     "functions": [
       {
         "name": {
-          "value": "Non-invasive clinical thermometer",
+          "value": "Volumetric infusion pump",
           "basis": "stated",
-          "evidence": "Non-invasive clinical thermometer"
+          "evidence": "Volumetric infusion pump"
         },
         "description": {
-          "value": "Measures body temperature by contact with intact skin.",
+          "value": "Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous.",
           "basis": "stated",
-          "evidence": "Measures body temperature by contact with intact skin."
+          "evidence": "Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous."
         },
         "kind": {
           "value": "general_device",
           "basis": "stated",
-          "evidence": "Measures body temperature by contact with intact skin."
+          "evidence": "Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous."
         },
         "is_software": {
           "value": "no",
           "basis": "stated",
-          "evidence": "Measures body temperature by contact with intact skin."
+          "evidence": "Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous."
         },
         "general": {
           "invasiveness": {
             "value": "non_invasive",
             "basis": "stated",
-            "evidence": "Measures body temperature by contact with intact skin."
+            "evidence": "Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous."
           },
           "duration": {
             "value": null,
@@ -86,7 +86,7 @@
           "contacts_injured_skin": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Measures body temperature by contact with intact skin."
+            "evidence": "Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous."
           },
           "wound_function": {
             "value": null,
@@ -101,7 +101,7 @@
           "fluid_handling": {
             "value": "none",
             "basis": "stated",
-            "evidence": "Measures body temperature by contact with intact skin."
+            "evidence": "Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous."
           },
           "connected_to_active_device": {
             "value": null,
@@ -124,9 +124,9 @@
             "evidence": null
           },
           "active_type": {
-            "value": "not_active",
+            "value": "active_therapeutic",
             "basis": "stated",
-            "evidence": "Measures body temperature by contact with intact skin."
+            "evidence": "Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous."
           },
           "is_active_implantable": {
             "value": null,
@@ -134,19 +134,19 @@
             "evidence": null
           },
           "clinical_function": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "administer_or_remove_medicines_or_fluids",
+            "basis": "stated",
+            "evidence": "Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous."
           },
           "delivers_hazardous_energy": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous."
           },
           "administers_or_removes_medicine": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous."
           },
           "decision_maker": {
             "value": null,
@@ -171,34 +171,34 @@
           "incorporates_medicine": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Measures body temperature by contact with intact skin."
+            "evidence": "Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous."
           },
           "animal_or_microbial_origin": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Measures body temperature by contact with intact skin."
+            "evidence": "Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous."
           },
           "human_blood_derivative": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Measures body temperature by contact with intact skin."
+            "evidence": "Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous."
           },
           "contraceptive_or_sti_prevention": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Measures body temperature by contact with intact skin."
+            "evidence": "Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous."
           },
           "disinfects_another_device": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Measures body temperature by contact with intact skin."
+            "evidence": "Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous."
           }
         },
         "ivd": null
       }
     ],
     "funding": null,
-    "source_text": "Non-invasive clinical thermometer Measures body temperature by contact with intact skin. Non-invasive clinical thermometer Measures body temperature by contact with intact skin. fixture decomposition is fixed by hand",
+    "source_text": "Volumetric infusion pump Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous. Volumetric infusion pump Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous. fixture decomposition is fixed by hand",
     "schema_version": "0.3"
   }
 }

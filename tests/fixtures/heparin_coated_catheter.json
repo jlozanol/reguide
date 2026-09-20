@@ -1,28 +1,26 @@
 {
-  "expected_class": "Class III",
-  "expected_rule": "5.1",
+  "expected_classes": {
+    "general": "Class III"
+  },
+  "functions": [
+    {
+      "name": "Heparin-coated catheter",
+      "expected_class": "Class III",
+      "expected_rule": "5.1"
+    }
+  ],
   "source": "TGA, Classifying medical devices that are not IVDs",
   "verified": true,
   "note": "Incorporated medicine lifts an otherwise lower-class catheter.",
   "profile": {
     "core": {
-      "device_name": {
+      "product_name": {
         "value": "Heparin-coated catheter",
         "basis": "stated",
         "evidence": "Heparin-coated catheter"
       },
       "intended_purpose": {
         "value": "Catheter incorporating heparin as an ancillary medicinal substance.",
-        "basis": "stated",
-        "evidence": "Catheter incorporating heparin as an ancillary medicinal substance."
-      },
-      "kind": {
-        "value": "general_device",
-        "basis": "stated",
-        "evidence": "Catheter incorporating heparin as an ancillary medicinal substance."
-      },
-      "is_software_only": {
-        "value": "no",
         "basis": "stated",
         "evidence": "Catheter incorporating heparin as an ancillary medicinal substance."
       },
@@ -35,143 +33,172 @@
         "value": "no",
         "basis": "stated",
         "evidence": "Catheter incorporating heparin as an ancillary medicinal substance."
-      }
-    },
-    "general": {
-      "invasiveness": {
-        "value": "surgically_invasive",
-        "basis": "stated",
-        "evidence": "Catheter incorporating heparin as an ancillary medicinal substance."
       },
-      "duration": {
-        "value": "short_term",
-        "basis": "stated",
-        "evidence": "Catheter incorporating heparin as an ancillary medicinal substance."
-      },
-      "body_contact": {
-        "value": "central_circulatory_system",
-        "basis": "stated",
-        "evidence": "Catheter incorporating heparin as an ancillary medicinal substance."
-      },
-      "orifice_site": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "contacts_injured_skin": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Catheter incorporating heparin as an ancillary medicinal substance."
-      },
-      "wound_function": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "breaches_dermis": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "fluid_handling": {
-        "value": "none",
-        "basis": "stated",
-        "evidence": "Catheter incorporating heparin as an ancillary medicinal substance."
-      },
-      "connected_to_active_device": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "reusable_surgical_instrument": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "absorbed_or_chemically_changed": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Catheter incorporating heparin as an ancillary medicinal substance."
-      },
-      "delivers_ionising_radiation": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "active_type": {
-        "value": "not_active",
-        "basis": "stated",
-        "evidence": "Catheter incorporating heparin as an ancillary medicinal substance."
-      },
-      "is_active_implantable": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "clinical_function": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "delivers_hazardous_energy": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "administers_or_removes_medicine": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "decision_maker": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "condition_severity": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "public_health_risk": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "records_diagnostic_images": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "incorporates_medicine": {
+      "functions_confirmed": {
         "value": "yes",
         "basis": "stated",
-        "evidence": "Catheter incorporating heparin as an ancillary medicinal substance."
-      },
-      "animal_or_microbial_origin": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Catheter incorporating heparin as an ancillary medicinal substance."
-      },
-      "human_blood_derivative": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Catheter incorporating heparin as an ancillary medicinal substance."
-      },
-      "contraceptive_or_sti_prevention": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Catheter incorporating heparin as an ancillary medicinal substance."
-      },
-      "disinfects_another_device": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Catheter incorporating heparin as an ancillary medicinal substance."
+        "evidence": "fixture decomposition is fixed by hand"
       }
     },
-    "ivd": null,
+    "functions": [
+      {
+        "name": {
+          "value": "Heparin-coated catheter",
+          "basis": "stated",
+          "evidence": "Heparin-coated catheter"
+        },
+        "description": {
+          "value": "Catheter incorporating heparin as an ancillary medicinal substance.",
+          "basis": "stated",
+          "evidence": "Catheter incorporating heparin as an ancillary medicinal substance."
+        },
+        "kind": {
+          "value": "general_device",
+          "basis": "stated",
+          "evidence": "Catheter incorporating heparin as an ancillary medicinal substance."
+        },
+        "is_software": {
+          "value": "no",
+          "basis": "stated",
+          "evidence": "Catheter incorporating heparin as an ancillary medicinal substance."
+        },
+        "general": {
+          "invasiveness": {
+            "value": "surgically_invasive",
+            "basis": "stated",
+            "evidence": "Catheter incorporating heparin as an ancillary medicinal substance."
+          },
+          "duration": {
+            "value": "short_term",
+            "basis": "stated",
+            "evidence": "Catheter incorporating heparin as an ancillary medicinal substance."
+          },
+          "body_contact": {
+            "value": "central_circulatory_system",
+            "basis": "stated",
+            "evidence": "Catheter incorporating heparin as an ancillary medicinal substance."
+          },
+          "orifice_site": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contacts_injured_skin": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "wound_function": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "breaches_dermis": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "fluid_handling": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "connected_to_active_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "reusable_surgical_instrument": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "absorbed_or_chemically_changed": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Catheter incorporating heparin as an ancillary medicinal substance."
+          },
+          "delivers_ionising_radiation": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "active_type": {
+            "value": "not_active",
+            "basis": "stated",
+            "evidence": "Catheter incorporating heparin as an ancillary medicinal substance."
+          },
+          "is_active_implantable": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "clinical_function": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "delivers_hazardous_energy": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "administers_or_removes_medicine": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "decision_maker": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "condition_severity": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "public_health_risk": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "records_diagnostic_images": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "incorporates_medicine": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Catheter incorporating heparin as an ancillary medicinal substance."
+          },
+          "animal_or_microbial_origin": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Catheter incorporating heparin as an ancillary medicinal substance."
+          },
+          "human_blood_derivative": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Catheter incorporating heparin as an ancillary medicinal substance."
+          },
+          "contraceptive_or_sti_prevention": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Catheter incorporating heparin as an ancillary medicinal substance."
+          },
+          "disinfects_another_device": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Catheter incorporating heparin as an ancillary medicinal substance."
+          }
+        },
+        "ivd": null
+      }
+    ],
     "funding": null,
-    "source_text": "Catheter incorporating heparin as an ancillary medicinal substance.",
-    "schema_version": "0.2"
+    "source_text": "Heparin-coated catheter Catheter incorporating heparin as an ancillary medicinal substance. Heparin-coated catheter Catheter incorporating heparin as an ancillary medicinal substance. fixture decomposition is fixed by hand",
+    "schema_version": "0.3"
   }
 }

@@ -1,28 +1,26 @@
 {
-  "expected_class": "Class III",
-  "expected_rule": "4.5(1)(c)(i)",
+  "expected_classes": {
+    "general": "Class III"
+  },
+  "functions": [
+    {
+      "name": "Consumer melanoma screening app",
+      "expected_class": "Class III",
+      "expected_rule": "4.5(1)(c)(i)"
+    }
+  ],
   "source": "TGA, Classifying active medical devices in Australia",
   "verified": true,
   "note": "Device gives the screening decision to a consumer, condition can kill without urgent treatment.",
   "profile": {
     "core": {
-      "device_name": {
+      "product_name": {
         "value": "Consumer melanoma screening app",
         "basis": "stated",
         "evidence": "Consumer melanoma screening app"
       },
       "intended_purpose": {
         "value": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer.",
-        "basis": "stated",
-        "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
-      },
-      "kind": {
-        "value": "general_device",
-        "basis": "stated",
-        "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
-      },
-      "is_software_only": {
-        "value": "yes",
         "basis": "stated",
         "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
       },
@@ -35,143 +33,172 @@
         "value": "no",
         "basis": "stated",
         "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+      },
+      "functions_confirmed": {
+        "value": "yes",
+        "basis": "stated",
+        "evidence": "fixture decomposition is fixed by hand"
       }
     },
-    "general": {
-      "invasiveness": {
-        "value": "non_invasive",
-        "basis": "stated",
-        "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
-      },
-      "duration": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "body_contact": {
-        "value": "none",
-        "basis": "stated",
-        "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
-      },
-      "orifice_site": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "contacts_injured_skin": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
-      },
-      "wound_function": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "breaches_dermis": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "fluid_handling": {
-        "value": "none",
-        "basis": "stated",
-        "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
-      },
-      "connected_to_active_device": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "reusable_surgical_instrument": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "absorbed_or_chemically_changed": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "delivers_ionising_radiation": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
-      },
-      "active_type": {
-        "value": "active_diagnostic",
-        "basis": "stated",
-        "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
-      },
-      "is_active_implantable": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "clinical_function": {
-        "value": "diagnose_or_screen_for_a_condition",
-        "basis": "stated",
-        "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
-      },
-      "delivers_hazardous_energy": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
-      },
-      "administers_or_removes_medicine": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "decision_maker": {
-        "value": "device_gives_the_decision_to_a_lay_user",
-        "basis": "stated",
-        "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
-      },
-      "condition_severity": {
-        "value": "death_or_severe_deterioration_without_urgent_treatment",
-        "basis": "stated",
-        "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
-      },
-      "public_health_risk": {
-        "value": "low",
-        "basis": "stated",
-        "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
-      },
-      "records_diagnostic_images": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
-      },
-      "incorporates_medicine": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
-      },
-      "animal_or_microbial_origin": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
-      },
-      "human_blood_derivative": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
-      },
-      "contraceptive_or_sti_prevention": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
-      },
-      "disinfects_another_device": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+    "functions": [
+      {
+        "name": {
+          "value": "Consumer melanoma screening app",
+          "basis": "stated",
+          "evidence": "Consumer melanoma screening app"
+        },
+        "description": {
+          "value": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer.",
+          "basis": "stated",
+          "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+        },
+        "kind": {
+          "value": "general_device",
+          "basis": "stated",
+          "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+        },
+        "is_software": {
+          "value": "yes",
+          "basis": "stated",
+          "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+        },
+        "general": {
+          "invasiveness": {
+            "value": "non_invasive",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          },
+          "duration": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "body_contact": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "orifice_site": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contacts_injured_skin": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          },
+          "wound_function": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "breaches_dermis": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "fluid_handling": {
+            "value": "none",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          },
+          "connected_to_active_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "reusable_surgical_instrument": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "absorbed_or_chemically_changed": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "delivers_ionising_radiation": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          },
+          "active_type": {
+            "value": "active_diagnostic",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          },
+          "is_active_implantable": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "clinical_function": {
+            "value": "diagnose_or_screen_for_a_condition",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          },
+          "delivers_hazardous_energy": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          },
+          "administers_or_removes_medicine": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "decision_maker": {
+            "value": "device_gives_the_decision_to_a_lay_user",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          },
+          "condition_severity": {
+            "value": "death_or_severe_deterioration_without_urgent_treatment",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          },
+          "public_health_risk": {
+            "value": "low",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          },
+          "records_diagnostic_images": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          },
+          "incorporates_medicine": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          },
+          "animal_or_microbial_origin": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "human_blood_derivative": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contraceptive_or_sti_prevention": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          },
+          "disinfects_another_device": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          }
+        },
+        "ivd": null
       }
-    },
-    "ivd": null,
+    ],
     "funding": null,
-    "source_text": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer.",
-    "schema_version": "0.2"
+    "source_text": "Consumer melanoma screening app Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer. Consumer melanoma screening app Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer. fixture decomposition is fixed by hand",
+    "schema_version": "0.3"
   }
 }

@@ -1,28 +1,26 @@
 {
-  "expected_class": "Class III",
-  "expected_rule": "3.3(4)(a)",
+  "expected_classes": {
+    "general": "Class III"
+  },
+  "functions": [
+    {
+      "name": "Fixation screw contacting central circulatory system",
+      "expected_class": "Class III",
+      "expected_rule": "3.3(4)(a)"
+    }
+  ],
   "source": "TGA, Classifying medical devices that are not IVDs",
   "verified": true,
   "note": "Location beats duration. Tests that body_contact is read first.",
   "profile": {
     "core": {
-      "device_name": {
+      "product_name": {
         "value": "Fixation screw contacting central circulatory system",
         "basis": "stated",
         "evidence": "Fixation screw contacting central circulatory system"
       },
       "intended_purpose": {
         "value": "Direct contact with the central circulatory or central nervous system.",
-        "basis": "stated",
-        "evidence": "Direct contact with the central circulatory or central nervous system."
-      },
-      "kind": {
-        "value": "general_device",
-        "basis": "stated",
-        "evidence": "Direct contact with the central circulatory or central nervous system."
-      },
-      "is_software_only": {
-        "value": "no",
         "basis": "stated",
         "evidence": "Direct contact with the central circulatory or central nervous system."
       },
@@ -35,143 +33,172 @@
         "value": "no",
         "basis": "stated",
         "evidence": "Direct contact with the central circulatory or central nervous system."
+      },
+      "functions_confirmed": {
+        "value": "yes",
+        "basis": "stated",
+        "evidence": "fixture decomposition is fixed by hand"
       }
     },
-    "general": {
-      "invasiveness": {
-        "value": "surgically_invasive",
-        "basis": "stated",
-        "evidence": "Direct contact with the central circulatory or central nervous system."
-      },
-      "duration": {
-        "value": "short_term",
-        "basis": "stated",
-        "evidence": "Direct contact with the central circulatory or central nervous system."
-      },
-      "body_contact": {
-        "value": "central_circulatory_system",
-        "basis": "stated",
-        "evidence": "Direct contact with the central circulatory or central nervous system."
-      },
-      "orifice_site": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "contacts_injured_skin": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Direct contact with the central circulatory or central nervous system."
-      },
-      "wound_function": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "breaches_dermis": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "fluid_handling": {
-        "value": "none",
-        "basis": "stated",
-        "evidence": "Direct contact with the central circulatory or central nervous system."
-      },
-      "connected_to_active_device": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "reusable_surgical_instrument": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "absorbed_or_chemically_changed": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Direct contact with the central circulatory or central nervous system."
-      },
-      "delivers_ionising_radiation": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "active_type": {
-        "value": "not_active",
-        "basis": "stated",
-        "evidence": "Direct contact with the central circulatory or central nervous system."
-      },
-      "is_active_implantable": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "clinical_function": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "delivers_hazardous_energy": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "administers_or_removes_medicine": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "decision_maker": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "condition_severity": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "public_health_risk": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "records_diagnostic_images": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "incorporates_medicine": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Direct contact with the central circulatory or central nervous system."
-      },
-      "animal_or_microbial_origin": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Direct contact with the central circulatory or central nervous system."
-      },
-      "human_blood_derivative": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Direct contact with the central circulatory or central nervous system."
-      },
-      "contraceptive_or_sti_prevention": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Direct contact with the central circulatory or central nervous system."
-      },
-      "disinfects_another_device": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Direct contact with the central circulatory or central nervous system."
+    "functions": [
+      {
+        "name": {
+          "value": "Fixation screw contacting central circulatory system",
+          "basis": "stated",
+          "evidence": "Fixation screw contacting central circulatory system"
+        },
+        "description": {
+          "value": "Direct contact with the central circulatory or central nervous system.",
+          "basis": "stated",
+          "evidence": "Direct contact with the central circulatory or central nervous system."
+        },
+        "kind": {
+          "value": "general_device",
+          "basis": "stated",
+          "evidence": "Direct contact with the central circulatory or central nervous system."
+        },
+        "is_software": {
+          "value": "no",
+          "basis": "stated",
+          "evidence": "Direct contact with the central circulatory or central nervous system."
+        },
+        "general": {
+          "invasiveness": {
+            "value": "surgically_invasive",
+            "basis": "stated",
+            "evidence": "Direct contact with the central circulatory or central nervous system."
+          },
+          "duration": {
+            "value": "short_term",
+            "basis": "stated",
+            "evidence": "Direct contact with the central circulatory or central nervous system."
+          },
+          "body_contact": {
+            "value": "central_circulatory_system",
+            "basis": "stated",
+            "evidence": "Direct contact with the central circulatory or central nervous system."
+          },
+          "orifice_site": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contacts_injured_skin": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "wound_function": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "breaches_dermis": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "fluid_handling": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "connected_to_active_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "reusable_surgical_instrument": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "absorbed_or_chemically_changed": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Direct contact with the central circulatory or central nervous system."
+          },
+          "delivers_ionising_radiation": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "active_type": {
+            "value": "not_active",
+            "basis": "stated",
+            "evidence": "Direct contact with the central circulatory or central nervous system."
+          },
+          "is_active_implantable": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "clinical_function": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "delivers_hazardous_energy": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "administers_or_removes_medicine": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "decision_maker": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "condition_severity": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "public_health_risk": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "records_diagnostic_images": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "incorporates_medicine": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Direct contact with the central circulatory or central nervous system."
+          },
+          "animal_or_microbial_origin": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Direct contact with the central circulatory or central nervous system."
+          },
+          "human_blood_derivative": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Direct contact with the central circulatory or central nervous system."
+          },
+          "contraceptive_or_sti_prevention": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Direct contact with the central circulatory or central nervous system."
+          },
+          "disinfects_another_device": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Direct contact with the central circulatory or central nervous system."
+          }
+        },
+        "ivd": null
       }
-    },
-    "ivd": null,
+    ],
     "funding": null,
-    "source_text": "Direct contact with the central circulatory or central nervous system.",
-    "schema_version": "0.2"
+    "source_text": "Fixation screw contacting central circulatory system Direct contact with the central circulatory or central nervous system. Fixation screw contacting central circulatory system Direct contact with the central circulatory or central nervous system. fixture decomposition is fixed by hand",
+    "schema_version": "0.3"
   }
 }

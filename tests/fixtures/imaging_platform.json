@@ -1,0 +1,524 @@
+{
+  "expected_classes": {
+    "general": "Class IIa"
+  },
+  "functions": [
+    {
+      "name": "Study archive",
+      "expected_class": "Class I",
+      "expected_rule": "not a medical device purpose"
+    },
+    {
+      "name": "Abnormality triage",
+      "expected_class": "Class IIa",
+      "expected_rule": "4.5(2)(b)"
+    },
+    {
+      "name": "Follow-up interval suggestion",
+      "expected_class": "Class IIa",
+      "expected_rule": "4.7(2)(b)(i)"
+    }
+  ],
+  "source": "Reasoned from Schedule 2 rule text, not a worked example",
+  "verified": false,
+  "note": "Three software functions of one platform. Storage alone carries no medical-device purpose, triage flags abnormal studies, and the follow-up suggestion specifies an intervention. Tests that the highest function governs the product and that one regulated function is enough to pull the whole platform in.",
+  "profile": {
+    "core": {
+      "product_name": {
+        "value": "Radiology reporting platform",
+        "basis": "stated",
+        "evidence": "Radiology reporting platform"
+      },
+      "intended_purpose": {
+        "value": "Stores radiology studies, flags abnormal ones for priority review and suggests a follow-up imaging interval.",
+        "basis": "stated",
+        "evidence": "Stores radiology studies, flags abnormal ones for priority review and suggests a follow-up imaging interval."
+      },
+      "supplied_sterile": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Stores radiology studies, flags abnormal ones for priority review and suggests a follow-up imaging interval."
+      },
+      "has_measuring_function": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Stores radiology studies, flags abnormal ones for priority review and suggests a follow-up imaging interval."
+      },
+      "functions_confirmed": {
+        "value": "yes",
+        "basis": "stated",
+        "evidence": "fixture decomposition is fixed by hand"
+      }
+    },
+    "functions": [
+      {
+        "name": {
+          "value": "Study archive",
+          "basis": "stated",
+          "evidence": "Study archive"
+        },
+        "description": {
+          "value": "Stores and displays radiology studies without interpretation.",
+          "basis": "stated",
+          "evidence": "Stores and displays radiology studies without interpretation."
+        },
+        "kind": {
+          "value": "general_device",
+          "basis": "stated",
+          "evidence": "Stores and displays radiology studies without interpretation."
+        },
+        "is_software": {
+          "value": "yes",
+          "basis": "stated",
+          "evidence": "Stores and displays radiology studies without interpretation."
+        },
+        "general": {
+          "invasiveness": {
+            "value": "non_invasive",
+            "basis": "stated",
+            "evidence": "Stores and displays radiology studies without interpretation."
+          },
+          "duration": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "body_contact": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "orifice_site": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contacts_injured_skin": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Stores and displays radiology studies without interpretation."
+          },
+          "wound_function": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "breaches_dermis": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "fluid_handling": {
+            "value": "none",
+            "basis": "stated",
+            "evidence": "Stores and displays radiology studies without interpretation."
+          },
+          "connected_to_active_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "reusable_surgical_instrument": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "absorbed_or_chemically_changed": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "delivers_ionising_radiation": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "active_type": {
+            "value": "not_active",
+            "basis": "stated",
+            "evidence": "Stores and displays radiology studies without interpretation."
+          },
+          "is_active_implantable": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "clinical_function": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "delivers_hazardous_energy": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "administers_or_removes_medicine": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "decision_maker": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "condition_severity": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "public_health_risk": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "records_diagnostic_images": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "incorporates_medicine": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Stores and displays radiology studies without interpretation."
+          },
+          "animal_or_microbial_origin": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "human_blood_derivative": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contraceptive_or_sti_prevention": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Stores and displays radiology studies without interpretation."
+          },
+          "disinfects_another_device": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Stores and displays radiology studies without interpretation."
+          }
+        },
+        "ivd": null
+      },
+      {
+        "name": {
+          "value": "Abnormality triage",
+          "basis": "stated",
+          "evidence": "Abnormality triage"
+        },
+        "description": {
+          "value": "Flags studies showing suspected abnormality for priority review by a radiologist.",
+          "basis": "stated",
+          "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+        },
+        "kind": {
+          "value": "general_device",
+          "basis": "stated",
+          "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+        },
+        "is_software": {
+          "value": "yes",
+          "basis": "stated",
+          "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+        },
+        "general": {
+          "invasiveness": {
+            "value": "non_invasive",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "duration": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "body_contact": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "orifice_site": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contacts_injured_skin": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "wound_function": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "breaches_dermis": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "fluid_handling": {
+            "value": "none",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "connected_to_active_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "reusable_surgical_instrument": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "absorbed_or_chemically_changed": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "delivers_ionising_radiation": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "active_type": {
+            "value": "active_diagnostic",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "is_active_implantable": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "clinical_function": {
+            "value": "diagnose_or_screen_for_a_condition",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "delivers_hazardous_energy": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "administers_or_removes_medicine": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "decision_maker": {
+            "value": "informs_a_health_professional_who_decides",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "condition_severity": {
+            "value": "serious_disease_or_condition",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "public_health_risk": {
+            "value": "moderate",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "records_diagnostic_images": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "incorporates_medicine": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "animal_or_microbial_origin": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "human_blood_derivative": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contraceptive_or_sti_prevention": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "disinfects_another_device": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          }
+        },
+        "ivd": null
+      },
+      {
+        "name": {
+          "value": "Follow-up interval suggestion",
+          "basis": "stated",
+          "evidence": "Follow-up interval suggestion"
+        },
+        "description": {
+          "value": "Suggests a follow-up imaging interval to the reporting radiologist.",
+          "basis": "stated",
+          "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+        },
+        "kind": {
+          "value": "general_device",
+          "basis": "stated",
+          "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+        },
+        "is_software": {
+          "value": "yes",
+          "basis": "stated",
+          "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+        },
+        "general": {
+          "invasiveness": {
+            "value": "non_invasive",
+            "basis": "stated",
+            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+          },
+          "duration": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "body_contact": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "orifice_site": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contacts_injured_skin": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+          },
+          "wound_function": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "breaches_dermis": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "fluid_handling": {
+            "value": "none",
+            "basis": "stated",
+            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+          },
+          "connected_to_active_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "reusable_surgical_instrument": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "absorbed_or_chemically_changed": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "delivers_ionising_radiation": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+          },
+          "active_type": {
+            "value": "active_diagnostic",
+            "basis": "stated",
+            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+          },
+          "is_active_implantable": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "clinical_function": {
+            "value": "specify_treatment_or_intervention",
+            "basis": "stated",
+            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+          },
+          "delivers_hazardous_energy": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+          },
+          "administers_or_removes_medicine": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "decision_maker": {
+            "value": "informs_a_health_professional_who_decides",
+            "basis": "stated",
+            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+          },
+          "condition_severity": {
+            "value": "serious_disease_or_condition",
+            "basis": "stated",
+            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+          },
+          "public_health_risk": {
+            "value": "moderate",
+            "basis": "stated",
+            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+          },
+          "records_diagnostic_images": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+          },
+          "incorporates_medicine": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+          },
+          "animal_or_microbial_origin": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "human_blood_derivative": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contraceptive_or_sti_prevention": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+          },
+          "disinfects_another_device": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+          }
+        },
+        "ivd": null
+      }
+    ],
+    "funding": null,
+    "source_text": "Radiology reporting platform Stores radiology studies, flags abnormal ones for priority review and suggests a follow-up imaging interval. Study archive Stores and displays radiology studies without interpretation. Abnormality triage Flags studies showing suspected abnormality for priority review by a radiologist. Follow-up interval suggestion Suggests a follow-up imaging interval to the reporting radiologist. fixture decomposition is fixed by hand",
+    "schema_version": "0.3"
+  }
+}

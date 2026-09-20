@@ -4,15 +4,18 @@ The structured object produced by intake and consumed by the rule engines.
 Every field records where its value came from, so the report can cite the
 founder's own words and the clarification loop knows what is still missing.
 
-Version 0.2 adds the fields the rules turn on that physical description alone
-does not supply, chiefly intended function, and adds relevance gating so the
-clarification loop asks only what the device's own branch requires.
+Version 0.3 moves the unit of analysis from a device to a product made of one
+or more functions. A product is a list of FunctionProfile objects, each with
+its own route through the rules. Results aggregate two different ways:
+classification takes the highest class across functions, while exclusion and
+the CDSS exemption require every function to qualify. That asymmetry is the
+reason functions have to be first-class rather than a flag.
 """
 
 from enum import Enum
 from typing import Generic, Literal, TypeVar
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 T = TypeVar("T")
 
@@ -35,6 +38,17 @@ class Answer(BaseModel, Generic[T]):
         default=None,
         description="Verbatim phrase from the source text that supports the value.",
     )
+
+    @model_validator(mode="after")
+    def _claims_need_evidence(self):
+        """A claim about this device has to point at where it came from.
+
+        DEFAULTED is exempt: a legal default is not a claim about the device
+        and has no phrase behind it.
+        """
+        if self.basis in (Basis.STATED, Basis.ANSWERED) and not self.evidence:
+            raise ValueError(f"basis {self.basis.value} requires evidence")
+        return self
 
     @property
     def resolved(self) -> bool:
@@ -194,14 +208,17 @@ class Operator(str, Enum):
 
 
 class CoreProfile(BaseModel):
-    """Asked for every device, whatever branch it takes."""
+    """Product-level facts. True of the thing as supplied, not of one function."""
 
-    device_name: Answer[str] = Answer()
+    product_name: Answer[str] = Answer()
     intended_purpose: Answer[str] = Answer()
-    kind: Answer[DeviceKind] = Answer()
-    is_software_only: Answer[Tri] = Answer()
     supplied_sterile: Answer[Tri] = Answer()          # drives Class Is
     has_measuring_function: Answer[Tri] = Answer()    # drives Class Im
+    functions_confirmed: Answer[Tri] = Answer(
+        # The founder describes a product; the decomposition into functions is
+        # proposed by intake and has to be confirmed, because the boundary
+        # between one function and three changes the regulatory outcome.
+    )
 
 
 class GeneralDeviceProfile(BaseModel):
@@ -271,13 +288,70 @@ class IvdProfile(BaseModel):
 
 
 class FundingProfile(BaseModel):
-    """Inputs to reimbursement triage. Not used by classification."""
+    """Inputs to reimbursement triage. Product level, not per function."""
 
     care_setting: Answer[CareSetting] = Answer()
     operator: Answer[Operator] = Answer()
     is_first_in_class: Answer[Tri] = Answer()
     replaces_existing_service: Answer[str] = Answer()
     privately_insured_patients: Answer[Tri] = Answer()
+
+
+class FunctionProfile(BaseModel):
+    """One function of a product, with its own route through the rules.
+
+    A function is the unit the rules actually operate on. An imaging platform
+    that stores studies, flags abnormal ones and suggests a follow-up interval
+    is three functions, and they can land in three different places.
+    """
+
+    name: Answer[str] = Answer()
+    description: Answer[str] = Answer()
+    kind: Answer[DeviceKind] = Answer()
+    is_software: Answer[Tri] = Answer()
+
+    general: GeneralDeviceProfile | None = None
+    ivd: IvdProfile | None = None
+
+    def branch(self) -> DeviceKind | None:
+        return self.kind.value
+
+    def relevant(self) -> list[str]:
+        """Field names this function requires, unprefixed."""
+        names = ["name", "description", "kind", "is_software"]
+        if self.branch() is DeviceKind.IVD and self.ivd is not None:
+            names += [f"ivd.{n}" for n in relevant_ivd_fields(self.ivd)]
+        elif self.branch() is DeviceKind.GENERAL and self.general is not None:
+            names += [f"general.{n}" for n in relevant_general_fields(self)]
+        return names
+
+    def missing(self) -> list[str]:
+        out = []
+        for dotted in self.relevant():
+            answer = self
+            for part in dotted.split("."):
+                answer = getattr(answer, part, None)
+                if answer is None:
+                    break
+            if isinstance(answer, Answer) and not answer.resolved:
+                out.append(dotted)
+        return out
+
+    def prune(self) -> "FunctionProfile":
+        """Clear any section field the gating does not ask for.
+
+        An answer nobody asked for is not evidence, it is a guess that survived.
+        Keeping it would also mask a gating gap: a rule could read a field the
+        interview never covers and still find it populated in testing.
+        """
+        asked = {n.split(".", 1)[1] for n in self.relevant() if "." in n}
+        for section in (self.general, self.ivd):
+            if section is None:
+                continue
+            for name in type(section).model_fields:
+                if name not in asked:
+                    setattr(section, name, Answer())
+        return self
 
 
 # --------------------------------------------------------------------------
@@ -304,15 +378,19 @@ def _dedupe(names: list[str]) -> list[str]:
     return [n for n in names if not (n in seen or seen.add(n))]
 
 
-def relevant_general_fields(core: CoreProfile, general: GeneralDeviceProfile) -> list[str]:
-    """Which Schedule 2 fields this device actually needs.
+def relevant_general_fields(function: "FunctionProfile") -> list[str]:
+    """Which Schedule 2 fields this function actually needs.
 
     Grows as facts are established. Before invasiveness is known the list is
     short; once it is known the branch opens. This is what stops intake turning
-    into a twenty-six question interrogation.
+    into a twenty-six question interrogation per function.
     """
+    general = function.general
+    if general is None:
+        return []
+
     fields = list(ALWAYS_GENERAL)
-    software = _value(core.is_software_only) is Tri.YES
+    software = _value(function.is_software) is Tri.YES
     route = _value(general.invasiveness)
     active = _value(general.active_type)
 
@@ -345,21 +423,21 @@ def relevant_general_fields(core: CoreProfile, general: GeneralDeviceProfile) ->
         fields += ["clinical_function", "delivers_hazardous_energy"]
         if active is ActiveType.DIAGNOSTIC:
             fields += ["delivers_ionising_radiation", "records_diagnostic_images"]
-        function = _value(general.clinical_function)
-        if function in (
+        function_kind = _value(general.clinical_function)
+        if function_kind in (
             ClinicalFunction.DIAGNOSE_OR_SCREEN,
             ClinicalFunction.MONITOR,
             ClinicalFunction.SPECIFY_THERAPY,
         ):
             fields += ["decision_maker", "condition_severity", "public_health_risk"]
-        if function is ClinicalFunction.ADMINISTER_SUBSTANCE:
+        if function_kind is ClinicalFunction.ADMINISTER_SUBSTANCE:
             fields += ["administers_or_removes_medicine"]
 
     return _dedupe(fields)
 
 
 def relevant_ivd_fields(ivd: IvdProfile) -> list[str]:
-    """Which Schedule 2A fields this IVD needs.
+    """Which Schedule 2A fields this IVD function needs.
 
     The named exceptions are checked first. An IVD that is a specimen
     receptacle or a quality control material is classified by that fact alone,
@@ -390,52 +468,108 @@ def relevant_ivd_fields(ivd: IvdProfile) -> list[str]:
 
 
 # --------------------------------------------------------------------------
+# Classification vocabulary and aggregation
+# --------------------------------------------------------------------------
+
+# Ordered by the conformity assessment burden each carries, which is what
+# "highest" means when several functions classify differently. Is and Im are
+# placed above I because they add a conformity assessment step, not because
+# they carry more clinical risk.
+GENERAL_ORDER = [
+    "Class I", "Class Is", "Class Im", "Class IIa", "Class IIb", "Class III", "Class AIMD",
+]
+IVD_ORDER = ["Class 1 IVD", "Class 2 IVD", "Class 3 IVD", "Class 4 IVD"]
+
+
+def highest_class(classes) -> dict[str, str]:
+    """The governing class per family.
+
+    General devices and IVDs are not comparable and do not collapse into one
+    answer: a product with both kinds of function needs separate ARTG entries,
+    so this returns one result per family rather than a single class.
+    """
+    # Materialised first: a generator argument would be exhausted by the
+    # first family and every later family would silently come back empty.
+    classes = list(classes)
+    result: dict[str, str] = {}
+    for family, order in (("general", GENERAL_ORDER), ("ivd", IVD_ORDER)):
+        present = [c for c in classes if c in order]
+        if present:
+            result[family] = max(present, key=order.index)
+    return result
 
 
 class DeviceProfile(BaseModel):
+    """A product, made of one or more functions.
+
+    Named DeviceProfile for continuity, but the unit is the product as
+    supplied. Single-function products are the common case and carry one
+    entry in functions.
+    """
+
     core: CoreProfile = CoreProfile()
-    general: GeneralDeviceProfile | None = None
-    ivd: IvdProfile | None = None
+    functions: list[FunctionProfile] = Field(default_factory=list)
     funding: FundingProfile | None = None
 
     source_text: str = ""
-    schema_version: Literal["0.2"] = "0.2"
+    schema_version: Literal["0.3"] = "0.3"
 
-    def branch(self) -> DeviceKind | None:
-        return self.core.kind.value
+    @property
+    def single_function(self) -> bool:
+        return len(self.functions) == 1
+
+    def kinds(self) -> set[DeviceKind]:
+        """Which rule families this product touches. More than one is legal."""
+        return {f.branch() for f in self.functions if f.branch() is not None}
 
     def relevant(self) -> list[str]:
-        """Dotted names of every field this device's branch requires."""
+        """Dotted names of every field this product requires."""
         names = [f"core.{n}" for n in CoreProfile.model_fields]
-        if self.branch() is DeviceKind.IVD and self.ivd is not None:
-            names += [f"ivd.{n}" for n in relevant_ivd_fields(self.ivd)]
-        elif self.branch() is DeviceKind.GENERAL and self.general is not None:
-            names += [f"general.{n}" for n in relevant_general_fields(self.core, self.general)]
+        for index, function in enumerate(self.functions):
+            names += [f"functions.{index}.{n}" for n in function.relevant()]
         return names
 
     def missing(self) -> list[str]:
         """Relevant fields still unresolved, in the order they should be asked.
 
-        next_question() takes missing()[0]. The list shortens as answers arrive
-        and can also lengthen, because establishing one fact opens a branch.
-        Classification must not run while this is non-empty.
+        Classification must not run while this is non-empty. A product with
+        three functions produces three groups of questions, and a function
+        cannot be classified until its own group is answered.
+        """
+        out = [
+            f"core.{name}"
+            for name in CoreProfile.model_fields
+            if not getattr(self.core, name).resolved
+        ]
+        for index, function in enumerate(self.functions):
+            out += [f"functions.{index}.{n}" for n in function.missing()]
+        return out
+
+    def missing_for(self, index: int) -> list[str]:
+        """Unresolved fields for one function, so it can be completed alone."""
+        return self.functions[index].missing()
+
+    def untraceable_evidence(self) -> list[str]:
+        """Fields whose evidence is not a phrase from source_text.
+
+        Extraction is meant to quote, not paraphrase. Anything listed here is
+        a field where the model wrote its own words into the evidence slot,
+        which is the shape a fabricated fact takes.
         """
         out = []
         for dotted in self.relevant():
-            section_name, field_name = dotted.split(".", 1)
-            section = getattr(self, section_name)
-            if section is None:
-                continue
-            answer = getattr(section, field_name)
-            if isinstance(answer, Answer) and not answer.resolved:
-                out.append(dotted)
+            answer = self
+            for part in dotted.split("."):
+                answer = answer[int(part)] if part.isdigit() else getattr(answer, part, None)
+                if answer is None:
+                    break
+            if isinstance(answer, Answer) and answer.evidence:
+                if answer.evidence not in self.source_text:
+                    out.append(dotted)
         return out
 
     def unresolved_in(self, section: BaseModel) -> list[str]:
-        """Every unresolved field in one section, relevant or not.
-
-        Diagnostic only. Use missing() for the clarification loop.
-        """
+        """Every unresolved field in one section, relevant or not. Diagnostic only."""
         return [
             name
             for name in type(section).model_fields

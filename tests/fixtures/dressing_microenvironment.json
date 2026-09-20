@@ -1,28 +1,26 @@
 {
-  "expected_class": "Class IIa",
-  "expected_rule": "2.4(1)",
+  "expected_classes": {
+    "general": "Class IIa"
+  },
+  "functions": [
+    {
+      "name": "Negative wound therapy dressing bandage",
+      "expected_class": "Class IIa",
+      "expected_rule": "2.4(1)"
+    }
+  ],
   "source": "TGA, Classifying medical devices that are not IVDs",
   "verified": true,
   "note": "Same contact as the barrier pad. Only the claim differs.",
   "profile": {
     "core": {
-      "device_name": {
+      "product_name": {
         "value": "Negative wound therapy dressing bandage",
         "basis": "stated",
         "evidence": "Negative wound therapy dressing bandage"
       },
       "intended_purpose": {
         "value": "Used together with an active medical device to manage the microenvironment of a wound.",
-        "basis": "stated",
-        "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
-      },
-      "kind": {
-        "value": "general_device",
-        "basis": "stated",
-        "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
-      },
-      "is_software_only": {
-        "value": "no",
         "basis": "stated",
         "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
       },
@@ -35,143 +33,172 @@
         "value": "no",
         "basis": "stated",
         "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
-      }
-    },
-    "general": {
-      "invasiveness": {
-        "value": "non_invasive",
-        "basis": "stated",
-        "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
       },
-      "duration": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "body_contact": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "orifice_site": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "contacts_injured_skin": {
+      "functions_confirmed": {
         "value": "yes",
         "basis": "stated",
-        "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
-      },
-      "wound_function": {
-        "value": "manage_microenvironment_of_wound",
-        "basis": "stated",
-        "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
-      },
-      "breaches_dermis": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "fluid_handling": {
-        "value": "none",
-        "basis": "stated",
-        "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
-      },
-      "connected_to_active_device": {
-        "value": "yes",
-        "basis": "stated",
-        "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
-      },
-      "reusable_surgical_instrument": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "absorbed_or_chemically_changed": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "delivers_ionising_radiation": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "active_type": {
-        "value": "not_active",
-        "basis": "stated",
-        "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
-      },
-      "is_active_implantable": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "clinical_function": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "delivers_hazardous_energy": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "administers_or_removes_medicine": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "decision_maker": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "condition_severity": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "public_health_risk": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "records_diagnostic_images": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "incorporates_medicine": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
-      },
-      "animal_or_microbial_origin": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
-      },
-      "human_blood_derivative": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
-      },
-      "contraceptive_or_sti_prevention": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
-      },
-      "disinfects_another_device": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
+        "evidence": "fixture decomposition is fixed by hand"
       }
     },
-    "ivd": null,
+    "functions": [
+      {
+        "name": {
+          "value": "Negative wound therapy dressing bandage",
+          "basis": "stated",
+          "evidence": "Negative wound therapy dressing bandage"
+        },
+        "description": {
+          "value": "Used together with an active medical device to manage the microenvironment of a wound.",
+          "basis": "stated",
+          "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
+        },
+        "kind": {
+          "value": "general_device",
+          "basis": "stated",
+          "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
+        },
+        "is_software": {
+          "value": "no",
+          "basis": "stated",
+          "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
+        },
+        "general": {
+          "invasiveness": {
+            "value": "non_invasive",
+            "basis": "stated",
+            "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
+          },
+          "duration": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "body_contact": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "orifice_site": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contacts_injured_skin": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
+          },
+          "wound_function": {
+            "value": "manage_microenvironment_of_wound",
+            "basis": "stated",
+            "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
+          },
+          "breaches_dermis": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "fluid_handling": {
+            "value": "none",
+            "basis": "stated",
+            "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
+          },
+          "connected_to_active_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "reusable_surgical_instrument": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "absorbed_or_chemically_changed": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "delivers_ionising_radiation": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "active_type": {
+            "value": "not_active",
+            "basis": "stated",
+            "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
+          },
+          "is_active_implantable": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "clinical_function": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "delivers_hazardous_energy": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "administers_or_removes_medicine": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "decision_maker": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "condition_severity": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "public_health_risk": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "records_diagnostic_images": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "incorporates_medicine": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
+          },
+          "animal_or_microbial_origin": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
+          },
+          "human_blood_derivative": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
+          },
+          "contraceptive_or_sti_prevention": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
+          },
+          "disinfects_another_device": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
+          }
+        },
+        "ivd": null
+      }
+    ],
     "funding": null,
-    "source_text": "Used together with an active medical device to manage the microenvironment of a wound.",
-    "schema_version": "0.2"
+    "source_text": "Negative wound therapy dressing bandage Used together with an active medical device to manage the microenvironment of a wound. Negative wound therapy dressing bandage Used together with an active medical device to manage the microenvironment of a wound. fixture decomposition is fixed by hand",
+    "schema_version": "0.3"
   }
 }

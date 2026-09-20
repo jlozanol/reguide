@@ -1,28 +1,26 @@
 {
-  "expected_class": "Class III",
-  "expected_rule": "5.1(2)",
+  "expected_classes": {
+    "general": "Class III"
+  },
+  "functions": [
+    {
+      "name": "Trauma covering with anaesthetic gel",
+      "expected_class": "Class III",
+      "expected_rule": "5.1(2)"
+    }
+  ],
   "source": "TGA, Classifying medical devices that are not IVDs",
   "verified": true,
   "note": "A medicine overrides sub-rule 2.4 entirely. Tests special-rule priority.",
   "profile": {
     "core": {
-      "device_name": {
+      "product_name": {
         "value": "Trauma covering with anaesthetic gel",
         "basis": "stated",
         "evidence": "Trauma covering with anaesthetic gel"
       },
       "intended_purpose": {
         "value": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic.",
-        "basis": "stated",
-        "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
-      },
-      "kind": {
-        "value": "general_device",
-        "basis": "stated",
-        "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
-      },
-      "is_software_only": {
-        "value": "no",
         "basis": "stated",
         "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
       },
@@ -35,143 +33,172 @@
         "value": "no",
         "basis": "stated",
         "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
-      }
-    },
-    "general": {
-      "invasiveness": {
-        "value": "non_invasive",
-        "basis": "stated",
-        "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
       },
-      "duration": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "body_contact": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "orifice_site": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "contacts_injured_skin": {
+      "functions_confirmed": {
         "value": "yes",
         "basis": "stated",
-        "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
-      },
-      "wound_function": {
-        "value": "mechanical_barrier_compression_or_absorption",
-        "basis": "stated",
-        "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
-      },
-      "breaches_dermis": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "fluid_handling": {
-        "value": "none",
-        "basis": "stated",
-        "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
-      },
-      "connected_to_active_device": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "reusable_surgical_instrument": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "absorbed_or_chemically_changed": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "delivers_ionising_radiation": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "active_type": {
-        "value": "not_active",
-        "basis": "stated",
-        "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
-      },
-      "is_active_implantable": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "clinical_function": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "delivers_hazardous_energy": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "administers_or_removes_medicine": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "decision_maker": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "condition_severity": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "public_health_risk": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "records_diagnostic_images": {
-        "value": null,
-        "basis": "unknown",
-        "evidence": null
-      },
-      "incorporates_medicine": {
-        "value": "yes",
-        "basis": "stated",
-        "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
-      },
-      "animal_or_microbial_origin": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
-      },
-      "human_blood_derivative": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
-      },
-      "contraceptive_or_sti_prevention": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
-      },
-      "disinfects_another_device": {
-        "value": "no",
-        "basis": "stated",
-        "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
+        "evidence": "fixture decomposition is fixed by hand"
       }
     },
-    "ivd": null,
+    "functions": [
+      {
+        "name": {
+          "value": "Trauma covering with anaesthetic gel",
+          "basis": "stated",
+          "evidence": "Trauma covering with anaesthetic gel"
+        },
+        "description": {
+          "value": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic.",
+          "basis": "stated",
+          "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
+        },
+        "kind": {
+          "value": "general_device",
+          "basis": "stated",
+          "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
+        },
+        "is_software": {
+          "value": "no",
+          "basis": "stated",
+          "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
+        },
+        "general": {
+          "invasiveness": {
+            "value": "non_invasive",
+            "basis": "stated",
+            "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
+          },
+          "duration": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "body_contact": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "orifice_site": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contacts_injured_skin": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
+          },
+          "wound_function": {
+            "value": "mechanical_barrier_compression_or_absorption",
+            "basis": "stated",
+            "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
+          },
+          "breaches_dermis": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "fluid_handling": {
+            "value": "none",
+            "basis": "stated",
+            "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
+          },
+          "connected_to_active_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "reusable_surgical_instrument": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "absorbed_or_chemically_changed": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "delivers_ionising_radiation": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "active_type": {
+            "value": "not_active",
+            "basis": "stated",
+            "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
+          },
+          "is_active_implantable": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "clinical_function": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "delivers_hazardous_energy": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "administers_or_removes_medicine": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "decision_maker": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "condition_severity": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "public_health_risk": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "records_diagnostic_images": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "incorporates_medicine": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
+          },
+          "animal_or_microbial_origin": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
+          },
+          "human_blood_derivative": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
+          },
+          "contraceptive_or_sti_prevention": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
+          },
+          "disinfects_another_device": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
+          }
+        },
+        "ivd": null
+      }
+    ],
     "funding": null,
-    "source_text": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic.",
-    "schema_version": "0.2"
+    "source_text": "Trauma covering with anaesthetic gel Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic. Trauma covering with anaesthetic gel Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic. fixture decomposition is fixed by hand",
+    "schema_version": "0.3"
   }
 }
