@@ -1,0 +1,177 @@
+{
+  "expected_class": "Class IIb",
+  "expected_rule": "3.1(2)(c)(i)",
+  "source": "TGA, Classifying medical devices that are not IVDs",
+  "verified": true,
+  "note": "Long-term use through a body orifice.",
+  "profile": {
+    "core": {
+      "device_name": {
+        "value": "Long-term indwelling orifice device",
+        "basis": "stated",
+        "evidence": "Long-term indwelling orifice device"
+      },
+      "intended_purpose": {
+        "value": "Invasive device used through a body orifice for longer than 30 days.",
+        "basis": "stated",
+        "evidence": "Invasive device used through a body orifice for longer than 30 days."
+      },
+      "kind": {
+        "value": "general_device",
+        "basis": "stated",
+        "evidence": "Invasive device used through a body orifice for longer than 30 days."
+      },
+      "is_software_only": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Invasive device used through a body orifice for longer than 30 days."
+      },
+      "supplied_sterile": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Invasive device used through a body orifice for longer than 30 days."
+      },
+      "has_measuring_function": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Invasive device used through a body orifice for longer than 30 days."
+      }
+    },
+    "general": {
+      "invasiveness": {
+        "value": "invasive_body_orifice",
+        "basis": "stated",
+        "evidence": "Invasive device used through a body orifice for longer than 30 days."
+      },
+      "duration": {
+        "value": "long_term",
+        "basis": "stated",
+        "evidence": "Invasive device used through a body orifice for longer than 30 days."
+      },
+      "body_contact": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "orifice_site": {
+        "value": "other_body_orifice",
+        "basis": "stated",
+        "evidence": "Invasive device used through a body orifice for longer than 30 days."
+      },
+      "contacts_injured_skin": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Invasive device used through a body orifice for longer than 30 days."
+      },
+      "wound_function": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "breaches_dermis": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "fluid_handling": {
+        "value": "none",
+        "basis": "stated",
+        "evidence": "Invasive device used through a body orifice for longer than 30 days."
+      },
+      "connected_to_active_device": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Invasive device used through a body orifice for longer than 30 days."
+      },
+      "reusable_surgical_instrument": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "absorbed_or_chemically_changed": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "delivers_ionising_radiation": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "active_type": {
+        "value": "not_active",
+        "basis": "stated",
+        "evidence": "Invasive device used through a body orifice for longer than 30 days."
+      },
+      "is_active_implantable": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "clinical_function": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "delivers_hazardous_energy": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "administers_or_removes_medicine": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "decision_maker": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "condition_severity": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "public_health_risk": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "records_diagnostic_images": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "incorporates_medicine": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Invasive device used through a body orifice for longer than 30 days."
+      },
+      "animal_or_microbial_origin": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Invasive device used through a body orifice for longer than 30 days."
+      },
+      "human_blood_derivative": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Invasive device used through a body orifice for longer than 30 days."
+      },
+      "contraceptive_or_sti_prevention": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Invasive device used through a body orifice for longer than 30 days."
+      },
+      "disinfects_another_device": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Invasive device used through a body orifice for longer than 30 days."
+      }
+    },
+    "ivd": null,
+    "funding": null,
+    "source_text": "Invasive device used through a body orifice for longer than 30 days.",
+    "schema_version": "0.2"
+  }
+}

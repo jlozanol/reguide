@@ -1,0 +1,102 @@
+{
+  "expected_class": "Class 3 IVD",
+  "expected_rule": "1.3",
+  "source": "TGA, Classifying IVDs for supply in Australia",
+  "verified": true,
+  "note": "Transmissible agent at moderate rather than high public health risk.",
+  "profile": {
+    "core": {
+      "device_name": {
+        "value": "Chlamydia trachomatis assay",
+        "basis": "stated",
+        "evidence": "Chlamydia trachomatis assay"
+      },
+      "intended_purpose": {
+        "value": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis.",
+        "basis": "stated",
+        "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+      },
+      "kind": {
+        "value": "ivd",
+        "basis": "stated",
+        "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+      },
+      "is_software_only": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+      },
+      "supplied_sterile": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+      },
+      "has_measuring_function": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+      }
+    },
+    "general": null,
+    "ivd": {
+      "purpose": {
+        "value": "transmissible_agent_detection",
+        "basis": "stated",
+        "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+      },
+      "is_self_test": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+      },
+      "is_near_patient_test": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+      },
+      "detects_transmissible_agent": {
+        "value": "yes",
+        "basis": "stated",
+        "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+      },
+      "transmission_risk_to_population": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+      },
+      "disease_is_life_threatening": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+      },
+      "result_drives_critical_decision": {
+        "value": "yes",
+        "basis": "stated",
+        "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+      },
+      "is_instrument_or_receptacle": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+      },
+      "is_quality_control_material": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+      },
+      "is_export_only": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+      },
+      "sample_type": {
+        "value": "urine or swab",
+        "basis": "stated",
+        "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+      }
+    },
+    "funding": null,
+    "source_text": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis.",
+    "schema_version": "0.2"
+  }
+}

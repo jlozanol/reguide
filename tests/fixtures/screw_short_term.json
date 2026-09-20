@@ -1,0 +1,177 @@
+{
+  "expected_class": "Class IIa",
+  "expected_rule": "3.3(2)",
+  "source": "TGA, Classifying medical devices that are not IVDs",
+  "verified": true,
+  "note": "Up to 30 days. Same class as transient, different rule.",
+  "profile": {
+    "core": {
+      "device_name": {
+        "value": "Metal fixation screw, short term",
+        "basis": "stated",
+        "evidence": "Metal fixation screw, short term"
+      },
+      "intended_purpose": {
+        "value": "Holds bone together for up to 30 days to support fracture healing.",
+        "basis": "stated",
+        "evidence": "Holds bone together for up to 30 days to support fracture healing."
+      },
+      "kind": {
+        "value": "general_device",
+        "basis": "stated",
+        "evidence": "Holds bone together for up to 30 days to support fracture healing."
+      },
+      "is_software_only": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Holds bone together for up to 30 days to support fracture healing."
+      },
+      "supplied_sterile": {
+        "value": "yes",
+        "basis": "stated",
+        "evidence": "Holds bone together for up to 30 days to support fracture healing."
+      },
+      "has_measuring_function": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Holds bone together for up to 30 days to support fracture healing."
+      }
+    },
+    "general": {
+      "invasiveness": {
+        "value": "surgically_invasive",
+        "basis": "stated",
+        "evidence": "Holds bone together for up to 30 days to support fracture healing."
+      },
+      "duration": {
+        "value": "short_term",
+        "basis": "stated",
+        "evidence": "Holds bone together for up to 30 days to support fracture healing."
+      },
+      "body_contact": {
+        "value": "breached_skin_or_wound",
+        "basis": "stated",
+        "evidence": "Holds bone together for up to 30 days to support fracture healing."
+      },
+      "orifice_site": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "contacts_injured_skin": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Holds bone together for up to 30 days to support fracture healing."
+      },
+      "wound_function": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "breaches_dermis": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "fluid_handling": {
+        "value": "none",
+        "basis": "stated",
+        "evidence": "Holds bone together for up to 30 days to support fracture healing."
+      },
+      "connected_to_active_device": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "reusable_surgical_instrument": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "absorbed_or_chemically_changed": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Holds bone together for up to 30 days to support fracture healing."
+      },
+      "delivers_ionising_radiation": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "active_type": {
+        "value": "not_active",
+        "basis": "stated",
+        "evidence": "Holds bone together for up to 30 days to support fracture healing."
+      },
+      "is_active_implantable": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "clinical_function": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "delivers_hazardous_energy": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "administers_or_removes_medicine": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "decision_maker": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "condition_severity": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "public_health_risk": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "records_diagnostic_images": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "incorporates_medicine": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Holds bone together for up to 30 days to support fracture healing."
+      },
+      "animal_or_microbial_origin": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Holds bone together for up to 30 days to support fracture healing."
+      },
+      "human_blood_derivative": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Holds bone together for up to 30 days to support fracture healing."
+      },
+      "contraceptive_or_sti_prevention": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Holds bone together for up to 30 days to support fracture healing."
+      },
+      "disinfects_another_device": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Holds bone together for up to 30 days to support fracture healing."
+      }
+    },
+    "ivd": null,
+    "funding": null,
+    "source_text": "Holds bone together for up to 30 days to support fracture healing.",
+    "schema_version": "0.2"
+  }
+}

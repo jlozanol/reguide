@@ -1,0 +1,177 @@
+{
+  "expected_class": "Class I",
+  "expected_rule": "2.4(3)",
+  "source": "TGA, Classifying medical devices that are not IVDs",
+  "verified": true,
+  "note": "Barrier, compression or absorption only. The floor of sub-rule 2.4.",
+  "profile": {
+    "core": {
+      "device_name": {
+        "value": "Absorbent pad",
+        "basis": "stated",
+        "evidence": "Absorbent pad"
+      },
+      "intended_purpose": {
+        "value": "Acts as a barrier to and absorbs exudate from a wound.",
+        "basis": "stated",
+        "evidence": "Acts as a barrier to and absorbs exudate from a wound."
+      },
+      "kind": {
+        "value": "general_device",
+        "basis": "stated",
+        "evidence": "Acts as a barrier to and absorbs exudate from a wound."
+      },
+      "is_software_only": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Acts as a barrier to and absorbs exudate from a wound."
+      },
+      "supplied_sterile": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Acts as a barrier to and absorbs exudate from a wound."
+      },
+      "has_measuring_function": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Acts as a barrier to and absorbs exudate from a wound."
+      }
+    },
+    "general": {
+      "invasiveness": {
+        "value": "non_invasive",
+        "basis": "stated",
+        "evidence": "Acts as a barrier to and absorbs exudate from a wound."
+      },
+      "duration": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "body_contact": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "orifice_site": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "contacts_injured_skin": {
+        "value": "yes",
+        "basis": "stated",
+        "evidence": "Acts as a barrier to and absorbs exudate from a wound."
+      },
+      "wound_function": {
+        "value": "mechanical_barrier_compression_or_absorption",
+        "basis": "stated",
+        "evidence": "Acts as a barrier to and absorbs exudate from a wound."
+      },
+      "breaches_dermis": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "fluid_handling": {
+        "value": "none",
+        "basis": "stated",
+        "evidence": "Acts as a barrier to and absorbs exudate from a wound."
+      },
+      "connected_to_active_device": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "reusable_surgical_instrument": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "absorbed_or_chemically_changed": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "delivers_ionising_radiation": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "active_type": {
+        "value": "not_active",
+        "basis": "stated",
+        "evidence": "Acts as a barrier to and absorbs exudate from a wound."
+      },
+      "is_active_implantable": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "clinical_function": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "delivers_hazardous_energy": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "administers_or_removes_medicine": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "decision_maker": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "condition_severity": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "public_health_risk": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "records_diagnostic_images": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "incorporates_medicine": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Acts as a barrier to and absorbs exudate from a wound."
+      },
+      "animal_or_microbial_origin": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Acts as a barrier to and absorbs exudate from a wound."
+      },
+      "human_blood_derivative": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Acts as a barrier to and absorbs exudate from a wound."
+      },
+      "contraceptive_or_sti_prevention": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Acts as a barrier to and absorbs exudate from a wound."
+      },
+      "disinfects_another_device": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Acts as a barrier to and absorbs exudate from a wound."
+      }
+    },
+    "ivd": null,
+    "funding": null,
+    "source_text": "Acts as a barrier to and absorbs exudate from a wound.",
+    "schema_version": "0.2"
+  }
+}

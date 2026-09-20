@@ -1,0 +1,102 @@
+{
+  "expected_class": "Class 1 IVD",
+  "expected_rule": "1.6",
+  "source": "TGA, Classifying IVDs for supply in Australia",
+  "verified": true,
+  "note": "Named exception. Cannot be reasoned to, only looked up.",
+  "profile": {
+    "core": {
+      "device_name": {
+        "value": "Microbiological culture medium",
+        "basis": "stated",
+        "evidence": "Microbiological culture medium"
+      },
+      "intended_purpose": {
+        "value": "Prepared culture medium for microbiological laboratory use.",
+        "basis": "stated",
+        "evidence": "Prepared culture medium for microbiological laboratory use."
+      },
+      "kind": {
+        "value": "ivd",
+        "basis": "stated",
+        "evidence": "Prepared culture medium for microbiological laboratory use."
+      },
+      "is_software_only": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Prepared culture medium for microbiological laboratory use."
+      },
+      "supplied_sterile": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Prepared culture medium for microbiological laboratory use."
+      },
+      "has_measuring_function": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Prepared culture medium for microbiological laboratory use."
+      }
+    },
+    "general": null,
+    "ivd": {
+      "purpose": {
+        "value": "other",
+        "basis": "stated",
+        "evidence": "Prepared culture medium for microbiological laboratory use."
+      },
+      "is_self_test": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Prepared culture medium for microbiological laboratory use."
+      },
+      "is_near_patient_test": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Prepared culture medium for microbiological laboratory use."
+      },
+      "detects_transmissible_agent": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Prepared culture medium for microbiological laboratory use."
+      },
+      "transmission_risk_to_population": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Prepared culture medium for microbiological laboratory use."
+      },
+      "disease_is_life_threatening": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Prepared culture medium for microbiological laboratory use."
+      },
+      "result_drives_critical_decision": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Prepared culture medium for microbiological laboratory use."
+      },
+      "is_instrument_or_receptacle": {
+        "value": "yes",
+        "basis": "stated",
+        "evidence": "Prepared culture medium for microbiological laboratory use."
+      },
+      "is_quality_control_material": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Prepared culture medium for microbiological laboratory use."
+      },
+      "is_export_only": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Prepared culture medium for microbiological laboratory use."
+      },
+      "sample_type": {
+        "value": "not stated",
+        "basis": "stated",
+        "evidence": "Prepared culture medium for microbiological laboratory use."
+      }
+    },
+    "funding": null,
+    "source_text": "Prepared culture medium for microbiological laboratory use.",
+    "schema_version": "0.2"
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "expected_class": "Class 3 IVD",
+  "expected_rule": "1.4",
+  "source": "TGA, Classifying IVDs for supply in Australia",
+  "verified": true,
+  "note": "Self-testing lifts the class of the strips above their own meter.",
+  "profile": {
+    "core": {
+      "device_name": {
+        "value": "Prothrombin time self-test strips",
+        "basis": "stated",
+        "evidence": "Prothrombin time self-test strips"
+      },
+      "intended_purpose": {
+        "value": "Test strips for prothrombin time self-testing by a lay person at home.",
+        "basis": "stated",
+        "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
+      },
+      "kind": {
+        "value": "ivd",
+        "basis": "stated",
+        "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
+      },
+      "is_software_only": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
+      },
+      "supplied_sterile": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
+      },
+      "has_measuring_function": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
+      }
+    },
+    "general": null,
+    "ivd": {
+      "purpose": {
+        "value": "therapy_or_disease_monitoring",
+        "basis": "stated",
+        "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
+      },
+      "is_self_test": {
+        "value": "yes",
+        "basis": "stated",
+        "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
+      },
+      "is_near_patient_test": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
+      },
+      "detects_transmissible_agent": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
+      },
+      "transmission_risk_to_population": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
+      },
+      "disease_is_life_threatening": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
+      },
+      "result_drives_critical_decision": {
+        "value": "yes",
+        "basis": "stated",
+        "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
+      },
+      "is_instrument_or_receptacle": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
+      },
+      "is_quality_control_material": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
+      },
+      "is_export_only": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
+      },
+      "sample_type": {
+        "value": "capillary whole blood",
+        "basis": "stated",
+        "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
+      }
+    },
+    "funding": null,
+    "source_text": "Test strips for prothrombin time self-testing by a lay person at home.",
+    "schema_version": "0.2"
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "expected_class": "Class IIb",
+  "expected_rule": "4.3(3)(c)",
+  "source": "TGA, Classifying active medical devices in Australia",
+  "verified": true,
+  "note": "Controls a device that emits ionising radiation. Control inherits the risk.",
+  "profile": {
+    "core": {
+      "device_name": {
+        "value": "Radiotherapy after-loading control system",
+        "basis": "stated",
+        "evidence": "Radiotherapy after-loading control system"
+      },
+      "intended_purpose": {
+        "value": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology.",
+        "basis": "stated",
+        "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+      },
+      "kind": {
+        "value": "general_device",
+        "basis": "stated",
+        "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+      },
+      "is_software_only": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+      },
+      "supplied_sterile": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+      },
+      "has_measuring_function": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+      }
+    },
+    "general": {
+      "invasiveness": {
+        "value": "non_invasive",
+        "basis": "stated",
+        "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+      },
+      "duration": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "body_contact": {
+        "value": "none",
+        "basis": "stated",
+        "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+      },
+      "orifice_site": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "contacts_injured_skin": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+      },
+      "wound_function": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "breaches_dermis": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "fluid_handling": {
+        "value": "none",
+        "basis": "stated",
+        "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+      },
+      "connected_to_active_device": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "reusable_surgical_instrument": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "absorbed_or_chemically_changed": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "delivers_ionising_radiation": {
+        "value": "yes",
+        "basis": "stated",
+        "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+      },
+      "active_type": {
+        "value": "active_diagnostic",
+        "basis": "stated",
+        "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+      },
+      "is_active_implantable": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "clinical_function": {
+        "value": "control_or_monitor_another_active_device",
+        "basis": "stated",
+        "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+      },
+      "delivers_hazardous_energy": {
+        "value": "yes",
+        "basis": "stated",
+        "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+      },
+      "administers_or_removes_medicine": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "decision_maker": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "condition_severity": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "public_health_risk": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "records_diagnostic_images": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+      },
+      "incorporates_medicine": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+      },
+      "animal_or_microbial_origin": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+      },
+      "human_blood_derivative": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+      },
+      "contraceptive_or_sti_prevention": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+      },
+      "disinfects_another_device": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+      }
+    },
+    "ivd": null,
+    "funding": null,
+    "source_text": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology.",
+    "schema_version": "0.2"
+  }
+}

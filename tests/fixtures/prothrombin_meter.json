@@ -1,0 +1,102 @@
+{
+  "expected_class": "Class 1 IVD",
+  "expected_rule": "1.6",
+  "source": "TGA, Classifying IVDs for supply in Australia",
+  "verified": true,
+  "note": "The meter is Class 1 while its own test strips are Class 3. Pairs with prothrombin_self_test to test that the pack is split, not merged.",
+  "profile": {
+    "core": {
+      "device_name": {
+        "value": "Portable prothrombin time meter",
+        "basis": "stated",
+        "evidence": "Portable prothrombin time meter"
+      },
+      "intended_purpose": {
+        "value": "Instrument that reads prothrombin time test strips.",
+        "basis": "stated",
+        "evidence": "Instrument that reads prothrombin time test strips."
+      },
+      "kind": {
+        "value": "ivd",
+        "basis": "stated",
+        "evidence": "Instrument that reads prothrombin time test strips."
+      },
+      "is_software_only": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Instrument that reads prothrombin time test strips."
+      },
+      "supplied_sterile": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Instrument that reads prothrombin time test strips."
+      },
+      "has_measuring_function": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Instrument that reads prothrombin time test strips."
+      }
+    },
+    "general": null,
+    "ivd": {
+      "purpose": {
+        "value": "other",
+        "basis": "stated",
+        "evidence": "Instrument that reads prothrombin time test strips."
+      },
+      "is_self_test": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Instrument that reads prothrombin time test strips."
+      },
+      "is_near_patient_test": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Instrument that reads prothrombin time test strips."
+      },
+      "detects_transmissible_agent": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Instrument that reads prothrombin time test strips."
+      },
+      "transmission_risk_to_population": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Instrument that reads prothrombin time test strips."
+      },
+      "disease_is_life_threatening": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Instrument that reads prothrombin time test strips."
+      },
+      "result_drives_critical_decision": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Instrument that reads prothrombin time test strips."
+      },
+      "is_instrument_or_receptacle": {
+        "value": "yes",
+        "basis": "stated",
+        "evidence": "Instrument that reads prothrombin time test strips."
+      },
+      "is_quality_control_material": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Instrument that reads prothrombin time test strips."
+      },
+      "is_export_only": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Instrument that reads prothrombin time test strips."
+      },
+      "sample_type": {
+        "value": "not stated",
+        "basis": "stated",
+        "evidence": "Instrument that reads prothrombin time test strips."
+      }
+    },
+    "funding": null,
+    "source_text": "Instrument that reads prothrombin time test strips.",
+    "schema_version": "0.2"
+  }
+}

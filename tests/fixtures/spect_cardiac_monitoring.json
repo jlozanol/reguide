@@ -1,0 +1,177 @@
+{
+  "expected_class": "Class IIb",
+  "expected_rule": "4.6(a)",
+  "source": "TGA, Classifying active medical devices in Australia",
+  "verified": true,
+  "note": "Monitoring where the information could indicate immediate danger.",
+  "profile": {
+    "core": {
+      "device_name": {
+        "value": "SPECT cardiac monitoring software",
+        "basis": "stated",
+        "evidence": "SPECT cardiac monitoring software"
+      },
+      "intended_purpose": {
+        "value": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow.",
+        "basis": "stated",
+        "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
+      },
+      "kind": {
+        "value": "general_device",
+        "basis": "stated",
+        "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
+      },
+      "is_software_only": {
+        "value": "yes",
+        "basis": "stated",
+        "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
+      },
+      "supplied_sterile": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
+      },
+      "has_measuring_function": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
+      }
+    },
+    "general": {
+      "invasiveness": {
+        "value": "non_invasive",
+        "basis": "stated",
+        "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
+      },
+      "duration": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "body_contact": {
+        "value": "none",
+        "basis": "stated",
+        "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
+      },
+      "orifice_site": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "contacts_injured_skin": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
+      },
+      "wound_function": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "breaches_dermis": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "fluid_handling": {
+        "value": "none",
+        "basis": "stated",
+        "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
+      },
+      "connected_to_active_device": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "reusable_surgical_instrument": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "absorbed_or_chemically_changed": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "delivers_ionising_radiation": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
+      },
+      "active_type": {
+        "value": "active_diagnostic",
+        "basis": "stated",
+        "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
+      },
+      "is_active_implantable": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "clinical_function": {
+        "value": "monitor_a_condition_or_parameter",
+        "basis": "stated",
+        "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
+      },
+      "delivers_hazardous_energy": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
+      },
+      "administers_or_removes_medicine": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "decision_maker": {
+        "value": "informs_a_health_professional_who_decides",
+        "basis": "stated",
+        "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
+      },
+      "condition_severity": {
+        "value": "death_or_severe_deterioration_without_urgent_treatment",
+        "basis": "stated",
+        "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
+      },
+      "public_health_risk": {
+        "value": "low",
+        "basis": "stated",
+        "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
+      },
+      "records_diagnostic_images": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
+      },
+      "incorporates_medicine": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
+      },
+      "animal_or_microbial_origin": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
+      },
+      "human_blood_derivative": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
+      },
+      "contraceptive_or_sti_prevention": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
+      },
+      "disinfects_another_device": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
+      }
+    },
+    "ivd": null,
+    "funding": null,
+    "source_text": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow.",
+    "schema_version": "0.2"
+  }
+}

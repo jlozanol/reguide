@@ -1,0 +1,177 @@
+{
+  "expected_class": "Class IIa",
+  "expected_rule": "4.3(2)(a)",
+  "source": "TGA, Classifying active medical devices in Australia",
+  "verified": true,
+  "note": "Same rule as ultrasound. Confirms the rule is not imaging-modality specific.",
+  "profile": {
+    "core": {
+      "device_name": {
+        "value": "Magnetic resonance equipment",
+        "basis": "stated",
+        "evidence": "Magnetic resonance equipment"
+      },
+      "intended_purpose": {
+        "value": "Supplies energy absorbed by the patient's body for diagnostic imaging.",
+        "basis": "stated",
+        "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+      },
+      "kind": {
+        "value": "general_device",
+        "basis": "stated",
+        "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+      },
+      "is_software_only": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+      },
+      "supplied_sterile": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+      },
+      "has_measuring_function": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+      }
+    },
+    "general": {
+      "invasiveness": {
+        "value": "non_invasive",
+        "basis": "stated",
+        "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+      },
+      "duration": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "body_contact": {
+        "value": "none",
+        "basis": "stated",
+        "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+      },
+      "orifice_site": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "contacts_injured_skin": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+      },
+      "wound_function": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "breaches_dermis": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "fluid_handling": {
+        "value": "none",
+        "basis": "stated",
+        "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+      },
+      "connected_to_active_device": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "reusable_surgical_instrument": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "absorbed_or_chemically_changed": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "delivers_ionising_radiation": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+      },
+      "active_type": {
+        "value": "active_diagnostic",
+        "basis": "stated",
+        "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+      },
+      "is_active_implantable": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "clinical_function": {
+        "value": "supply_or_exchange_energy",
+        "basis": "stated",
+        "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+      },
+      "delivers_hazardous_energy": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+      },
+      "administers_or_removes_medicine": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "decision_maker": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "condition_severity": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "public_health_risk": {
+        "value": null,
+        "basis": "unknown",
+        "evidence": null
+      },
+      "records_diagnostic_images": {
+        "value": "yes",
+        "basis": "stated",
+        "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+      },
+      "incorporates_medicine": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+      },
+      "animal_or_microbial_origin": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+      },
+      "human_blood_derivative": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+      },
+      "contraceptive_or_sti_prevention": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+      },
+      "disinfects_another_device": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+      }
+    },
+    "ivd": null,
+    "funding": null,
+    "source_text": "Supplies energy absorbed by the patient's body for diagnostic imaging.",
+    "schema_version": "0.2"
+  }
+}

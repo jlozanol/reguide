@@ -1,0 +1,102 @@
+{
+  "expected_class": "Class 2 IVD",
+  "expected_rule": "1.5",
+  "source": "TGA, Classifying IVDs for supply in Australia",
+  "verified": true,
+  "note": "Non-assay-specific control material. Another named exception.",
+  "profile": {
+    "core": {
+      "device_name": {
+        "value": "Non-assay-specific control plasma",
+        "basis": "stated",
+        "evidence": "Non-assay-specific control plasma"
+      },
+      "intended_purpose": {
+        "value": "Quality control material for coagulation studies, not assay specific.",
+        "basis": "stated",
+        "evidence": "Quality control material for coagulation studies, not assay specific."
+      },
+      "kind": {
+        "value": "ivd",
+        "basis": "stated",
+        "evidence": "Quality control material for coagulation studies, not assay specific."
+      },
+      "is_software_only": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Quality control material for coagulation studies, not assay specific."
+      },
+      "supplied_sterile": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Quality control material for coagulation studies, not assay specific."
+      },
+      "has_measuring_function": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Quality control material for coagulation studies, not assay specific."
+      }
+    },
+    "general": null,
+    "ivd": {
+      "purpose": {
+        "value": "other",
+        "basis": "stated",
+        "evidence": "Quality control material for coagulation studies, not assay specific."
+      },
+      "is_self_test": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Quality control material for coagulation studies, not assay specific."
+      },
+      "is_near_patient_test": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Quality control material for coagulation studies, not assay specific."
+      },
+      "detects_transmissible_agent": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Quality control material for coagulation studies, not assay specific."
+      },
+      "transmission_risk_to_population": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Quality control material for coagulation studies, not assay specific."
+      },
+      "disease_is_life_threatening": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Quality control material for coagulation studies, not assay specific."
+      },
+      "result_drives_critical_decision": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Quality control material for coagulation studies, not assay specific."
+      },
+      "is_instrument_or_receptacle": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Quality control material for coagulation studies, not assay specific."
+      },
+      "is_quality_control_material": {
+        "value": "yes",
+        "basis": "stated",
+        "evidence": "Quality control material for coagulation studies, not assay specific."
+      },
+      "is_export_only": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Quality control material for coagulation studies, not assay specific."
+      },
+      "sample_type": {
+        "value": "not stated",
+        "basis": "stated",
+        "evidence": "Quality control material for coagulation studies, not assay specific."
+      }
+    },
+    "funding": null,
+    "source_text": "Quality control material for coagulation studies, not assay specific.",
+    "schema_version": "0.2"
+  }
+}
