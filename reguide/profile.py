@@ -576,3 +576,5 @@ class DeviceProfile(BaseModel):
             if isinstance(getattr(section, name), Answer)
             and not getattr(section, name).resolved
         ]
+
+## End of file
