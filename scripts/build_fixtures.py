@@ -54,6 +54,8 @@ ACTIVE = "TGA, Classifying active medical devices in Australia"
 IVD_GUIDE = "TGA, Classifying IVDs for supply in Australia"
 RULE_TEXT = "Reasoned from Schedule 2 rule text, not a worked example"
 IHR_GUIDE = "TGA, Completing Conformity Assessment for immunohaematology reagents (IHRs)"
+THERMOMETERS = ("TGA, Regulation of thermometers and other temperature measuring medical "
+                "devices and products for COVID-19")
 GATE_TEXT = ("Reasoned from s41BD of the Act and Schedule 4 Part 2 of the "
              "Regulations, not a worked example")
 
@@ -347,11 +349,12 @@ add("dressing_secondary_intent", "Class IIb", "2.4(4)", NOT_IVD,
            wound_function=WoundFunction.SECONDARY_INTENT,
            breaches_dermis=Tri.YES, sterile=Tri.YES))
 
-add("dressing_collagen_deep_wound", "Class IIb", "2.4(4)", NOT_IVD,
-    "SOURCES CONFLICT. A TGA case study puts a collagen dressing for breached "
-    "dermis at 2.4(4) Class IIb, while collagen dressings also appear in a "
-    "Class III list under the animal origin rule. Resolve from the primary "
-    "document before trusting either value.",
+add("dressing_collagen_deep_wound", "Class III", "5.5", NOT_IVD,
+    "TGA case study 1 (dressings) gives this exact device as Class III under "
+    "5.5, animal origin. 2.4(4) also applies (Class IIb) but regulation 3.3(7) "
+    "takes the higher class. The guidance cites 5.5(1)(a) in the pre-July 2024 "
+    "wording; in Compilation 72 collagen is a derivative under 5.5(1)(b) and "
+    "the class is set by 5.5(3), so the fixture names the whole clause.",
     device("Collagen dressing for deep ulcers",
            "Dressing for deep wounds and ulcers that have breached the dermis, "
            "containing collagen for wound healing.",
@@ -359,8 +362,7 @@ add("dressing_collagen_deep_wound", "Class IIb", "2.4(4)", NOT_IVD,
            status=dict(therapeutic_purpose=TherapeuticPurpose.INJURY),
            wound_function=WoundFunction.SECONDARY_INTENT,
            breaches_dermis=Tri.YES, animal_or_microbial_origin=Tri.YES,
-           sterile=Tri.YES),
-    verified=False)
+           sterile=Tri.YES))
 
 add("trauma_covering_anaesthetic", "Class III", "5.1(2)", NOT_IVD,
     "A medicine overrides sub-rule 2.4 entirely. Tests special-rule priority.",
@@ -485,35 +487,39 @@ add("emg_dystrophy_monitoring", "Class IIa", "4.6(b)", ACTIVE,
            delivers_hazardous_energy=Tri.NO, delivers_ionising_radiation=Tri.NO,
            records_diagnostic_images=Tri.NO, body_contact=BodyContact.NONE))
 
-# -- Class I sub-classes. Not quoted from a worked example. -----------------
-add("sterile_barrier_dressing", "Class I", "2.4(3)", RULE_TEXT,
-    "Identical to dressing_mechanical_barrier except for sterile supply, which "
-    "leaves the Schedule 2 class at I and adds the regulation 3.9(2) qualifier "
-    "(often shortened to Class Is).",
-    device("Sterile absorbent pad",
-           "Acts as a barrier to and absorbs exudate from a wound, supplied sterile.",
+# -- Class I with regulation 3.9 qualifiers, and a reusable instrument. -----
+add("sterile_barrier_dressing", "Class I", "2.4(3)", NOT_IVD,
+    "TGA case study 1 (dressings): a sterile adhesive dressing strip is Class I "
+    "(sterile) under 2.4(3)(c). Identical to dressing_mechanical_barrier except "
+    "for sterile supply, which leaves the Schedule 2 class at I and adds the "
+    "regulation 3.9(2) qualifier.",
+    device("Sterile adhesive dressing strip",
+           "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile.",
            contacts_injured_skin=Tri.YES,
            status=dict(therapeutic_purpose=TherapeuticPurpose.INJURY),
            wound_function=WoundFunction.MECHANICAL_BARRIER, sterile=Tri.YES),
-    verified=False, qualifiers=("supplied_sterile",))
+    qualifiers=("supplied_sterile",))
 
-add("measuring_thermometer", "Class I", "2.1", RULE_TEXT,
-    "Exercises has_measuring_function, which nothing else in the set touches. "
-    "Class I under 2.1 with the regulation 1.4 and 3.9(3) qualifier (often "
-    "shortened to Class Im).",
-    device("Non-invasive clinical thermometer",
-           "Measures body temperature by contact with intact skin.",
+add("measuring_thermometer", "Class I", "2.1", THERMOMETERS,
+    "TGA: clinical thermometers that are not battery-powered are Class I "
+    "(measuring); battery-powered digital thermometers are Class IIa. The source "
+    "gives the class, not the rule: 2.1 follows from the Schedule 2 text for a "
+    "non-active device on intact skin. Exercises has_measuring_function, which "
+    "nothing else in the set touches.",
+    device("Non-powered clinical thermometer",
+           "Clinical thermometer, not battery-powered, that measures body temperature "
+           "by contact with intact skin.",
            body_contact=BodyContact.INTACT_SKIN, measuring=Tri.YES),
-    verified=False, qualifiers=("measuring_function",))
+    qualifiers=("measuring_function",))
 
-add("reusable_surgical_instrument", "Class I", "3.2(4)", RULE_TEXT,
-    "A reusable instrument drops to Class I despite surgical invasiveness.",
+add("reusable_surgical_instrument", "Class I", "3.2(4)", NOT_IVD,
+    "TGA lists scissors among the reusable surgical instruments that are Class I "
+    "under 3.2(4), despite surgical invasiveness.",
     device("Reusable surgical scissors",
            "Reusable surgical instrument for transient use during surgery.",
            invasiveness=Invasiveness.SURGICALLY_INVASIVE, duration=Duration.TRANSIENT,
            body_contact=BodyContact.BREACHED_SKIN, absorbed_or_chemically_changed=Tri.NO,
-           reusable_surgical_instrument=Tri.YES),
-    verified=False)
+           reusable_surgical_instrument=Tri.YES))
 
 # -- IVDs, Schedule 2A ------------------------------------------------------
 add("culture_media", "Class 1 IVD", "1.6(2)(c)", IVD_GUIDE,
@@ -567,16 +573,16 @@ add("abo_reagent_red_cells", "Class 4 IVD", "1.2(2)", IHR_GUIDE,
 
 
 add("infusion_pump", "Class IIb", "4.4(2)", ACTIVE,
-    "Reaches administers_or_removes_medicine, which nothing else touches. "
-    "Potentially hazardous administration lifts it above the 4.4 baseline.",
+    "TGA's active device guidance lists infusion pumps under 4.4(2), Class IIb: "
+    "administration that is potentially hazardous lifts it above the 4.4(1) "
+    "baseline. Reaches administers_or_removes_medicine, which nothing else touches.",
     device("Volumetric infusion pump",
            "Administers medicines to a patient at a controlled rate, where the "
            "manner of administration is potentially hazardous.",
            active_type=ActiveType.THERAPEUTIC,
            clinical_function=ClinicalFunction.ADMINISTER_SUBSTANCE,
            administers_or_removes_medicine=Tri.YES,
-           delivers_hazardous_energy=Tri.YES),
-    verified=False)
+           delivers_hazardous_energy=Tri.YES))
 
 
 # -- Multi-function products. The reason functions are first-class. ---------

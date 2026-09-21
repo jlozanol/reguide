@@ -13,8 +13,8 @@
     }
   ],
   "source": "TGA, Classifying active medical devices in Australia",
-  "verified": false,
-  "note": "Reaches administers_or_removes_medicine, which nothing else touches. Potentially hazardous administration lifts it above the 4.4 baseline.",
+  "verified": true,
+  "note": "TGA's active device guidance lists infusion pumps under 4.4(2), Class IIb: administration that is potentially hazardous lifts it above the 4.4(1) baseline. Reaches administers_or_removes_medicine, which nothing else touches.",
   "profile": {
     "core": {
       "product_name": {

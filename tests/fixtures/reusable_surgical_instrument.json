@@ -12,9 +12,9 @@
       "expected_qualifiers": []
     }
   ],
-  "source": "Reasoned from Schedule 2 rule text, not a worked example",
-  "verified": false,
-  "note": "A reusable instrument drops to Class I despite surgical invasiveness.",
+  "source": "TGA, Classifying medical devices that are not IVDs",
+  "verified": true,
+  "note": "TGA lists scissors among the reusable surgical instruments that are Class I under 3.2(4), despite surgical invasiveness.",
   "profile": {
     "core": {
       "product_name": {

@@ -5,7 +5,7 @@
   },
   "functions": [
     {
-      "name": "Sterile absorbent pad",
+      "name": "Sterile adhesive dressing strip",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class I",
       "expected_rule": "2.4(3)",
@@ -14,30 +14,30 @@
       ]
     }
   ],
-  "source": "Reasoned from Schedule 2 rule text, not a worked example",
-  "verified": false,
-  "note": "Identical to dressing_mechanical_barrier except for sterile supply, which leaves the Schedule 2 class at I and adds the regulation 3.9(2) qualifier (often shortened to Class Is).",
+  "source": "TGA, Classifying medical devices that are not IVDs",
+  "verified": true,
+  "note": "TGA case study 1 (dressings): a sterile adhesive dressing strip is Class I (sterile) under 2.4(3)(c). Identical to dressing_mechanical_barrier except for sterile supply, which leaves the Schedule 2 class at I and adds the regulation 3.9(2) qualifier.",
   "profile": {
     "core": {
       "product_name": {
-        "value": "Sterile absorbent pad",
+        "value": "Sterile adhesive dressing strip",
         "basis": "stated",
-        "evidence": "Sterile absorbent pad"
+        "evidence": "Sterile adhesive dressing strip"
       },
       "intended_purpose": {
-        "value": "Acts as a barrier to and absorbs exudate from a wound, supplied sterile.",
+        "value": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile.",
         "basis": "stated",
-        "evidence": "Acts as a barrier to and absorbs exudate from a wound, supplied sterile."
+        "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
       },
       "supplied_sterile": {
         "value": "yes",
         "basis": "stated",
-        "evidence": "Acts as a barrier to and absorbs exudate from a wound, supplied sterile."
+        "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
       },
       "has_measuring_function": {
         "value": "no",
         "basis": "stated",
-        "evidence": "Acts as a barrier to and absorbs exudate from a wound, supplied sterile."
+        "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
       },
       "functions_confirmed": {
         "value": "yes",
@@ -48,35 +48,35 @@
     "functions": [
       {
         "name": {
-          "value": "Sterile absorbent pad",
+          "value": "Sterile adhesive dressing strip",
           "basis": "stated",
-          "evidence": "Sterile absorbent pad"
+          "evidence": "Sterile adhesive dressing strip"
         },
         "description": {
-          "value": "Acts as a barrier to and absorbs exudate from a wound, supplied sterile.",
+          "value": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile.",
           "basis": "stated",
-          "evidence": "Acts as a barrier to and absorbs exudate from a wound, supplied sterile."
+          "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
         },
         "kind": {
           "value": "general_device",
           "basis": "stated",
-          "evidence": "Acts as a barrier to and absorbs exudate from a wound, supplied sterile."
+          "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
         },
         "is_software": {
           "value": "no",
           "basis": "stated",
-          "evidence": "Acts as a barrier to and absorbs exudate from a wound, supplied sterile."
+          "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
         },
         "status": {
           "therapeutic_purpose": {
             "value": "diagnosis_monitoring_treatment_or_compensation_for_injury",
             "basis": "stated",
-            "evidence": "Acts as a barrier to and absorbs exudate from a wound, supplied sterile."
+            "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
           },
           "principal_action_pharmacological": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Acts as a barrier to and absorbs exudate from a wound, supplied sterile."
+            "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
           },
           "is_accessory_to_device": {
             "value": null,
@@ -86,7 +86,7 @@
           "excluded_item": {
             "value": "none",
             "basis": "stated",
-            "evidence": "Acts as a barrier to and absorbs exudate from a wound, supplied sterile."
+            "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
           },
           "exclusion_conditions_met": {
             "value": null,
@@ -113,7 +113,7 @@
           "invasiveness": {
             "value": "non_invasive",
             "basis": "stated",
-            "evidence": "Acts as a barrier to and absorbs exudate from a wound, supplied sterile."
+            "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
           },
           "duration": {
             "value": null,
@@ -133,12 +133,12 @@
           "contacts_injured_skin": {
             "value": "yes",
             "basis": "stated",
-            "evidence": "Acts as a barrier to and absorbs exudate from a wound, supplied sterile."
+            "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
           },
           "wound_function": {
             "value": "mechanical_barrier_compression_or_absorption",
             "basis": "stated",
-            "evidence": "Acts as a barrier to and absorbs exudate from a wound, supplied sterile."
+            "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
           },
           "breaches_dermis": {
             "value": null,
@@ -148,7 +148,7 @@
           "fluid_handling": {
             "value": "none",
             "basis": "stated",
-            "evidence": "Acts as a barrier to and absorbs exudate from a wound, supplied sterile."
+            "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
           },
           "connected_to_active_device": {
             "value": null,
@@ -173,7 +173,7 @@
           "active_type": {
             "value": "not_active",
             "basis": "stated",
-            "evidence": "Acts as a barrier to and absorbs exudate from a wound, supplied sterile."
+            "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
           },
           "is_active_implantable": {
             "value": null,
@@ -218,34 +218,34 @@
           "incorporates_medicine": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Acts as a barrier to and absorbs exudate from a wound, supplied sterile."
+            "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
           },
           "animal_or_microbial_origin": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Acts as a barrier to and absorbs exudate from a wound, supplied sterile."
+            "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
           },
           "human_blood_derivative": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Acts as a barrier to and absorbs exudate from a wound, supplied sterile."
+            "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
           },
           "contraceptive_or_sti_prevention": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Acts as a barrier to and absorbs exudate from a wound, supplied sterile."
+            "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
           },
           "disinfects_another_device": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Acts as a barrier to and absorbs exudate from a wound, supplied sterile."
+            "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
           }
         },
         "ivd": null
       }
     ],
     "funding": null,
-    "source_text": "Sterile absorbent pad Acts as a barrier to and absorbs exudate from a wound, supplied sterile. Sterile absorbent pad Acts as a barrier to and absorbs exudate from a wound, supplied sterile. fixture decomposition is fixed by hand",
+    "source_text": "Sterile adhesive dressing strip Adhesive dressing strip that absorbs exudate from a wound, supplied sterile. Sterile adhesive dressing strip Adhesive dressing strip that absorbs exudate from a wound, supplied sterile. fixture decomposition is fixed by hand",
     "schema_version": "0.6"
   }
 }

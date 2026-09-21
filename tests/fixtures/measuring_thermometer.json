@@ -5,7 +5,7 @@
   },
   "functions": [
     {
-      "name": "Non-invasive clinical thermometer",
+      "name": "Non-powered clinical thermometer",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class I",
       "expected_rule": "2.1",
@@ -14,30 +14,30 @@
       ]
     }
   ],
-  "source": "Reasoned from Schedule 2 rule text, not a worked example",
-  "verified": false,
-  "note": "Exercises has_measuring_function, which nothing else in the set touches. Class I under 2.1 with the regulation 1.4 and 3.9(3) qualifier (often shortened to Class Im).",
+  "source": "TGA, Regulation of thermometers and other temperature measuring medical devices and products for COVID-19",
+  "verified": true,
+  "note": "TGA: clinical thermometers that are not battery-powered are Class I (measuring); battery-powered digital thermometers are Class IIa. The source gives the class, not the rule: 2.1 follows from the Schedule 2 text for a non-active device on intact skin. Exercises has_measuring_function, which nothing else in the set touches.",
   "profile": {
     "core": {
       "product_name": {
-        "value": "Non-invasive clinical thermometer",
+        "value": "Non-powered clinical thermometer",
         "basis": "stated",
-        "evidence": "Non-invasive clinical thermometer"
+        "evidence": "Non-powered clinical thermometer"
       },
       "intended_purpose": {
-        "value": "Measures body temperature by contact with intact skin.",
+        "value": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin.",
         "basis": "stated",
-        "evidence": "Measures body temperature by contact with intact skin."
+        "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
       },
       "supplied_sterile": {
         "value": "no",
         "basis": "stated",
-        "evidence": "Measures body temperature by contact with intact skin."
+        "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
       },
       "has_measuring_function": {
         "value": "yes",
         "basis": "stated",
-        "evidence": "Measures body temperature by contact with intact skin."
+        "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
       },
       "functions_confirmed": {
         "value": "yes",
@@ -48,35 +48,35 @@
     "functions": [
       {
         "name": {
-          "value": "Non-invasive clinical thermometer",
+          "value": "Non-powered clinical thermometer",
           "basis": "stated",
-          "evidence": "Non-invasive clinical thermometer"
+          "evidence": "Non-powered clinical thermometer"
         },
         "description": {
-          "value": "Measures body temperature by contact with intact skin.",
+          "value": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin.",
           "basis": "stated",
-          "evidence": "Measures body temperature by contact with intact skin."
+          "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
         },
         "kind": {
           "value": "general_device",
           "basis": "stated",
-          "evidence": "Measures body temperature by contact with intact skin."
+          "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
         },
         "is_software": {
           "value": "no",
           "basis": "stated",
-          "evidence": "Measures body temperature by contact with intact skin."
+          "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
         },
         "status": {
           "therapeutic_purpose": {
             "value": "diagnosis_prevention_monitoring_prediction_treatment_of_disease",
             "basis": "stated",
-            "evidence": "Measures body temperature by contact with intact skin."
+            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
           },
           "principal_action_pharmacological": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Measures body temperature by contact with intact skin."
+            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
           },
           "is_accessory_to_device": {
             "value": null,
@@ -86,7 +86,7 @@
           "excluded_item": {
             "value": "none",
             "basis": "stated",
-            "evidence": "Measures body temperature by contact with intact skin."
+            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
           },
           "exclusion_conditions_met": {
             "value": null,
@@ -113,7 +113,7 @@
           "invasiveness": {
             "value": "non_invasive",
             "basis": "stated",
-            "evidence": "Measures body temperature by contact with intact skin."
+            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
           },
           "duration": {
             "value": null,
@@ -133,7 +133,7 @@
           "contacts_injured_skin": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Measures body temperature by contact with intact skin."
+            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
           },
           "wound_function": {
             "value": null,
@@ -148,7 +148,7 @@
           "fluid_handling": {
             "value": "none",
             "basis": "stated",
-            "evidence": "Measures body temperature by contact with intact skin."
+            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
           },
           "connected_to_active_device": {
             "value": null,
@@ -173,7 +173,7 @@
           "active_type": {
             "value": "not_active",
             "basis": "stated",
-            "evidence": "Measures body temperature by contact with intact skin."
+            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
           },
           "is_active_implantable": {
             "value": null,
@@ -218,34 +218,34 @@
           "incorporates_medicine": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Measures body temperature by contact with intact skin."
+            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
           },
           "animal_or_microbial_origin": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Measures body temperature by contact with intact skin."
+            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
           },
           "human_blood_derivative": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Measures body temperature by contact with intact skin."
+            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
           },
           "contraceptive_or_sti_prevention": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Measures body temperature by contact with intact skin."
+            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
           },
           "disinfects_another_device": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Measures body temperature by contact with intact skin."
+            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
           }
         },
         "ivd": null
       }
     ],
     "funding": null,
-    "source_text": "Non-invasive clinical thermometer Measures body temperature by contact with intact skin. Non-invasive clinical thermometer Measures body temperature by contact with intact skin. fixture decomposition is fixed by hand",
+    "source_text": "Non-powered clinical thermometer Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin. Non-powered clinical thermometer Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin. fixture decomposition is fixed by hand",
     "schema_version": "0.6"
   }
 }

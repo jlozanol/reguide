@@ -1,20 +1,20 @@
 {
   "expected_status": "regulated_medical_device",
   "expected_classes": {
-    "general": "Class IIb"
+    "general": "Class III"
   },
   "functions": [
     {
       "name": "Collagen dressing for deep ulcers",
       "expected_status": "regulated_medical_device",
-      "expected_class": "Class IIb",
-      "expected_rule": "2.4(4)",
+      "expected_class": "Class III",
+      "expected_rule": "5.5",
       "expected_qualifiers": []
     }
   ],
   "source": "TGA, Classifying medical devices that are not IVDs",
-  "verified": false,
-  "note": "SOURCES CONFLICT. A TGA case study puts a collagen dressing for breached dermis at 2.4(4) Class IIb, while collagen dressings also appear in a Class III list under the animal origin rule. Resolve from the primary document before trusting either value.",
+  "verified": true,
+  "note": "TGA case study 1 (dressings) gives this exact device as Class III under 5.5, animal origin. 2.4(4) also applies (Class IIb) but regulation 3.3(7) takes the higher class. The guidance cites 5.5(1)(a) in the pre-July 2024 wording; in Compilation 72 collagen is a derivative under 5.5(1)(b) and the class is set by 5.5(3), so the fixture names the whole clause.",
   "profile": {
     "core": {
       "product_name": {
