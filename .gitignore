@@ -14,3 +14,4 @@ data/legislation/*.md
 .pytest_cache/
 .ruff_cache/
 .DS_Store
+data/legislation/source/
