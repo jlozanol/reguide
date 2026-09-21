@@ -29,9 +29,10 @@ FIXTURE_DIR = Path(__file__).parent / "fixtures"
 FIXTURES = sorted(FIXTURE_DIR.glob("*.json"))
 
 KNOWN_CLASSES = {
-    "Class I", "Class Is", "Class Im", "Class IIa", "Class IIb", "Class III",
-    "Class AIMD", "Class 1 IVD", "Class 2 IVD", "Class 3 IVD", "Class 4 IVD",
+    "Class I", "Class IIa", "Class IIb", "Class III",
+    "Class 1 IVD", "Class 2 IVD", "Class 3 IVD", "Class 4 IVD",
 }
+KNOWN_QUALIFIERS = {"supplied_sterile", "measuring_function"}
 
 KNOWN_STATUSES = {outcome.value for outcome in StatusOutcome} - {"undecided"}
 REGULATED = StatusOutcome.REGULATED.value
@@ -88,6 +89,14 @@ class TestFixture:
         for function in load(path)["functions"]:
             if function["expected_status"] == REGULATED:
                 assert function["expected_class"] in KNOWN_CLASSES
+
+    def test_qualifiers_are_known_and_only_on_class_i(self, path):
+        """Regulation 3.9 conditions attach to a Class I general device only."""
+        for function in load(path)["functions"]:
+            qualifiers = function["expected_qualifiers"]
+            assert set(qualifiers) <= KNOWN_QUALIFIERS
+            if qualifiers:
+                assert function["expected_class"] == "Class I"
 
     def test_every_expected_status_is_known(self, path):
         """Undecided is never an expectation. A fixture is a settled answer."""

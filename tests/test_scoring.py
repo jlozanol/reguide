@@ -12,6 +12,7 @@ import pytest
 
 from reguide import scoring as SC
 from reguide.profile import DeviceKind
+from reguide.rules import engine as E
 
 FIXTURES = Path(__file__).resolve().parent / "fixtures"
 
@@ -97,6 +98,41 @@ class TestVerdicts:
         monkeypatch.setattr(SC, "classify", refuse)
         [row] = SC.score_fixture("wellness_sleep_tracker", fixture("wellness_sleep_tracker"))
         assert row.verdict == SC.AGREE
+
+
+class TestQualifiers:
+    """Schedule 2 is not written yet, so the engine is stood in for."""
+
+    @staticmethod
+    def _stand_in(monkeypatch, qualifiers):
+        def fake(profile, indices):
+            outcome = SC.Classification(
+                result="Class I", hits=[E.RuleHit("s2-2.4(3)", "c", "Class I", "b")],
+                qualifiers=[E.Qualifier(code, code, "c", "b") for code in qualifiers])
+            return {i: outcome for i in indices}
+        monkeypatch.setattr(SC, "classify", fake)
+
+    def test_the_right_qualifier_agrees(self, monkeypatch):
+        self._stand_in(monkeypatch, ["supplied_sterile"])
+        [row] = SC.score_fixture("s", fixture("sterile_barrier_dressing"))
+        assert row.verdict == SC.AGREE
+
+    def test_a_missing_qualifier_is_a_miss(self, monkeypatch):
+        self._stand_in(monkeypatch, [])
+        [row] = SC.score_fixture("s", fixture("sterile_barrier_dressing"))
+        assert row.verdict == SC.WRONG_QUALIFIER
+        assert row.detail == "qualifiers none, fixture supplied_sterile"
+
+    def test_an_extra_qualifier_is_a_miss(self, monkeypatch):
+        self._stand_in(monkeypatch, ["supplied_sterile", "measuring_function"])
+        [row] = SC.score_fixture("s", fixture("sterile_barrier_dressing"))
+        assert row.verdict == SC.WRONG_QUALIFIER
+
+    def test_the_report_shows_both_sides(self, monkeypatch):
+        self._stand_in(monkeypatch, [])
+        text = SC.report(SC.Score(SC.score_fixture("s", fixture("sterile_barrier_dressing"))))
+        assert "| Class I + supplied_sterile (2.4(3)) | Class I (s2-2.4(3)) | wrong qualifier |" \
+            in text
 
 
 class TestScore:

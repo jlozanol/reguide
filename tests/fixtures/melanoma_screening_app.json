@@ -8,7 +8,8 @@
       "name": "Consumer melanoma screening app",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class III",
-      "expected_rule": "4.5(1)(c)(i)"
+      "expected_rule": "4.5(1)(c)(i)",
+      "expected_qualifiers": []
     }
   ],
   "source": "TGA, Classifying active medical devices in Australia",

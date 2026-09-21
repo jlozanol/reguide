@@ -50,6 +50,20 @@ class Pending:
     fields: tuple[str, ...] = ()      # unresolved inputs, e.g. "ivd.is_self_test"
 
 
+@dataclass(frozen=True)
+class Qualifier:
+    """A conformity assessment condition attached to a class, not a class.
+
+    Regulation 3.9 adds procedures for a Class I medical device that is
+    supplied sterile (3.9(2)) or has a measuring function (1.4, 3.9(3)).
+    """
+
+    code: str             # "supplied_sterile" or "measuring_function"
+    label: str            # plain words for the report
+    citation: str
+    because: str
+
+
 @dataclass
 class Classification:
     result: str | None = None
@@ -57,6 +71,7 @@ class Classification:
     unresolved: list[str] = field(default_factory=list)
     displaced: list[str] = field(default_factory=list)   # rule ids set aside
     flags: list[Flag] = field(default_factory=list)      # shown beside the class
+    qualifiers: list[Qualifier] = field(default_factory=list)
 
     @property
     def confident(self) -> bool:
@@ -139,6 +154,42 @@ def classify_function(function: FunctionProfile) -> Classification:
     return Classification(unresolved=["kind"])
 
 
+QUALIFIERS = [
+    ("supplied_sterile", "supplied_sterile", "supplied sterile",
+     f"{REGULATIONS} regulation 3.9(2)"),
+    ("has_measuring_function", "measuring_function", "has a measuring function",
+     f"{REGULATIONS} regulations 1.4 and 3.9(3)"),
+]
+
+
+def qualify(profile: DeviceProfile, function: FunctionProfile,
+            outcome: Classification) -> Classification:
+    """Attach the regulation 3.9 qualifiers to a confident Class I result.
+
+    Only general devices: regulation 1.4(2) excludes IVDs from the measuring
+    function, and Class 1 IVDs have their own procedures (regulation 3.9A).
+    The inputs sit on the product (CoreProfile), so every function of a
+    product shares them. An unanswered input leaves the result standing but
+    not confident, because the conformity route of a Class I device is not
+    known until both are answered.
+    """
+    if function.branch() is not DeviceKind.GENERAL or outcome.result != "Class I":
+        return outcome
+    if not outcome.confident:
+        return outcome
+    for field_name, code, label, citation in QUALIFIERS:
+        answer = getattr(profile.core, field_name)
+        value = known(answer)
+        if value is None:
+            outcome.unresolved.append(f"core.{field_name}")
+        elif value is Tri.YES:
+            quote = f' ("{answer.evidence}")' if answer.evidence else ""
+            outcome.qualifiers.append(Qualifier(
+                code, label, citation,
+                f"{field_name} is yes ({answer.basis.value}){quote}"))
+    return outcome
+
+
 def classify(profile: DeviceProfile, indices: list[int]) -> dict[int, Classification]:
     """Classify the functions at indices, keyed by index.
 
@@ -147,11 +198,13 @@ def classify(profile: DeviceProfile, indices: list[int]) -> dict[int, Classifica
     gate has not marked regulated by forgetting to ask. Results are per
     function; the class per family for the product is highest_class() over
     the confident ones, and only when every regulated function is confident.
-    Flags raised by a rule are stamped with the function's index here.
+    Flags raised by a rule are stamped with the function's index here, and a
+    Class I general device gets its regulation 3.9 qualifiers.
     """
     results = {}
     for i in indices:
-        outcome = classify_function(profile.functions[i])
+        function = profile.functions[i]
+        outcome = qualify(profile, function, classify_function(function))
         outcome.flags = [replace(f, functions=(i,)) for f in outcome.flags]
         results[i] = outcome
     return results

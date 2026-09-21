@@ -9,19 +9,22 @@
       "name": "Portable prothrombin time meter",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class 1 IVD",
-      "expected_rule": "1.6(2)(a)"
+      "expected_rule": "1.6(2)(a)",
+      "expected_qualifiers": []
     },
     {
       "name": "Prothrombin time test strips",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class 3 IVD",
-      "expected_rule": "1.4"
+      "expected_rule": "1.4",
+      "expected_qualifiers": []
     },
     {
       "name": "Lancet",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class IIa",
-      "expected_rule": "3.2"
+      "expected_rule": "3.2",
+      "expected_qualifiers": []
     }
   ],
   "source": "TGA, Classifying IVDs for supply in Australia",

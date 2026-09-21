@@ -8,7 +8,8 @@
       "name": "Volumetric infusion pump",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class IIb",
-      "expected_rule": "4.4(2)"
+      "expected_rule": "4.4(2)",
+      "expected_qualifiers": []
     }
   ],
   "source": "TGA, Classifying active medical devices in Australia",

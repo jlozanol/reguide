@@ -8,7 +8,8 @@
       "name": "Chlamydia trachomatis assay",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class 3 IVD",
-      "expected_rule": "1.3(a)"
+      "expected_rule": "1.3(a)",
+      "expected_qualifiers": []
     }
   ],
   "source": "TGA, Classifying IVDs for supply in Australia",

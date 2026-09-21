@@ -8,19 +8,22 @@
       "name": "Study archive",
       "expected_status": "excluded_from_regulation",
       "expected_class": null,
-      "expected_rule": "S1-14H"
+      "expected_rule": "S1-14H",
+      "expected_qualifiers": []
     },
     {
       "name": "Abnormality triage",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class IIa",
-      "expected_rule": "4.5(2)(b)"
+      "expected_rule": "4.5(2)(b)",
+      "expected_qualifiers": []
     },
     {
       "name": "Follow-up interval suggestion",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class IIa",
-      "expected_rule": "4.7(2)(b)(i)"
+      "expected_rule": "4.7(2)(b)(i)",
+      "expected_qualifiers": []
     }
   ],
   "source": "Reasoned from Schedule 2 rule text, not a worked example",

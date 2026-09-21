@@ -8,7 +8,8 @@
       "name": "Long-term indwelling orifice device",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class IIb",
-      "expected_rule": "3.1(2)(c)(i)"
+      "expected_rule": "3.1(2)(c)(i)",
+      "expected_qualifiers": []
     }
   ],
   "source": "TGA, Classifying medical devices that are not IVDs",

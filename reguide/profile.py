@@ -245,8 +245,11 @@ class CoreProfile(BaseModel):
 
     product_name: Answer[str] = Answer()
     intended_purpose: Answer[str] = Answer()
-    supplied_sterile: Answer[Tri] = Answer()          # drives Class Is
-    has_measuring_function: Answer[Tri] = Answer()    # drives Class Im
+    # Not classification inputs. On a Class I device they add conformity
+    # assessment procedures (regulation 3.9(2) and (3)), reported as qualifiers
+    # beside the class. Often shortened to "Class Is" and "Class Im".
+    supplied_sterile: Answer[Tri] = Answer()
+    has_measuring_function: Answer[Tri] = Answer()    # regulation 1.4
     functions_confirmed: Answer[Tri] = Answer(
         # The founder describes a product; the decomposition into functions is
         # proposed by intake and has to be confirmed, because the boundary
@@ -656,13 +659,14 @@ def relevant_ivd_fields(ivd: IvdProfile) -> list[str]:
 # Classification vocabulary and aggregation
 # --------------------------------------------------------------------------
 
-# Ordered by the conformity assessment burden each carries, which is what
-# "highest" means when several functions classify differently. Is and Im are
-# placed above I because they add a conformity assessment step, not because
-# they carry more clinical risk.
-GENERAL_ORDER = [
-    "Class I", "Class Is", "Class Im", "Class IIa", "Class IIb", "Class III", "Class AIMD",
-]
+# The classes Schedule 2 assigns, lowest first. "Highest" is regulation
+# 3.3(7)'s sense when rules conflict, and the per-family maximum when several
+# functions classify differently. Sterile supply and a measuring function are
+# not classes: they are conformity assessment conditions on a Class I device
+# (regulation 3.9) and are reported as qualifiers. There is no AIMD class in
+# Compilation 72: Schedule 2 clause 5.7(1) makes an active implantable
+# medical device Class III.
+GENERAL_ORDER = ["Class I", "Class IIa", "Class IIb", "Class III"]
 IVD_ORDER = ["Class 1 IVD", "Class 2 IVD", "Class 3 IVD", "Class 4 IVD"]
 
 

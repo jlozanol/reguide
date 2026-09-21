@@ -6,7 +6,8 @@
       "name": "Anatomy teaching app",
       "expected_status": "not_a_medical_device",
       "expected_class": null,
-      "expected_rule": "no limb of s41BD reached"
+      "expected_rule": "no limb of s41BD reached",
+      "expected_qualifiers": []
     }
   ],
   "source": "Reasoned from s41BD of the Act and Schedule 4 Part 2 of the Regulations, not a worked example",

@@ -8,13 +8,15 @@
       "name": "Activity and sleep tracking",
       "expected_status": "excluded_from_regulation",
       "expected_class": null,
-      "expected_rule": "S1-14B"
+      "expected_rule": "S1-14B",
+      "expected_qualifiers": []
     },
     {
       "name": "Symptom checker",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class IIa",
-      "expected_rule": "4.5(2)"
+      "expected_rule": "4.5(2)",
+      "expected_qualifiers": []
     }
   ],
   "source": "Reasoned from Schedule 2 rule text, not a worked example",

@@ -13,11 +13,16 @@ quality measure, so the harness is strict about what counts:
   gate reaches the same verdict.
 - A fixture agrees only when every one of its functions does.
 
-A miss is one of four kinds, worst first:
+A Class I general device also has to carry the fixture's regulation 3.9
+qualifiers (supplied sterile, measuring function), no more and no fewer.
+
+A miss is one of five kinds, worst first:
 
 - wrong class: a confident class that differs from the fixture. This is the
   only failure that could mislead a founder, so the test suite forbids it
   outright on verified fixtures.
+- wrong qualifier: the right class with the wrong regulation 3.9 conditions,
+  which sends the founder down the wrong conformity assessment route.
 - wrong rule: the right class for a reason the fixture does not record.
 - gate: the status gate disagrees with the fixture, so the class question
   never arose or arose wrongly.
@@ -42,6 +47,7 @@ REGULATED = S.StatusOutcome.REGULATED.value
 
 AGREE = "agree"
 WRONG_CLASS = "wrong class"
+WRONG_QUALIFIER = "wrong qualifier"
 WRONG_RULE = "wrong rule"
 GATE = "gate"
 NO_RESULT = "no result"
@@ -61,6 +67,8 @@ class Row:
     expected_rule: str
     got_class: str | None = None
     got_rules: list[str] = field(default_factory=list)
+    expected_qualifiers: list[str] = field(default_factory=list)
+    got_qualifiers: list[str] = field(default_factory=list)
     verdict: str = AGREE
     detail: str = ""
 
@@ -84,7 +92,7 @@ class Score:
 
     @property
     def misses(self) -> list[Row]:
-        order = [WRONG_CLASS, WRONG_RULE, GATE, NO_RESULT]
+        order = [WRONG_CLASS, WRONG_QUALIFIER, WRONG_RULE, GATE, NO_RESULT]
         return sorted((r for r in self.rows if r.verdict != AGREE),
                       key=lambda r: (order.index(r.verdict), r.fixture, r.index))
 
@@ -123,6 +131,7 @@ def score_fixture(slug: str, data: dict) -> list[Row]:
             gate_status=gate_status,
             expected_class=expected["expected_class"],
             expected_rule=expected["expected_rule"],
+            expected_qualifiers=sorted(expected.get("expected_qualifiers", [])),
         )
         rows.append(row)
 
@@ -136,6 +145,7 @@ def score_fixture(slug: str, data: dict) -> list[Row]:
         outcome: Classification = classes[index]
         row.got_class = outcome.result
         row.got_rules = [h.rule_id for h in outcome.governing]
+        row.got_qualifiers = sorted(q.code for q in outcome.qualifiers)
         if not outcome.confident:
             row.verdict = NO_RESULT
             row.detail = ", ".join(outcome.unresolved)
@@ -143,6 +153,11 @@ def score_fixture(slug: str, data: dict) -> list[Row]:
         if outcome.result != row.expected_class:
             row.verdict = WRONG_CLASS
             row.detail = f"cited {', '.join(row.got_rules)}"
+            continue
+        if row.got_qualifiers != row.expected_qualifiers:
+            row.verdict = WRONG_QUALIFIER
+            row.detail = (f"qualifiers {', '.join(row.got_qualifiers) or 'none'}, fixture "
+                          f"{', '.join(row.expected_qualifiers) or 'none'}")
             continue
         wanted = expected_rule_id(function.branch(), row.expected_rule)
         if wanted is None or not any(rule_matches(wanted, got) for got in row.got_rules):
@@ -191,8 +206,12 @@ def report(score: Score) -> str:
     ]
     for row in score.misses:
         expected = row.expected_class or row.expected_status
+        if row.expected_qualifiers:
+            expected = f"{expected} + {', '.join(row.expected_qualifiers)}"
         expected = f"{expected} ({row.expected_rule})"
         got = row.got_class or (row.gate_status if row.verdict == GATE else None)
+        if got and row.got_qualifiers:
+            got = f"{got} + {', '.join(row.got_qualifiers)}"
         if row.got_rules:
             got = f"{got} ({', '.join(row.got_rules)})"
         lines.append(

@@ -6,7 +6,8 @@
       "name": "Follow-up interval recommender",
       "expected_status": "exempt_clinical_decision_support",
       "expected_class": null,
-      "expected_rule": "Schedule 4 Part 2"
+      "expected_rule": "Schedule 4 Part 2",
+      "expected_qualifiers": []
     }
   ],
   "source": "Reasoned from s41BD of the Act and Schedule 4 Part 2 of the Regulations, not a worked example",

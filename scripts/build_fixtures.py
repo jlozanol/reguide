@@ -241,20 +241,31 @@ def ivd(name, text, **given):
 F = []
 
 
+QUALIFIER_CODES = {"supplied_sterile", "measuring_function"}
+
+
 def _expectation(slug, entry):
-    """(class, rule) for a regulated function, (None, reason, status) otherwise."""
+    """(class, rule, status, qualifiers) for one function.
+
+    A regulated function has a class; a function the gate stops has none.
+    Qualifiers are the regulation 3.9 conditions on a Class I general device.
+    """
     expected, rule, *rest = entry
     status = rest[0] if rest else REGULATED
+    qualifiers = tuple(rest[1]) if len(rest) > 1 else ()
     if status.terminal:
         assert expected is None, f"{slug}: a function the gate stops has no class"
     else:
         assert expected is not None, f"{slug}: a regulated function needs a class"
-    return expected, rule, status
+    assert set(qualifiers) <= QUALIFIER_CODES, f"{slug}: unknown qualifier"
+    assert not qualifiers or expected == "Class I", f"{slug}: qualifiers need Class I"
+    return expected, rule, status, qualifiers
 
 
-def add(slug, expected, rule, source, note, profile, verified=True, status=REGULATED):
+def add(slug, expected, rule, source, note, profile, verified=True, status=REGULATED,
+        qualifiers=()):
     """A single-function fixture. The expectations apply to function 0."""
-    entry = _expectation(slug, (expected, rule, status))
+    entry = _expectation(slug, (expected, rule, status, qualifiers))
     F.append((slug, source, note, profile, verified, [entry], status))
 
 
@@ -475,21 +486,25 @@ add("emg_dystrophy_monitoring", "Class IIa", "4.6(b)", ACTIVE,
            records_diagnostic_images=Tri.NO, body_contact=BodyContact.NONE))
 
 # -- Class I sub-classes. Not quoted from a worked example. -----------------
-add("sterile_barrier_dressing", "Class Is", "2.4(3) with sterile supply", RULE_TEXT,
-    "Identical to dressing_mechanical_barrier except for sterile supply.",
+add("sterile_barrier_dressing", "Class I", "2.4(3)", RULE_TEXT,
+    "Identical to dressing_mechanical_barrier except for sterile supply, which "
+    "leaves the Schedule 2 class at I and adds the regulation 3.9(2) qualifier "
+    "(often shortened to Class Is).",
     device("Sterile absorbent pad",
            "Acts as a barrier to and absorbs exudate from a wound, supplied sterile.",
            contacts_injured_skin=Tri.YES,
            status=dict(therapeutic_purpose=TherapeuticPurpose.INJURY),
            wound_function=WoundFunction.MECHANICAL_BARRIER, sterile=Tri.YES),
-    verified=False)
+    verified=False, qualifiers=("supplied_sterile",))
 
-add("measuring_thermometer", "Class Im", "2.1 with measuring function", RULE_TEXT,
-    "Exercises has_measuring_function, which nothing else in the set touches.",
+add("measuring_thermometer", "Class I", "2.1", RULE_TEXT,
+    "Exercises has_measuring_function, which nothing else in the set touches. "
+    "Class I under 2.1 with the regulation 1.4 and 3.9(3) qualifier (often "
+    "shortened to Class Im).",
     device("Non-invasive clinical thermometer",
            "Measures body temperature by contact with intact skin.",
            body_contact=BodyContact.INTACT_SKIN, measuring=Tri.YES),
-    verified=False)
+    verified=False, qualifiers=("measuring_function",))
 
 add("reusable_surgical_instrument", "Class I", "3.2(4)", RULE_TEXT,
     "A reusable instrument drops to Class I despite surgical invasiveness.",
@@ -750,13 +765,14 @@ def main():
                 "expected_status": function_status.value,
                 "expected_class": expected,
                 "expected_rule": rule,
+                "expected_qualifiers": list(qualifiers),
             }
-            for function, (expected, rule, function_status)
-            in zip(profile.functions, expectations)
+            for function, (expected, rule, function_status, qualifiers)
+            in zip(profile.functions, expectations, strict=True)
         ]
         payload = {
             "expected_status": status.value,
-            "expected_classes": highest_class(e for e, _, _ in expectations),
+            "expected_classes": highest_class(e for e, *_ in expectations),
             "functions": functions,
             "source": source,
             "verified": verified,
@@ -767,6 +783,9 @@ def main():
         flag = "  " if verified else " ?"
         count = f"{len(functions)} fn" if len(functions) > 1 else "     "
         summary = ", ".join(sorted(payload["expected_classes"].values())) or "no class"
+        extras = sorted({q for *_, qs in expectations for q in qs})
+        if extras:
+            summary = f"{summary} + {', '.join(extras)}"
         if status is not REGULATED:
             summary = f"{summary} [{status.value}]"
         warn = f"  MISSING: {missing}" if missing else ""

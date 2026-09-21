@@ -1,19 +1,22 @@
 {
   "expected_status": "regulated_medical_device",
   "expected_classes": {
-    "general": "Class Is"
+    "general": "Class I"
   },
   "functions": [
     {
       "name": "Sterile absorbent pad",
       "expected_status": "regulated_medical_device",
-      "expected_class": "Class Is",
-      "expected_rule": "2.4(3) with sterile supply"
+      "expected_class": "Class I",
+      "expected_rule": "2.4(3)",
+      "expected_qualifiers": [
+        "supplied_sterile"
+      ]
     }
   ],
   "source": "Reasoned from Schedule 2 rule text, not a worked example",
   "verified": false,
-  "note": "Identical to dressing_mechanical_barrier except for sterile supply.",
+  "note": "Identical to dressing_mechanical_barrier except for sterile supply, which leaves the Schedule 2 class at I and adds the regulation 3.9(2) qualifier (often shortened to Class Is).",
   "profile": {
     "core": {
       "product_name": {

@@ -8,7 +8,8 @@
       "name": "Radiotherapy after-loading control system",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class IIb",
-      "expected_rule": "4.3(3)(c)"
+      "expected_rule": "4.3(3)(c)",
+      "expected_qualifiers": []
     }
   ],
   "source": "TGA, Classifying active medical devices in Australia",

@@ -8,7 +8,8 @@
       "name": "Collagen dressing for deep ulcers",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class IIb",
-      "expected_rule": "2.4(4)"
+      "expected_rule": "2.4(4)",
+      "expected_qualifiers": []
     }
   ],
   "source": "TGA, Classifying medical devices that are not IVDs",

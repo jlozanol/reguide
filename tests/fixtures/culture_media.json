@@ -8,7 +8,8 @@
       "name": "Microbiological culture medium",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class 1 IVD",
-      "expected_rule": "1.6(2)(c)"
+      "expected_rule": "1.6(2)(c)",
+      "expected_qualifiers": []
     }
   ],
   "source": "TGA, Classifying IVDs for supply in Australia",

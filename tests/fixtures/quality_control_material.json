@@ -8,7 +8,8 @@
       "name": "Non-assay-specific control plasma",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class 2 IVD",
-      "expected_rule": "1.5"
+      "expected_rule": "1.5",
+      "expected_qualifiers": []
     }
   ],
   "source": "TGA, Classifying IVDs for supply in Australia",

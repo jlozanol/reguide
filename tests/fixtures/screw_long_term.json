@@ -8,7 +8,8 @@
       "name": "Metal fixation screw, permanent",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class IIb",
-      "expected_rule": "3.4(2)"
+      "expected_rule": "3.4(2)",
+      "expected_qualifiers": []
     }
   ],
   "source": "TGA, Classifying medical devices that are not IVDs",

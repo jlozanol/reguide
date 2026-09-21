@@ -8,7 +8,8 @@
       "name": "Reagent red blood cells for ABO reverse grouping",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class 4 IVD",
-      "expected_rule": "1.2(2)"
+      "expected_rule": "1.2(2)",
+      "expected_qualifiers": []
     }
   ],
   "source": "TGA, Completing Conformity Assessment for immunohaematology reagents (IHRs)",

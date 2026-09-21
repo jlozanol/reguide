@@ -8,7 +8,8 @@
       "name": "Trauma covering with anaesthetic gel",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class III",
-      "expected_rule": "5.1(2)"
+      "expected_rule": "5.1(2)",
+      "expected_qualifiers": []
     }
   ],
   "source": "TGA, Classifying medical devices that are not IVDs",

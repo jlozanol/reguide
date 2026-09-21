@@ -1,19 +1,22 @@
 {
   "expected_status": "regulated_medical_device",
   "expected_classes": {
-    "general": "Class Im"
+    "general": "Class I"
   },
   "functions": [
     {
       "name": "Non-invasive clinical thermometer",
       "expected_status": "regulated_medical_device",
-      "expected_class": "Class Im",
-      "expected_rule": "2.1 with measuring function"
+      "expected_class": "Class I",
+      "expected_rule": "2.1",
+      "expected_qualifiers": [
+        "measuring_function"
+      ]
     }
   ],
   "source": "Reasoned from Schedule 2 rule text, not a worked example",
   "verified": false,
-  "note": "Exercises has_measuring_function, which nothing else in the set touches.",
+  "note": "Exercises has_measuring_function, which nothing else in the set touches. Class I under 2.1 with the regulation 1.4 and 3.9(3) qualifier (often shortened to Class Im).",
   "profile": {
     "core": {
       "product_name": {
