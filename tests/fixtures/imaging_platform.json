@@ -649,6 +649,6 @@
     ],
     "funding": null,
     "source_text": "Radiology reporting platform Stores radiology studies, flags abnormal ones for priority review and suggests a follow-up imaging interval. Study archive Stores and transmits radiology studies without interpretation. Abnormality triage Flags studies showing suspected abnormality for priority review by a radiologist. Follow-up interval suggestion Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist. fixture decomposition is fixed by hand",
-    "schema_version": "0.4"
+    "schema_version": "0.5"
   }
 }

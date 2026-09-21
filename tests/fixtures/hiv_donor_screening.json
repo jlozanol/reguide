@@ -143,7 +143,17 @@
             "basis": "stated",
             "evidence": "Screens donated blood for HIV before transfusion."
           },
-          "is_instrument_or_receptacle": {
+          "is_ivd_instrument": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Screens donated blood for HIV before transfusion."
+          },
+          "is_specimen_receptacle": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Screens donated blood for HIV before transfusion."
+          },
+          "is_culture_medium": {
             "value": "no",
             "basis": "stated",
             "evidence": "Screens donated blood for HIV before transfusion."
@@ -168,6 +178,6 @@
     ],
     "funding": null,
     "source_text": "HIV blood donor screening assay Screens donated blood for HIV before transfusion. HIV blood donor screening assay Screens donated blood for HIV before transfusion. fixture decomposition is fixed by hand",
-    "schema_version": "0.4"
+    "schema_version": "0.5"
   }
 }

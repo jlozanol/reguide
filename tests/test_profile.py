@@ -291,16 +291,35 @@ class TestEvidenceTraceability:
 
 class TestIvdGating:
     def test_a_named_exception_stops_the_questions(self):
-        """A specimen receptacle is classified by that fact alone."""
+        """An instrument is classified by that fact alone, clause 1.6(2)(a)."""
         profile = ivd_profile()
-        only(profile).ivd.is_instrument_or_receptacle = stated(Tri.YES)
+        only(profile).ivd.is_ivd_instrument = stated(Tri.YES)
         remaining = [m for m in profile.missing() if ".ivd." in m]
         assert all("purpose" not in m and "self_test" not in m for m in remaining)
+
+    def test_a_specimen_receptacle_asks_only_about_self_testing(self):
+        """Clause 1.6(2)(b) excludes a receptacle intended for self-testing."""
+        profile = ivd_profile()
+        only(profile).ivd.is_specimen_receptacle = stated(Tri.YES)
+        remaining = [m for m in profile.missing() if ".ivd." in m]
+        assert "functions.0.ivd.is_self_test" in remaining
+        assert all("purpose" not in m for m in remaining)
+
+        only(profile).ivd.is_self_test = stated(Tri.NO)
+        assert all("purpose" not in m for m in profile.missing() if ".ivd." in m)
+
+    def test_a_self_test_receptacle_falls_back_to_the_ordinary_rules(self):
+        profile = ivd_profile()
+        only(profile).ivd.is_specimen_receptacle = stated(Tri.YES)
+        only(profile).ivd.is_self_test = stated(Tri.YES)
+        assert "functions.0.ivd.purpose" in profile.missing()
 
     def test_a_transmissible_agent_opens_the_risk_questions(self):
         profile = ivd_profile()
         section = only(profile).ivd
-        section.is_instrument_or_receptacle = stated(Tri.NO)
+        section.is_ivd_instrument = stated(Tri.NO)
+        section.is_specimen_receptacle = stated(Tri.NO)
+        section.is_culture_medium = stated(Tri.NO)
         section.is_quality_control_material = stated(Tri.NO)
         section.is_export_only = stated(Tri.NO)
         section.detects_transmissible_agent = stated(Tri.YES)

@@ -243,6 +243,6 @@
     ],
     "funding": null,
     "source_text": "Emphysema detection software Diagnoses emphysema from CT scans, providing information to a health professional to support diagnostic decision making. Emphysema detection software Diagnoses emphysema from CT scans, providing information to a health professional to support diagnostic decision making. fixture decomposition is fixed by hand",
-    "schema_version": "0.4"
+    "schema_version": "0.5"
   }
 }

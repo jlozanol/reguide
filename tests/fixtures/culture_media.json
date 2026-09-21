@@ -8,7 +8,7 @@
       "name": "Microbiological culture medium",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class 1 IVD",
-      "expected_rule": "1.6"
+      "expected_rule": "1.6(2)(c)"
     }
   ],
   "source": "TGA, Classifying IVDs for supply in Australia",
@@ -143,7 +143,17 @@
             "basis": "unknown",
             "evidence": null
           },
-          "is_instrument_or_receptacle": {
+          "is_ivd_instrument": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Prepared culture medium for microbiological laboratory use."
+          },
+          "is_specimen_receptacle": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Prepared culture medium for microbiological laboratory use."
+          },
+          "is_culture_medium": {
             "value": "yes",
             "basis": "stated",
             "evidence": "Prepared culture medium for microbiological laboratory use."
@@ -168,6 +178,6 @@
     ],
     "funding": null,
     "source_text": "Microbiological culture medium Prepared culture medium for microbiological laboratory use. Microbiological culture medium Prepared culture medium for microbiological laboratory use. fixture decomposition is fixed by hand",
-    "schema_version": "0.4"
+    "schema_version": "0.5"
   }
 }

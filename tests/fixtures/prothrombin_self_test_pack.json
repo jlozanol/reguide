@@ -9,7 +9,7 @@
       "name": "Portable prothrombin time meter",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class 1 IVD",
-      "expected_rule": "1.6"
+      "expected_rule": "1.6(2)(a)"
     },
     {
       "name": "Prothrombin time test strips",
@@ -156,8 +156,18 @@
             "basis": "unknown",
             "evidence": null
           },
-          "is_instrument_or_receptacle": {
+          "is_ivd_instrument": {
             "value": "yes",
+            "basis": "stated",
+            "evidence": "Instrument that reads prothrombin time test strips."
+          },
+          "is_specimen_receptacle": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Instrument that reads prothrombin time test strips."
+          },
+          "is_culture_medium": {
+            "value": "no",
             "basis": "stated",
             "evidence": "Instrument that reads prothrombin time test strips."
           },
@@ -278,7 +288,17 @@
             "basis": "stated",
             "evidence": "Test strips for prothrombin time self-testing by a lay person."
           },
-          "is_instrument_or_receptacle": {
+          "is_ivd_instrument": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Test strips for prothrombin time self-testing by a lay person."
+          },
+          "is_specimen_receptacle": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Test strips for prothrombin time self-testing by a lay person."
+          },
+          "is_culture_medium": {
             "value": "no",
             "basis": "stated",
             "evidence": "Test strips for prothrombin time self-testing by a lay person."
@@ -500,6 +520,6 @@
     ],
     "funding": null,
     "source_text": "Prothrombin time self-testing pack Procedure pack for prothrombin time self-testing at home, containing a portable meter, test strips and a lancet. Portable prothrombin time meter Instrument that reads prothrombin time test strips. Prothrombin time test strips Test strips for prothrombin time self-testing by a lay person. Lancet Single-use lancet for obtaining a capillary blood specimen. fixture decomposition is fixed by hand",
-    "schema_version": "0.4"
+    "schema_version": "0.5"
   }
 }

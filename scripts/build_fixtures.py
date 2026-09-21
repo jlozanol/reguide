@@ -80,7 +80,9 @@ GENERAL_DEFAULTS = dict(
 )
 
 IVD_DEFAULTS = dict(
-    is_instrument_or_receptacle=Tri.NO,
+    is_ivd_instrument=Tri.NO,
+    is_specimen_receptacle=Tri.NO,
+    is_culture_medium=Tri.NO,
     is_quality_control_material=Tri.NO,
     is_export_only=Tri.NO,
     purpose=IvdPurpose.OTHER,
@@ -483,18 +485,18 @@ add("reusable_surgical_instrument", "Class I", "3.2(3)", RULE_TEXT,
     verified=False)
 
 # -- IVDs, Schedule 2A ------------------------------------------------------
-add("culture_media", "Class 1 IVD", "1.6", IVD_GUIDE,
+add("culture_media", "Class 1 IVD", "1.6(2)(c)", IVD_GUIDE,
     "Named exception. Cannot be reasoned to, only looked up.",
     ivd("Microbiological culture medium",
         "Prepared culture medium for microbiological laboratory use.",
-        is_instrument_or_receptacle=Tri.YES))
+        is_culture_medium=Tri.YES))
 
-add("prothrombin_meter", "Class 1 IVD", "1.6", IVD_GUIDE,
+add("prothrombin_meter", "Class 1 IVD", "1.6(2)(a)", IVD_GUIDE,
     "The meter is Class 1 while its own test strips are Class 3. Pairs with "
     "prothrombin_self_test to test that the pack is split, not merged.",
     ivd("Portable prothrombin time meter",
         "Instrument that reads prothrombin time test strips.",
-        is_instrument_or_receptacle=Tri.YES))
+        is_ivd_instrument=Tri.YES))
 
 add("quality_control_material", "Class 2 IVD", "1.5", IVD_GUIDE,
     "Non-assay-specific control material. Another named exception.",
@@ -553,7 +555,7 @@ add_multi(
         [
             ivd_fn("Portable prothrombin time meter",
                    "Instrument that reads prothrombin time test strips.",
-                   is_instrument_or_receptacle=Tri.YES),
+                   is_ivd_instrument=Tri.YES),
             ivd_fn("Prothrombin time test strips",
                    "Test strips for prothrombin time self-testing by a lay person.",
                    purpose=IvdPurpose.MONITORING, is_self_test=Tri.YES,
@@ -568,7 +570,7 @@ add_multi(
         ],
         sterile=Tri.YES,
     ),
-    [("Class 1 IVD", "1.6"), ("Class 3 IVD", "1.4"), ("Class IIa", "3.2")],
+    [("Class 1 IVD", "1.6(2)(a)"), ("Class 3 IVD", "1.4"), ("Class IIa", "3.2")],
     verified=True,
 )
 

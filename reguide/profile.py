@@ -15,6 +15,12 @@ Version 0.4 adds the inputs the regulatory status gate needs. Nothing here
 decides status; these are the facts the gate in status.py reads. They sit on
 the function rather than the product because a single product can hold one
 function that is a regulated device and another that is excluded.
+
+Version 0.5 splits the one Schedule 2A field is_instrument_or_receptacle
+into the three things clause 1.6(2) actually names: an instrument (a), a
+specimen receptacle (b) and a microbiological culture medium (c). Each
+paragraph is cited on its own, and (b) excludes a receptacle intended for
+self-testing, which a combined field could not express.
 """
 
 from enum import Enum
@@ -304,9 +310,11 @@ class IvdProfile(BaseModel):
     result_drives_critical_decision: Answer[Tri] = Answer()
 
     # Named exceptions. These cannot be reasoned to, only looked up.
-    is_instrument_or_receptacle: Answer[Tri] = Answer()      # rule 1.6
-    is_quality_control_material: Answer[Tri] = Answer()      # rule 1.5
-    is_export_only: Answer[Tri] = Answer()                   # rule 1.8
+    is_ivd_instrument: Answer[Tri] = Answer()                # clause 1.6(2)(a)
+    is_specimen_receptacle: Answer[Tri] = Answer()           # clause 1.6(2)(b)
+    is_culture_medium: Answer[Tri] = Answer()                # clause 1.6(2)(c)
+    is_quality_control_material: Answer[Tri] = Answer()      # clause 1.5
+    is_export_only: Answer[Tri] = Answer()                   # clause 1.8
 
     sample_type: Answer[str] = Answer()
 
@@ -542,18 +550,34 @@ def relevant_general_fields(function: "FunctionProfile") -> list[str]:
 def relevant_ivd_fields(ivd: IvdProfile) -> list[str]:
     """Which Schedule 2A fields this IVD function needs.
 
-    The named exceptions are checked first. An IVD that is a specimen
-    receptacle or a quality control material is classified by that fact alone,
-    so nothing else is worth asking.
+    The named exceptions are checked first. An instrument, a culture medium,
+    a non assay-specific quality control material or an export-only device
+    is classified by that fact alone, so nothing else is worth asking. A
+    specimen receptacle is too, but only when it is not intended for
+    self-testing (clause 1.6(2)(b)), so it opens that one question. A
+    self-test receptacle falls back to the ordinary rules and is asked
+    everything.
     """
     exceptions = [
-        "is_instrument_or_receptacle",
+        "is_ivd_instrument",
+        "is_specimen_receptacle",
+        "is_culture_medium",
         "is_quality_control_material",
         "is_export_only",
     ]
-    for name in exceptions:
-        if _value(getattr(ivd, name)) is Tri.YES:
-            return exceptions
+    receptacle = _value(ivd.is_specimen_receptacle) is Tri.YES
+    if receptacle:
+        exceptions.append("is_self_test")
+    decisive = [
+        "is_ivd_instrument",
+        "is_culture_medium",
+        "is_quality_control_material",
+        "is_export_only",
+    ]
+    if any(_value(getattr(ivd, name)) is Tri.YES for name in decisive):
+        return exceptions
+    if receptacle and _value(ivd.is_self_test) is not Tri.YES:
+        return exceptions
 
     fields = exceptions + [
         "purpose",
@@ -615,7 +639,7 @@ class DeviceProfile(BaseModel):
     funding: FundingProfile | None = None
 
     source_text: str = ""
-    schema_version: Literal["0.4"] = "0.4"
+    schema_version: Literal["0.5"] = "0.5"
 
     @property
     def single_function(self) -> bool:
