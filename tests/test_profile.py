@@ -12,6 +12,10 @@ import pytest
 from pydantic import ValidationError
 
 from reguide.profile import (
+    IVD_AGENT_FIELDS,
+    IVD_GENERAL_FIELDS,
+    IVD_SELF_TEST_FIELDS,
+    IVD_TYPING_FIELDS,
     ActiveType,
     Answer,
     Basis,
@@ -22,9 +26,9 @@ from reguide.profile import (
     DeviceProfile,
     Duration,
     FluidHandling,
+    FunctionProfile,
     GeneralDeviceProfile,
     Invasiveness,
-    FunctionProfile,
     IvdProfile,
     TherapeuticPurpose,
     Tri,
@@ -312,18 +316,44 @@ class TestIvdGating:
         profile = ivd_profile()
         only(profile).ivd.is_specimen_receptacle = stated(Tri.YES)
         only(profile).ivd.is_self_test = stated(Tri.YES)
-        assert "functions.0.ivd.purpose" in profile.missing()
+        assert "functions.0.ivd.detects_infectious_agent" in profile.missing()
+        assert "functions.0.ivd.result_not_determining_serious_condition" in profile.missing()
 
-    def test_a_transmissible_agent_opens_the_risk_questions(self):
-        profile = ivd_profile()
+    @staticmethod
+    def _ordinary(profile):
+        """No named exception applies, so the ordinary rules are asked."""
         section = only(profile).ivd
-        section.is_ivd_instrument = stated(Tri.NO)
-        section.is_specimen_receptacle = stated(Tri.NO)
-        section.is_culture_medium = stated(Tri.NO)
-        section.is_quality_control_material = stated(Tri.NO)
-        section.is_export_only = stated(Tri.NO)
-        section.detects_transmissible_agent = stated(Tri.YES)
-        assert "functions.0.ivd.transmission_risk_to_population" in profile.missing()
+        for name in ("is_ivd_instrument", "is_specimen_receptacle", "is_culture_medium",
+                     "is_quality_control_material", "is_export_only"):
+            setattr(section, name, stated(Tri.NO))
+        return section
+
+    def _ivd_missing(self, profile):
+        return {m.rsplit(".", 1)[1] for m in profile.missing() if ".ivd." in m}
+
+    def test_the_gates_close_their_paragraphs(self):
+        profile = ivd_profile()
+        section = self._ordinary(profile)
+        for gate in ("detects_infectious_agent", "types_blood_or_tissue", "is_self_test"):
+            setattr(section, gate, stated(Tri.NO))
+        missing = self._ivd_missing(profile)
+        assert missing == set(IVD_GENERAL_FIELDS)
+
+    @pytest.mark.parametrize("gate,opened", [
+        ("detects_infectious_agent", IVD_AGENT_FIELDS),
+        ("types_blood_or_tissue", IVD_TYPING_FIELDS),
+        ("is_self_test", IVD_SELF_TEST_FIELDS),
+    ])
+    def test_each_gate_opens_its_paragraphs(self, gate, opened):
+        """Schedule 2A clauses 1.1 and 1.3 agents, 1.2 typing, 1.4 self-testing."""
+        profile = ivd_profile()
+        section = self._ordinary(profile)
+        for name in ("detects_infectious_agent", "types_blood_or_tissue", "is_self_test"):
+            setattr(section, name, stated(Tri.YES if name == gate else Tri.NO))
+        missing = self._ivd_missing(profile)
+        assert set(opened) <= missing
+        others = set(IVD_AGENT_FIELDS + IVD_TYPING_FIELDS + IVD_SELF_TEST_FIELDS) - set(opened)
+        assert not (others & missing)
 
 
 class TestBranching:
@@ -380,7 +410,7 @@ class TestRoundTrip:
         restored = DeviceProfile.model_validate(
             json.loads(ivd_profile().model_dump_json())
         )
-        assert restored.functions[0].ivd.purpose.resolved is False
+        assert restored.functions[0].ivd.detects_infectious_agent.resolved is False
 
     def test_a_multi_function_product_survives_json(self):
         profile = general_profile()

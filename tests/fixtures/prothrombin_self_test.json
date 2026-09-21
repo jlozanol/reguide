@@ -108,8 +108,13 @@
         },
         "general": null,
         "ivd": {
-          "purpose": {
-            "value": "therapy_or_disease_monitoring",
+          "detects_infectious_agent": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
+          },
+          "types_blood_or_tissue": {
+            "value": "no",
             "basis": "stated",
             "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
           },
@@ -118,28 +123,98 @@
             "basis": "stated",
             "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
           },
-          "is_near_patient_test": {
+          "screens_donations_for_transmissible_agents": {
             "value": null,
             "basis": "unknown",
             "evidence": null
           },
-          "detects_transmissible_agent": {
+          "agent_serious_with_high_propagation_risk": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "assesses_transfusion_or_transplant_compatibility": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "detects_listed_blood_group_marker": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "detects_sexually_transmitted_agent": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "detects_limited_propagation_agent_in_csf_or_blood": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "error_could_cause_death_or_severe_disability": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "prenatal_immune_status_screening": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "infective_status_error_life_threatening": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "manages_life_threatening_infectious_disease": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "selects_patients_for_therapy": {
             "value": "no",
             "basis": "stated",
             "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
           },
-          "transmission_risk_to_population": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+          "selects_patients_for_disease_staging": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
           },
-          "disease_is_life_threatening": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+          "selects_patients_in_cancer_diagnosis": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
           },
-          "result_drives_critical_decision": {
-            "value": "yes",
+          "is_companion_diagnostic": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
+          },
+          "is_human_genetic_test": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
+          },
+          "monitors_levels_error_life_threatening": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
+          },
+          "screens_foetus_for_congenital_disorders": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
+          },
+          "result_not_determining_serious_condition": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
+          },
+          "preliminary_with_follow_up_testing": {
+            "value": "no",
             "basis": "stated",
             "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
           },
@@ -167,17 +242,12 @@
             "value": "no",
             "basis": "stated",
             "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
-          },
-          "sample_type": {
-            "value": "capillary whole blood",
-            "basis": "stated",
-            "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
           }
         }
       }
     ],
     "funding": null,
     "source_text": "Prothrombin time self-test strips Test strips for prothrombin time self-testing by a lay person at home. Prothrombin time self-test strips Test strips for prothrombin time self-testing by a lay person at home. fixture decomposition is fixed by hand",
-    "schema_version": "0.5"
+    "schema_version": "0.6"
   }
 }

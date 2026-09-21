@@ -108,7 +108,12 @@
         },
         "general": null,
         "ivd": {
-          "purpose": {
+          "detects_infectious_agent": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "types_blood_or_tissue": {
             "value": null,
             "basis": "unknown",
             "evidence": null
@@ -118,27 +123,97 @@
             "basis": "unknown",
             "evidence": null
           },
-          "is_near_patient_test": {
+          "screens_donations_for_transmissible_agents": {
             "value": null,
             "basis": "unknown",
             "evidence": null
           },
-          "detects_transmissible_agent": {
+          "agent_serious_with_high_propagation_risk": {
             "value": null,
             "basis": "unknown",
             "evidence": null
           },
-          "transmission_risk_to_population": {
+          "assesses_transfusion_or_transplant_compatibility": {
             "value": null,
             "basis": "unknown",
             "evidence": null
           },
-          "disease_is_life_threatening": {
+          "detects_listed_blood_group_marker": {
             "value": null,
             "basis": "unknown",
             "evidence": null
           },
-          "result_drives_critical_decision": {
+          "detects_sexually_transmitted_agent": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "detects_limited_propagation_agent_in_csf_or_blood": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "error_could_cause_death_or_severe_disability": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "prenatal_immune_status_screening": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "infective_status_error_life_threatening": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "manages_life_threatening_infectious_disease": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "selects_patients_for_therapy": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "selects_patients_for_disease_staging": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "selects_patients_in_cancer_diagnosis": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_companion_diagnostic": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_human_genetic_test": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "monitors_levels_error_life_threatening": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "screens_foetus_for_congenital_disorders": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "result_not_determining_serious_condition": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "preliminary_with_follow_up_testing": {
             "value": null,
             "basis": "unknown",
             "evidence": null
@@ -167,17 +242,12 @@
             "value": "no",
             "basis": "stated",
             "evidence": "Prepared culture medium for microbiological laboratory use."
-          },
-          "sample_type": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
           }
         }
       }
     ],
     "funding": null,
     "source_text": "Microbiological culture medium Prepared culture medium for microbiological laboratory use. Microbiological culture medium Prepared culture medium for microbiological laboratory use. fixture decomposition is fixed by hand",
-    "schema_version": "0.5"
+    "schema_version": "0.6"
   }
 }

@@ -8,7 +8,7 @@
       "name": "HIV blood donor screening assay",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class 4 IVD",
-      "expected_rule": "1.1"
+      "expected_rule": "1.1(a)"
     }
   ],
   "source": "TGA, Classifying IVDs for supply in Australia",
@@ -108,8 +108,13 @@
         },
         "general": null,
         "ivd": {
-          "purpose": {
-            "value": "blood_or_tissue_donor_screening",
+          "detects_infectious_agent": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Screens donated blood for HIV before transfusion."
+          },
+          "types_blood_or_tissue": {
+            "value": "no",
             "basis": "stated",
             "evidence": "Screens donated blood for HIV before transfusion."
           },
@@ -118,30 +123,100 @@
             "basis": "stated",
             "evidence": "Screens donated blood for HIV before transfusion."
           },
-          "is_near_patient_test": {
+          "screens_donations_for_transmissible_agents": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Screens donated blood for HIV before transfusion."
+          },
+          "agent_serious_with_high_propagation_risk": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Screens donated blood for HIV before transfusion."
+          },
+          "assesses_transfusion_or_transplant_compatibility": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "detects_listed_blood_group_marker": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "detects_sexually_transmitted_agent": {
             "value": "no",
             "basis": "stated",
             "evidence": "Screens donated blood for HIV before transfusion."
           },
-          "detects_transmissible_agent": {
-            "value": "yes",
+          "detects_limited_propagation_agent_in_csf_or_blood": {
+            "value": "no",
             "basis": "stated",
             "evidence": "Screens donated blood for HIV before transfusion."
           },
-          "transmission_risk_to_population": {
-            "value": "yes",
+          "error_could_cause_death_or_severe_disability": {
+            "value": "no",
             "basis": "stated",
             "evidence": "Screens donated blood for HIV before transfusion."
           },
-          "disease_is_life_threatening": {
-            "value": "yes",
+          "prenatal_immune_status_screening": {
+            "value": "no",
             "basis": "stated",
             "evidence": "Screens donated blood for HIV before transfusion."
           },
-          "result_drives_critical_decision": {
-            "value": "yes",
+          "infective_status_error_life_threatening": {
+            "value": "no",
             "basis": "stated",
             "evidence": "Screens donated blood for HIV before transfusion."
+          },
+          "manages_life_threatening_infectious_disease": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Screens donated blood for HIV before transfusion."
+          },
+          "selects_patients_for_therapy": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Screens donated blood for HIV before transfusion."
+          },
+          "selects_patients_for_disease_staging": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Screens donated blood for HIV before transfusion."
+          },
+          "selects_patients_in_cancer_diagnosis": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Screens donated blood for HIV before transfusion."
+          },
+          "is_companion_diagnostic": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Screens donated blood for HIV before transfusion."
+          },
+          "is_human_genetic_test": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Screens donated blood for HIV before transfusion."
+          },
+          "monitors_levels_error_life_threatening": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Screens donated blood for HIV before transfusion."
+          },
+          "screens_foetus_for_congenital_disorders": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Screens donated blood for HIV before transfusion."
+          },
+          "result_not_determining_serious_condition": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "preliminary_with_follow_up_testing": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "is_ivd_instrument": {
             "value": "no",
@@ -167,17 +242,12 @@
             "value": "no",
             "basis": "stated",
             "evidence": "Screens donated blood for HIV before transfusion."
-          },
-          "sample_type": {
-            "value": "donor whole blood",
-            "basis": "stated",
-            "evidence": "Screens donated blood for HIV before transfusion."
           }
         }
       }
     ],
     "funding": null,
     "source_text": "HIV blood donor screening assay Screens donated blood for HIV before transfusion. HIV blood donor screening assay Screens donated blood for HIV before transfusion. fixture decomposition is fixed by hand",
-    "schema_version": "0.5"
+    "schema_version": "0.6"
   }
 }

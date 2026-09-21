@@ -21,8 +21,12 @@ from reguide.profile import DeviceKind
 from reguide.scoring import AGREE, FAMILY_PREFIX, NO_RESULT, RULE_REFERENCE, WRONG_CLASS, run
 
 KNOWN_AGREEING = {
+    "abo_reagent_red_cells",
+    "chlamydia_test",
     "culture_media",
+    "hiv_donor_screening",
     "prothrombin_meter",
+    "prothrombin_self_test",
     "quality_control_material",
 }
 
@@ -54,8 +58,8 @@ def test_known_agreeing_is_up_to_date(verified):
 
 
 def test_every_verified_fixture_is_scored(verified, everything):
-    assert len(verified.fixtures) == 25
-    assert len(everything.fixtures) == 35
+    assert len(verified.fixtures) == 26
+    assert len(everything.fixtures) == 36
 
 
 def test_unverified_fixtures_get_no_confident_wrong_class_either(everything):

@@ -243,6 +243,6 @@
     ],
     "funding": null,
     "source_text": "Radiotherapy after-loading control system Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology. Radiotherapy after-loading control system Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology. fixture decomposition is fixed by hand",
-    "schema_version": "0.5"
+    "schema_version": "0.6"
   }
 }

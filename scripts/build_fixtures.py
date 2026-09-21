@@ -38,7 +38,6 @@ from reguide.profile import (
     highest_class,
     Invasiveness,
     IvdProfile,
-    IvdPurpose,
     OrificeSite,
     PublicHealthRisk,
     Severity,
@@ -54,6 +53,7 @@ NOT_IVD = "TGA, Classifying medical devices that are not IVDs"
 ACTIVE = "TGA, Classifying active medical devices in Australia"
 IVD_GUIDE = "TGA, Classifying IVDs for supply in Australia"
 RULE_TEXT = "Reasoned from Schedule 2 rule text, not a worked example"
+IHR_GUIDE = "TGA, Completing Conformity Assessment for immunohaematology reagents (IHRs)"
 GATE_TEXT = ("Reasoned from s41BD of the Act and Schedule 4 Part 2 of the "
              "Regulations, not a worked example")
 
@@ -85,14 +85,28 @@ IVD_DEFAULTS = dict(
     is_culture_medium=Tri.NO,
     is_quality_control_material=Tri.NO,
     is_export_only=Tri.NO,
-    purpose=IvdPurpose.OTHER,
+    detects_infectious_agent=Tri.NO,
+    types_blood_or_tissue=Tri.NO,
     is_self_test=Tri.NO,
-    is_near_patient_test=Tri.NO,
-    detects_transmissible_agent=Tri.NO,
-    transmission_risk_to_population=Tri.NO,
-    disease_is_life_threatening=Tri.NO,
-    result_drives_critical_decision=Tri.NO,
-    sample_type="not stated",
+    screens_donations_for_transmissible_agents=Tri.NO,
+    agent_serious_with_high_propagation_risk=Tri.NO,
+    assesses_transfusion_or_transplant_compatibility=Tri.NO,
+    detects_listed_blood_group_marker=Tri.NO,
+    detects_sexually_transmitted_agent=Tri.NO,
+    detects_limited_propagation_agent_in_csf_or_blood=Tri.NO,
+    error_could_cause_death_or_severe_disability=Tri.NO,
+    prenatal_immune_status_screening=Tri.NO,
+    infective_status_error_life_threatening=Tri.NO,
+    manages_life_threatening_infectious_disease=Tri.NO,
+    selects_patients_for_therapy=Tri.NO,
+    selects_patients_for_disease_staging=Tri.NO,
+    selects_patients_in_cancer_diagnosis=Tri.NO,
+    is_companion_diagnostic=Tri.NO,
+    is_human_genetic_test=Tri.NO,
+    monitors_levels_error_life_threatening=Tri.NO,
+    screens_foetus_for_congenital_disorders=Tri.NO,
+    result_not_determining_serious_condition=Tri.NO,
+    preliminary_with_follow_up_testing=Tri.NO,
 )
 
 
@@ -510,24 +524,31 @@ add("prothrombin_self_test", "Class 3 IVD", "1.4", IVD_GUIDE,
     "Self-testing lifts the class of the strips above their own meter.",
     ivd("Prothrombin time self-test strips",
         "Test strips for prothrombin time self-testing by a lay person at home.",
-        purpose=IvdPurpose.MONITORING, is_self_test=Tri.YES,
-        result_drives_critical_decision=Tri.YES, sample_type="capillary whole blood"))
+        is_self_test=Tri.YES))
 
-add("hiv_donor_screening", "Class 4 IVD", "1.1", IVD_GUIDE,
+add("hiv_donor_screening", "Class 4 IVD", "1.1(a)", IVD_GUIDE,
     "The IVD ceiling. Donor screening for a high public health risk agent.",
     ivd("HIV blood donor screening assay",
         "Screens donated blood for HIV before transfusion.",
-        purpose=IvdPurpose.BLOOD_OR_TISSUE_SCREENING, detects_transmissible_agent=Tri.YES,
-        transmission_risk_to_population=Tri.YES, disease_is_life_threatening=Tri.YES,
-        result_drives_critical_decision=Tri.YES, sample_type="donor whole blood"))
+        detects_infectious_agent=Tri.YES, screens_donations_for_transmissible_agents=Tri.YES,
+        agent_serious_with_high_propagation_risk=Tri.YES))
 
-add("chlamydia_test", "Class 3 IVD", "1.3", IVD_GUIDE,
+add("chlamydia_test", "Class 3 IVD", "1.3(a)", IVD_GUIDE,
     "Transmissible agent at moderate rather than high public health risk.",
     ivd("Chlamydia trachomatis assay",
         "Detects Chlamydia trachomatis in a clinical specimen for diagnosis.",
-        purpose=IvdPurpose.TRANSMISSIBLE_AGENT, detects_transmissible_agent=Tri.YES,
-        transmission_risk_to_population=Tri.NO, disease_is_life_threatening=Tri.NO,
-        result_drives_critical_decision=Tri.YES, sample_type="urine or swab"))
+        detects_infectious_agent=Tri.YES, detects_sexually_transmitted_agent=Tri.YES))
+
+add("abo_reagent_red_cells", "Class 4 IVD", "1.2(2)", IHR_GUIDE,
+    "TGA's worked example: reagent red cells for ABO reverse grouping are Class 4 "
+    "under 1.2(2). Used in pretransfusion testing, so 1.2(1) is met too, but its "
+    "paragraph (b) excludes a device mentioned in 1.2(2).",
+    ivd("Reagent red blood cells for ABO reverse grouping",
+        "Kit of red blood cells for performing ABO reverse groups in pretransfusion "
+        "testing.",
+        types_blood_or_tissue=Tri.YES,
+        assesses_transfusion_or_transplant_compatibility=Tri.YES,
+        detects_listed_blood_group_marker=Tri.YES))
 
 
 add("infusion_pump", "Class IIb", "4.4(2)", ACTIVE,
@@ -560,9 +581,7 @@ add_multi(
                    is_ivd_instrument=Tri.YES),
             ivd_fn("Prothrombin time test strips",
                    "Test strips for prothrombin time self-testing by a lay person.",
-                   purpose=IvdPurpose.MONITORING, is_self_test=Tri.YES,
-                   result_drives_critical_decision=Tri.YES,
-                   sample_type="capillary whole blood"),
+                   is_self_test=Tri.YES),
             fn("Lancet",
                "Single-use lancet for obtaining a capillary blood specimen.",
                invasiveness=Invasiveness.SURGICALLY_INVASIVE,

@@ -22,8 +22,9 @@ resolved profile fields and nothing else.
 """
 
 import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 
+from ..flags import Flag
 from ..profile import DeviceKind, DeviceProfile, FunctionProfile, Tri
 
 REGULATIONS = "Therapeutic Goods (Medical Devices) Regulations 2002"
@@ -55,6 +56,7 @@ class Classification:
     hits: list[RuleHit] = field(default_factory=list)
     unresolved: list[str] = field(default_factory=list)
     displaced: list[str] = field(default_factory=list)   # rule ids set aside
+    flags: list[Flag] = field(default_factory=list)      # shown beside the class
 
     @property
     def confident(self) -> bool:
@@ -145,5 +147,11 @@ def classify(profile: DeviceProfile, indices: list[int]) -> dict[int, Classifica
     gate has not marked regulated by forgetting to ask. Results are per
     function; the class per family for the product is highest_class() over
     the confident ones, and only when every regulated function is confident.
+    Flags raised by a rule are stamped with the function's index here.
     """
-    return {i: classify_function(profile.functions[i]) for i in indices}
+    results = {}
+    for i in indices:
+        outcome = classify_function(profile.functions[i])
+        outcome.flags = [replace(f, functions=(i,)) for f in outcome.flags]
+        results[i] = outcome
+    return results

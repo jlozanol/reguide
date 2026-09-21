@@ -72,9 +72,9 @@ class TestVerdicts:
         assert row.got_class is None
 
     def test_no_result_names_what_stopped_it(self):
-        [row] = SC.score_fixture("chlamydia_test", fixture("chlamydia_test"))
+        [row] = SC.score_fixture("screw_transient", fixture("screw_transient"))
         assert row.verdict == SC.NO_RESULT
-        assert "s2a-1.3 (not implemented)" in row.detail
+        assert row.detail == "s2 (Schedule 2 rules not implemented)"
 
     def test_an_excluded_function_agrees_without_being_classified(self, monkeypatch):
         seen = []
@@ -103,14 +103,14 @@ class TestScore:
     def test_a_fixture_agrees_only_when_every_function_does(self):
         pack = fixture("prothrombin_self_test_pack")
         score = SC.Score(SC.score_fixture("pack", pack))
-        assert score.rows[0].verdict == SC.AGREE
+        assert [r.verdict for r in score.rows] == [SC.AGREE, SC.AGREE, SC.NO_RESULT]
         assert score.agreeing_fixtures == []
-        assert score.agreeing_functions == 1
+        assert score.agreeing_functions == 2
 
     def test_misses_are_ordered_worst_first(self):
         wrong = copy.deepcopy(fixture("culture_media"))
         wrong["functions"][0]["expected_class"] = "Class 4 IVD"
-        rows = (SC.score_fixture("b_refused", fixture("chlamydia_test"))
+        rows = (SC.score_fixture("b_refused", fixture("screw_transient"))
                 + SC.score_fixture("a_wrong", wrong))
         assert [r.verdict for r in SC.Score(rows).misses] == [SC.WRONG_CLASS, SC.NO_RESULT]
 
@@ -121,13 +121,13 @@ class TestScore:
 class TestReport:
     def test_headline_and_table(self):
         rows = (SC.score_fixture("culture_media", fixture("culture_media"))
-                + SC.score_fixture("chlamydia_test", fixture("chlamydia_test")))
+                + SC.score_fixture("screw_transient", fixture("screw_transient")))
         text = SC.report(SC.Score(rows))
         assert text.startswith("Agreement: 1/2 fixtures (50%), 1/2 functions\n")
         assert "Misses: 1 no result" in text
         assert "| fixture | function | expected | got | miss | detail |" in text
-        assert "| chlamydia_test | Chlamydia trachomatis assay | Class 3 IVD (1.3) | none " \
-               "| no result |" in text
+        assert "| screw_transient | Metal fixation screw, intraoperative | Class IIa (3.2(2)) " \
+               "| none | no result |" in text
 
     def test_no_table_when_nothing_is_missed(self):
         text = SC.report(SC.Score(SC.score_fixture("culture_media", fixture("culture_media"))))

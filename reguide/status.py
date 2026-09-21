@@ -40,6 +40,7 @@ from dataclasses import dataclass, field
 from enum import Enum
 from pathlib import Path
 
+from .flags import Flag, Severity
 from .profile import (
     Answer,
     DeviceProfile,
@@ -131,27 +132,6 @@ def load_exclusions(path: str | Path = EXCLUSION_SOURCE) -> int:
         exclusion = Exclusion(**entry)
         EXCLUSION_TABLE[exclusion_key(exclusion.key)] = exclusion
     return len(EXCLUSION_TABLE)
-
-
-class Severity(str, Enum):
-    """How loudly the report should raise a flag.
-
-    AMBER: the verdict stands, but a person should look before relying on it.
-    RED: the tool could not reach a safe verdict and a person must decide.
-    """
-
-    AMBER = "amber"
-    RED = "red"
-
-
-@dataclass(frozen=True)
-class Flag:
-    """Something the report must show beside the verdict, not bury in it."""
-
-    severity: Severity
-    code: str        # stable identifier, for tests and for the report layout
-    message: str     # plain words for the founder
-    functions: tuple[int, ...] = ()   # indices of the functions it concerns
 
 
 @dataclass

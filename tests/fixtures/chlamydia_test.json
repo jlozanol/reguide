@@ -8,7 +8,7 @@
       "name": "Chlamydia trachomatis assay",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class 3 IVD",
-      "expected_rule": "1.3"
+      "expected_rule": "1.3(a)"
     }
   ],
   "source": "TGA, Classifying IVDs for supply in Australia",
@@ -108,8 +108,13 @@
         },
         "general": null,
         "ivd": {
-          "purpose": {
-            "value": "transmissible_agent_detection",
+          "detects_infectious_agent": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+          },
+          "types_blood_or_tissue": {
+            "value": "no",
             "basis": "stated",
             "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
           },
@@ -118,30 +123,100 @@
             "basis": "stated",
             "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
           },
-          "is_near_patient_test": {
+          "screens_donations_for_transmissible_agents": {
             "value": "no",
             "basis": "stated",
             "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
           },
-          "detects_transmissible_agent": {
+          "agent_serious_with_high_propagation_risk": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+          },
+          "assesses_transfusion_or_transplant_compatibility": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "detects_listed_blood_group_marker": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "detects_sexually_transmitted_agent": {
             "value": "yes",
             "basis": "stated",
             "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
           },
-          "transmission_risk_to_population": {
+          "detects_limited_propagation_agent_in_csf_or_blood": {
             "value": "no",
             "basis": "stated",
             "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
           },
-          "disease_is_life_threatening": {
+          "error_could_cause_death_or_severe_disability": {
             "value": "no",
             "basis": "stated",
             "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
           },
-          "result_drives_critical_decision": {
-            "value": "yes",
+          "prenatal_immune_status_screening": {
+            "value": "no",
             "basis": "stated",
             "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+          },
+          "infective_status_error_life_threatening": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+          },
+          "manages_life_threatening_infectious_disease": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+          },
+          "selects_patients_for_therapy": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+          },
+          "selects_patients_for_disease_staging": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+          },
+          "selects_patients_in_cancer_diagnosis": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+          },
+          "is_companion_diagnostic": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+          },
+          "is_human_genetic_test": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+          },
+          "monitors_levels_error_life_threatening": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+          },
+          "screens_foetus_for_congenital_disorders": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+          },
+          "result_not_determining_serious_condition": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "preliminary_with_follow_up_testing": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "is_ivd_instrument": {
             "value": "no",
@@ -167,17 +242,12 @@
             "value": "no",
             "basis": "stated",
             "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
-          },
-          "sample_type": {
-            "value": "urine or swab",
-            "basis": "stated",
-            "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
           }
         }
       }
     ],
     "funding": null,
     "source_text": "Chlamydia trachomatis assay Detects Chlamydia trachomatis in a clinical specimen for diagnosis. Chlamydia trachomatis assay Detects Chlamydia trachomatis in a clinical specimen for diagnosis. fixture decomposition is fixed by hand",
-    "schema_version": "0.5"
+    "schema_version": "0.6"
   }
 }

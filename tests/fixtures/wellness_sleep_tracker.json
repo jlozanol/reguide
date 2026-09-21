@@ -241,6 +241,6 @@
     ],
     "funding": null,
     "source_text": "Sleep and activity tracker Records sleep and activity for general wellbeing. Sleep and activity tracker Records sleep and activity for general wellbeing. fixture decomposition is fixed by hand",
-    "schema_version": "0.5"
+    "schema_version": "0.6"
   }
 }

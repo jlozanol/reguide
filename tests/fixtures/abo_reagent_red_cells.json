@@ -1,40 +1,40 @@
 {
   "expected_status": "regulated_medical_device",
   "expected_classes": {
-    "ivd": "Class 2 IVD"
+    "ivd": "Class 4 IVD"
   },
   "functions": [
     {
-      "name": "Non-assay-specific control plasma",
+      "name": "Reagent red blood cells for ABO reverse grouping",
       "expected_status": "regulated_medical_device",
-      "expected_class": "Class 2 IVD",
-      "expected_rule": "1.5"
+      "expected_class": "Class 4 IVD",
+      "expected_rule": "1.2(2)"
     }
   ],
-  "source": "TGA, Classifying IVDs for supply in Australia",
+  "source": "TGA, Completing Conformity Assessment for immunohaematology reagents (IHRs)",
   "verified": true,
-  "note": "Non-assay-specific control material. Another named exception.",
+  "note": "TGA's worked example: reagent red cells for ABO reverse grouping are Class 4 under 1.2(2). Used in pretransfusion testing, so 1.2(1) is met too, but its paragraph (b) excludes a device mentioned in 1.2(2).",
   "profile": {
     "core": {
       "product_name": {
-        "value": "Non-assay-specific control plasma",
+        "value": "Reagent red blood cells for ABO reverse grouping",
         "basis": "stated",
-        "evidence": "Non-assay-specific control plasma"
+        "evidence": "Reagent red blood cells for ABO reverse grouping"
       },
       "intended_purpose": {
-        "value": "Quality control material for coagulation studies, not assay specific.",
+        "value": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing.",
         "basis": "stated",
-        "evidence": "Quality control material for coagulation studies, not assay specific."
+        "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
       },
       "supplied_sterile": {
         "value": "no",
         "basis": "stated",
-        "evidence": "Quality control material for coagulation studies, not assay specific."
+        "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
       },
       "has_measuring_function": {
         "value": "no",
         "basis": "stated",
-        "evidence": "Quality control material for coagulation studies, not assay specific."
+        "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
       },
       "functions_confirmed": {
         "value": "yes",
@@ -45,35 +45,35 @@
     "functions": [
       {
         "name": {
-          "value": "Non-assay-specific control plasma",
+          "value": "Reagent red blood cells for ABO reverse grouping",
           "basis": "stated",
-          "evidence": "Non-assay-specific control plasma"
+          "evidence": "Reagent red blood cells for ABO reverse grouping"
         },
         "description": {
-          "value": "Quality control material for coagulation studies, not assay specific.",
+          "value": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing.",
           "basis": "stated",
-          "evidence": "Quality control material for coagulation studies, not assay specific."
+          "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
         },
         "kind": {
           "value": "ivd",
           "basis": "stated",
-          "evidence": "Quality control material for coagulation studies, not assay specific."
+          "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
         },
         "is_software": {
           "value": "no",
           "basis": "stated",
-          "evidence": "Quality control material for coagulation studies, not assay specific."
+          "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
         },
         "status": {
           "therapeutic_purpose": {
             "value": "in_vitro_examination_of_specimen_for_medical_purpose",
             "basis": "stated",
-            "evidence": "Quality control material for coagulation studies, not assay specific."
+            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
           },
           "principal_action_pharmacological": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Quality control material for coagulation studies, not assay specific."
+            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
           },
           "is_accessory_to_device": {
             "value": null,
@@ -83,7 +83,7 @@
           "excluded_item": {
             "value": "none",
             "basis": "stated",
-            "evidence": "Quality control material for coagulation studies, not assay specific."
+            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
           },
           "exclusion_conditions_met": {
             "value": null,
@@ -109,19 +109,19 @@
         "general": null,
         "ivd": {
           "detects_infectious_agent": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
           },
           "types_blood_or_tissue": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
           },
           "is_self_test": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
           },
           "screens_donations_for_transmissible_agents": {
             "value": null,
@@ -134,14 +134,14 @@
             "evidence": null
           },
           "assesses_transfusion_or_transplant_compatibility": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
           },
           "detects_listed_blood_group_marker": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
           },
           "detects_sexually_transmitted_agent": {
             "value": null,
@@ -174,39 +174,39 @@
             "evidence": null
           },
           "selects_patients_for_therapy": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
           },
           "selects_patients_for_disease_staging": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
           },
           "selects_patients_in_cancer_diagnosis": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
           },
           "is_companion_diagnostic": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
           },
           "is_human_genetic_test": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
           },
           "monitors_levels_error_life_threatening": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
           },
           "screens_foetus_for_congenital_disorders": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
           },
           "result_not_determining_serious_condition": {
             "value": null,
@@ -221,33 +221,33 @@
           "is_ivd_instrument": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Quality control material for coagulation studies, not assay specific."
+            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
           },
           "is_specimen_receptacle": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Quality control material for coagulation studies, not assay specific."
+            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
           },
           "is_culture_medium": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Quality control material for coagulation studies, not assay specific."
+            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
           },
           "is_quality_control_material": {
-            "value": "yes",
+            "value": "no",
             "basis": "stated",
-            "evidence": "Quality control material for coagulation studies, not assay specific."
+            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
           },
           "is_export_only": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Quality control material for coagulation studies, not assay specific."
+            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
           }
         }
       }
     ],
     "funding": null,
-    "source_text": "Non-assay-specific control plasma Quality control material for coagulation studies, not assay specific. Non-assay-specific control plasma Quality control material for coagulation studies, not assay specific. fixture decomposition is fixed by hand",
+    "source_text": "Reagent red blood cells for ABO reverse grouping Kit of red blood cells for performing ABO reverse groups in pretransfusion testing. Reagent red blood cells for ABO reverse grouping Kit of red blood cells for performing ABO reverse groups in pretransfusion testing. fixture decomposition is fixed by hand",
     "schema_version": "0.6"
   }
 }

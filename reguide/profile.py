@@ -21,6 +21,20 @@ into the three things clause 1.6(2) actually names: an instrument (a), a
 specimen receptacle (b) and a microbiological culture medium (c). Each
 paragraph is cited on its own, and (b) excludes a receptacle intended for
 self-testing, which a combined field could not express.
+
+Version 0.6 gives Schedule 2A clauses 1.1 to 1.4 one field per paragraph.
+The paragraphs are intended uses, not combinations of shared attributes, and
+several can apply to one device, so a single purpose field could neither
+cite the paragraph nor record the overlap. Three gate questions keep the
+interview short: an infectious or transmissible agent opens 1.1 and the
+agent paragraphs of 1.3; blood group or tissue typing opens 1.2;
+self-testing opens the two exceptions in 1.4. The coarse fields they replace
+(purpose, transmission risk, life-threatening disease, critical decision,
+near-patient testing, sample type) are gone: no rule read them, and
+near-patient testing has no clause in Schedule 2A at all.
+
+Whether an agent poses "a high risk of propagation in Australia" is a
+regulatory judgement. It is asked, with evidence, never inferred.
 """
 
 from enum import Enum
@@ -204,17 +218,6 @@ class PublicHealthRisk(str, Enum):
     NONE = "none"
 
 
-class IvdPurpose(str, Enum):
-    BLOOD_OR_TISSUE_SCREENING = "blood_or_tissue_donor_screening"
-    TRANSMISSIBLE_AGENT = "transmissible_agent_detection"
-    BLOOD_GROUP_OR_TISSUE_TYPE = "blood_grouping_or_tissue_typing"
-    DISEASE_DIAGNOSIS = "disease_diagnosis"
-    MONITORING = "therapy_or_disease_monitoring"
-    SCREENING_ASYMPTOMATIC = "population_screening"
-    GENETIC_TESTING = "genetic_testing"
-    OTHER = "other"
-
-
 class CareSetting(str, Enum):
     PUBLIC_HOSPITAL = "public_hospital"
     PRIVATE_HOSPITAL = "private_hospital"
@@ -299,15 +302,42 @@ class GeneralDeviceProfile(BaseModel):
 
 
 class IvdProfile(BaseModel):
-    """Inputs to the Schedule 2A rules."""
+    """Inputs to the Schedule 2A rules. Each comment names the clause it feeds."""
 
-    purpose: Answer[IvdPurpose] = Answer()
-    is_self_test: Answer[Tri] = Answer()
-    is_near_patient_test: Answer[Tri] = Answer()
-    detects_transmissible_agent: Answer[Tri] = Answer()
-    transmission_risk_to_population: Answer[Tri] = Answer()
-    disease_is_life_threatening: Answer[Tri] = Answer()
-    result_drives_critical_decision: Answer[Tri] = Answer()
+    # Gates. Each opens a group of paragraphs; none decides a class alone.
+    detects_infectious_agent: Answer[Tri] = Answer()          # 1.1, 1.3(a)-(e), (i)
+    types_blood_or_tissue: Answer[Tri] = Answer()             # 1.2
+    is_self_test: Answer[Tri] = Answer()                      # 1.4, 1.6(2)(b)
+
+    # Clause 1.1, Class 4. Asked when detects_infectious_agent is yes.
+    screens_donations_for_transmissible_agents: Answer[Tri] = Answer()   # 1.1(a)
+    agent_serious_with_high_propagation_risk: Answer[Tri] = Answer()     # 1.1(b)
+
+    # Clause 1.2. Asked when types_blood_or_tissue is yes.
+    assesses_transfusion_or_transplant_compatibility: Answer[Tri] = Answer()  # 1.2(1)
+    detects_listed_blood_group_marker: Answer[Tri] = Answer()                 # 1.2(2)
+
+    # Clause 1.3, Class 3. The agent paragraphs, asked when
+    # detects_infectious_agent is yes.
+    detects_sexually_transmitted_agent: Answer[Tri] = Answer()           # 1.3(a)
+    detects_limited_propagation_agent_in_csf_or_blood: Answer[Tri] = Answer()  # 1.3(b)
+    error_could_cause_death_or_severe_disability: Answer[Tri] = Answer()  # 1.3(c)
+    prenatal_immune_status_screening: Answer[Tri] = Answer()             # 1.3(d)
+    infective_status_error_life_threatening: Answer[Tri] = Answer()      # 1.3(e)
+    manages_life_threatening_infectious_disease: Answer[Tri] = Answer()  # 1.3(i)
+
+    # Clause 1.3, Class 3. Asked of every IVD that reaches the ordinary rules.
+    selects_patients_for_therapy: Answer[Tri] = Answer()                 # 1.3(f)(i)
+    selects_patients_for_disease_staging: Answer[Tri] = Answer()         # 1.3(f)(ii)
+    selects_patients_in_cancer_diagnosis: Answer[Tri] = Answer()         # 1.3(f)(iii)
+    is_companion_diagnostic: Answer[Tri] = Answer()                      # 1.3(fa)
+    is_human_genetic_test: Answer[Tri] = Answer()                        # 1.3(g)
+    monitors_levels_error_life_threatening: Answer[Tri] = Answer()       # 1.3(h)
+    screens_foetus_for_congenital_disorders: Answer[Tri] = Answer()      # 1.3(j)
+
+    # Clause 1.4 exceptions. Asked when is_self_test is yes.
+    result_not_determining_serious_condition: Answer[Tri] = Answer()     # 1.4(a)
+    preliminary_with_follow_up_testing: Answer[Tri] = Answer()           # 1.4(b)
 
     # Named exceptions. These cannot be reasoned to, only looked up.
     is_ivd_instrument: Answer[Tri] = Answer()                # clause 1.6(2)(a)
@@ -315,8 +345,6 @@ class IvdProfile(BaseModel):
     is_culture_medium: Answer[Tri] = Answer()                # clause 1.6(2)(c)
     is_quality_control_material: Answer[Tri] = Answer()      # clause 1.5
     is_export_only: Answer[Tri] = Answer()                   # clause 1.8
-
-    sample_type: Answer[str] = Answer()
 
 
 class FundingProfile(BaseModel):
@@ -547,6 +575,35 @@ def relevant_general_fields(function: "FunctionProfile") -> list[str]:
     return _dedupe(fields)
 
 
+IVD_AGENT_FIELDS = [
+    "screens_donations_for_transmissible_agents",
+    "agent_serious_with_high_propagation_risk",
+    "detects_sexually_transmitted_agent",
+    "detects_limited_propagation_agent_in_csf_or_blood",
+    "error_could_cause_death_or_severe_disability",
+    "prenatal_immune_status_screening",
+    "infective_status_error_life_threatening",
+    "manages_life_threatening_infectious_disease",
+]
+IVD_TYPING_FIELDS = [
+    "assesses_transfusion_or_transplant_compatibility",
+    "detects_listed_blood_group_marker",
+]
+IVD_GENERAL_FIELDS = [
+    "selects_patients_for_therapy",
+    "selects_patients_for_disease_staging",
+    "selects_patients_in_cancer_diagnosis",
+    "is_companion_diagnostic",
+    "is_human_genetic_test",
+    "monitors_levels_error_life_threatening",
+    "screens_foetus_for_congenital_disorders",
+]
+IVD_SELF_TEST_FIELDS = [
+    "result_not_determining_serious_condition",
+    "preliminary_with_follow_up_testing",
+]
+
+
 def relevant_ivd_fields(ivd: IvdProfile) -> list[str]:
     """Which Schedule 2A fields this IVD function needs.
 
@@ -580,16 +637,17 @@ def relevant_ivd_fields(ivd: IvdProfile) -> list[str]:
         return exceptions
 
     fields = exceptions + [
-        "purpose",
+        "detects_infectious_agent",
+        "types_blood_or_tissue",
         "is_self_test",
-        "detects_transmissible_agent",
-        "sample_type",
     ]
-    if _value(ivd.detects_transmissible_agent) is Tri.YES:
-        fields += ["transmission_risk_to_population", "disease_is_life_threatening"]
-    if _value(ivd.is_self_test) is Tri.NO:
-        fields += ["is_near_patient_test"]
-    fields += ["result_drives_critical_decision"]
+    if _value(ivd.detects_infectious_agent) is Tri.YES:
+        fields += IVD_AGENT_FIELDS
+    if _value(ivd.types_blood_or_tissue) is Tri.YES:
+        fields += IVD_TYPING_FIELDS
+    fields += IVD_GENERAL_FIELDS
+    if _value(ivd.is_self_test) is Tri.YES:
+        fields += IVD_SELF_TEST_FIELDS
 
     return _dedupe(fields)
 
@@ -639,7 +697,7 @@ class DeviceProfile(BaseModel):
     funding: FundingProfile | None = None
 
     source_text: str = ""
-    schema_version: Literal["0.5"] = "0.5"
+    schema_version: Literal["0.6"] = "0.6"
 
     @property
     def single_function(self) -> bool:
