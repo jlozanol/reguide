@@ -10,6 +10,11 @@ its own route through the rules. Results aggregate two different ways:
 classification takes the highest class across functions, while exclusion and
 the CDSS exemption require every function to qualify. That asymmetry is the
 reason functions have to be first-class rather than a flag.
+
+Version 0.4 adds the inputs the regulatory status gate needs. Nothing here
+decides status; these are the facts the gate in status.py reads. They sit on
+the function rather than the product because a single product can hold one
+function that is a regulated device and another that is excluded.
 """
 
 from enum import Enum
@@ -72,6 +77,27 @@ class DeviceKind(str, Enum):
     GENERAL = "general_device"
     IVD = "ivd"
     UNKNOWN = "unknown"
+
+
+class TherapeuticPurpose(str, Enum):
+    """The limbs of the medical device definition, s41BD of the Act.
+
+    A function qualifies through exactly one of these or through none. NONE is
+    a finding, not a gap: it means the founder's own description of what the
+    function is for does not reach any limb, which is what makes the thing not
+    a device.
+
+    The sub-paragraph references in the citations are provisional until the
+    current compilation of the Act is loaded into data/legislation and the
+    fixtures confirm them.
+    """
+
+    DISEASE = "diagnosis_prevention_monitoring_treatment_of_disease"
+    INJURY = "diagnosis_monitoring_treatment_or_compensation_for_injury"
+    ANATOMY = "investigation_replacement_or_modification_of_anatomy"
+    CONCEPTION = "control_of_conception"
+    IN_VITRO_SPECIMEN = "information_from_in_vitro_examination_of_specimens"
+    NONE = "no_therapeutic_purpose"
 
 
 class Invasiveness(str, Enum):
@@ -297,6 +323,36 @@ class FundingProfile(BaseModel):
     privately_insured_patients: Answer[Tri] = Answer()
 
 
+class StatusProfile(BaseModel):
+    """Inputs to the regulatory status gate. One per function.
+
+    Three separate questions live here and they are not the same question.
+    Whether the function is a device at all is decided by the Act. Whether an
+    excluded good description captures it is decided by the Excluded Goods
+    Determination 2018 and removes it from regulation entirely. Whether it is
+    exempt clinical decision support is decided by the Medical Devices
+    Regulations, leaves it a medical device, and carries a notification
+    obligation rather than an ARTG entry.
+    """
+
+    # Is it a device at all, s41BD
+    therapeutic_purpose: Answer[TherapeuticPurpose] = Answer()
+    principal_action_pharmacological: Answer[Tri] = Answer()
+    is_accessory_to_device: Answer[Tri] = Answer()
+
+    # Is it excluded, Excluded Goods Determination 2018, Schedule 1
+    excluded_item: Answer[str] = Answer()            # e.g. "14E", or "none"
+    exclusion_conditions_met: Answer[Tri] = Answer()  # every condition of that item
+
+    # Is it exempt CDSS, Medical Devices Regulations 2002, Schedule 4 Part 2.
+    # Worded as the criteria are worded, deliberately. decision_maker on the
+    # general section is close to the third criterion but is not the same test,
+    # so neither is derived from the other.
+    cdss_sole_purpose_recommendation: Answer[Tri] = Answer()
+    cdss_processes_device_signal_or_image: Answer[Tri] = Answer()
+    cdss_replaces_clinical_judgement: Answer[Tri] = Answer()
+
+
 class FunctionProfile(BaseModel):
     """One function of a product, with its own route through the rules.
 
@@ -310,15 +366,24 @@ class FunctionProfile(BaseModel):
     kind: Answer[DeviceKind] = Answer()
     is_software: Answer[Tri] = Answer()
 
+    status: StatusProfile = StatusProfile()
     general: GeneralDeviceProfile | None = None
     ivd: IvdProfile | None = None
 
     def branch(self) -> DeviceKind | None:
-        return self.kind.value
+        """The settled kind, or None.
+
+        Goes through _value rather than reading kind.value directly, so an
+        unresolved answer cannot route a function into a rule family. UNKNOWN
+        is not a branch either.
+        """
+        kind = _value(self.kind)
+        return None if kind is DeviceKind.UNKNOWN else kind
 
     def relevant(self) -> list[str]:
         """Field names this function requires, unprefixed."""
         names = ["name", "description", "kind", "is_software"]
+        names += [f"status.{n}" for n in relevant_status_fields(self)]
         if self.branch() is DeviceKind.IVD and self.ivd is not None:
             names += [f"ivd.{n}" for n in relevant_ivd_fields(self.ivd)]
         elif self.branch() is DeviceKind.GENERAL and self.general is not None:
@@ -345,7 +410,7 @@ class FunctionProfile(BaseModel):
         interview never covers and still find it populated in testing.
         """
         asked = {n.split(".", 1)[1] for n in self.relevant() if "." in n}
-        for section in (self.general, self.ivd):
+        for section in (self.status, self.general, self.ivd):
             if section is None:
                 continue
             for name in type(section).model_fields:
@@ -376,6 +441,39 @@ def _value(answer: Answer):
 def _dedupe(names: list[str]) -> list[str]:
     seen: set[str] = set()
     return [n for n in names if not (n in seen or seen.add(n))]
+
+
+def relevant_status_fields(function: "FunctionProfile") -> list[str]:
+    """Which gate fields this function needs.
+
+    Asked of every function, whatever its kind, because the gate runs before
+    the general and IVD branches open. A function that reaches no limb of the
+    definition and is not an accessory needs nothing else: it is out of scope
+    and asking it about sterility or sample type would be theatre.
+    """
+    status = function.status
+    fields = ["therapeutic_purpose"]
+    purpose = _value(status.therapeutic_purpose)
+    if purpose is None:
+        return fields
+
+    if purpose is TherapeuticPurpose.NONE:
+        fields += ["is_accessory_to_device"]
+        if _value(status.is_accessory_to_device) is not Tri.YES:
+            return fields
+    else:
+        fields += ["principal_action_pharmacological"]
+        if _value(status.principal_action_pharmacological) is Tri.YES:
+            return fields
+
+    fields += ["excluded_item", "exclusion_conditions_met"]
+    if _value(function.is_software) is Tri.YES:
+        fields += [
+            "cdss_sole_purpose_recommendation",
+            "cdss_processes_device_signal_or_image",
+            "cdss_replaces_clinical_judgement",
+        ]
+    return _dedupe(fields)
 
 
 def relevant_general_fields(function: "FunctionProfile") -> list[str]:
@@ -512,7 +610,7 @@ class DeviceProfile(BaseModel):
     funding: FundingProfile | None = None
 
     source_text: str = ""
-    schema_version: Literal["0.3"] = "0.3"
+    schema_version: Literal["0.4"] = "0.4"
 
     @property
     def single_function(self) -> bool:
@@ -576,5 +674,3 @@ class DeviceProfile(BaseModel):
             if isinstance(getattr(section, name), Answer)
             and not getattr(section, name).resolved
         ]
-
-## End of file
