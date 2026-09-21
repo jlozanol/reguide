@@ -234,9 +234,6 @@ class TestSchemaCoverage:
     that here than after writing the rule.
     """
 
-    # Reached only by a fixture that names an exclusion item, which needs the
-    # Determination loaded. Delete this line once such a fixture exists.
-    STATUS_PENDING = {"exclusion_conditions_met"}
 
     def _asked(self):
         general, ivd = set(), set()
@@ -263,5 +260,4 @@ class TestSchemaCoverage:
             profile = DeviceProfile.model_validate(load(path)["profile"])
             for function in profile.functions:
                 asked |= set(relevant_status_fields(function))
-        unreached = set(StatusProfile.model_fields) - asked
-        assert unreached == self.STATUS_PENDING
+        assert set(StatusProfile.model_fields) - asked == set()

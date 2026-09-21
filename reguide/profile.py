@@ -80,23 +80,21 @@ class DeviceKind(str, Enum):
 
 
 class TherapeuticPurpose(str, Enum):
-    """The limbs of the medical device definition, s41BD of the Act.
+    """The limbs of the medical device definition, s41BD(1)(a)(i) to (v).
 
-    A function qualifies through exactly one of these or through none. NONE is
-    a finding, not a gap: it means the founder's own description of what the
+    A function qualifies through one of these or through none. NONE is a
+    finding, not a gap: it means the founder's own description of what the
     function is for does not reach any limb, which is what makes the thing not
-    a device.
+    a device unless it is an accessory under s41BD(1)(b).
 
-    The sub-paragraph references in the citations are provisional until the
-    current compilation of the Act is loaded into data/legislation and the
-    fixtures confirm them.
+    Checked against the Act at Compilation No. 89 (5 September 2025).
     """
 
-    DISEASE = "diagnosis_prevention_monitoring_treatment_of_disease"
-    INJURY = "diagnosis_monitoring_treatment_or_compensation_for_injury"
-    ANATOMY = "investigation_replacement_or_modification_of_anatomy"
-    CONCEPTION = "control_of_conception"
-    IN_VITRO_SPECIMEN = "information_from_in_vitro_examination_of_specimens"
+    DISEASE = "diagnosis_prevention_monitoring_prediction_treatment_of_disease"  # (i)
+    INJURY = "diagnosis_monitoring_treatment_or_compensation_for_injury"          # (ii)
+    ANATOMY = "investigation_or_modification_of_anatomy_or_physiological_process"  # (iii)
+    CONCEPTION = "control_or_support_of_conception"                               # (iv)
+    IN_VITRO_SPECIMEN = "in_vitro_examination_of_specimen_for_medical_purpose"    # (v)
     NONE = "no_therapeutic_purpose"
 
 
@@ -341,10 +339,11 @@ class StatusProfile(BaseModel):
     is_accessory_to_device: Answer[Tri] = Answer()
 
     # Is it excluded, Excluded Goods Determination 2018, Schedule 1
-    excluded_item: Answer[str] = Answer()            # e.g. "14E", or "none"
+    excluded_item: Answer[str] = Answer()            # "S1-14B", "S2-7", or "none"
     exclusion_conditions_met: Answer[Tri] = Answer()  # every condition of that item
 
-    # Is it exempt CDSS, Medical Devices Regulations 2002, Schedule 4 Part 2.
+    # Is it exempt CDSS, Medical Devices Regulations 2002, Schedule 4 Part 2
+    # item 2.15.
     # Worded as the criteria are worded, deliberately. decision_maker on the
     # general section is close to the third criterion but is not the same test,
     # so neither is derived from the other.
@@ -470,6 +469,9 @@ def relevant_status_fields(function: "FunctionProfile") -> list[str]:
     item = _value(status.excluded_item)
     if item is not None and item.strip().lower() not in ("", "none"):
         fields += ["exclusion_conditions_met"]
+        # Excluded goods are outside the Act. Nothing after this matters.
+        if _value(status.exclusion_conditions_met) is Tri.YES:
+            return _dedupe(fields)
     if _value(function.is_software) is Tri.YES:
         fields += [
             "cdss_sole_purpose_recommendation",

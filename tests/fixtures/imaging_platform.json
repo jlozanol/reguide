@@ -25,7 +25,7 @@
   ],
   "source": "Reasoned from Schedule 2 rule text, not a worked example",
   "verified": false,
-  "note": "Three software functions of one platform. Storage alone carries no medical-device purpose, triage flags abnormal studies, and the follow-up suggestion specifies an intervention. Tests that the highest function governs the product and that one regulated function is enough to pull the whole platform in. The follow-up suggestion stays regulated only because it is taken to work from the studies themselves. If it worked from the report text alone it would meet every CDSS criterion and be exempt, so this function is the one to check first.",
+  "note": "Three software functions of one platform. Storage alone carries no medical-device purpose, triage flags abnormal studies, and the follow-up suggestion specifies an intervention. Tests that the highest function governs the product and that one regulated function is enough to pull the whole platform in. The follow-up suggestion stays regulated only because it is taken to work from the studies themselves. If it worked from the report text alone it would meet every CDSS criterion and be exempt, so this function is the one to check first. The archive is treated as having no s41BD purpose. Item 14H excludes software whose sole purpose is storing or transmitting patient images, but this archive also displays them, so 14H does not cover it as described.",
   "profile": {
     "core": {
       "product_name": {
@@ -275,7 +275,7 @@
         },
         "status": {
           "therapeutic_purpose": {
-            "value": "diagnosis_prevention_monitoring_treatment_of_disease",
+            "value": "diagnosis_prevention_monitoring_prediction_treatment_of_disease",
             "basis": "stated",
             "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
           },
@@ -472,7 +472,7 @@
         },
         "status": {
           "therapeutic_purpose": {
-            "value": "diagnosis_prevention_monitoring_treatment_of_disease",
+            "value": "diagnosis_prevention_monitoring_prediction_treatment_of_disease",
             "basis": "stated",
             "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
           },

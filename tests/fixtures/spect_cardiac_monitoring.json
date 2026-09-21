@@ -66,7 +66,7 @@
         },
         "status": {
           "therapeutic_purpose": {
-            "value": "diagnosis_prevention_monitoring_treatment_of_disease",
+            "value": "diagnosis_prevention_monitoring_prediction_treatment_of_disease",
             "basis": "stated",
             "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
           },

@@ -59,6 +59,7 @@ GATE_TEXT = ("Reasoned from s41BD of the Act and Schedule 4 Part 2 of the "
 
 REGULATED = StatusOutcome.REGULATED
 NOT_A_DEVICE = StatusOutcome.NOT_A_DEVICE
+EXCLUDED = StatusOutcome.EXCLUDED
 EXEMPT_CDSS = StatusOutcome.EXEMPT_CDSS
 
 
@@ -119,6 +120,14 @@ PROCESSES_DEVICE_DATA = dict(
 # A function with no therapeutic purpose of its own and no device it serves.
 NO_PURPOSE = dict(therapeutic_purpose=TherapeuticPurpose.NONE,
                   is_accessory_to_device=Tri.NO)
+
+# Consumer wellness tracking. Monitoring sleep or activity arguably reaches
+# limb (iii), a physiological state, which is why item 14B exists to take it
+# back out. Every condition of 14B holds: consumer use, general wellness,
+# non-invasive, not for clinical practice, nothing about a serious condition.
+WELLNESS_TRACKING = dict(therapeutic_purpose=TherapeuticPurpose.ANATOMY,
+                         excluded_item="S1-14B",
+                         exclusion_conditions_met=Tri.YES)
 
 
 def status_for(text, purpose, overrides):
@@ -562,7 +571,10 @@ add_multi(
     "the whole platform in. The follow-up suggestion stays regulated only "
     "because it is taken to work from the studies themselves. If it worked "
     "from the report text alone it would meet every CDSS criterion and be "
-    "exempt, so this function is the one to check first.",
+    "exempt, so this function is the one to check first. The archive is "
+    "treated as having no s41BD purpose. Item 14H excludes software whose sole "
+    "purpose is storing or transmitting patient images, but this archive also "
+    "displays them, so 14H does not cover it as described.",
     product(
         "Radiology reporting platform",
         "Stores radiology studies, flags abnormal ones for priority review and "
@@ -602,11 +614,10 @@ add_multi(
 add_multi(
     "wellness_app_with_symptom_checker",
     RULE_TEXT,
-    "A consumer app whose tracking function reaches no limb of s41BD. The "
-    "symptom checker is regulated, and one regulated function regulates the "
-    "product, so the whole app is pulled in. The tracking function may be "
-    "better expressed as an excluded good under the consumer health items of "
-    "the Determination; revisit once that table is loaded.",
+    "A consumer app whose tracking function is an excluded good under item "
+    "14B. The symptom checker is not excluded, and a product is excluded only "
+    "when every function qualifies, so one regulated function pulls the whole "
+    "app into regulation. This is the unanimity test.",
     product(
         "Consumer wellbeing app",
         "Tracks sleep and activity for general wellbeing and includes a symptom "
@@ -614,7 +625,7 @@ add_multi(
         [
             fn("Activity and sleep tracking",
                "Records sleep and activity for general wellbeing.",
-               status=NO_PURPOSE, software=Tri.YES, active_type=ActiveType.NOT_ACTIVE,
+               status=WELLNESS_TRACKING, software=Tri.YES, active_type=ActiveType.NOT_ACTIVE,
                body_contact=BodyContact.NONE),
             fn("Symptom checker",
                "Asks a consumer about symptoms and suggests whether to seek "
@@ -629,23 +640,24 @@ add_multi(
                records_diagnostic_images=Tri.NO, body_contact=BodyContact.NONE),
         ],
     ),
-    [(None, "general wellbeing only, no s41BD purpose", NOT_A_DEVICE),
+    [(None, "S1-14B", EXCLUDED),
      ("Class IIa", "4.5(2)")],
     verified=False,
 )
 
 
 # -- The status gate. Products the gate stops before classification. ---------
-add("wellness_sleep_tracker", None, "no limb of s41BD reached", GATE_TEXT,
-    "The tracking function of the wellness app, supplied on its own. Nothing "
-    "in the product reaches a therapeutic purpose, so the gate stops it and "
-    "classification never runs. May instead be an excluded good once the "
-    "Determination is loaded.",
+add("wellness_sleep_tracker", None, "S1-14B", GATE_TEXT,
+    "The tracking function of the wellness app, supplied on its own. It is an "
+    "excluded good under item 14B, so the gate stops it and classification "
+    "never runs. Pairs with the wellness app to show the same function "
+    "deciding a product alone and failing to decide it alongside a regulated "
+    "function.",
     device("Sleep and activity tracker",
            "Records sleep and activity for general wellbeing.",
-           status=NO_PURPOSE, software=Tri.YES,
+           status=WELLNESS_TRACKING, software=Tri.YES,
            active_type=ActiveType.NOT_ACTIVE, body_contact=BodyContact.NONE),
-    verified=False, status=NOT_A_DEVICE)
+    verified=False, status=EXCLUDED)
 
 add("cdss_followup_from_report_text", None, "Schedule 4 Part 2", GATE_TEXT,
     "The follow-up suggestion from the imaging platform, rebuilt to read only "

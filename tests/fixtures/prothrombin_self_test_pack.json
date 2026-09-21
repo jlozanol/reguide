@@ -79,7 +79,7 @@
         },
         "status": {
           "therapeutic_purpose": {
-            "value": "information_from_in_vitro_examination_of_specimens",
+            "value": "in_vitro_examination_of_specimen_for_medical_purpose",
             "basis": "stated",
             "evidence": "Instrument that reads prothrombin time test strips."
           },
@@ -201,7 +201,7 @@
         },
         "status": {
           "therapeutic_purpose": {
-            "value": "information_from_in_vitro_examination_of_specimens",
+            "value": "in_vitro_examination_of_specimen_for_medical_purpose",
             "basis": "stated",
             "evidence": "Test strips for prothrombin time self-testing by a lay person."
           },
@@ -323,7 +323,7 @@
         },
         "status": {
           "therapeutic_purpose": {
-            "value": "diagnosis_prevention_monitoring_treatment_of_disease",
+            "value": "diagnosis_prevention_monitoring_prediction_treatment_of_disease",
             "basis": "stated",
             "evidence": "Single-use lancet for obtaining a capillary blood specimen."
           },

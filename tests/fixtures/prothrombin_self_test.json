@@ -66,7 +66,7 @@
         },
         "status": {
           "therapeutic_purpose": {
-            "value": "information_from_in_vitro_examination_of_specimens",
+            "value": "in_vitro_examination_of_specimen_for_medical_purpose",
             "basis": "stated",
             "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
           },

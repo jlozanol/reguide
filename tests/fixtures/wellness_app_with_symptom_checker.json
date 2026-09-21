@@ -6,9 +6,9 @@
   "functions": [
     {
       "name": "Activity and sleep tracking",
-      "expected_status": "not_a_medical_device",
+      "expected_status": "excluded_from_regulation",
       "expected_class": null,
-      "expected_rule": "general wellbeing only, no s41BD purpose"
+      "expected_rule": "S1-14B"
     },
     {
       "name": "Symptom checker",
@@ -19,7 +19,7 @@
   ],
   "source": "Reasoned from Schedule 2 rule text, not a worked example",
   "verified": false,
-  "note": "A consumer app whose tracking function reaches no limb of s41BD. The symptom checker is regulated, and one regulated function regulates the product, so the whole app is pulled in. The tracking function may be better expressed as an excluded good under the consumer health items of the Determination; revisit once that table is loaded.",
+  "note": "A consumer app whose tracking function is an excluded good under item 14B. The symptom checker is not excluded, and a product is excluded only when every function qualifies, so one regulated function pulls the whole app into regulation. This is the unanimity test.",
   "profile": {
     "core": {
       "product_name": {
@@ -72,29 +72,29 @@
         },
         "status": {
           "therapeutic_purpose": {
-            "value": "no_therapeutic_purpose",
+            "value": "investigation_or_modification_of_anatomy_or_physiological_process",
             "basis": "stated",
             "evidence": "Records sleep and activity for general wellbeing."
           },
           "principal_action_pharmacological": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
-          },
-          "is_accessory_to_device": {
             "value": "no",
             "basis": "stated",
             "evidence": "Records sleep and activity for general wellbeing."
           },
-          "excluded_item": {
+          "is_accessory_to_device": {
             "value": null,
             "basis": "unknown",
             "evidence": null
           },
+          "excluded_item": {
+            "value": "S1-14B",
+            "basis": "stated",
+            "evidence": "Records sleep and activity for general wellbeing."
+          },
           "exclusion_conditions_met": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Records sleep and activity for general wellbeing."
           },
           "cdss_sole_purpose_recommendation": {
             "value": null,
@@ -269,7 +269,7 @@
         },
         "status": {
           "therapeutic_purpose": {
-            "value": "diagnosis_prevention_monitoring_treatment_of_disease",
+            "value": "diagnosis_prevention_monitoring_prediction_treatment_of_disease",
             "basis": "stated",
             "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
           },

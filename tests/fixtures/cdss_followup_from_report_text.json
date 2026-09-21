@@ -64,7 +64,7 @@
         },
         "status": {
           "therapeutic_purpose": {
-            "value": "diagnosis_prevention_monitoring_treatment_of_disease",
+            "value": "diagnosis_prevention_monitoring_prediction_treatment_of_disease",
             "basis": "stated",
             "evidence": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides."
           },

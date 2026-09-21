@@ -8,10 +8,15 @@ order the TGA's own guidance puts them:
    Goods) Determination 2018 capture it? Excluded goods are outside the
    regulatory scheme entirely.
 3. If it is not excluded, does it meet every criterion of the clinical decision
-   support exemption in Schedule 4, Part 2 of the Therapeutic Goods (Medical
-   Devices) Regulations 2002? Exempt software is still a medical device. It
-   does not need an ARTG entry, but the sponsor must notify the TGA within 30
-   working days of supply and the essential principles still apply.
+   support exemption, item 2.15 of Schedule 4, Part 2 of the Therapeutic Goods
+   (Medical Devices) Regulations 2002? Exempt software is still a medical
+   device. It does not need an ARTG entry, but it carries conditions: the
+   essential principles, conformity assessment, adverse event reporting, and
+   notifying the TGA within 20 working days of import or supply.
+
+Sources checked: the Act at Compilation No. 89 (5 September 2025), the
+Determination at Compilation No. 11 (8 August 2024), the Regulations at
+Compilation No. 72 (8 September 2026).
 
 No model calls. Every verdict carries the clause that produced it.
 
@@ -50,12 +55,24 @@ REGULATIONS = "Therapeutic Goods (Medical Devices) Regulations 2002"
 
 EXCLUSION_SOURCE = "data/legislation/excluded_goods_determination_2018.json"
 
+CDSS_ITEM = f"{REGULATIONS} Schedule 4 Part 2 item 2.15"
+
 CDSS_NOTIFICATION = (
-    "Exempt CDSS: notify the TGA using the Clinical Decision Support Software "
-    "Exemption notification form within 30 working days of supply. The "
-    "essential principles, advertising requirements and adverse event "
-    "reporting continue to apply."
+    "Exempt CDSS, conditions of item 2.15: notify the TGA on the approved form "
+    "within 20 working days of importing or supplying the device; comply with "
+    "the essential principles; apply the conformity assessment procedures; "
+    "report adverse events within the prescribed periods; and provide "
+    "compliance information within 20 working days if the TGA asks."
 )
+
+# Where each limb of the definition sits in s41BD(1)(a).
+LIMB = {
+    TherapeuticPurpose.DISEASE: "(i)",
+    TherapeuticPurpose.INJURY: "(ii)",
+    TherapeuticPurpose.ANATOMY: "(iii)",
+    TherapeuticPurpose.CONCEPTION: "(iv)",
+    TherapeuticPurpose.IN_VITRO_SPECIMEN: "(v)",
+}
 
 
 class StatusOutcome(str, Enum):
@@ -79,27 +96,39 @@ class StatusOutcome(str, Enum):
 
 @dataclass(frozen=True)
 class Exclusion:
-    """One item of Schedule 1 of the Determination."""
+    """One item of Schedule 1 or Schedule 2 of the Determination.
 
-    item: str        # "14E"
-    citation: str    # as it should appear in the report
-    summary: str     # short description of what the item covers
+    Item numbers repeat across the two Schedules, so the key carries the
+    Schedule: S1-14B, S2-7. Schedule 2 goods are excluded only when used or
+    presented in the way that item describes.
+    """
+
+    key: str          # "S1-14B"
+    schedule: int     # 1 or 2
+    item: str         # "14B"
+    citation: str     # as it should appear in the report
+    software: bool    # a software item, 14A to 14O
+    summary: str      # paraphrase naming the conditions, not the legal text
 
 
 EXCLUSION_TABLE: dict[str, Exclusion] = {}
 
 
-def load_exclusions(path: str | Path = EXCLUSION_SOURCE) -> int:
-    """Populate the exclusion table from the Determination.
+def exclusion_key(text: str) -> str:
+    """Normalise a user-supplied key: ' s1-14b ' becomes 'S1-14B'."""
+    return "".join(text.split()).upper()
 
-    Expects a list of objects with item, citation and summary. Returns the
-    number of items loaded so a caller can fail loudly on zero.
+
+def load_exclusions(path: str | Path = EXCLUSION_SOURCE) -> int:
+    """Populate the exclusion table from the file scripts/build_exclusions.py writes.
+
+    Returns the number of items loaded so a caller can fail loudly on zero.
     """
-    entries = json.loads(Path(path).read_text())
+    payload = json.loads(Path(path).read_text())
     EXCLUSION_TABLE.clear()
-    for entry in entries:
+    for entry in payload["items"]:
         exclusion = Exclusion(**entry)
-        EXCLUSION_TABLE[exclusion.item.upper()] = exclusion
+        EXCLUSION_TABLE[exclusion_key(exclusion.key)] = exclusion
     return len(EXCLUSION_TABLE)
 
 
@@ -185,7 +214,7 @@ def status_of(function: FunctionProfile, index: int = 0) -> FunctionStatus:
             verdict.hits.append(
                 RuleHit(
                     rule_id="s41BD",
-                    citation=f"{ACT} s41BD(1)",
+                    citation=f"{ACT} s41BD(1)(a) and (b)",
                     result=StatusOutcome.NOT_A_DEVICE.value,
                     because=(
                         "no limb of the definition is reached and the function is "
@@ -196,7 +225,7 @@ def status_of(function: FunctionProfile, index: int = 0) -> FunctionStatus:
             return verdict
         origin = RuleHit(
             rule_id="s41BD-accessory",
-            citation=f"{ACT} s41BD(3)",
+            citation=f"{ACT} s41BD(1)(b)",
             result="medical device",
             because=f"accessory to a medical device: {_quote(status.is_accessory_to_device)}",
         )
@@ -209,7 +238,7 @@ def status_of(function: FunctionProfile, index: int = 0) -> FunctionStatus:
             verdict.hits.append(
                 RuleHit(
                     rule_id="s41BD-principal-action",
-                    citation=f"{ACT} s41BD(1)(b)",
+                    citation=f"{ACT} s41BD(1)(a), closing words",
                     result=StatusOutcome.NOT_A_DEVICE.value,
                     because=(
                         "principal intended action is achieved by pharmacological, "
@@ -221,7 +250,7 @@ def status_of(function: FunctionProfile, index: int = 0) -> FunctionStatus:
             return verdict
         origin = RuleHit(
             rule_id="s41BD",
-            citation=f"{ACT} s41BD(1)",
+            citation=f"{ACT} s41BD(1)(a){LIMB[purpose]}",
             result="medical device",
             because=f"{purpose.value}: {_quote(status.therapeutic_purpose)}",
         )
@@ -237,7 +266,7 @@ def status_of(function: FunctionProfile, index: int = 0) -> FunctionStatus:
     if item is None:
         return verdict
     if item.strip().lower() not in ("", "none"):
-        key = item.strip().upper()
+        key = exclusion_key(item)
         exclusion = EXCLUSION_TABLE.get(key)
         if exclusion is None:
             verdict.unresolved.append(f"status.excluded_item (no item {key} in table)")
@@ -250,7 +279,7 @@ def status_of(function: FunctionProfile, index: int = 0) -> FunctionStatus:
             verdict.hits.append(
                 RuleHit(
                     rule_id=f"egd-{key}",
-                    citation=f"{DETERMINATION} Schedule 1 item {key}",
+                    citation=exclusion.citation,
                     result=StatusOutcome.EXCLUDED.value,
                     because=(
                         f"{exclusion.summary}, every condition met: "
@@ -271,8 +300,8 @@ def status_of(function: FunctionProfile, index: int = 0) -> FunctionStatus:
             verdict.outcome = StatusOutcome.EXEMPT_CDSS
             verdict.hits.append(
                 RuleHit(
-                    rule_id="mdr-sch4-pt2-cdss",
-                    citation=f"{REGULATIONS} Schedule 4 Part 2",
+                    rule_id="mdr-sch4-pt2-2.15",
+                    citation=CDSS_ITEM,
                     result=StatusOutcome.EXEMPT_CDSS.value,
                     because=(
                         "sole purpose is providing or supporting a recommendation to a "

@@ -39,15 +39,22 @@ def answer(value, evidence, basis=Basis.STATED):
     return Answer(value=value, basis=basis, evidence=evidence)
 
 
+REAL_TABLE = (Path(__file__).resolve().parent.parent
+              / "data" / "legislation" / "excluded_goods_determination_2018.json")
+
+
 @pytest.fixture(autouse=True)
 def exclusion_table():
-    """Every test starts with a known table, and none leaks into the next."""
+    """Every test starts with a known one-item table, and none leaks into the next."""
     S.EXCLUSION_TABLE.clear()
     S.EXCLUSION_TABLE.update(
         {
-            "14E": S.Exclusion(
+            "S1-14E": S.Exclusion(
+                key="S1-14E",
+                schedule=1,
                 item="14E",
                 citation="Schedule 1 item 14E",
+                software=True,
                 summary="digital mental health tool",
             )
         }
@@ -102,7 +109,7 @@ def test_no_purpose_and_not_an_accessory_is_not_a_device():
     assert result.outcome is S.StatusOutcome.NOT_A_DEVICE
     assert result.proceeds is False
     assert result.classifiable == []
-    assert result.hits[0].citation.endswith("s41BD(1)")
+    assert result.hits[0].citation.endswith("s41BD(1)(a) and (b)")
 
 
 def test_accessory_with_no_purpose_of_its_own_is_still_a_device():
@@ -113,7 +120,7 @@ def test_accessory_with_no_purpose_of_its_own_is_still_a_device():
     result = S.gate(product(function))
 
     assert result.outcome is not S.StatusOutcome.NOT_A_DEVICE
-    assert any("41BD(3)" in hit.citation for hit in result.hits)
+    assert any(hit.citation.endswith("s41BD(1)(b)") for hit in result.hits)
 
 
 def test_pharmacological_principal_action_is_not_a_device():
@@ -126,6 +133,44 @@ def test_pharmacological_principal_action_is_not_a_device():
 
     assert result.outcome is S.StatusOutcome.NOT_A_DEVICE
     assert result.hits[0].rule_id == "s41BD-principal-action"
+
+
+@pytest.mark.parametrize(
+    "purpose, limb",
+    [
+        (TherapeuticPurpose.DISEASE, "(i)"),
+        (TherapeuticPurpose.INJURY, "(ii)"),
+        (TherapeuticPurpose.ANATOMY, "(iii)"),
+        (TherapeuticPurpose.CONCEPTION, "(iv)"),
+        (TherapeuticPurpose.IN_VITRO_SPECIMEN, "(v)"),
+    ],
+)
+def test_the_device_finding_cites_its_limb(purpose, limb):
+    function = software_function()
+    function.status.therapeutic_purpose = answer(purpose, "flags abnormal chest x-rays")
+
+    result = S.gate(product(function))
+
+    assert result.hits[0].citation.endswith(f"s41BD(1)(a){limb}")
+
+
+def test_the_principal_action_proviso_is_cited_from_paragraph_a():
+    function = software_function()
+    function.status.principal_action_pharmacological = answer(
+        Tri.YES, "take their own medication"
+    )
+
+    assert S.gate(product(function)).hits[0].citation.endswith(
+        "s41BD(1)(a), closing words"
+    )
+
+
+def test_an_accessory_is_cited_from_paragraph_b():
+    function = software_function()
+    function.status.therapeutic_purpose = answer(TherapeuticPurpose.NONE, "web app")
+    function.status.is_accessory_to_device = answer(Tri.YES, "for a radiologist")
+
+    assert S.gate(product(function)).hits[0].citation.endswith("s41BD(1)(b)")
 
 
 def test_unknown_purpose_is_undecided_not_a_verdict():
@@ -159,18 +204,19 @@ def test_unloaded_exclusion_table_blocks_rather_than_clearing():
 
 def test_matching_excluded_item_with_conditions_met_is_excluded():
     function = software_function()
-    function.status.excluded_item = answer("14E", "reminds people")
+    function.status.excluded_item = answer("S1-14E", "reminds people")
     function.status.exclusion_conditions_met = answer(Tri.YES, "mild seasonal allergies")
 
     result = S.gate(product(function))
 
     assert result.outcome is S.StatusOutcome.EXCLUDED
     assert any("item 14E" in hit.citation for hit in result.hits)
+    assert result.hits[-1].rule_id == "egd-S1-14E"
 
 
 def test_excluded_item_with_conditions_unmet_falls_through_to_the_exemption():
     function = software_function()
-    function.status.excluded_item = answer("14E", "reminds people")
+    function.status.excluded_item = answer("S1-14E", "reminds people")
     function.status.exclusion_conditions_met = answer(Tri.NO, "for a radiologist")
 
     result = S.gate(product(function))
@@ -180,13 +226,32 @@ def test_excluded_item_with_conditions_unmet_falls_through_to_the_exemption():
 
 def test_item_absent_from_the_table_is_unresolved_not_excluded():
     function = software_function()
-    function.status.excluded_item = answer("99Z", "web app")
+    function.status.excluded_item = answer("S1-99Z", "web app")
     function.status.exclusion_conditions_met = answer(Tri.YES, "web app")
 
     result = S.gate(product(function))
 
     assert result.outcome is S.StatusOutcome.UNDECIDED
-    assert any("99Z" in name for name in result.unresolved)
+    assert any("S1-99Z" in name for name in result.unresolved)
+
+
+def test_an_unqualified_item_number_is_not_guessed():
+    """Item 5 exists in both Schedules. The gate never picks one."""
+    function = software_function()
+    function.status.excluded_item = answer("14E", "reminds people")
+    function.status.exclusion_conditions_met = answer(Tri.YES, "mild seasonal allergies")
+
+    result = S.gate(product(function))
+
+    assert result.outcome is S.StatusOutcome.UNDECIDED
+
+
+def test_item_keys_are_normalised():
+    function = software_function()
+    function.status.excluded_item = answer(" s1-14e ", "reminds people")
+    function.status.exclusion_conditions_met = answer(Tri.YES, "mild seasonal allergies")
+
+    assert S.gate(product(function)).outcome is S.StatusOutcome.EXCLUDED
 
 
 # --------------------------------------------------------------------------
@@ -199,8 +264,8 @@ def test_all_three_criteria_met_is_exempt_with_a_notification_obligation():
 
     assert result.outcome is S.StatusOutcome.EXEMPT_CDSS
     assert result.proceeds is False
-    assert any("30 working days" in text for text in result.obligations)
-    assert any("Schedule 4 Part 2" in hit.citation for hit in result.hits)
+    assert any("20 working days" in text for text in result.obligations)
+    assert result.hits[-1].citation.endswith("Schedule 4 Part 2 item 2.15")
 
 
 @pytest.mark.parametrize(
@@ -278,7 +343,7 @@ def test_one_regulated_function_regulates_the_product():
 
 def test_exclusion_requires_every_function():
     excluded = software_function()
-    excluded.status.excluded_item = answer("14E", "reminds people")
+    excluded.status.excluded_item = answer("S1-14E", "reminds people")
     excluded.status.exclusion_conditions_met = answer(Tri.YES, "mild seasonal allergies")
 
     result = S.gate(product(excluded, regulated_function()))
@@ -288,7 +353,7 @@ def test_exclusion_requires_every_function():
 
 def test_excluded_and_not_a_device_together_is_excluded():
     excluded = software_function()
-    excluded.status.excluded_item = answer("14E", "reminds people")
+    excluded.status.excluded_item = answer("S1-14E", "reminds people")
     excluded.status.exclusion_conditions_met = answer(Tri.YES, "mild seasonal allergies")
 
     result = S.gate(product(excluded, not_a_device_function()))
@@ -337,6 +402,16 @@ def test_a_software_device_is_asked_the_cdss_criteria():
 
     assert "status.cdss_replaces_clinical_judgement" in asked
     assert "status.excluded_item" in asked
+
+
+def test_an_excluded_function_is_not_asked_the_cdss_criteria():
+    function = software_function()
+    function.status.excluded_item = answer("S1-14E", "reminds people")
+    function.status.exclusion_conditions_met = answer(Tri.YES, "mild seasonal allergies")
+    asked = [name for name in function.relevant() if name.startswith("status.")]
+
+    assert "status.exclusion_conditions_met" in asked
+    assert not any("cdss" in name for name in asked)
 
 
 def test_hardware_is_not_asked_the_cdss_criteria():
@@ -400,9 +475,9 @@ FIXTURES = sorted((Path(__file__).parent / "fixtures").glob("*.json"))
 def test_gate_agrees_with_the_fixture(path):
     """Every fixture records the verdict by hand. The gate has to reach it.
 
-    Runs with the placeholder exclusion table from the autouse fixture, which
-    is enough here: no fixture names an exclusion item yet.
+    Runs against the real exclusion table, not the placeholder.
     """
+    S.load_exclusions(REAL_TABLE)
     data = json.loads(path.read_text())
     profile = DeviceProfile.model_validate(data["profile"])
 
@@ -415,16 +490,53 @@ def test_gate_agrees_with_the_fixture(path):
     assert result.missing_sources == []
 
 
-def test_load_exclusions_reads_the_determination(tmp_path):
+def entry(schedule, item):
+    return {
+        "key": f"s{schedule}-{item}",
+        "schedule": schedule,
+        "item": item,
+        "citation": f"Schedule {schedule} item {item}",
+        "software": False,
+        "summary": "test entry",
+    }
+
+
+def test_load_exclusions_reads_the_table_format(tmp_path):
     path = tmp_path / "egd.json"
-    path.write_text(
-        json.dumps(
-            [
-                {"item": "14a", "citation": "Schedule 1 item 14A", "summary": "consumer health"},
-                {"item": "14E", "citation": "Schedule 1 item 14E", "summary": "mental health"},
-            ]
-        )
-    )
+    path.write_text(json.dumps({"items": [entry(1, "14a"), entry(2, "5")]}))
 
     assert S.load_exclusions(path) == 2
-    assert "14A" in S.EXCLUSION_TABLE  # keys are normalised
+    assert "S1-14A" in S.EXCLUSION_TABLE  # keys are normalised
+
+
+def test_the_same_item_number_in_both_schedules_stays_distinct(tmp_path):
+    path = tmp_path / "egd.json"
+    path.write_text(json.dumps({"items": [entry(1, "5"), entry(2, "5")]}))
+
+    assert S.load_exclusions(path) == 2
+    assert S.EXCLUSION_TABLE["S1-5"].schedule == 1
+    assert S.EXCLUSION_TABLE["S2-5"].schedule == 2
+
+
+class TestTheRealTable:
+    """The committed table, built by scripts/build_exclusions.py."""
+
+    def test_it_holds_every_item_of_both_schedules(self):
+        assert S.load_exclusions(REAL_TABLE) == 59
+        schedules = [e.schedule for e in S.EXCLUSION_TABLE.values()]
+        assert schedules.count(1) == 43 and schedules.count(2) == 16
+
+    def test_the_software_items_are_14a_to_14o(self):
+        S.load_exclusions(REAL_TABLE)
+        software = sorted(e.item for e in S.EXCLUSION_TABLE.values() if e.software)
+        assert software == [f"14{letter}" for letter in "ABCDEFGHIJKLMNO"]
+
+    def test_it_records_which_compilation_it_came_from(self):
+        payload = json.loads(REAL_TABLE.read_text())
+        assert payload["register_id"] == "F2018L01350"
+        assert payload["compilation"] == 11
+
+    def test_every_citation_names_its_schedule(self):
+        S.load_exclusions(REAL_TABLE)
+        for exclusion in S.EXCLUSION_TABLE.values():
+            assert f"Schedule {exclusion.schedule} item {exclusion.item}" in exclusion.citation
