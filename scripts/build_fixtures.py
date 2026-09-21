@@ -475,7 +475,7 @@ add("measuring_thermometer", "Class Im", "2.1 with measuring function", RULE_TEX
            body_contact=BodyContact.INTACT_SKIN, measuring=Tri.YES),
     verified=False)
 
-add("reusable_surgical_instrument", "Class I", "3.2(3)", RULE_TEXT,
+add("reusable_surgical_instrument", "Class I", "3.2(4)", RULE_TEXT,
     "A reusable instrument drops to Class I despite surgical invasiveness.",
     device("Reusable surgical scissors",
            "Reusable surgical instrument for transient use during surgery.",

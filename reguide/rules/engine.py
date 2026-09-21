@@ -137,10 +137,13 @@ def classify_function(function: FunctionProfile) -> Classification:
     return Classification(unresolved=["kind"])
 
 
-def classify(profile: DeviceProfile) -> Classification:
-    """Route every regulated function and aggregate per family.
+def classify(profile: DeviceProfile, indices: list[int]) -> dict[int, Classification]:
+    """Classify the functions at indices, keyed by index.
 
-    Wired up with the scoring harness, which is where the gate's verdict
-    decides which functions are classified.
+    indices is the status gate's classifiable list (StatusResult.classifiable).
+    It is a required argument so that no caller can classify a function the
+    gate has not marked regulated by forgetting to ask. Results are per
+    function; the class per family for the product is highest_class() over
+    the confident ones, and only when every regulated function is confident.
     """
-    raise NotImplementedError
+    return {i: classify_function(profile.functions[i]) for i in indices}

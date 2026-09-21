@@ -8,7 +8,7 @@
       "name": "Reusable surgical scissors",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class I",
-      "expected_rule": "3.2(3)"
+      "expected_rule": "3.2(4)"
     }
   ],
   "source": "Reasoned from Schedule 2 rule text, not a worked example",
