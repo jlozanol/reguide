@@ -1,10 +1,12 @@
 {
+  "expected_status": "regulated_medical_device",
   "expected_classes": {
     "general": "Class III"
   },
   "functions": [
     {
       "name": "Condom with spermicide",
+      "expected_status": "regulated_medical_device",
       "expected_class": "Class III",
       "expected_rule": "5.2"
     }
@@ -61,6 +63,48 @@
           "value": "no",
           "basis": "stated",
           "evidence": "Barrier contraceptive incorporating a spermicidal agent."
+        },
+        "status": {
+          "therapeutic_purpose": {
+            "value": "control_of_conception",
+            "basis": "stated",
+            "evidence": "Barrier contraceptive incorporating a spermicidal agent."
+          },
+          "principal_action_pharmacological": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Barrier contraceptive incorporating a spermicidal agent."
+          },
+          "is_accessory_to_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "excluded_item": {
+            "value": "none",
+            "basis": "stated",
+            "evidence": "Barrier contraceptive incorporating a spermicidal agent."
+          },
+          "exclusion_conditions_met": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_sole_purpose_recommendation": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_processes_device_signal_or_image": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_replaces_clinical_judgement": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          }
         },
         "general": {
           "invasiveness": {
@@ -199,6 +243,6 @@
     ],
     "funding": null,
     "source_text": "Condom with spermicide Barrier contraceptive incorporating a spermicidal agent. Condom with spermicide Barrier contraceptive incorporating a spermicidal agent. fixture decomposition is fixed by hand",
-    "schema_version": "0.3"
+    "schema_version": "0.4"
   }
 }

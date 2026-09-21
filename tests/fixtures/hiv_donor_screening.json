@@ -1,10 +1,12 @@
 {
+  "expected_status": "regulated_medical_device",
   "expected_classes": {
     "ivd": "Class 4 IVD"
   },
   "functions": [
     {
       "name": "HIV blood donor screening assay",
+      "expected_status": "regulated_medical_device",
       "expected_class": "Class 4 IVD",
       "expected_rule": "1.1"
     }
@@ -61,6 +63,48 @@
           "value": "no",
           "basis": "stated",
           "evidence": "Screens donated blood for HIV before transfusion."
+        },
+        "status": {
+          "therapeutic_purpose": {
+            "value": "information_from_in_vitro_examination_of_specimens",
+            "basis": "stated",
+            "evidence": "Screens donated blood for HIV before transfusion."
+          },
+          "principal_action_pharmacological": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Screens donated blood for HIV before transfusion."
+          },
+          "is_accessory_to_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "excluded_item": {
+            "value": "none",
+            "basis": "stated",
+            "evidence": "Screens donated blood for HIV before transfusion."
+          },
+          "exclusion_conditions_met": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_sole_purpose_recommendation": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_processes_device_signal_or_image": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_replaces_clinical_judgement": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          }
         },
         "general": null,
         "ivd": {
@@ -124,6 +168,6 @@
     ],
     "funding": null,
     "source_text": "HIV blood donor screening assay Screens donated blood for HIV before transfusion. HIV blood donor screening assay Screens donated blood for HIV before transfusion. fixture decomposition is fixed by hand",
-    "schema_version": "0.3"
+    "schema_version": "0.4"
   }
 }

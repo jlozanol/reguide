@@ -1,10 +1,12 @@
 {
+  "expected_status": "regulated_medical_device",
   "expected_classes": {
     "general": "Class IIb"
   },
   "functions": [
     {
       "name": "SPECT cardiac monitoring software",
+      "expected_status": "regulated_medical_device",
       "expected_class": "Class IIb",
       "expected_rule": "4.6(a)"
     }
@@ -61,6 +63,48 @@
           "value": "yes",
           "basis": "stated",
           "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
+        },
+        "status": {
+          "therapeutic_purpose": {
+            "value": "diagnosis_prevention_monitoring_treatment_of_disease",
+            "basis": "stated",
+            "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
+          },
+          "principal_action_pharmacological": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
+          },
+          "is_accessory_to_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "excluded_item": {
+            "value": "none",
+            "basis": "stated",
+            "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
+          },
+          "exclusion_conditions_met": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_sole_purpose_recommendation": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
+          },
+          "cdss_processes_device_signal_or_image": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
+          },
+          "cdss_replaces_clinical_judgement": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
+          }
         },
         "general": {
           "invasiveness": {
@@ -199,6 +243,6 @@
     ],
     "funding": null,
     "source_text": "SPECT cardiac monitoring software Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow. SPECT cardiac monitoring software Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow. fixture decomposition is fixed by hand",
-    "schema_version": "0.3"
+    "schema_version": "0.4"
   }
 }

@@ -1,27 +1,31 @@
 {
+  "expected_status": "regulated_medical_device",
   "expected_classes": {
     "general": "Class IIa"
   },
   "functions": [
     {
       "name": "Study archive",
-      "expected_class": "Class I",
-      "expected_rule": "not a medical device purpose"
+      "expected_status": "not_a_medical_device",
+      "expected_class": null,
+      "expected_rule": "storage and display only, no s41BD purpose"
     },
     {
       "name": "Abnormality triage",
+      "expected_status": "regulated_medical_device",
       "expected_class": "Class IIa",
       "expected_rule": "4.5(2)(b)"
     },
     {
       "name": "Follow-up interval suggestion",
+      "expected_status": "regulated_medical_device",
       "expected_class": "Class IIa",
       "expected_rule": "4.7(2)(b)(i)"
     }
   ],
   "source": "Reasoned from Schedule 2 rule text, not a worked example",
   "verified": false,
-  "note": "Three software functions of one platform. Storage alone carries no medical-device purpose, triage flags abnormal studies, and the follow-up suggestion specifies an intervention. Tests that the highest function governs the product and that one regulated function is enough to pull the whole platform in.",
+  "note": "Three software functions of one platform. Storage alone carries no medical-device purpose, triage flags abnormal studies, and the follow-up suggestion specifies an intervention. Tests that the highest function governs the product and that one regulated function is enough to pull the whole platform in. The follow-up suggestion stays regulated only because it is taken to work from the studies themselves. If it worked from the report text alone it would meet every CDSS criterion and be exempt, so this function is the one to check first.",
   "profile": {
     "core": {
       "product_name": {
@@ -71,6 +75,48 @@
           "value": "yes",
           "basis": "stated",
           "evidence": "Stores and displays radiology studies without interpretation."
+        },
+        "status": {
+          "therapeutic_purpose": {
+            "value": "no_therapeutic_purpose",
+            "basis": "stated",
+            "evidence": "Stores and displays radiology studies without interpretation."
+          },
+          "principal_action_pharmacological": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_accessory_to_device": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Stores and displays radiology studies without interpretation."
+          },
+          "excluded_item": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "exclusion_conditions_met": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_sole_purpose_recommendation": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_processes_device_signal_or_image": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_replaces_clinical_judgement": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          }
         },
         "general": {
           "invasiveness": {
@@ -227,6 +273,48 @@
           "basis": "stated",
           "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
         },
+        "status": {
+          "therapeutic_purpose": {
+            "value": "diagnosis_prevention_monitoring_treatment_of_disease",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "principal_action_pharmacological": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "is_accessory_to_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "excluded_item": {
+            "value": "none",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "exclusion_conditions_met": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_sole_purpose_recommendation": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "cdss_processes_device_signal_or_image": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "cdss_replaces_clinical_judgement": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          }
+        },
         "general": {
           "invasiveness": {
             "value": "non_invasive",
@@ -382,6 +470,48 @@
           "basis": "stated",
           "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
         },
+        "status": {
+          "therapeutic_purpose": {
+            "value": "diagnosis_prevention_monitoring_treatment_of_disease",
+            "basis": "stated",
+            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+          },
+          "principal_action_pharmacological": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+          },
+          "is_accessory_to_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "excluded_item": {
+            "value": "none",
+            "basis": "stated",
+            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+          },
+          "exclusion_conditions_met": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_sole_purpose_recommendation": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+          },
+          "cdss_processes_device_signal_or_image": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+          },
+          "cdss_replaces_clinical_judgement": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+          }
+        },
         "general": {
           "invasiveness": {
             "value": "non_invasive",
@@ -519,6 +649,6 @@
     ],
     "funding": null,
     "source_text": "Radiology reporting platform Stores radiology studies, flags abnormal ones for priority review and suggests a follow-up imaging interval. Study archive Stores and displays radiology studies without interpretation. Abnormality triage Flags studies showing suspected abnormality for priority review by a radiologist. Follow-up interval suggestion Suggests a follow-up imaging interval to the reporting radiologist. fixture decomposition is fixed by hand",
-    "schema_version": "0.3"
+    "schema_version": "0.4"
   }
 }

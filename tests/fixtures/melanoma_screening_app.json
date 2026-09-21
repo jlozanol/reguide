@@ -1,10 +1,12 @@
 {
+  "expected_status": "regulated_medical_device",
   "expected_classes": {
     "general": "Class III"
   },
   "functions": [
     {
       "name": "Consumer melanoma screening app",
+      "expected_status": "regulated_medical_device",
       "expected_class": "Class III",
       "expected_rule": "4.5(1)(c)(i)"
     }
@@ -61,6 +63,48 @@
           "value": "yes",
           "basis": "stated",
           "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+        },
+        "status": {
+          "therapeutic_purpose": {
+            "value": "diagnosis_prevention_monitoring_treatment_of_disease",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          },
+          "principal_action_pharmacological": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          },
+          "is_accessory_to_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "excluded_item": {
+            "value": "none",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          },
+          "exclusion_conditions_met": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_sole_purpose_recommendation": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          },
+          "cdss_processes_device_signal_or_image": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          },
+          "cdss_replaces_clinical_judgement": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          }
         },
         "general": {
           "invasiveness": {
@@ -199,6 +243,6 @@
     ],
     "funding": null,
     "source_text": "Consumer melanoma screening app Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer. Consumer melanoma screening app Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer. fixture decomposition is fixed by hand",
-    "schema_version": "0.3"
+    "schema_version": "0.4"
   }
 }

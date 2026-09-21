@@ -1,10 +1,12 @@
 {
+  "expected_status": "regulated_medical_device",
   "expected_classes": {
     "general": "Class IIb"
   },
   "functions": [
     {
       "name": "Metal fixation screw, permanent",
+      "expected_status": "regulated_medical_device",
       "expected_class": "Class IIb",
       "expected_rule": "3.4(2)"
     }
@@ -61,6 +63,48 @@
           "value": "no",
           "basis": "stated",
           "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+        },
+        "status": {
+          "therapeutic_purpose": {
+            "value": "diagnosis_monitoring_treatment_or_compensation_for_injury",
+            "basis": "stated",
+            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+          },
+          "principal_action_pharmacological": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+          },
+          "is_accessory_to_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "excluded_item": {
+            "value": "none",
+            "basis": "stated",
+            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+          },
+          "exclusion_conditions_met": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_sole_purpose_recommendation": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_processes_device_signal_or_image": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_replaces_clinical_judgement": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          }
         },
         "general": {
           "invasiveness": {
@@ -199,6 +243,6 @@
     ],
     "funding": null,
     "source_text": "Metal fixation screw, permanent Holds bone together for longer than 30 days, permanently implanted. Metal fixation screw, permanent Holds bone together for longer than 30 days, permanently implanted. fixture decomposition is fixed by hand",
-    "schema_version": "0.3"
+    "schema_version": "0.4"
   }
 }

@@ -1,10 +1,12 @@
 {
+  "expected_status": "regulated_medical_device",
   "expected_classes": {
     "general": "Class IIa"
   },
   "functions": [
     {
       "name": "Emphysema detection software",
+      "expected_status": "regulated_medical_device",
       "expected_class": "Class IIa",
       "expected_rule": "4.5(2)(b)"
     }
@@ -61,6 +63,48 @@
           "value": "yes",
           "basis": "stated",
           "evidence": "Diagnoses emphysema from CT scans, providing information to a health professional to support diagnostic decision making."
+        },
+        "status": {
+          "therapeutic_purpose": {
+            "value": "diagnosis_prevention_monitoring_treatment_of_disease",
+            "basis": "stated",
+            "evidence": "Diagnoses emphysema from CT scans, providing information to a health professional to support diagnostic decision making."
+          },
+          "principal_action_pharmacological": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Diagnoses emphysema from CT scans, providing information to a health professional to support diagnostic decision making."
+          },
+          "is_accessory_to_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "excluded_item": {
+            "value": "none",
+            "basis": "stated",
+            "evidence": "Diagnoses emphysema from CT scans, providing information to a health professional to support diagnostic decision making."
+          },
+          "exclusion_conditions_met": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_sole_purpose_recommendation": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Diagnoses emphysema from CT scans, providing information to a health professional to support diagnostic decision making."
+          },
+          "cdss_processes_device_signal_or_image": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Diagnoses emphysema from CT scans, providing information to a health professional to support diagnostic decision making."
+          },
+          "cdss_replaces_clinical_judgement": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Diagnoses emphysema from CT scans, providing information to a health professional to support diagnostic decision making."
+          }
         },
         "general": {
           "invasiveness": {
@@ -199,6 +243,6 @@
     ],
     "funding": null,
     "source_text": "Emphysema detection software Diagnoses emphysema from CT scans, providing information to a health professional to support diagnostic decision making. Emphysema detection software Diagnoses emphysema from CT scans, providing information to a health professional to support diagnostic decision making. fixture decomposition is fixed by hand",
-    "schema_version": "0.3"
+    "schema_version": "0.4"
   }
 }

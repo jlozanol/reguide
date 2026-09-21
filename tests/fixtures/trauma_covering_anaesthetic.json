@@ -1,10 +1,12 @@
 {
+  "expected_status": "regulated_medical_device",
   "expected_classes": {
     "general": "Class III"
   },
   "functions": [
     {
       "name": "Trauma covering with anaesthetic gel",
+      "expected_status": "regulated_medical_device",
       "expected_class": "Class III",
       "expected_rule": "5.1(2)"
     }
@@ -61,6 +63,48 @@
           "value": "no",
           "basis": "stated",
           "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
+        },
+        "status": {
+          "therapeutic_purpose": {
+            "value": "diagnosis_monitoring_treatment_or_compensation_for_injury",
+            "basis": "stated",
+            "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
+          },
+          "principal_action_pharmacological": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
+          },
+          "is_accessory_to_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "excluded_item": {
+            "value": "none",
+            "basis": "stated",
+            "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
+          },
+          "exclusion_conditions_met": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_sole_purpose_recommendation": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_processes_device_signal_or_image": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_replaces_clinical_judgement": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          }
         },
         "general": {
           "invasiveness": {
@@ -199,6 +243,6 @@
     ],
     "funding": null,
     "source_text": "Trauma covering with anaesthetic gel Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic. Trauma covering with anaesthetic gel Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic. fixture decomposition is fixed by hand",
-    "schema_version": "0.3"
+    "schema_version": "0.4"
   }
 }

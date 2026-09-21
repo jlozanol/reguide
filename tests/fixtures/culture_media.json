@@ -1,10 +1,12 @@
 {
+  "expected_status": "regulated_medical_device",
   "expected_classes": {
     "ivd": "Class 1 IVD"
   },
   "functions": [
     {
       "name": "Microbiological culture medium",
+      "expected_status": "regulated_medical_device",
       "expected_class": "Class 1 IVD",
       "expected_rule": "1.6"
     }
@@ -61,6 +63,48 @@
           "value": "no",
           "basis": "stated",
           "evidence": "Prepared culture medium for microbiological laboratory use."
+        },
+        "status": {
+          "therapeutic_purpose": {
+            "value": "information_from_in_vitro_examination_of_specimens",
+            "basis": "stated",
+            "evidence": "Prepared culture medium for microbiological laboratory use."
+          },
+          "principal_action_pharmacological": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Prepared culture medium for microbiological laboratory use."
+          },
+          "is_accessory_to_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "excluded_item": {
+            "value": "none",
+            "basis": "stated",
+            "evidence": "Prepared culture medium for microbiological laboratory use."
+          },
+          "exclusion_conditions_met": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_sole_purpose_recommendation": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_processes_device_signal_or_image": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_replaces_clinical_judgement": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          }
         },
         "general": null,
         "ivd": {
@@ -124,6 +168,6 @@
     ],
     "funding": null,
     "source_text": "Microbiological culture medium Prepared culture medium for microbiological laboratory use. Microbiological culture medium Prepared culture medium for microbiological laboratory use. fixture decomposition is fixed by hand",
-    "schema_version": "0.3"
+    "schema_version": "0.4"
   }
 }

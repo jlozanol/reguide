@@ -466,7 +466,10 @@ def relevant_status_fields(function: "FunctionProfile") -> list[str]:
         if _value(status.principal_action_pharmacological) is Tri.YES:
             return fields
 
-    fields += ["excluded_item", "exclusion_conditions_met"]
+    fields += ["excluded_item"]
+    item = _value(status.excluded_item)
+    if item is not None and item.strip().lower() not in ("", "none"):
+        fields += ["exclusion_conditions_met"]
     if _value(function.is_software) is Tri.YES:
         fields += [
             "cdss_sole_purpose_recommendation",

@@ -1,10 +1,12 @@
 {
+  "expected_status": "regulated_medical_device",
   "expected_classes": {
     "general": "Class I"
   },
   "functions": [
     {
       "name": "Absorbent pad",
+      "expected_status": "regulated_medical_device",
       "expected_class": "Class I",
       "expected_rule": "2.4(3)"
     }
@@ -61,6 +63,48 @@
           "value": "no",
           "basis": "stated",
           "evidence": "Acts as a barrier to and absorbs exudate from a wound."
+        },
+        "status": {
+          "therapeutic_purpose": {
+            "value": "diagnosis_monitoring_treatment_or_compensation_for_injury",
+            "basis": "stated",
+            "evidence": "Acts as a barrier to and absorbs exudate from a wound."
+          },
+          "principal_action_pharmacological": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Acts as a barrier to and absorbs exudate from a wound."
+          },
+          "is_accessory_to_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "excluded_item": {
+            "value": "none",
+            "basis": "stated",
+            "evidence": "Acts as a barrier to and absorbs exudate from a wound."
+          },
+          "exclusion_conditions_met": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_sole_purpose_recommendation": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_processes_device_signal_or_image": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_replaces_clinical_judgement": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          }
         },
         "general": {
           "invasiveness": {
@@ -199,6 +243,6 @@
     ],
     "funding": null,
     "source_text": "Absorbent pad Acts as a barrier to and absorbs exudate from a wound. Absorbent pad Acts as a barrier to and absorbs exudate from a wound. fixture decomposition is fixed by hand",
-    "schema_version": "0.3"
+    "schema_version": "0.4"
   }
 }

@@ -1,0 +1,246 @@
+{
+  "expected_status": "exempt_clinical_decision_support",
+  "expected_classes": {},
+  "functions": [
+    {
+      "name": "Follow-up interval recommender",
+      "expected_status": "exempt_clinical_decision_support",
+      "expected_class": null,
+      "expected_rule": "Schedule 4 Part 2"
+    }
+  ],
+  "source": "Reasoned from s41BD of the Act and Schedule 4 Part 2 of the Regulations, not a worked example",
+  "verified": false,
+  "note": "The follow-up suggestion from the imaging platform, rebuilt to read only the written report. It recommends to a radiologist, processes no image or signal from another device, and leaves the decision with the radiologist, so all three CDSS criteria are met and it is exempt. The pair with imaging_platform isolates the second criterion.",
+  "profile": {
+    "core": {
+      "product_name": {
+        "value": "Follow-up interval recommender",
+        "basis": "stated",
+        "evidence": "Follow-up interval recommender"
+      },
+      "intended_purpose": {
+        "value": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides.",
+        "basis": "stated",
+        "evidence": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides."
+      },
+      "supplied_sterile": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides."
+      },
+      "has_measuring_function": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides."
+      },
+      "functions_confirmed": {
+        "value": "yes",
+        "basis": "stated",
+        "evidence": "fixture decomposition is fixed by hand"
+      }
+    },
+    "functions": [
+      {
+        "name": {
+          "value": "Follow-up interval recommender",
+          "basis": "stated",
+          "evidence": "Follow-up interval recommender"
+        },
+        "description": {
+          "value": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides.",
+          "basis": "stated",
+          "evidence": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides."
+        },
+        "kind": {
+          "value": "general_device",
+          "basis": "stated",
+          "evidence": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides."
+        },
+        "is_software": {
+          "value": "yes",
+          "basis": "stated",
+          "evidence": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides."
+        },
+        "status": {
+          "therapeutic_purpose": {
+            "value": "diagnosis_prevention_monitoring_treatment_of_disease",
+            "basis": "stated",
+            "evidence": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides."
+          },
+          "principal_action_pharmacological": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides."
+          },
+          "is_accessory_to_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "excluded_item": {
+            "value": "none",
+            "basis": "stated",
+            "evidence": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides."
+          },
+          "exclusion_conditions_met": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_sole_purpose_recommendation": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides."
+          },
+          "cdss_processes_device_signal_or_image": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides."
+          },
+          "cdss_replaces_clinical_judgement": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides."
+          }
+        },
+        "general": {
+          "invasiveness": {
+            "value": "non_invasive",
+            "basis": "stated",
+            "evidence": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides."
+          },
+          "duration": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "body_contact": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "orifice_site": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contacts_injured_skin": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides."
+          },
+          "wound_function": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "breaches_dermis": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "fluid_handling": {
+            "value": "none",
+            "basis": "stated",
+            "evidence": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides."
+          },
+          "connected_to_active_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "reusable_surgical_instrument": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "absorbed_or_chemically_changed": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "delivers_ionising_radiation": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides."
+          },
+          "active_type": {
+            "value": "active_diagnostic",
+            "basis": "stated",
+            "evidence": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides."
+          },
+          "is_active_implantable": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "clinical_function": {
+            "value": "specify_treatment_or_intervention",
+            "basis": "stated",
+            "evidence": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides."
+          },
+          "delivers_hazardous_energy": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides."
+          },
+          "administers_or_removes_medicine": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "decision_maker": {
+            "value": "informs_a_health_professional_who_decides",
+            "basis": "stated",
+            "evidence": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides."
+          },
+          "condition_severity": {
+            "value": "serious_disease_or_condition",
+            "basis": "stated",
+            "evidence": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides."
+          },
+          "public_health_risk": {
+            "value": "moderate",
+            "basis": "stated",
+            "evidence": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides."
+          },
+          "records_diagnostic_images": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides."
+          },
+          "incorporates_medicine": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides."
+          },
+          "animal_or_microbial_origin": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "human_blood_derivative": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contraceptive_or_sti_prevention": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides."
+          },
+          "disinfects_another_device": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides."
+          }
+        },
+        "ivd": null
+      }
+    ],
+    "funding": null,
+    "source_text": "Follow-up interval recommender Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides. Follow-up interval recommender Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides. fixture decomposition is fixed by hand",
+    "schema_version": "0.4"
+  }
+}

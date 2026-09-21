@@ -3,6 +3,8 @@
 These do not check classification. They check that every fixture is a complete,
 valid product profile, so that when a rule fails you know the fault is in the
 rule and not in the fixture.
+
+The gate itself is scored against these fixtures in test_status.py.
 """
 
 import json
@@ -15,10 +17,13 @@ from reguide.profile import (
     DeviceProfile,
     GeneralDeviceProfile,
     IvdProfile,
+    StatusProfile,
     highest_class,
     relevant_general_fields,
     relevant_ivd_fields,
+    relevant_status_fields,
 )
+from reguide.status import StatusOutcome
 
 FIXTURE_DIR = Path(__file__).parent / "fixtures"
 FIXTURES = sorted(FIXTURE_DIR.glob("*.json"))
@@ -27,6 +32,9 @@ KNOWN_CLASSES = {
     "Class I", "Class Is", "Class Im", "Class IIa", "Class IIb", "Class III",
     "Class AIMD", "Class 1 IVD", "Class 2 IVD", "Class 3 IVD", "Class 4 IVD",
 }
+
+KNOWN_STATUSES = {outcome.value for outcome in StatusOutcome} - {"undecided"}
+REGULATED = StatusOutcome.REGULATED.value
 
 
 def load(path: Path) -> dict:
@@ -58,7 +66,8 @@ def test_multi_function_products_are_represented():
 class TestFixture:
     def test_has_required_keys(self, path):
         data = load(path)
-        for key in ("expected_classes", "functions", "source", "verified", "profile"):
+        for key in ("expected_status", "expected_classes", "functions", "source",
+                    "verified", "profile"):
             assert key in data, f"{path.name} is missing {key}"
 
     def test_profile_validates(self, path):
@@ -77,7 +86,26 @@ class TestFixture:
 
     def test_every_expected_class_is_known(self, path):
         for function in load(path)["functions"]:
-            assert function["expected_class"] in KNOWN_CLASSES
+            if function["expected_status"] == REGULATED:
+                assert function["expected_class"] in KNOWN_CLASSES
+
+    def test_every_expected_status_is_known(self, path):
+        """Undecided is never an expectation. A fixture is a settled answer."""
+        data = load(path)
+        assert data["expected_status"] in KNOWN_STATUSES
+        for function in data["functions"]:
+            assert function["expected_status"] in KNOWN_STATUSES
+
+    def test_only_regulated_functions_carry_a_class(self, path):
+        """A function the gate stops never reaches classification."""
+        for function in load(path)["functions"]:
+            has_class = function["expected_class"] is not None
+            assert has_class == (function["expected_status"] == REGULATED)
+
+    def test_a_regulated_product_has_a_regulated_function(self, path):
+        data = load(path)
+        statuses = [f["expected_status"] for f in data["functions"]]
+        assert (data["expected_status"] == REGULATED) == (REGULATED in statuses)
 
     def test_product_class_is_the_highest_per_family(self, path):
         """Derived, never asserted separately, so it cannot drift."""
@@ -99,6 +127,8 @@ class TestFixture:
         data = load(path)
         profile = DeviceProfile.model_validate(data["profile"])
         for expected, function in zip(data["functions"], profile.functions):
+            if expected["expected_class"] is None:
+                continue
             is_ivd_class = "IVD" in expected["expected_class"]
             assert is_ivd_class == (function.branch() is DeviceKind.IVD)
 
@@ -204,6 +234,10 @@ class TestSchemaCoverage:
     that here than after writing the rule.
     """
 
+    # Reached only by a fixture that names an exclusion item, which needs the
+    # Determination loaded. Delete this line once such a fixture exists.
+    STATUS_PENDING = {"exclusion_conditions_met"}
+
     def _asked(self):
         general, ivd = set(), set()
         for path in FIXTURES:
@@ -222,3 +256,12 @@ class TestSchemaCoverage:
     def test_every_ivd_field_is_reached_by_some_fixture(self):
         _, ivd = self._asked()
         assert set(IvdProfile.model_fields) - ivd == set()
+
+    def test_every_status_field_is_reached_by_some_fixture(self):
+        asked = set()
+        for path in FIXTURES:
+            profile = DeviceProfile.model_validate(load(path)["profile"])
+            for function in profile.functions:
+                asked |= set(relevant_status_fields(function))
+        unreached = set(StatusProfile.model_fields) - asked
+        assert unreached == self.STATUS_PENDING

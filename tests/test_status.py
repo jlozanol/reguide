@@ -10,6 +10,7 @@ Three things are being tested and they are worth separating in your head:
 """
 
 import json
+from pathlib import Path
 
 import pytest
 from pydantic import ValidationError
@@ -386,6 +387,32 @@ def test_untraceable_evidence_catches_a_paraphrased_status_field():
 # --------------------------------------------------------------------------
 # Loading the table
 # --------------------------------------------------------------------------
+
+
+# --------------------------------------------------------------------------
+# Scored against the fixtures
+# --------------------------------------------------------------------------
+
+FIXTURES = sorted((Path(__file__).parent / "fixtures").glob("*.json"))
+
+
+@pytest.mark.parametrize("path", FIXTURES, ids=lambda p: p.stem)
+def test_gate_agrees_with_the_fixture(path):
+    """Every fixture records the verdict by hand. The gate has to reach it.
+
+    Runs with the placeholder exclusion table from the autouse fixture, which
+    is enough here: no fixture names an exclusion item yet.
+    """
+    data = json.loads(path.read_text())
+    profile = DeviceProfile.model_validate(data["profile"])
+
+    result = S.gate(profile)
+
+    assert [f.outcome.value for f in result.functions] == [
+        f["expected_status"] for f in data["functions"]
+    ]
+    assert result.outcome.value == data["expected_status"]
+    assert result.missing_sources == []
 
 
 def test_load_exclusions_reads_the_determination(tmp_path):

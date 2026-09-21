@@ -6,6 +6,15 @@ are reasoned from rule text rather than quoted from an example, or sit on a
 point where sources disagree. The scoring harness counts only verified ones.
 Promote a fixture to verified after checking it against the primary document.
 
+Every fixture also records the regulatory status gate's expected verdict, for
+the product and for each function. It is written by hand, never derived from
+status.py, so the gate can be scored against it. A function the gate stops
+(not a device, excluded, exempt CDSS) carries no expected class, because
+classification never runs for it.
+
+The therapeutic purpose limb recorded on each function is for the citation
+only. The gate does not branch on which limb, only on whether one is reached.
+
 Run:  python scripts/build_fixtures.py
 """
 
@@ -33,15 +42,24 @@ from reguide.profile import (
     OrificeSite,
     PublicHealthRisk,
     Severity,
+    StatusProfile,
+    TherapeuticPurpose,
     Tri,
     WoundFunction,
 )
+from reguide.status import StatusOutcome
 
 OUT = Path(__file__).resolve().parent.parent / "tests" / "fixtures"
 NOT_IVD = "TGA, Classifying medical devices that are not IVDs"
 ACTIVE = "TGA, Classifying active medical devices in Australia"
 IVD_GUIDE = "TGA, Classifying IVDs for supply in Australia"
 RULE_TEXT = "Reasoned from Schedule 2 rule text, not a worked example"
+GATE_TEXT = ("Reasoned from s41BD of the Act and Schedule 4 Part 2 of the "
+             "Regulations, not a worked example")
+
+REGULATED = StatusOutcome.REGULATED
+NOT_A_DEVICE = StatusOutcome.NOT_A_DEVICE
+EXEMPT_CDSS = StatusOutcome.EXEMPT_CDSS
 
 
 def a(value, evidence):
@@ -75,9 +93,44 @@ IVD_DEFAULTS = dict(
 )
 
 
+# Answers to the gate's questions. Anything the gating does not ask for this
+# function is cleared by prune() in product(), so a hardware device keeps no
+# CDSS answers and a device keeps no accessory answer.
+STATUS_DEFAULTS = dict(
+    principal_action_pharmacological=Tri.NO,
+    is_accessory_to_device=Tri.NO,
+    excluded_item="none",
+    # Software fixtures are regulated unless one says otherwise. Failing the
+    # sole-purpose criterion is enough to keep a function out of the exemption.
+    cdss_sole_purpose_recommendation=Tri.NO,
+    cdss_processes_device_signal_or_image=Tri.NO,
+    cdss_replaces_clinical_judgement=Tri.NO,
+)
+
+# Clinician-facing software that analyses images or signals from another
+# device. Recommends to a professional without replacing judgement, but fails
+# the exemption because of what it processes.
+PROCESSES_DEVICE_DATA = dict(
+    cdss_sole_purpose_recommendation=Tri.YES,
+    cdss_processes_device_signal_or_image=Tri.YES,
+    cdss_replaces_clinical_judgement=Tri.NO,
+)
+
+# A function with no therapeutic purpose of its own and no device it serves.
+NO_PURPOSE = dict(therapeutic_purpose=TherapeuticPurpose.NONE,
+                  is_accessory_to_device=Tri.NO)
+
+
+def status_for(text, purpose, overrides):
+    fields = dict(STATUS_DEFAULTS, therapeutic_purpose=purpose)
+    fields.update(overrides or {})
+    return StatusProfile(**{k: a(v, text) for k, v in fields.items()})
+
+
 def fn(name, text, **given):
     """One general-device function."""
     software = given.pop("software", Tri.NO)
+    status = status_for(text, TherapeuticPurpose.DISEASE, given.pop("status", None))
     fields = dict(GENERAL_DEFAULTS)
     fields.update(given)
     if software is Tri.YES:
@@ -88,19 +141,24 @@ def fn(name, text, **given):
         description=a(text, text),
         kind=a(DeviceKind.GENERAL, text),
         is_software=a(software, text),
+        status=status,
         general=GeneralDeviceProfile(**{k: a(v, text) for k, v in fields.items()}),
     )
 
 
 def ivd_fn(name, text, **given):
     """One IVD function."""
+    software = given.pop("software", Tri.NO)
+    status = status_for(text, TherapeuticPurpose.IN_VITRO_SPECIMEN,
+                        given.pop("status", None))
     fields = dict(IVD_DEFAULTS)
     fields.update(given)
     return FunctionProfile(
         name=a(name, name),
         description=a(text, text),
         kind=a(DeviceKind.IVD, text),
-        is_software=a(given.pop("software", Tri.NO), text),
+        is_software=a(software, text),
+        status=status,
         ivd=IvdProfile(**{k: a(v, text) for k, v in fields.items()}),
     )
 
@@ -147,19 +205,34 @@ def ivd(name, text, **given):
 F = []
 
 
-def add(slug, expected, rule, source, note, profile, verified=True):
-    """A single-function fixture. The expectation applies to function 0."""
-    F.append((slug, source, note, profile, verified, [(expected, rule)]))
+def _expectation(slug, entry):
+    """(class, rule) for a regulated function, (None, reason, status) otherwise."""
+    expected, rule, *rest = entry
+    status = rest[0] if rest else REGULATED
+    if status.terminal:
+        assert expected is None, f"{slug}: a function the gate stops has no class"
+    else:
+        assert expected is not None, f"{slug}: a regulated function needs a class"
+    return expected, rule, status
 
 
-def add_multi(slug, source, note, profile, expectations, verified=False):
+def add(slug, expected, rule, source, note, profile, verified=True, status=REGULATED):
+    """A single-function fixture. The expectations apply to function 0."""
+    entry = _expectation(slug, (expected, rule, status))
+    F.append((slug, source, note, profile, verified, [entry], status))
+
+
+def add_multi(slug, source, note, profile, expectations, verified=False,
+              status=REGULATED):
     """A multi-function fixture. One expectation per function, in order.
 
-    The product-level answer is derived, not asserted: the highest class per
-    family. Asserting it separately would let the fixture disagree with itself.
+    The product class is derived, not asserted: the highest class per family.
+    The product status is asserted by hand, because deriving it would mean
+    copying the gate's aggregation into the answer key.
     """
     assert len(expectations) == len(profile.functions), slug
-    F.append((slug, source, note, profile, verified, expectations))
+    entries = [_expectation(slug, e) for e in expectations]
+    F.append((slug, source, note, profile, verified, entries, status))
 
 
 # -- The screw family. One device, three classes. ---------------------------
@@ -167,6 +240,7 @@ add("screw_transient", "Class IIa", "3.2(2)", NOT_IVD,
     "Transient use during surgery.",
     device("Metal fixation screw, intraoperative",
            "Holds bone together temporarily during surgery.",
+           status=dict(therapeutic_purpose=TherapeuticPurpose.INJURY),
            invasiveness=Invasiveness.SURGICALLY_INVASIVE, duration=Duration.TRANSIENT,
            body_contact=BodyContact.BREACHED_SKIN, absorbed_or_chemically_changed=Tri.NO,
            reusable_surgical_instrument=Tri.NO, sterile=Tri.YES))
@@ -175,6 +249,7 @@ add("screw_short_term", "Class IIa", "3.3(2)", NOT_IVD,
     "Up to 30 days. Same class as transient, different rule.",
     device("Metal fixation screw, short term",
            "Holds bone together for up to 30 days to support fracture healing.",
+           status=dict(therapeutic_purpose=TherapeuticPurpose.INJURY),
            invasiveness=Invasiveness.SURGICALLY_INVASIVE, duration=Duration.SHORT_TERM,
            body_contact=BodyContact.BREACHED_SKIN, absorbed_or_chemically_changed=Tri.NO,
            sterile=Tri.YES))
@@ -183,6 +258,7 @@ add("screw_long_term", "Class IIb", "3.4(2)", NOT_IVD,
     "Crossing 30 days moves the class. The duration band is load-bearing.",
     device("Metal fixation screw, permanent",
            "Holds bone together for longer than 30 days, permanently implanted.",
+           status=dict(therapeutic_purpose=TherapeuticPurpose.INJURY),
            invasiveness=Invasiveness.IMPLANTABLE, duration=Duration.LONG_TERM,
            body_contact=BodyContact.BREACHED_SKIN, absorbed_or_chemically_changed=Tri.NO,
            is_active_implantable=Tri.NO, sterile=Tri.YES))
@@ -201,6 +277,7 @@ add("dressing_mechanical_barrier", "Class I", "2.4(3)", NOT_IVD,
     device("Absorbent pad",
            "Acts as a barrier to and absorbs exudate from a wound.",
            contacts_injured_skin=Tri.YES,
+           status=dict(therapeutic_purpose=TherapeuticPurpose.INJURY),
            wound_function=WoundFunction.MECHANICAL_BARRIER))
 
 add("dressing_microenvironment", "Class IIa", "2.4(1)", NOT_IVD,
@@ -209,6 +286,7 @@ add("dressing_microenvironment", "Class IIa", "2.4(1)", NOT_IVD,
            "Used together with an active medical device to manage the "
            "microenvironment of a wound.",
            contacts_injured_skin=Tri.YES,
+           status=dict(therapeutic_purpose=TherapeuticPurpose.INJURY),
            wound_function=WoundFunction.MICROENVIRONMENT,
            connected_to_active_device=Tri.YES))
 
@@ -218,6 +296,7 @@ add("dressing_secondary_intent", "Class IIb", "2.4(4)", NOT_IVD,
            "For wounds that have breached the dermis and can only heal by "
            "secondary intent.",
            contacts_injured_skin=Tri.YES,
+           status=dict(therapeutic_purpose=TherapeuticPurpose.INJURY),
            wound_function=WoundFunction.SECONDARY_INTENT,
            breaches_dermis=Tri.YES, sterile=Tri.YES))
 
@@ -230,6 +309,7 @@ add("dressing_collagen_deep_wound", "Class IIb", "2.4(4)", NOT_IVD,
            "Dressing for deep wounds and ulcers that have breached the dermis, "
            "containing collagen for wound healing.",
            contacts_injured_skin=Tri.YES,
+           status=dict(therapeutic_purpose=TherapeuticPurpose.INJURY),
            wound_function=WoundFunction.SECONDARY_INTENT,
            breaches_dermis=Tri.YES, animal_or_microbial_origin=Tri.YES,
            sterile=Tri.YES),
@@ -241,6 +321,7 @@ add("trauma_covering_anaesthetic", "Class III", "5.1(2)", NOT_IVD,
            "Non-sterile trauma covering to maintain stability of a burn patient "
            "en route to hospital, coated in a gel containing anaesthetic.",
            contacts_injured_skin=Tri.YES,
+           status=dict(therapeutic_purpose=TherapeuticPurpose.INJURY),
            wound_function=WoundFunction.MECHANICAL_BARRIER,
            incorporates_medicine=Tri.YES))
 
@@ -259,7 +340,8 @@ add("condom_with_spermicide", "Class III", "5.2", NOT_IVD,
            "Barrier contraceptive incorporating a spermicidal agent.",
            invasiveness=Invasiveness.BODY_ORIFICE, duration=Duration.TRANSIENT,
            orifice_site=OrificeSite.OTHER_ORIFICE, connected_to_active_device=Tri.NO,
-           contraceptive_or_sti_prevention=Tri.YES, incorporates_medicine=Tri.YES))
+           contraceptive_or_sti_prevention=Tri.YES, incorporates_medicine=Tri.YES,
+           status=dict(therapeutic_purpose=TherapeuticPurpose.CONCEPTION)))
 
 # -- Orifice route ----------------------------------------------------------
 add("orifice_long_term", "Class IIb", "3.1(2)(c)(i)", NOT_IVD,
@@ -306,6 +388,7 @@ add("melanoma_screening_app", "Class III", "4.5(1)(c)(i)", ACTIVE,
            software=Tri.YES, active_type=ActiveType.DIAGNOSTIC,
            clinical_function=ClinicalFunction.DIAGNOSE_OR_SCREEN,
            decision_maker=DecisionMaker.DEVICE_TO_LAY_USER,
+           status=dict(cdss_replaces_clinical_judgement=Tri.YES),
            condition_severity=Severity.DEATH_WITHOUT_URGENT_TREATMENT,
            public_health_risk=PublicHealthRisk.LOW,
            delivers_hazardous_energy=Tri.NO, delivers_ionising_radiation=Tri.NO,
@@ -316,6 +399,7 @@ add("emphysema_ct_software", "Class IIa", "4.5(2)(b)", ACTIVE,
     device("Emphysema detection software",
            "Diagnoses emphysema from CT scans, providing information to a health "
            "professional to support diagnostic decision making.",
+           status=PROCESSES_DEVICE_DATA,
            software=Tri.YES, active_type=ActiveType.DIAGNOSTIC,
            clinical_function=ClinicalFunction.DIAGNOSE_OR_SCREEN,
            decision_maker=DecisionMaker.INFORMS_PROFESSIONAL,
@@ -329,6 +413,7 @@ add("spect_cardiac_monitoring", "Class IIb", "4.6(a)", ACTIVE,
     device("SPECT cardiac monitoring software",
            "Analyses gamma camera imagery from a SPECT scan to track progression "
            "of heart disease from cardiac muscle blood flow.",
+           status=PROCESSES_DEVICE_DATA,
            software=Tri.YES, active_type=ActiveType.DIAGNOSTIC,
            clinical_function=ClinicalFunction.MONITOR,
            decision_maker=DecisionMaker.INFORMS_PROFESSIONAL,
@@ -342,6 +427,7 @@ add("emg_dystrophy_monitoring", "Class IIa", "4.6(b)", ACTIVE,
     device("Muscle response monitoring app",
            "Receives electromyography data by Bluetooth to monitor muscle fibre "
            "response in a person with muscular dystrophy.",
+           status=PROCESSES_DEVICE_DATA,
            software=Tri.YES, active_type=ActiveType.DIAGNOSTIC,
            clinical_function=ClinicalFunction.MONITOR,
            decision_maker=DecisionMaker.INFORMS_PROFESSIONAL,
@@ -356,6 +442,7 @@ add("sterile_barrier_dressing", "Class Is", "2.4(3) with sterile supply", RULE_T
     device("Sterile absorbent pad",
            "Acts as a barrier to and absorbs exudate from a wound, supplied sterile.",
            contacts_injured_skin=Tri.YES,
+           status=dict(therapeutic_purpose=TherapeuticPurpose.INJURY),
            wound_function=WoundFunction.MECHANICAL_BARRIER, sterile=Tri.YES),
     verified=False)
 
@@ -472,7 +559,10 @@ add_multi(
     "medical-device purpose, triage flags abnormal studies, and the follow-up "
     "suggestion specifies an intervention. Tests that the highest function "
     "governs the product and that one regulated function is enough to pull "
-    "the whole platform in.",
+    "the whole platform in. The follow-up suggestion stays regulated only "
+    "because it is taken to work from the studies themselves. If it worked "
+    "from the report text alone it would meet every CDSS criterion and be "
+    "exempt, so this function is the one to check first.",
     product(
         "Radiology reporting platform",
         "Stores radiology studies, flags abnormal ones for priority review and "
@@ -480,12 +570,12 @@ add_multi(
         [
             fn("Study archive",
                "Stores and displays radiology studies without interpretation.",
-               software=Tri.YES, active_type=ActiveType.NOT_ACTIVE,
+               status=NO_PURPOSE, software=Tri.YES, active_type=ActiveType.NOT_ACTIVE,
                body_contact=BodyContact.NONE),
             fn("Abnormality triage",
                "Flags studies showing suspected abnormality for priority review "
                "by a radiologist.",
-               software=Tri.YES, active_type=ActiveType.DIAGNOSTIC,
+               status=PROCESSES_DEVICE_DATA, software=Tri.YES, active_type=ActiveType.DIAGNOSTIC,
                clinical_function=ClinicalFunction.DIAGNOSE_OR_SCREEN,
                decision_maker=DecisionMaker.INFORMS_PROFESSIONAL,
                condition_severity=Severity.SERIOUS,
@@ -494,7 +584,7 @@ add_multi(
                records_diagnostic_images=Tri.NO, body_contact=BodyContact.NONE),
             fn("Follow-up interval suggestion",
                "Suggests a follow-up imaging interval to the reporting radiologist.",
-               software=Tri.YES, active_type=ActiveType.DIAGNOSTIC,
+               status=PROCESSES_DEVICE_DATA, software=Tri.YES, active_type=ActiveType.DIAGNOSTIC,
                clinical_function=ClinicalFunction.SPECIFY_THERAPY,
                decision_maker=DecisionMaker.INFORMS_PROFESSIONAL,
                condition_severity=Severity.SERIOUS,
@@ -503,7 +593,7 @@ add_multi(
                records_diagnostic_images=Tri.NO, body_contact=BodyContact.NONE),
         ],
     ),
-    [("Class I", "not a medical device purpose"),
+    [(None, "storage and display only, no s41BD purpose", NOT_A_DEVICE),
      ("Class IIa", "4.5(2)(b)"),
      ("Class IIa", "4.7(2)(b)(i)")],
     verified=False,
@@ -512,10 +602,11 @@ add_multi(
 add_multi(
     "wellness_app_with_symptom_checker",
     RULE_TEXT,
-    "A consumer app whose main function would be excluded on its own. The "
-    "symptom checker is not excluded, and a product is only excluded when "
-    "every function qualifies, so the whole app is pulled into regulation. "
-    "This is the unanimity test rather than the maximum test.",
+    "A consumer app whose tracking function reaches no limb of s41BD. The "
+    "symptom checker is regulated, and one regulated function regulates the "
+    "product, so the whole app is pulled in. The tracking function may be "
+    "better expressed as an excluded good under the consumer health items of "
+    "the Determination; revisit once that table is loaded.",
     product(
         "Consumer wellbeing app",
         "Tracks sleep and activity for general wellbeing and includes a symptom "
@@ -523,11 +614,12 @@ add_multi(
         [
             fn("Activity and sleep tracking",
                "Records sleep and activity for general wellbeing.",
-               software=Tri.YES, active_type=ActiveType.NOT_ACTIVE,
+               status=NO_PURPOSE, software=Tri.YES, active_type=ActiveType.NOT_ACTIVE,
                body_contact=BodyContact.NONE),
             fn("Symptom checker",
                "Asks a consumer about symptoms and suggests whether to seek "
                "medical care.",
+               status=dict(cdss_replaces_clinical_judgement=Tri.YES),
                software=Tri.YES, active_type=ActiveType.DIAGNOSTIC,
                clinical_function=ClinicalFunction.DIAGNOSE_OR_SCREEN,
                decision_maker=DecisionMaker.DEVICE_TO_LAY_USER,
@@ -537,9 +629,44 @@ add_multi(
                records_diagnostic_images=Tri.NO, body_contact=BodyContact.NONE),
         ],
     ),
-    [("Class I", "not a medical device purpose"), ("Class IIa", "4.5(2)")],
+    [(None, "general wellbeing only, no s41BD purpose", NOT_A_DEVICE),
+     ("Class IIa", "4.5(2)")],
     verified=False,
 )
+
+
+# -- The status gate. Products the gate stops before classification. ---------
+add("wellness_sleep_tracker", None, "no limb of s41BD reached", GATE_TEXT,
+    "The tracking function of the wellness app, supplied on its own. Nothing "
+    "in the product reaches a therapeutic purpose, so the gate stops it and "
+    "classification never runs. May instead be an excluded good once the "
+    "Determination is loaded.",
+    device("Sleep and activity tracker",
+           "Records sleep and activity for general wellbeing.",
+           status=NO_PURPOSE, software=Tri.YES,
+           active_type=ActiveType.NOT_ACTIVE, body_contact=BodyContact.NONE),
+    verified=False, status=NOT_A_DEVICE)
+
+add("cdss_followup_from_report_text", None, "Schedule 4 Part 2", GATE_TEXT,
+    "The follow-up suggestion from the imaging platform, rebuilt to read only "
+    "the written report. It recommends to a radiologist, processes no image "
+    "or signal from another device, and leaves the decision with the "
+    "radiologist, so all three CDSS criteria are met and it is exempt. The "
+    "pair with imaging_platform isolates the second criterion.",
+    device("Follow-up interval recommender",
+           "Reads the written radiology report and recommends a follow-up "
+           "imaging interval to the reporting radiologist, who decides.",
+           status=dict(cdss_sole_purpose_recommendation=Tri.YES,
+                       cdss_processes_device_signal_or_image=Tri.NO,
+                       cdss_replaces_clinical_judgement=Tri.NO),
+           software=Tri.YES, active_type=ActiveType.DIAGNOSTIC,
+           clinical_function=ClinicalFunction.SPECIFY_THERAPY,
+           decision_maker=DecisionMaker.INFORMS_PROFESSIONAL,
+           condition_severity=Severity.SERIOUS,
+           public_health_risk=PublicHealthRisk.MODERATE,
+           delivers_hazardous_energy=Tri.NO, delivers_ionising_radiation=Tri.NO,
+           records_diagnostic_images=Tri.NO, body_contact=BodyContact.NONE),
+    verified=False, status=EXEMPT_CDSS)
 
 
 def main():
@@ -555,19 +682,22 @@ def main():
             print(f"   removed stale fixture {stale.name}")
 
     gaps = 0
-    for slug, source, note, profile, verified, expectations in F:
+    for slug, source, note, profile, verified, expectations, status in F:
         missing = profile.missing()
         gaps += len(missing)
         functions = [
             {
                 "name": function.name.value,
+                "expected_status": function_status.value,
                 "expected_class": expected,
                 "expected_rule": rule,
             }
-            for function, (expected, rule) in zip(profile.functions, expectations)
+            for function, (expected, rule, function_status)
+            in zip(profile.functions, expectations)
         ]
         payload = {
-            "expected_classes": highest_class(e for e, _ in expectations),
+            "expected_status": status.value,
+            "expected_classes": highest_class(e for e, _, _ in expectations),
             "functions": functions,
             "source": source,
             "verified": verified,
@@ -577,7 +707,9 @@ def main():
         (OUT / f"{slug}.json").write_text(json.dumps(payload, indent=2) + "\n")
         flag = "  " if verified else " ?"
         count = f"{len(functions)} fn" if len(functions) > 1 else "     "
-        summary = ", ".join(sorted(payload["expected_classes"].values()))
+        summary = ", ".join(sorted(payload["expected_classes"].values())) or "no class"
+        if status is not REGULATED:
+            summary = f"{summary} [{status.value}]"
         warn = f"  MISSING: {missing}" if missing else ""
         print(f"{flag} {slug:34} {count} {summary}{warn}")
 

@@ -26,6 +26,7 @@ from reguide.profile import (
     Invasiveness,
     FunctionProfile,
     IvdProfile,
+    TherapeuticPurpose,
     Tri,
     WoundFunction,
     highest_class,
@@ -246,6 +247,8 @@ class TestTermination:
             "contacts_injured_skin": Tri.YES,
             "wound_function": WoundFunction.SECONDARY_INTENT,
             "fluid_handling": FluidHandling.NONE,
+            "therapeutic_purpose": TherapeuticPurpose.DISEASE,
+            "excluded_item": "none",
         }
         for _ in range(60):
             missing = profile.missing()
@@ -259,6 +262,8 @@ class TestTermination:
                 target = function
                 if ".general." in dotted:
                     target = function.general
+                elif ".status." in dotted:
+                    target = function.status
             value = answers.get(name, Tri.NO if name != "sample_type" else "serum")
             setattr(target, name, stated(value))
         else:

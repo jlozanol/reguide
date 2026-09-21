@@ -1,10 +1,12 @@
 {
+  "expected_status": "regulated_medical_device",
   "expected_classes": {
     "general": "Class IIa"
   },
   "functions": [
     {
       "name": "Muscle response monitoring app",
+      "expected_status": "regulated_medical_device",
       "expected_class": "Class IIa",
       "expected_rule": "4.6(b)"
     }
@@ -61,6 +63,48 @@
           "value": "yes",
           "basis": "stated",
           "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
+        },
+        "status": {
+          "therapeutic_purpose": {
+            "value": "diagnosis_prevention_monitoring_treatment_of_disease",
+            "basis": "stated",
+            "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
+          },
+          "principal_action_pharmacological": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
+          },
+          "is_accessory_to_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "excluded_item": {
+            "value": "none",
+            "basis": "stated",
+            "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
+          },
+          "exclusion_conditions_met": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_sole_purpose_recommendation": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
+          },
+          "cdss_processes_device_signal_or_image": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
+          },
+          "cdss_replaces_clinical_judgement": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
+          }
         },
         "general": {
           "invasiveness": {
@@ -199,6 +243,6 @@
     ],
     "funding": null,
     "source_text": "Muscle response monitoring app Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy. Muscle response monitoring app Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy. fixture decomposition is fixed by hand",
-    "schema_version": "0.3"
+    "schema_version": "0.4"
   }
 }

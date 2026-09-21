@@ -1,10 +1,12 @@
 {
+  "expected_status": "regulated_medical_device",
   "expected_classes": {
     "general": "Class IIb"
   },
   "functions": [
     {
       "name": "Volumetric infusion pump",
+      "expected_status": "regulated_medical_device",
       "expected_class": "Class IIb",
       "expected_rule": "4.4(2)"
     }
@@ -61,6 +63,48 @@
           "value": "no",
           "basis": "stated",
           "evidence": "Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous."
+        },
+        "status": {
+          "therapeutic_purpose": {
+            "value": "diagnosis_prevention_monitoring_treatment_of_disease",
+            "basis": "stated",
+            "evidence": "Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous."
+          },
+          "principal_action_pharmacological": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous."
+          },
+          "is_accessory_to_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "excluded_item": {
+            "value": "none",
+            "basis": "stated",
+            "evidence": "Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous."
+          },
+          "exclusion_conditions_met": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_sole_purpose_recommendation": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_processes_device_signal_or_image": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_replaces_clinical_judgement": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          }
         },
         "general": {
           "invasiveness": {
@@ -199,6 +243,6 @@
     ],
     "funding": null,
     "source_text": "Volumetric infusion pump Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous. Volumetric infusion pump Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous. fixture decomposition is fixed by hand",
-    "schema_version": "0.3"
+    "schema_version": "0.4"
   }
 }

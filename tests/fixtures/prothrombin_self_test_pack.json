@@ -1,4 +1,5 @@
 {
+  "expected_status": "regulated_medical_device",
   "expected_classes": {
     "general": "Class IIa",
     "ivd": "Class 3 IVD"
@@ -6,16 +7,19 @@
   "functions": [
     {
       "name": "Portable prothrombin time meter",
+      "expected_status": "regulated_medical_device",
       "expected_class": "Class 1 IVD",
       "expected_rule": "1.6"
     },
     {
       "name": "Prothrombin time test strips",
+      "expected_status": "regulated_medical_device",
       "expected_class": "Class 3 IVD",
       "expected_rule": "1.4"
     },
     {
       "name": "Lancet",
+      "expected_status": "regulated_medical_device",
       "expected_class": "Class IIa",
       "expected_rule": "3.2"
     }
@@ -72,6 +76,48 @@
           "value": "no",
           "basis": "stated",
           "evidence": "Instrument that reads prothrombin time test strips."
+        },
+        "status": {
+          "therapeutic_purpose": {
+            "value": "information_from_in_vitro_examination_of_specimens",
+            "basis": "stated",
+            "evidence": "Instrument that reads prothrombin time test strips."
+          },
+          "principal_action_pharmacological": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Instrument that reads prothrombin time test strips."
+          },
+          "is_accessory_to_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "excluded_item": {
+            "value": "none",
+            "basis": "stated",
+            "evidence": "Instrument that reads prothrombin time test strips."
+          },
+          "exclusion_conditions_met": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_sole_purpose_recommendation": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_processes_device_signal_or_image": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_replaces_clinical_judgement": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          }
         },
         "general": null,
         "ivd": {
@@ -153,6 +199,48 @@
           "basis": "stated",
           "evidence": "Test strips for prothrombin time self-testing by a lay person."
         },
+        "status": {
+          "therapeutic_purpose": {
+            "value": "information_from_in_vitro_examination_of_specimens",
+            "basis": "stated",
+            "evidence": "Test strips for prothrombin time self-testing by a lay person."
+          },
+          "principal_action_pharmacological": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Test strips for prothrombin time self-testing by a lay person."
+          },
+          "is_accessory_to_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "excluded_item": {
+            "value": "none",
+            "basis": "stated",
+            "evidence": "Test strips for prothrombin time self-testing by a lay person."
+          },
+          "exclusion_conditions_met": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_sole_purpose_recommendation": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_processes_device_signal_or_image": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_replaces_clinical_judgement": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          }
+        },
         "general": null,
         "ivd": {
           "purpose": {
@@ -232,6 +320,48 @@
           "value": "no",
           "basis": "stated",
           "evidence": "Single-use lancet for obtaining a capillary blood specimen."
+        },
+        "status": {
+          "therapeutic_purpose": {
+            "value": "diagnosis_prevention_monitoring_treatment_of_disease",
+            "basis": "stated",
+            "evidence": "Single-use lancet for obtaining a capillary blood specimen."
+          },
+          "principal_action_pharmacological": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Single-use lancet for obtaining a capillary blood specimen."
+          },
+          "is_accessory_to_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "excluded_item": {
+            "value": "none",
+            "basis": "stated",
+            "evidence": "Single-use lancet for obtaining a capillary blood specimen."
+          },
+          "exclusion_conditions_met": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_sole_purpose_recommendation": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_processes_device_signal_or_image": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_replaces_clinical_judgement": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          }
         },
         "general": {
           "invasiveness": {
@@ -370,6 +500,6 @@
     ],
     "funding": null,
     "source_text": "Prothrombin time self-testing pack Procedure pack for prothrombin time self-testing at home, containing a portable meter, test strips and a lancet. Portable prothrombin time meter Instrument that reads prothrombin time test strips. Prothrombin time test strips Test strips for prothrombin time self-testing by a lay person. Lancet Single-use lancet for obtaining a capillary blood specimen. fixture decomposition is fixed by hand",
-    "schema_version": "0.3"
+    "schema_version": "0.4"
   }
 }

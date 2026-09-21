@@ -1,22 +1,25 @@
 {
+  "expected_status": "regulated_medical_device",
   "expected_classes": {
     "general": "Class IIa"
   },
   "functions": [
     {
       "name": "Activity and sleep tracking",
-      "expected_class": "Class I",
-      "expected_rule": "not a medical device purpose"
+      "expected_status": "not_a_medical_device",
+      "expected_class": null,
+      "expected_rule": "general wellbeing only, no s41BD purpose"
     },
     {
       "name": "Symptom checker",
+      "expected_status": "regulated_medical_device",
       "expected_class": "Class IIa",
       "expected_rule": "4.5(2)"
     }
   ],
   "source": "Reasoned from Schedule 2 rule text, not a worked example",
   "verified": false,
-  "note": "A consumer app whose main function would be excluded on its own. The symptom checker is not excluded, and a product is only excluded when every function qualifies, so the whole app is pulled into regulation. This is the unanimity test rather than the maximum test.",
+  "note": "A consumer app whose tracking function reaches no limb of s41BD. The symptom checker is regulated, and one regulated function regulates the product, so the whole app is pulled in. The tracking function may be better expressed as an excluded good under the consumer health items of the Determination; revisit once that table is loaded.",
   "profile": {
     "core": {
       "product_name": {
@@ -66,6 +69,48 @@
           "value": "yes",
           "basis": "stated",
           "evidence": "Records sleep and activity for general wellbeing."
+        },
+        "status": {
+          "therapeutic_purpose": {
+            "value": "no_therapeutic_purpose",
+            "basis": "stated",
+            "evidence": "Records sleep and activity for general wellbeing."
+          },
+          "principal_action_pharmacological": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_accessory_to_device": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Records sleep and activity for general wellbeing."
+          },
+          "excluded_item": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "exclusion_conditions_met": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_sole_purpose_recommendation": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_processes_device_signal_or_image": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_replaces_clinical_judgement": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          }
         },
         "general": {
           "invasiveness": {
@@ -222,6 +267,48 @@
           "basis": "stated",
           "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
         },
+        "status": {
+          "therapeutic_purpose": {
+            "value": "diagnosis_prevention_monitoring_treatment_of_disease",
+            "basis": "stated",
+            "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
+          },
+          "principal_action_pharmacological": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
+          },
+          "is_accessory_to_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "excluded_item": {
+            "value": "none",
+            "basis": "stated",
+            "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
+          },
+          "exclusion_conditions_met": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_sole_purpose_recommendation": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
+          },
+          "cdss_processes_device_signal_or_image": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
+          },
+          "cdss_replaces_clinical_judgement": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
+          }
+        },
         "general": {
           "invasiveness": {
             "value": "non_invasive",
@@ -359,6 +446,6 @@
     ],
     "funding": null,
     "source_text": "Consumer wellbeing app Tracks sleep and activity for general wellbeing and includes a symptom checker that suggests whether to seek care. Activity and sleep tracking Records sleep and activity for general wellbeing. Symptom checker Asks a consumer about symptoms and suggests whether to seek medical care. fixture decomposition is fixed by hand",
-    "schema_version": "0.3"
+    "schema_version": "0.4"
   }
 }
