@@ -356,8 +356,10 @@ add("heparin_coated_catheter", "Class III", "5.1", NOT_IVD,
            absorbed_or_chemically_changed=Tri.NO,
            incorporates_medicine=Tri.YES, sterile=Tri.YES))
 
-add("condom_with_spermicide", "Class III", "5.2", NOT_IVD,
-    "Contraception plus a medicine. A plain condom sits lower.",
+add("condom_with_spermicide", "Class III", "5.1(2)", NOT_IVD,
+    "Contraception plus a medicine. 5.2(1) alone gives Class IIb (5.2(2) is "
+    "for implantable or long-term invasive devices); the incorporated "
+    "spermicide brings 5.1, Class III, which governs under regulation 3.3(7).",
     device("Condom with spermicide",
            "Barrier contraceptive incorporating a spermicidal agent.",
            invasiveness=Invasiveness.BODY_ORIFICE, duration=Duration.TRANSIENT,

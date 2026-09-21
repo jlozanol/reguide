@@ -8,12 +8,12 @@
       "name": "Condom with spermicide",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class III",
-      "expected_rule": "5.2"
+      "expected_rule": "5.1(2)"
     }
   ],
   "source": "TGA, Classifying medical devices that are not IVDs",
   "verified": true,
-  "note": "Contraception plus a medicine. A plain condom sits lower.",
+  "note": "Contraception plus a medicine. 5.2(1) alone gives Class IIb (5.2(2) is for implantable or long-term invasive devices); the incorporated spermicide brings 5.1, Class III, which governs under regulation 3.3(7).",
   "profile": {
     "core": {
       "product_name": {
