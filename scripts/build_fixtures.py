@@ -129,6 +129,17 @@ WELLNESS_TRACKING = dict(therapeutic_purpose=TherapeuticPurpose.ANATOMY,
                          excluded_item="S1-14B",
                          exclusion_conditions_met=Tri.YES)
 
+# Storage and transmission of patient images only. Storing images that serve
+# diagnosis arguably reaches limb (i), which is why item 14H exists to take it
+# back out. The fixture is worded as store and transmit ONLY on purpose: TGA
+# guidance says 14H does not cover software that also displays images for
+# diagnosis or screening, and such software is likely a regulated device. The
+# class of an image display function is a stage 4 question; add a display
+# fixture once the Schedule 2 rules exist.
+IMAGE_STORAGE = dict(therapeutic_purpose=TherapeuticPurpose.DISEASE,
+                     excluded_item="S1-14H",
+                     exclusion_conditions_met=Tri.YES)
+
 
 def status_for(text, purpose, overrides):
     fields = dict(STATUS_DEFAULTS, therapeutic_purpose=purpose)
@@ -564,25 +575,25 @@ add_multi(
 add_multi(
     "imaging_platform",
     RULE_TEXT,
-    "Three software functions of one platform. Storage alone carries no "
-    "medical-device purpose, triage flags abnormal studies, and the follow-up "
-    "suggestion specifies an intervention. Tests that the highest function "
-    "governs the product and that one regulated function is enough to pull "
-    "the whole platform in. The follow-up suggestion stays regulated only "
-    "because it is taken to work from the studies themselves. If it worked "
-    "from the report text alone it would meet every CDSS criterion and be "
-    "exempt, so this function is the one to check first. The archive is "
-    "treated as having no s41BD purpose. Item 14H excludes software whose sole "
-    "purpose is storing or transmitting patient images, but this archive also "
-    "displays them, so 14H does not cover it as described.",
+    "Three software functions of one platform. The archive is excluded under "
+    "item 14H, triage flags abnormal studies, and the follow-up suggestion "
+    "specifies an intervention. Tests that the highest function governs the "
+    "product and that one regulated function pulls the whole platform in. "
+    "WARNING: the archive is worded as store and transmit only on purpose. "
+    "TGA guidance (March 2026) says 14H does not cover software that also "
+    "displays images for diagnosis or screening; such a function is likely a "
+    "regulated device, and its class waits on the stage 4 rules. The follow-up "
+    "suggestion analyses the scan images, which fails the second CDSS "
+    "criterion and keeps it regulated; cdss_followup_from_report_text is the "
+    "report-only version, which is exempt.",
     product(
         "Radiology reporting platform",
         "Stores radiology studies, flags abnormal ones for priority review and "
         "suggests a follow-up imaging interval.",
         [
             fn("Study archive",
-               "Stores and displays radiology studies without interpretation.",
-               status=NO_PURPOSE, software=Tri.YES, active_type=ActiveType.NOT_ACTIVE,
+               "Stores and transmits radiology studies without interpretation.",
+               status=IMAGE_STORAGE, software=Tri.YES, active_type=ActiveType.NOT_ACTIVE,
                body_contact=BodyContact.NONE),
             fn("Abnormality triage",
                "Flags studies showing suspected abnormality for priority review "
@@ -595,7 +606,8 @@ add_multi(
                delivers_hazardous_energy=Tri.NO, delivers_ionising_radiation=Tri.NO,
                records_diagnostic_images=Tri.NO, body_contact=BodyContact.NONE),
             fn("Follow-up interval suggestion",
-               "Suggests a follow-up imaging interval to the reporting radiologist.",
+               "Analyses the scan images and suggests a follow-up imaging interval "
+               "to the reporting radiologist.",
                status=PROCESSES_DEVICE_DATA, software=Tri.YES, active_type=ActiveType.DIAGNOSTIC,
                clinical_function=ClinicalFunction.SPECIFY_THERAPY,
                decision_maker=DecisionMaker.INFORMS_PROFESSIONAL,
@@ -605,7 +617,7 @@ add_multi(
                records_diagnostic_images=Tri.NO, body_contact=BodyContact.NONE),
         ],
     ),
-    [(None, "storage and display only, no s41BD purpose", NOT_A_DEVICE),
+    [(None, "S1-14H", EXCLUDED),
      ("Class IIa", "4.5(2)(b)"),
      ("Class IIa", "4.7(2)(b)(i)")],
     verified=False,
@@ -658,6 +670,18 @@ add("wellness_sleep_tracker", None, "S1-14B", GATE_TEXT,
            status=WELLNESS_TRACKING, software=Tri.YES,
            active_type=ActiveType.NOT_ACTIVE, body_contact=BodyContact.NONE),
     verified=False, status=EXCLUDED)
+
+add("anatomy_education_app", None, "no limb of s41BD reached", GATE_TEXT,
+    "Teaching software for students. It is used on no patient and reaches no "
+    "limb of s41BD, it serves no device, and no exclusion item describes it, "
+    "so it is simply not a medical device. The only fixture that exercises the "
+    "not-a-device verdict and the accessory question.",
+    device("Anatomy teaching app",
+           "Interactive 3D anatomy lessons for medical students, used for "
+           "study only and never on a patient.",
+           status=NO_PURPOSE, software=Tri.YES,
+           active_type=ActiveType.NOT_ACTIVE, body_contact=BodyContact.NONE),
+    verified=False, status=NOT_A_DEVICE)
 
 add("cdss_followup_from_report_text", None, "Schedule 4 Part 2", GATE_TEXT,
     "The follow-up suggestion from the imaging platform, rebuilt to read only "

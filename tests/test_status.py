@@ -465,6 +465,68 @@ def test_untraceable_evidence_catches_a_paraphrased_status_field():
 
 
 # --------------------------------------------------------------------------
+# Flags: things the report must raise beside the verdict
+# --------------------------------------------------------------------------
+
+
+def excluded_function() -> FunctionProfile:
+    function = software_function()
+    function.name = answer("Appointment booking", "web app")
+    function.status.excluded_item = answer("S1-14E", "reminds people")
+    function.status.exclusion_conditions_met = answer(Tri.YES, "mild seasonal allergies")
+    return function
+
+
+def test_exempt_plus_excluded_is_exempt_with_an_amber_flag():
+    result = S.gate(product(software_function(), excluded_function()))
+
+    assert result.outcome is S.StatusOutcome.EXEMPT_CDSS
+    assert result.obligations  # the exemption's duties still apply
+    [flag] = [f for f in result.flags if f.code == "mixed_exempt_and_excluded"]
+    assert flag.severity is S.Severity.AMBER
+    assert flag.functions == (0, 1)
+    assert "Appointment booking" in flag.message
+
+
+def test_excluded_plus_not_a_device_raises_no_mixed_flag():
+    result = S.gate(product(excluded_function(), not_a_device_function()))
+
+    assert result.outcome is S.StatusOutcome.EXCLUDED
+    assert not any(f.code == "mixed_exempt_and_excluded" for f in result.flags)
+
+
+def test_a_plain_exempt_product_raises_no_flag():
+    assert S.gate(product(software_function())).flags == []
+
+
+def test_an_exclusion_with_a_caution_raises_it_as_a_flag():
+    S.EXCLUSION_TABLE["S1-14E"] = S.Exclusion(
+        key="S1-14E", schedule=1, item="14E", citation="Schedule 1 item 14E",
+        software=True, summary="digital mental health tool",
+        caution="check the guidelines are displayed",
+    )
+    result = S.gate(product(excluded_function()))
+
+    [flag] = result.flags
+    assert flag.code == "exclusion_caution_S1-14E"
+    assert flag.severity is S.Severity.AMBER
+    assert flag.message == "Appointment booking: check the guidelines are displayed"
+
+
+def test_the_caution_is_raised_even_inside_a_regulated_product():
+    """The imaging platform is regulated, but its archive still needs the warning."""
+    S.load_exclusions(REAL_TABLE)
+    data = json.loads((Path(__file__).parent / "fixtures" / "imaging_platform.json").read_text())
+
+    result = S.gate(DeviceProfile.model_validate(data["profile"]))
+
+    assert result.outcome is S.StatusOutcome.REGULATED
+    [flag] = result.flags
+    assert flag.code == "exclusion_caution_S1-14H"
+    assert "displays images" in flag.message
+
+
+# --------------------------------------------------------------------------
 # Scored against the fixtures
 # --------------------------------------------------------------------------
 
@@ -535,6 +597,12 @@ class TestTheRealTable:
         payload = json.loads(REAL_TABLE.read_text())
         assert payload["register_id"] == "F2018L01350"
         assert payload["compilation"] == 11
+
+    def test_14h_warns_that_display_is_not_covered(self):
+        S.load_exclusions(REAL_TABLE)
+        caution = S.EXCLUSION_TABLE["S1-14H"].caution
+        assert "displays images for diagnosis or screening" in caution
+        assert "TGA guidance" in caution
 
     def test_every_citation_names_its_schedule(self):
         S.load_exclusions(REAL_TABLE)

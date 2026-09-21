@@ -1,0 +1,246 @@
+{
+  "expected_status": "not_a_medical_device",
+  "expected_classes": {},
+  "functions": [
+    {
+      "name": "Anatomy teaching app",
+      "expected_status": "not_a_medical_device",
+      "expected_class": null,
+      "expected_rule": "no limb of s41BD reached"
+    }
+  ],
+  "source": "Reasoned from s41BD of the Act and Schedule 4 Part 2 of the Regulations, not a worked example",
+  "verified": false,
+  "note": "Teaching software for students. It is used on no patient and reaches no limb of s41BD, it serves no device, and no exclusion item describes it, so it is simply not a medical device. The only fixture that exercises the not-a-device verdict and the accessory question.",
+  "profile": {
+    "core": {
+      "product_name": {
+        "value": "Anatomy teaching app",
+        "basis": "stated",
+        "evidence": "Anatomy teaching app"
+      },
+      "intended_purpose": {
+        "value": "Interactive 3D anatomy lessons for medical students, used for study only and never on a patient.",
+        "basis": "stated",
+        "evidence": "Interactive 3D anatomy lessons for medical students, used for study only and never on a patient."
+      },
+      "supplied_sterile": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Interactive 3D anatomy lessons for medical students, used for study only and never on a patient."
+      },
+      "has_measuring_function": {
+        "value": "no",
+        "basis": "stated",
+        "evidence": "Interactive 3D anatomy lessons for medical students, used for study only and never on a patient."
+      },
+      "functions_confirmed": {
+        "value": "yes",
+        "basis": "stated",
+        "evidence": "fixture decomposition is fixed by hand"
+      }
+    },
+    "functions": [
+      {
+        "name": {
+          "value": "Anatomy teaching app",
+          "basis": "stated",
+          "evidence": "Anatomy teaching app"
+        },
+        "description": {
+          "value": "Interactive 3D anatomy lessons for medical students, used for study only and never on a patient.",
+          "basis": "stated",
+          "evidence": "Interactive 3D anatomy lessons for medical students, used for study only and never on a patient."
+        },
+        "kind": {
+          "value": "general_device",
+          "basis": "stated",
+          "evidence": "Interactive 3D anatomy lessons for medical students, used for study only and never on a patient."
+        },
+        "is_software": {
+          "value": "yes",
+          "basis": "stated",
+          "evidence": "Interactive 3D anatomy lessons for medical students, used for study only and never on a patient."
+        },
+        "status": {
+          "therapeutic_purpose": {
+            "value": "no_therapeutic_purpose",
+            "basis": "stated",
+            "evidence": "Interactive 3D anatomy lessons for medical students, used for study only and never on a patient."
+          },
+          "principal_action_pharmacological": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_accessory_to_device": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Interactive 3D anatomy lessons for medical students, used for study only and never on a patient."
+          },
+          "excluded_item": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "exclusion_conditions_met": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_sole_purpose_recommendation": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_processes_device_signal_or_image": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "cdss_replaces_clinical_judgement": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          }
+        },
+        "general": {
+          "invasiveness": {
+            "value": "non_invasive",
+            "basis": "stated",
+            "evidence": "Interactive 3D anatomy lessons for medical students, used for study only and never on a patient."
+          },
+          "duration": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "body_contact": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "orifice_site": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contacts_injured_skin": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Interactive 3D anatomy lessons for medical students, used for study only and never on a patient."
+          },
+          "wound_function": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "breaches_dermis": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "fluid_handling": {
+            "value": "none",
+            "basis": "stated",
+            "evidence": "Interactive 3D anatomy lessons for medical students, used for study only and never on a patient."
+          },
+          "connected_to_active_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "reusable_surgical_instrument": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "absorbed_or_chemically_changed": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "delivers_ionising_radiation": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "active_type": {
+            "value": "not_active",
+            "basis": "stated",
+            "evidence": "Interactive 3D anatomy lessons for medical students, used for study only and never on a patient."
+          },
+          "is_active_implantable": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "clinical_function": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "delivers_hazardous_energy": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "administers_or_removes_medicine": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "decision_maker": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "condition_severity": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "public_health_risk": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "records_diagnostic_images": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "incorporates_medicine": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Interactive 3D anatomy lessons for medical students, used for study only and never on a patient."
+          },
+          "animal_or_microbial_origin": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "human_blood_derivative": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contraceptive_or_sti_prevention": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Interactive 3D anatomy lessons for medical students, used for study only and never on a patient."
+          },
+          "disinfects_another_device": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Interactive 3D anatomy lessons for medical students, used for study only and never on a patient."
+          }
+        },
+        "ivd": null
+      }
+    ],
+    "funding": null,
+    "source_text": "Anatomy teaching app Interactive 3D anatomy lessons for medical students, used for study only and never on a patient. Anatomy teaching app Interactive 3D anatomy lessons for medical students, used for study only and never on a patient. fixture decomposition is fixed by hand",
+    "schema_version": "0.4"
+  }
+}

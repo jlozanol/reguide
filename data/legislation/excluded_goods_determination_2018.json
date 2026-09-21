@@ -10,7 +10,8 @@
       "item": "1",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 1",
       "software": false,
-      "summary": "Adhesive removers and non-medicated skin cleansers for colostomy and ileostomy care"
+      "summary": "Adhesive removers and non-medicated skin cleansers for colostomy and ileostomy care",
+      "caution": ""
     },
     {
       "key": "S1-1A",
@@ -18,7 +19,8 @@
       "item": "1A",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 1A",
       "software": false,
-      "summary": "Anatomical models intended for education or record keeping"
+      "summary": "Anatomical models intended for education or record keeping",
+      "caution": ""
     },
     {
       "key": "S1-2",
@@ -26,7 +28,8 @@
       "item": "2",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 2",
       "software": false,
-      "summary": "Antiperspirants whose effect comes only from inorganic salts of aluminium, zinc or zirconium"
+      "summary": "Antiperspirants whose effect comes only from inorganic salts of aluminium, zinc or zirconium",
+      "caution": ""
     },
     {
       "key": "S1-2A",
@@ -34,7 +37,8 @@
       "item": "2A",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 2A",
       "software": false,
-      "summary": "Non-sterile personal protective equipment and safety apparel, other than articles in item 1 of Schedule 1 to the Specified Articles Instrument 2020"
+      "summary": "Non-sterile personal protective equipment and safety apparel, other than articles in item 1 of Schedule 1 to the Specified Articles Instrument 2020",
+      "caution": ""
     },
     {
       "key": "S1-2B",
@@ -42,7 +46,8 @@
       "item": "2B",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 2B",
       "software": false,
-      "summary": "Cosmetic finishing components for orthoses and prostheses"
+      "summary": "Cosmetic finishing components for orthoses and prostheses",
+      "caution": ""
     },
     {
       "key": "S1-2C",
@@ -50,7 +55,8 @@
       "item": "2C",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 2C",
       "software": false,
-      "summary": "Craniofacial prostheses that are spectacle-retained or adhesive-retained"
+      "summary": "Craniofacial prostheses that are spectacle-retained or adhesive-retained",
+      "caution": ""
     },
     {
       "key": "S1-3",
@@ -58,7 +64,8 @@
       "item": "3",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 3",
       "software": false,
-      "summary": "Dental bleaches and dental whiteners"
+      "summary": "Dental bleaches and dental whiteners",
+      "caution": ""
     },
     {
       "key": "S1-3AA",
@@ -66,7 +73,8 @@
       "item": "3AA",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 3AA",
       "software": false,
-      "summary": "Dental impression trays"
+      "summary": "Dental impression trays",
+      "caution": ""
     },
     {
       "key": "S1-3A",
@@ -74,7 +82,8 @@
       "item": "3A",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 3A",
       "software": false,
-      "summary": "Laundry and general cleaning detergents and soaps, other than disinfectants"
+      "summary": "Laundry and general cleaning detergents and soaps, other than disinfectants",
+      "caution": ""
     },
     {
       "key": "S1-4",
@@ -82,7 +91,8 @@
       "item": "4",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 4",
       "software": false,
-      "summary": "Devices that measure alcohol in body fluids or exhaled air"
+      "summary": "Devices that measure alcohol in body fluids or exhaled air",
+      "caution": ""
     },
     {
       "key": "S1-5",
@@ -90,7 +100,8 @@
       "item": "5",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 5",
       "software": false,
-      "summary": "Disinfectant and sterilant gases"
+      "summary": "Disinfectant and sterilant gases",
+      "caution": ""
     },
     {
       "key": "S1-6",
@@ -98,7 +109,8 @@
       "item": "6",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 6",
       "software": false,
-      "summary": "Drinking water purification and treatment equipment"
+      "summary": "Drinking water purification and treatment equipment",
+      "caution": ""
     },
     {
       "key": "S1-7",
@@ -106,7 +118,8 @@
       "item": "7",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 7",
       "software": false,
-      "summary": "Ear candles"
+      "summary": "Ear candles",
+      "caution": ""
     },
     {
       "key": "S1-7AA",
@@ -114,7 +127,8 @@
       "item": "7AA",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 7AA",
       "software": false,
-      "summary": "Ear moulds intended to anchor hearing aids"
+      "summary": "Ear moulds intended to anchor hearing aids",
+      "caution": ""
     },
     {
       "key": "S1-7A",
@@ -122,7 +136,8 @@
       "item": "7A",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 7A",
       "software": false,
-      "summary": "Fluoridated reticulated drinking water"
+      "summary": "Fluoridated reticulated drinking water",
+      "caution": ""
     },
     {
       "key": "S1-8",
@@ -130,7 +145,8 @@
       "item": "8",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 8",
       "software": false,
-      "summary": "Hair bleaches, dyes, colorants and perming preparations"
+      "summary": "Hair bleaches, dyes, colorants and perming preparations",
+      "caution": ""
     },
     {
       "key": "S1-9",
@@ -138,7 +154,8 @@
       "item": "9",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 9",
       "software": false,
-      "summary": "Household and personal aids, furniture and utensils for people with disabilities"
+      "summary": "Household and personal aids, furniture and utensils for people with disabilities",
+      "caution": ""
     },
     {
       "key": "S1-10",
@@ -146,7 +163,8 @@
       "item": "10",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 10",
       "software": false,
-      "summary": "Incontinence pads, mattress overlays and mattress protectors"
+      "summary": "Incontinence pads, mattress overlays and mattress protectors",
+      "caution": ""
     },
     {
       "key": "S1-10A",
@@ -154,7 +172,8 @@
       "item": "10A",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 10A",
       "software": false,
-      "summary": "Medicament trays intended to hold medicaments"
+      "summary": "Medicament trays intended to hold medicaments",
+      "caution": ""
     },
     {
       "key": "S1-11",
@@ -162,7 +181,8 @@
       "item": "11",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 11",
       "software": false,
-      "summary": "Menstrual pads, but not tampons or menstrual cups"
+      "summary": "Menstrual pads, but not tampons or menstrual cups",
+      "caution": ""
     },
     {
       "key": "S1-11A",
@@ -170,7 +190,8 @@
       "item": "11A",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 11A",
       "software": false,
-      "summary": "Mouthguards intended to protect teeth from external forces, such as in contact sport"
+      "summary": "Mouthguards intended to protect teeth from external forces, such as in contact sport",
+      "caution": ""
     },
     {
       "key": "S1-11B",
@@ -178,7 +199,8 @@
       "item": "11B",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 11B",
       "software": false,
-      "summary": "Ocular prostheses intended for cosmetic purposes"
+      "summary": "Ocular prostheses intended for cosmetic purposes",
+      "caution": ""
     },
     {
       "key": "S1-11C",
@@ -186,7 +208,8 @@
       "item": "11C",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 11C",
       "software": false,
-      "summary": "Physical impressions of anatomy and models cast from them"
+      "summary": "Physical impressions of anatomy and models cast from them",
+      "caution": ""
     },
     {
       "key": "S1-12",
@@ -194,7 +217,8 @@
       "item": "12",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 12",
       "software": false,
-      "summary": "Sanitation, environmental control and detoxification equipment, including films and coatings, other than articles in item 3 of Schedule 1 to the Specified Articles Instrument 2020; does not include disinfectants"
+      "summary": "Sanitation, environmental control and detoxification equipment, including films and coatings, other than articles in item 3 of Schedule 1 to the Specified Articles Instrument 2020; does not include disinfectants",
+      "caution": ""
     },
     {
       "key": "S1-12A",
@@ -202,7 +226,8 @@
       "item": "12A",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 12A",
       "software": false,
-      "summary": "Spectacle frames"
+      "summary": "Spectacle frames",
+      "caution": ""
     },
     {
       "key": "S1-13",
@@ -210,7 +235,8 @@
       "item": "13",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 13",
       "software": false,
-      "summary": "Nail preparations that harden nails or deter nail biting"
+      "summary": "Nail preparations that harden nails or deter nail biting",
+      "caution": ""
     },
     {
       "key": "S1-14",
@@ -218,7 +244,8 @@
       "item": "14",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 14",
       "software": false,
-      "summary": "Lip products containing sunscreen that are secondary sunscreen products, contain no Schedule 2, 3, 4 or 8 poison, and meet the AS/NZS 2604:2021 labelling and broad-spectrum requirements; see section 7 for transitional goods"
+      "summary": "Lip products containing sunscreen that are secondary sunscreen products, contain no Schedule 2, 3, 4 or 8 poison, and meet the AS/NZS 2604:2021 labelling and broad-spectrum requirements; see section 7 for transitional goods",
+      "caution": ""
     },
     {
       "key": "S1-14A",
@@ -226,7 +253,8 @@
       "item": "14A",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 14A",
       "software": true,
-      "summary": "Consumer software for self-management of an existing condition that is not serious, provided it is not for use in clinical practice, not for a serious condition, and not for diagnosis, treatment or a specific treatment recommendation"
+      "summary": "Consumer software for self-management of an existing condition that is not serious, provided it is not for use in clinical practice, not for a serious condition, and not for diagnosis, treatment or a specific treatment recommendation",
+      "caution": ""
     },
     {
       "key": "S1-14B",
@@ -234,7 +262,8 @@
       "item": "14B",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 14B",
       "software": true,
-      "summary": "Consumer software, alone or with non-invasive hardware, that promotes general health or wellness by non-invasively measuring or monitoring a physical parameter such as movement, sleep, heart rate or rhythm, temperature, blood pressure or oxygen saturation, provided it is not for clinical practice and not for any diagnostic, monitoring or treatment purpose relating to a serious condition"
+      "summary": "Consumer software, alone or with non-invasive hardware, that promotes general health or wellness by non-invasively measuring or monitoring a physical parameter such as movement, sleep, heart rate or rhythm, temperature, blood pressure or oxygen saturation, provided it is not for clinical practice and not for any diagnostic, monitoring or treatment purpose relating to a serious condition",
+      "caution": ""
     },
     {
       "key": "S1-14C",
@@ -242,7 +271,8 @@
       "item": "14C",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 14C",
       "software": true,
-      "summary": "Consumer software that coaches or encourages behaviour change on personal or environmental factors such as weight, exercise, sun exposure or diet, provided it is not for clinical practice, gives no information needing a health professional's interpretation, and is not for diagnosis, prognosis or treatment decisions"
+      "summary": "Consumer software that coaches or encourages behaviour change on personal or environmental factors such as weight, exercise, sun exposure or diet, provided it is not for clinical practice, gives no information needing a health professional's interpretation, and is not for diagnosis, prognosis or treatment decisions",
+      "caution": ""
     },
     {
       "key": "S1-14D",
@@ -250,7 +280,8 @@
       "item": "14D",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 14D",
       "software": true,
-      "summary": "Software that is a patient reported outcome measures (PROMs) questionnaire or patient survey, provided it is not intended to diagnose, screen, monitor, predict, treat or recommend treatment"
+      "summary": "Software that is a patient reported outcome measures (PROMs) questionnaire or patient survey, provided it is not intended to diagnose, screen, monitor, predict, treat or recommend treatment",
+      "caution": ""
     },
     {
       "key": "S1-14E",
@@ -258,7 +289,8 @@
       "item": "14E",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 14E",
       "software": true,
-      "summary": "Digital mental health tools, including cognitive behaviour therapy tools, based on established clinical practice guidelines that the software references and displays so the user can review them"
+      "summary": "Digital mental health tools, including cognitive behaviour therapy tools, based on established clinical practice guidelines that the software references and displays so the user can review them",
+      "caution": ""
     },
     {
       "key": "S1-14F",
@@ -266,7 +298,8 @@
       "item": "14F",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 14F",
       "software": true,
-      "summary": "Software enabling communication, including transmission of patient information, to support delivery of health services, provided it has no diagnostic, monitoring, predictive or treatment purpose"
+      "summary": "Software enabling communication, including transmission of patient information, to support delivery of health services, provided it has no diagnostic, monitoring, predictive or treatment purpose",
+      "caution": ""
     },
     {
       "key": "S1-14G",
@@ -274,7 +307,8 @@
       "item": "14G",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 14G",
       "software": true,
-      "summary": "Software for administering or managing health processes or facilities, such as billing, claims, appointments, bed and theatre management, scheduling, business analytics and inventory, provided it has no diagnostic, monitoring, predictive or treatment purpose"
+      "summary": "Software for administering or managing health processes or facilities, such as billing, claims, appointments, bed and theatre management, scheduling, business analytics and inventory, provided it has no diagnostic, monitoring, predictive or treatment purpose",
+      "caution": ""
     },
     {
       "key": "S1-14H",
@@ -282,7 +316,8 @@
       "item": "14H",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 14H",
       "software": true,
-      "summary": "Software whose sole purpose is storing or transmitting patient images"
+      "summary": "Software whose sole purpose is storing or transmitting patient images",
+      "caution": "item 14H covers software whose only purpose is storing or transmitting patient images. TGA guidance (Understanding the image storage and transmission software exclusion, March 2026) states it does not apply to software that also displays images for diagnosis or screening. If this function lets anyone view images to make a clinical decision, it is not excluded and is likely a regulated medical device."
     },
     {
       "key": "S1-14I",
@@ -290,7 +325,8 @@
       "item": "14I",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 14I",
       "software": true,
-      "summary": "Software whose sole purpose is alerting health professionals about patient care, provided it does not replace clinical judgement and is not intended to diagnose, screen, prevent, treat or decide treatment"
+      "summary": "Software whose sole purpose is alerting health professionals about patient care, provided it does not replace clinical judgement and is not intended to diagnose, screen, prevent, treat or decide treatment",
+      "caution": ""
     },
     {
       "key": "S1-14J",
@@ -298,7 +334,8 @@
       "item": "14J",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 14J",
       "software": true,
-      "summary": "Clinical workflow management software, provided it has no diagnostic, monitoring, predictive or treatment purpose"
+      "summary": "Clinical workflow management software, provided it has no diagnostic, monitoring, predictive or treatment purpose",
+      "caution": ""
     },
     {
       "key": "S1-14K",
@@ -306,7 +343,8 @@
       "item": "14K",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 14K",
       "software": true,
-      "summary": "Middleware connecting applications to an operating system or other applications, provided it does not control medical devices, does not perform analysis or logic relating to a device's intended purpose, and has no diagnostic or treatment purpose"
+      "summary": "Middleware connecting applications to an operating system or other applications, provided it does not control medical devices, does not perform analysis or logic relating to a device's intended purpose, and has no diagnostic or treatment purpose",
+      "caution": ""
     },
     {
       "key": "S1-14L",
@@ -314,7 +352,8 @@
       "item": "14L",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 14L",
       "software": true,
-      "summary": "Calculator software that either uses published clinical standards or authoritative sources, or displays calculations and outputs so the user can validate them, provided it does not control the administration of a calculated dose"
+      "summary": "Calculator software that either uses published clinical standards or authoritative sources, or displays calculations and outputs so the user can validate them, provided it does not control the administration of a calculated dose",
+      "caution": ""
     },
     {
       "key": "S1-14M",
@@ -322,7 +361,8 @@
       "item": "14M",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 14M",
       "software": true,
-      "summary": "Electronic health records used in clinical practice by healthcare providers to manage patient clinical data within or between facilities, provided they have no diagnostic, monitoring, predictive or treatment purpose"
+      "summary": "Electronic health records used in clinical practice by healthcare providers to manage patient clinical data within or between facilities, provided they have no diagnostic, monitoring, predictive or treatment purpose",
+      "caution": ""
     },
     {
       "key": "S1-14N",
@@ -330,7 +370,8 @@
       "item": "14N",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 14N",
       "software": true,
-      "summary": "Data analytics software for collecting and analysing class, group or population data, provided it is not for diagnosis, monitoring, prediction, prognosis or treatment of individuals"
+      "summary": "Data analytics software for collecting and analysing class, group or population data, provided it is not for diagnosis, monitoring, prediction, prognosis or treatment of individuals",
+      "caution": ""
     },
     {
       "key": "S1-14O",
@@ -338,7 +379,8 @@
       "item": "14O",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 14O",
       "software": true,
-      "summary": "Laboratory information management systems, provided they do not manipulate data to change or generate diagnostic outputs (beyond simple calculations or report comments) and have no monitoring, predictive or treatment purpose"
+      "summary": "Laboratory information management systems, provided they do not manipulate data to change or generate diagnostic outputs (beyond simple calculations or report comments) and have no monitoring, predictive or treatment purpose",
+      "caution": ""
     },
     {
       "key": "S1-15",
@@ -346,7 +388,8 @@
       "item": "15",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 1 item 15",
       "software": false,
-      "summary": "Tinted bases and foundations containing sunscreen that are secondary sunscreen products, contain no Schedule 2, 3, 4 or 8 poison, and meet the AS/NZS 2604:2021 labelling and broad-spectrum requirements; see section 7 for transitional goods"
+      "summary": "Tinted bases and foundations containing sunscreen that are secondary sunscreen products, contain no Schedule 2, 3, 4 or 8 poison, and meet the AS/NZS 2604:2021 labelling and broad-spectrum requirements; see section 7 for transitional goods",
+      "caution": ""
     },
     {
       "key": "S2-1",
@@ -354,7 +397,8 @@
       "item": "1",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 2 item 1",
       "software": false,
-      "summary": "Anti-acne skin care containing no Schedule 2, 3, 4 or 8 poison, when presented as controlling acne only by cleansing, moisturising, exfoliating or drying the skin"
+      "summary": "Anti-acne skin care containing no Schedule 2, 3, 4 or 8 poison, when presented as controlling acne only by cleansing, moisturising, exfoliating or drying the skin",
+      "caution": ""
     },
     {
       "key": "S2-2",
@@ -362,7 +406,8 @@
       "item": "2",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 2 item 2",
       "software": false,
-      "summary": "Antibacterial skin care containing no Schedule 2, 3, 4 or 8 poison, when presented as active against bacteria only, and not for use with disease, piercing, blood exposure, clinical contact, venepuncture or injections"
+      "summary": "Antibacterial skin care containing no Schedule 2, 3, 4 or 8 poison, when presented as active against bacteria only, and not for use with disease, piercing, blood exposure, clinical contact, venepuncture or injections",
+      "caution": ""
     },
     {
       "key": "S2-3",
@@ -370,7 +415,8 @@
       "item": "3",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 2 item 3",
       "software": false,
-      "summary": "Anti-dandruff hair care, when presented as controlling dandruff only by cleansing, moisturising, exfoliating or drying the scalp"
+      "summary": "Anti-dandruff hair care, when presented as controlling dandruff only by cleansing, moisturising, exfoliating or drying the scalp",
+      "caution": ""
     },
     {
       "key": "S2-4",
@@ -378,7 +424,8 @@
       "item": "4",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 2 item 4",
       "software": false,
-      "summary": "Compressed gases, when used as a power source for medical devices"
+      "summary": "Compressed gases, when used as a power source for medical devices",
+      "caution": ""
     },
     {
       "key": "S2-4A",
@@ -386,7 +433,8 @@
       "item": "4A",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 2 item 4A",
       "software": false,
-      "summary": "Human cells or tissues collected from a patient and manufactured under the treating practitioner's supervision in a hospital, when used for that patient and not advertised to consumers"
+      "summary": "Human cells or tissues collected from a patient and manufactured under the treating practitioner's supervision in a hospital, when used for that patient and not advertised to consumers",
+      "caution": ""
     },
     {
       "key": "S2-4B",
@@ -394,7 +442,8 @@
       "item": "4B",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 2 item 4B",
       "software": false,
-      "summary": "Fresh viable human haematopoietic progenitor cells, when used for direct donor-to-host transplantation for haematopoietic reconstitution"
+      "summary": "Fresh viable human haematopoietic progenitor cells, when used for direct donor-to-host transplantation for haematopoietic reconstitution",
+      "caution": ""
     },
     {
       "key": "S2-4C",
@@ -402,7 +451,8 @@
       "item": "4C",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 2 item 4C",
       "software": false,
-      "summary": "Fresh viable human organs or parts of organs, when used for direct donor-to-host transplantation"
+      "summary": "Fresh viable human organs or parts of organs, when used for direct donor-to-host transplantation",
+      "caution": ""
     },
     {
       "key": "S2-4D",
@@ -410,7 +460,8 @@
       "item": "4D",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 2 item 4D",
       "software": false,
-      "summary": "Human reproductive tissue, when used in assisted reproductive therapy"
+      "summary": "Human reproductive tissue, when used in assisted reproductive therapy",
+      "caution": ""
     },
     {
       "key": "S2-4E",
@@ -418,7 +469,8 @@
       "item": "4E",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 2 item 4E",
       "software": false,
-      "summary": "Human eggs or sperm, when used in an activity authorised by a mitochondrial donation licence"
+      "summary": "Human eggs or sperm, when used in an activity authorised by a mitochondrial donation licence",
+      "caution": ""
     },
     {
       "key": "S2-5",
@@ -426,7 +478,8 @@
       "item": "5",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 2 item 5",
       "software": false,
-      "summary": "Moisturising skin care containing sunscreen that is a secondary sunscreen product meeting AS/NZS 2604:2021, when presented at SPF 15 or below, not water-resistant, at most 300 mL or 300 g, with an expiry date if needed and no therapeutic claims beyond premature ageing"
+      "summary": "Moisturising skin care containing sunscreen that is a secondary sunscreen product meeting AS/NZS 2604:2021, when presented at SPF 15 or below, not water-resistant, at most 300 mL or 300 g, with an expiry date if needed and no therapeutic claims beyond premature ageing",
+      "caution": ""
     },
     {
       "key": "S2-6",
@@ -434,7 +487,8 @@
       "item": "6",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 2 item 6",
       "software": false,
-      "summary": "Oral hygiene products containing no Schedule 2, 3, 4 or 8 poison, when the only benefits claimed follow from better oral hygiene, including preventing tooth decay"
+      "summary": "Oral hygiene products containing no Schedule 2, 3, 4 or 8 poison, when the only benefits claimed follow from better oral hygiene, including preventing tooth decay",
+      "caution": ""
     },
     {
       "key": "S2-7",
@@ -442,7 +496,8 @@
       "item": "7",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 2 item 7",
       "software": false,
-      "summary": "Packs and kits of medical devices for preventing blood borne and sexually transmissible diseases, where every item is already on the Register, when supplied as part of an expressly authorised government health promotion program"
+      "summary": "Packs and kits of medical devices for preventing blood borne and sexually transmissible diseases, where every item is already on the Register, when supplied as part of an expressly authorised government health promotion program",
+      "caution": ""
     },
     {
       "key": "S2-8",
@@ -450,7 +505,8 @@
       "item": "8",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 2 item 8",
       "software": false,
-      "summary": "Piped medical gas systems, when installed and used in compliance with AS 2896-2011"
+      "summary": "Piped medical gas systems, when installed and used in compliance with AS 2896-2011",
+      "caution": ""
     },
     {
       "key": "S2-9",
@@ -458,7 +514,8 @@
       "item": "9",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 2 item 9",
       "software": false,
-      "summary": "Preparations containing a sunscreening substance whose primary purpose is neither sun protection nor another therapeutic purpose, when presented without any claimed sun protection factor or other therapeutic use"
+      "summary": "Preparations containing a sunscreening substance whose primary purpose is neither sun protection nor another therapeutic purpose, when presented without any claimed sun protection factor or other therapeutic use",
+      "caution": ""
     },
     {
       "key": "S2-10",
@@ -466,7 +523,8 @@
       "item": "10",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 2 item 10",
       "software": false,
-      "summary": "Sunbathing products containing sunscreen with SPF 4 to 15 that are secondary sunscreen products meeting AS/NZS 2604:2021, when presented at SPF 15 or below, not water-resistant, at most 300 mL or 300 g, with an expiry date if needed and no therapeutic claims beyond premature ageing"
+      "summary": "Sunbathing products containing sunscreen with SPF 4 to 15 that are secondary sunscreen products meeting AS/NZS 2604:2021, when presented at SPF 15 or below, not water-resistant, at most 300 mL or 300 g, with an expiry date if needed and no therapeutic claims beyond premature ageing",
+      "caution": ""
     },
     {
       "key": "S2-11",
@@ -474,7 +532,8 @@
       "item": "11",
       "citation": "Therapeutic Goods (Excluded Goods) Determination 2018 Schedule 2 item 11",
       "software": false,
-      "summary": "Goods for retaining, cushioning or repairing dentures, when presented for supply to the ultimate consumer"
+      "summary": "Goods for retaining, cushioning or repairing dentures, when presented for supply to the ultimate consumer",
+      "caution": ""
     }
   ]
 }

@@ -32,6 +32,19 @@ COMPILATION = {
     "compilation_date": "2024-08-08",
 }
 
+# Traps the TGA's own guidance warns about, raised as flags when the item is
+# used. Keep each one sourced.
+CAUTIONS = {
+    "S1-14H": (
+        "item 14H covers software whose only purpose is storing or transmitting "
+        "patient images. TGA guidance (Understanding the image storage and "
+        "transmission software exclusion, March 2026) states it does not apply "
+        "to software that also displays images for diagnosis or screening. If "
+        "this function lets anyone view images to make a clinical decision, it "
+        "is not excluded and is likely a regulated medical device."
+    ),
+}
+
 # (item, software, summary)
 SCHEDULE_1 = [
     ("1", False, "Adhesive removers and non-medicated skin cleansers for colostomy "
@@ -193,13 +206,15 @@ SCHEDULE_2 = [
 def entries():
     for schedule, rows in ((1, SCHEDULE_1), (2, SCHEDULE_2)):
         for item, software, summary in rows:
+            key = f"S{schedule}-{item}"
             yield {
-                "key": f"S{schedule}-{item}",
+                "key": key,
                 "schedule": schedule,
                 "item": item,
                 "citation": f"{INSTRUMENT} Schedule {schedule} item {item}",
                 "software": software,
                 "summary": summary,
+                "caution": CAUTIONS.get(key, ""),
             }
 
 
@@ -207,6 +222,7 @@ def main():
     items = list(entries())
     keys = [entry["key"] for entry in items]
     assert len(keys) == len(set(keys)), "duplicate key"
+    assert set(CAUTIONS) <= set(keys), "caution for an item that does not exist"
     payload = {"instrument": INSTRUMENT, **COMPILATION, "items": items}
     OUT.write_text(json.dumps(payload, indent=2) + "\n")
     software = sum(1 for entry in items if entry["software"])

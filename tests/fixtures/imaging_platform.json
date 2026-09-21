@@ -6,9 +6,9 @@
   "functions": [
     {
       "name": "Study archive",
-      "expected_status": "not_a_medical_device",
+      "expected_status": "excluded_from_regulation",
       "expected_class": null,
-      "expected_rule": "storage and display only, no s41BD purpose"
+      "expected_rule": "S1-14H"
     },
     {
       "name": "Abnormality triage",
@@ -25,7 +25,7 @@
   ],
   "source": "Reasoned from Schedule 2 rule text, not a worked example",
   "verified": false,
-  "note": "Three software functions of one platform. Storage alone carries no medical-device purpose, triage flags abnormal studies, and the follow-up suggestion specifies an intervention. Tests that the highest function governs the product and that one regulated function is enough to pull the whole platform in. The follow-up suggestion stays regulated only because it is taken to work from the studies themselves. If it worked from the report text alone it would meet every CDSS criterion and be exempt, so this function is the one to check first. The archive is treated as having no s41BD purpose. Item 14H excludes software whose sole purpose is storing or transmitting patient images, but this archive also displays them, so 14H does not cover it as described.",
+  "note": "Three software functions of one platform. The archive is excluded under item 14H, triage flags abnormal studies, and the follow-up suggestion specifies an intervention. Tests that the highest function governs the product and that one regulated function pulls the whole platform in. WARNING: the archive is worded as store and transmit only on purpose. TGA guidance (March 2026) says 14H does not cover software that also displays images for diagnosis or screening; such a function is likely a regulated device, and its class waits on the stage 4 rules. The follow-up suggestion analyses the scan images, which fails the second CDSS criterion and keeps it regulated; cdss_followup_from_report_text is the report-only version, which is exempt.",
   "profile": {
     "core": {
       "product_name": {
@@ -62,45 +62,45 @@
           "evidence": "Study archive"
         },
         "description": {
-          "value": "Stores and displays radiology studies without interpretation.",
+          "value": "Stores and transmits radiology studies without interpretation.",
           "basis": "stated",
-          "evidence": "Stores and displays radiology studies without interpretation."
+          "evidence": "Stores and transmits radiology studies without interpretation."
         },
         "kind": {
           "value": "general_device",
           "basis": "stated",
-          "evidence": "Stores and displays radiology studies without interpretation."
+          "evidence": "Stores and transmits radiology studies without interpretation."
         },
         "is_software": {
           "value": "yes",
           "basis": "stated",
-          "evidence": "Stores and displays radiology studies without interpretation."
+          "evidence": "Stores and transmits radiology studies without interpretation."
         },
         "status": {
           "therapeutic_purpose": {
-            "value": "no_therapeutic_purpose",
+            "value": "diagnosis_prevention_monitoring_prediction_treatment_of_disease",
             "basis": "stated",
-            "evidence": "Stores and displays radiology studies without interpretation."
+            "evidence": "Stores and transmits radiology studies without interpretation."
           },
           "principal_action_pharmacological": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
-          },
-          "is_accessory_to_device": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Stores and displays radiology studies without interpretation."
+            "evidence": "Stores and transmits radiology studies without interpretation."
+          },
+          "is_accessory_to_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "excluded_item": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "S1-14H",
+            "basis": "stated",
+            "evidence": "Stores and transmits radiology studies without interpretation."
           },
           "exclusion_conditions_met": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Stores and transmits radiology studies without interpretation."
           },
           "cdss_sole_purpose_recommendation": {
             "value": null,
@@ -122,7 +122,7 @@
           "invasiveness": {
             "value": "non_invasive",
             "basis": "stated",
-            "evidence": "Stores and displays radiology studies without interpretation."
+            "evidence": "Stores and transmits radiology studies without interpretation."
           },
           "duration": {
             "value": null,
@@ -142,7 +142,7 @@
           "contacts_injured_skin": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Stores and displays radiology studies without interpretation."
+            "evidence": "Stores and transmits radiology studies without interpretation."
           },
           "wound_function": {
             "value": null,
@@ -157,7 +157,7 @@
           "fluid_handling": {
             "value": "none",
             "basis": "stated",
-            "evidence": "Stores and displays radiology studies without interpretation."
+            "evidence": "Stores and transmits radiology studies without interpretation."
           },
           "connected_to_active_device": {
             "value": null,
@@ -182,7 +182,7 @@
           "active_type": {
             "value": "not_active",
             "basis": "stated",
-            "evidence": "Stores and displays radiology studies without interpretation."
+            "evidence": "Stores and transmits radiology studies without interpretation."
           },
           "is_active_implantable": {
             "value": null,
@@ -227,7 +227,7 @@
           "incorporates_medicine": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Stores and displays radiology studies without interpretation."
+            "evidence": "Stores and transmits radiology studies without interpretation."
           },
           "animal_or_microbial_origin": {
             "value": null,
@@ -242,12 +242,12 @@
           "contraceptive_or_sti_prevention": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Stores and displays radiology studies without interpretation."
+            "evidence": "Stores and transmits radiology studies without interpretation."
           },
           "disinfects_another_device": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Stores and displays radiology studies without interpretation."
+            "evidence": "Stores and transmits radiology studies without interpretation."
           }
         },
         "ivd": null
@@ -456,30 +456,30 @@
           "evidence": "Follow-up interval suggestion"
         },
         "description": {
-          "value": "Suggests a follow-up imaging interval to the reporting radiologist.",
+          "value": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist.",
           "basis": "stated",
-          "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+          "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
         },
         "kind": {
           "value": "general_device",
           "basis": "stated",
-          "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+          "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
         },
         "is_software": {
           "value": "yes",
           "basis": "stated",
-          "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+          "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
         },
         "status": {
           "therapeutic_purpose": {
             "value": "diagnosis_prevention_monitoring_prediction_treatment_of_disease",
             "basis": "stated",
-            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
           },
           "principal_action_pharmacological": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
           },
           "is_accessory_to_device": {
             "value": null,
@@ -489,7 +489,7 @@
           "excluded_item": {
             "value": "none",
             "basis": "stated",
-            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
           },
           "exclusion_conditions_met": {
             "value": null,
@@ -499,24 +499,24 @@
           "cdss_sole_purpose_recommendation": {
             "value": "yes",
             "basis": "stated",
-            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
           },
           "cdss_processes_device_signal_or_image": {
             "value": "yes",
             "basis": "stated",
-            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
           },
           "cdss_replaces_clinical_judgement": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
           }
         },
         "general": {
           "invasiveness": {
             "value": "non_invasive",
             "basis": "stated",
-            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
           },
           "duration": {
             "value": null,
@@ -536,7 +536,7 @@
           "contacts_injured_skin": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
           },
           "wound_function": {
             "value": null,
@@ -551,7 +551,7 @@
           "fluid_handling": {
             "value": "none",
             "basis": "stated",
-            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
           },
           "connected_to_active_device": {
             "value": null,
@@ -571,12 +571,12 @@
           "delivers_ionising_radiation": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
           },
           "active_type": {
             "value": "active_diagnostic",
             "basis": "stated",
-            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
           },
           "is_active_implantable": {
             "value": null,
@@ -586,12 +586,12 @@
           "clinical_function": {
             "value": "specify_treatment_or_intervention",
             "basis": "stated",
-            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
           },
           "delivers_hazardous_energy": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
           },
           "administers_or_removes_medicine": {
             "value": null,
@@ -601,27 +601,27 @@
           "decision_maker": {
             "value": "informs_a_health_professional_who_decides",
             "basis": "stated",
-            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
           },
           "condition_severity": {
             "value": "serious_disease_or_condition",
             "basis": "stated",
-            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
           },
           "public_health_risk": {
             "value": "moderate",
             "basis": "stated",
-            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
           },
           "records_diagnostic_images": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
           },
           "incorporates_medicine": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
           },
           "animal_or_microbial_origin": {
             "value": null,
@@ -636,19 +636,19 @@
           "contraceptive_or_sti_prevention": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
           },
           "disinfects_another_device": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Suggests a follow-up imaging interval to the reporting radiologist."
+            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
           }
         },
         "ivd": null
       }
     ],
     "funding": null,
-    "source_text": "Radiology reporting platform Stores radiology studies, flags abnormal ones for priority review and suggests a follow-up imaging interval. Study archive Stores and displays radiology studies without interpretation. Abnormality triage Flags studies showing suspected abnormality for priority review by a radiologist. Follow-up interval suggestion Suggests a follow-up imaging interval to the reporting radiologist. fixture decomposition is fixed by hand",
+    "source_text": "Radiology reporting platform Stores radiology studies, flags abnormal ones for priority review and suggests a follow-up imaging interval. Study archive Stores and transmits radiology studies without interpretation. Abnormality triage Flags studies showing suspected abnormality for priority review by a radiologist. Follow-up interval suggestion Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist. fixture decomposition is fixed by hand",
     "schema_version": "0.4"
   }
 }

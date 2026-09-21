@@ -109,6 +109,7 @@ class Exclusion:
     citation: str     # as it should appear in the report
     software: bool    # a software item, 14A to 14O
     summary: str      # paraphrase naming the conditions, not the legal text
+    caution: str = ""  # a known trap, from TGA guidance; raised as a flag when used
 
 
 EXCLUSION_TABLE: dict[str, Exclusion] = {}
@@ -132,6 +133,27 @@ def load_exclusions(path: str | Path = EXCLUSION_SOURCE) -> int:
     return len(EXCLUSION_TABLE)
 
 
+class Severity(str, Enum):
+    """How loudly the report should raise a flag.
+
+    AMBER: the verdict stands, but a person should look before relying on it.
+    RED: the tool could not reach a safe verdict and a person must decide.
+    """
+
+    AMBER = "amber"
+    RED = "red"
+
+
+@dataclass(frozen=True)
+class Flag:
+    """Something the report must show beside the verdict, not bury in it."""
+
+    severity: Severity
+    code: str        # stable identifier, for tests and for the report layout
+    message: str     # plain words for the founder
+    functions: tuple[int, ...] = ()   # indices of the functions it concerns
+
+
 @dataclass
 class FunctionStatus:
     """One function's verdict."""
@@ -142,6 +164,7 @@ class FunctionStatus:
     hits: list[RuleHit] = field(default_factory=list)
     unresolved: list[str] = field(default_factory=list)
     missing_sources: list[str] = field(default_factory=list)
+    exclusion: str | None = None   # the exclusion key, when the outcome is EXCLUDED
 
 
 @dataclass
@@ -157,6 +180,7 @@ class StatusResult:
     unresolved: list[str] = field(default_factory=list)
     missing_sources: list[str] = field(default_factory=list)
     obligations: list[str] = field(default_factory=list)
+    flags: list[Flag] = field(default_factory=list)
 
     @property
     def proceeds(self) -> bool:
@@ -276,6 +300,7 @@ def status_of(function: FunctionProfile, index: int = 0) -> FunctionStatus:
             return verdict
         if conditions is Tri.YES:
             verdict.outcome = StatusOutcome.EXCLUDED
+            verdict.exclusion = key
             verdict.hits.append(
                 RuleHit(
                     rule_id=f"egd-{key}",
@@ -332,6 +357,7 @@ def gate(profile: DeviceProfile) -> StatusResult:
     result.missing_sources = sorted(
         {source for f in result.functions for source in f.missing_sources}
     )
+    result.flags = _caution_flags(result.functions)
 
     # Existential: one regulated function regulates the product, whatever the
     # rest are. Unresolved fields elsewhere still block classification, which is
@@ -348,10 +374,52 @@ def gate(profile: DeviceProfile) -> StatusResult:
     if all(o is StatusOutcome.NOT_A_DEVICE for o in outcomes):
         result.outcome = StatusOutcome.NOT_A_DEVICE
     elif StatusOutcome.EXEMPT_CDSS in outcomes:
-        # A product with an exempt function and an excluded one is supplied as
-        # exempt: the notification obligation is the binding one.
+        # The exempt function is still a medical device with duties, so the
+        # product is supplied as exempt. If another function is excluded, the
+        # verdict is defensible but unusual, and the report says so out loud.
         result.outcome = StatusOutcome.EXEMPT_CDSS
         result.obligations.append(CDSS_NOTIFICATION)
+        if StatusOutcome.EXCLUDED in outcomes:
+            result.flags.append(_mixed_flag(result.functions))
     else:
         result.outcome = StatusOutcome.EXCLUDED
     return result
+
+
+def _name(function: FunctionStatus) -> str:
+    return function.name or f"function {function.index + 1}"
+
+
+def _mixed_flag(functions: list[FunctionStatus]) -> Flag:
+    exempt = [f for f in functions if f.outcome is StatusOutcome.EXEMPT_CDSS]
+    excluded = [f for f in functions if f.outcome is StatusOutcome.EXCLUDED]
+    return Flag(
+        severity=Severity.AMBER,
+        code="mixed_exempt_and_excluded",
+        message=(
+            f"This product mixes an exempt function ({', '.join(map(_name, exempt))}) "
+            f"with an excluded one ({', '.join(map(_name, excluded))}). It is treated "
+            "as exempt, so the exemption's conditions apply to the whole product, "
+            "including notifying the TGA. The excluded function adds no obligations "
+            "of its own. Confirm this split with the TGA or a regulatory adviser "
+            "before relying on it."
+        ),
+        functions=tuple(f.index for f in exempt + excluded),
+    )
+
+
+def _caution_flags(functions: list[FunctionStatus]) -> list[Flag]:
+    """One flag per excluded function whose exclusion item carries a caution."""
+    flags = []
+    for function in functions:
+        exclusion = EXCLUSION_TABLE.get(function.exclusion or "")
+        if exclusion is not None and exclusion.caution:
+            flags.append(
+                Flag(
+                    severity=Severity.AMBER,
+                    code=f"exclusion_caution_{exclusion.key}",
+                    message=f"{_name(function)}: {exclusion.caution}",
+                    functions=(function.index,),
+                )
+            )
+    return flags
