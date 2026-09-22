@@ -25,7 +25,6 @@ from reguide.profile import (
     ActiveType,
     Answer,
     Basis,
-    BodyContact,
     ClinicalFunction,
     CoreProfile,
     DecisionMaker,
@@ -91,6 +90,20 @@ GENERAL_DEFAULTS = dict(
     inhalation_treats_life_threatening_condition=Tri.NO,
     is_substance_through_orifice_or_skin=Tri.NO,
     substance_acts_in_nose_mouth_or_on_skin=Tri.NO,
+    connected_to_an_active_device=Tri.NO,
+    liable_to_be_absorbed_by_mucous_membrane=Tri.NO,
+    corrects_heart_or_circulatory_defect_by_contact=Tri.NO,
+    direct_contact_heart_circulation_or_nervous_system=Tri.NO,
+    reusable_surgical_instrument=Tri.NO,
+    delivers_ionising_radiation=Tri.NO,
+    has_biological_effect=Tri.NO,
+    wholly_or_mostly_absorbed=Tri.NO,
+    undergoes_chemical_change=Tri.NO,
+    placed_in_teeth=Tri.NO,
+    administers_medicine_hazardously_by_delivery_system=Tri.NO,
+    administers_medicine=Tri.NO,
+    joint_replacement_or_surgical_mesh=Tri.NO,
+    spinal_motion_preserving=Tri.NO,
     handles_substances_for_administration=Tri.NO,
     contacts_injured_skin_or_mucous_membrane=Tri.NO,
     channels_or_stores_blood_for_administration=Tri.NO,
@@ -315,7 +328,6 @@ add("screw_transient", "Class IIa", "3.2(2)", NOT_IVD,
            "Holds bone together temporarily during surgery.",
            status=dict(therapeutic_purpose=TherapeuticPurpose.INJURY),
            invasiveness=Invasiveness.SURGICALLY_INVASIVE, duration=Duration.TRANSIENT,
-           body_contact=BodyContact.BREACHED_SKIN, absorbed_or_chemically_changed=Tri.NO,
            reusable_surgical_instrument=Tri.NO, sterile=Tri.YES))
 
 add("screw_short_term", "Class IIa", "3.3(2)", NOT_IVD,
@@ -324,7 +336,6 @@ add("screw_short_term", "Class IIa", "3.3(2)", NOT_IVD,
            "Holds bone together for up to 30 days to support fracture healing.",
            status=dict(therapeutic_purpose=TherapeuticPurpose.INJURY),
            invasiveness=Invasiveness.SURGICALLY_INVASIVE, duration=Duration.SHORT_TERM,
-           body_contact=BodyContact.BREACHED_SKIN, absorbed_or_chemically_changed=Tri.NO,
            sterile=Tri.YES))
 
 add("screw_long_term", "Class IIb", "3.4(2)", NOT_IVD,
@@ -333,16 +344,16 @@ add("screw_long_term", "Class IIb", "3.4(2)", NOT_IVD,
            "Holds bone together for longer than 30 days, permanently implanted.",
            status=dict(therapeutic_purpose=TherapeuticPurpose.INJURY),
            invasiveness=Invasiveness.IMPLANTABLE, duration=Duration.LONG_TERM,
-           body_contact=BodyContact.BREACHED_SKIN, absorbed_or_chemically_changed=Tri.NO,
            is_active_implantable=Tri.NO, sterile=Tri.YES))
 
-add("screw_central_circulation", "Class III", "3.3(4)(a)", NOT_IVD,
-    "Location beats duration. Tests that body_contact is read first.",
+add("screw_central_circulation", "Class III", "3.3(4)(b)", NOT_IVD,
+    "Location beats duration. TGA case study 2 cites 3.3(4)(a), but a fixation "
+    "screw does not diagnose, monitor, control or correct a heart defect; direct "
+    "contact with the central circulatory or nervous system is 3.3(4)(b).",
     device("Fixation screw contacting central circulatory system",
            "Direct contact with the central circulatory or central nervous system.",
            invasiveness=Invasiveness.SURGICALLY_INVASIVE, duration=Duration.SHORT_TERM,
-           body_contact=BodyContact.CENTRAL_CIRCULATION,
-           absorbed_or_chemically_changed=Tri.NO, sterile=Tri.YES))
+           direct_contact_heart_circulation_or_nervous_system=Tri.YES, sterile=Tri.YES))
 
 # -- The dressing family. Intended function decides, not the wound. ---------
 add("dressing_mechanical_barrier", "Class I", "2.4(3)", NOT_IVD,
@@ -426,8 +437,6 @@ add("heparin_coated_catheter", "Class III", "5.1", NOT_IVD,
     device("Heparin-coated catheter",
            "Catheter incorporating heparin as an ancillary medicinal substance.",
            invasiveness=Invasiveness.SURGICALLY_INVASIVE, duration=Duration.SHORT_TERM,
-           body_contact=BodyContact.CENTRAL_CIRCULATION,
-           absorbed_or_chemically_changed=Tri.NO,
            incorporates_medicine=Tri.YES, sterile=Tri.YES))
 
 add("condom_with_spermicide", "Class III", "5.1(2)", NOT_IVD,
@@ -437,7 +446,7 @@ add("condom_with_spermicide", "Class III", "5.1(2)", NOT_IVD,
     device("Condom with spermicide",
            "Barrier contraceptive incorporating a spermicidal agent.",
            invasiveness=Invasiveness.BODY_ORIFICE, duration=Duration.TRANSIENT,
-           orifice_site=OrificeSite.OTHER_ORIFICE, connected_to_active_device=Tri.NO,
+           orifice_site=OrificeSite.OTHER_ORIFICE, connected_to_an_active_device=Tri.NO,
            contraceptive_or_sti_prevention=Tri.YES, incorporates_medicine=Tri.YES,
            status=dict(therapeutic_purpose=TherapeuticPurpose.CONCEPTION)))
 
@@ -447,7 +456,19 @@ add("orifice_long_term", "Class IIb", "3.1(2)(c)(i)", NOT_IVD,
     device("Long-term indwelling orifice device",
            "Invasive device used through a body orifice for longer than 30 days.",
            invasiveness=Invasiveness.BODY_ORIFICE, duration=Duration.LONG_TERM,
-           orifice_site=OrificeSite.OTHER_ORIFICE, connected_to_active_device=Tri.NO))
+           orifice_site=OrificeSite.OTHER_ORIFICE, connected_to_an_active_device=Tri.NO))
+
+add("nasal_device_long_term", "Class IIa", "3.1(2)(c)(ii)", RULE_TEXT,
+    "Reasoned from the 3.1 text, not a worked example: a long-term nasal device "
+    "not liable to be absorbed by the mucous membrane is Class IIa under "
+    "3.1(2)(c)(ii); if it were liable to be absorbed it would stay at (c)(i), "
+    "Class IIb. Exercises the absorption question, which nothing else reaches.",
+    device("Long-term nasal splint",
+           "Non-absorbable splint used in a nasal cavity for longer than 30 days.",
+           invasiveness=Invasiveness.BODY_ORIFICE, duration=Duration.LONG_TERM,
+           orifice_site=OrificeSite.NASAL_CAVITY, connected_to_an_active_device=Tri.NO,
+           liable_to_be_absorbed_by_mucous_membrane=Tri.NO),
+    verified=False)
 
 # -- Active devices ---------------------------------------------------------
 add("diagnostic_ultrasound", "Class IIa", "4.3(2)(a)", ACTIVE,
@@ -456,7 +477,7 @@ add("diagnostic_ultrasound", "Class IIa", "4.3(2)(a)", ACTIVE,
            "Supplies ultrasonic energy absorbed by the patient for imaging.",
            active_type=ActiveType.DIAGNOSTIC, clinical_function=ClinicalFunction.SUPPLY_ENERGY,
            delivers_hazardous_energy=Tri.NO, delivers_ionising_radiation=Tri.NO,
-           records_diagnostic_images=Tri.YES, body_contact=BodyContact.INTACT_SKIN,
+           records_diagnostic_images=Tri.YES,
            records_images_or_anatomical_model=Tri.YES,
            records_patient_images_outside_visible_spectrum=Tri.YES))
 
@@ -466,7 +487,7 @@ add("mri_equipment", "Class IIa", "4.3(2)(a)", ACTIVE,
            "Supplies energy absorbed by the patient's body for diagnostic imaging.",
            active_type=ActiveType.DIAGNOSTIC, clinical_function=ClinicalFunction.SUPPLY_ENERGY,
            delivers_hazardous_energy=Tri.NO, delivers_ionising_radiation=Tri.NO,
-           records_diagnostic_images=Tri.YES, body_contact=BodyContact.NONE,
+           records_diagnostic_images=Tri.YES,
            records_images_or_anatomical_model=Tri.YES,
            records_patient_images_outside_visible_spectrum=Tri.YES))
 
@@ -478,7 +499,7 @@ add("radiotherapy_afterloading_control", "Class IIb", "4.3(3)(c)", ACTIVE,
            active_type=ActiveType.DIAGNOSTIC,
            clinical_function=ClinicalFunction.CONTROL_ANOTHER_DEVICE,
            delivers_hazardous_energy=Tri.YES, delivers_ionising_radiation=Tri.YES,
-           records_diagnostic_images=Tri.NO, body_contact=BodyContact.NONE))
+           records_diagnostic_images=Tri.NO))
 
 # -- Software. The pairs that matter most. ----------------------------------
 add("melanoma_screening_app", "Class III", "4.5(1)(c)(i)", ACTIVE,
@@ -494,7 +515,7 @@ add("melanoma_screening_app", "Class III", "4.5(1)(c)(i)", ACTIVE,
            condition_severity=Severity.DEATH_WITHOUT_URGENT_TREATMENT,
            public_health_risk=PublicHealthRisk.LOW,
            delivers_hazardous_energy=Tri.NO, delivers_ionising_radiation=Tri.NO,
-           records_diagnostic_images=Tri.NO, body_contact=BodyContact.NONE))
+           records_diagnostic_images=Tri.NO))
 
 add("emphysema_ct_software", "Class IIa", "4.5(2)(b)", ACTIVE,
     "Same rule family as the melanoma app. A clinician decides, so it drops.",
@@ -508,7 +529,7 @@ add("emphysema_ct_software", "Class IIa", "4.5(2)(b)", ACTIVE,
            condition_severity=Severity.SERIOUS,
            public_health_risk=PublicHealthRisk.MODERATE,
            delivers_hazardous_energy=Tri.NO, delivers_ionising_radiation=Tri.NO,
-           records_diagnostic_images=Tri.NO, body_contact=BodyContact.NONE))
+           records_diagnostic_images=Tri.NO))
 
 add("spect_cardiac_monitoring", "Class IIb", "4.6(a)", ACTIVE,
     "Monitoring where the information could indicate immediate danger.",
@@ -522,7 +543,7 @@ add("spect_cardiac_monitoring", "Class IIb", "4.6(a)", ACTIVE,
            condition_severity=Severity.DEATH_WITHOUT_URGENT_TREATMENT,
            public_health_risk=PublicHealthRisk.LOW,
            delivers_hazardous_energy=Tri.NO, delivers_ionising_radiation=Tri.NO,
-           records_diagnostic_images=Tri.NO, body_contact=BodyContact.NONE))
+           records_diagnostic_images=Tri.NO))
 
 add("emg_dystrophy_monitoring", "Class IIa", "4.6(b)", ACTIVE,
     "Paired with the SPECT fixture. Same rule, lower danger, lower class.",
@@ -536,7 +557,7 @@ add("emg_dystrophy_monitoring", "Class IIa", "4.6(b)", ACTIVE,
            condition_severity=Severity.MODERATE,
            public_health_risk=PublicHealthRisk.LOW,
            delivers_hazardous_energy=Tri.NO, delivers_ionising_radiation=Tri.NO,
-           records_diagnostic_images=Tri.NO, body_contact=BodyContact.NONE))
+           records_diagnostic_images=Tri.NO))
 
 # -- Class I with regulation 3.9 qualifiers, and a reusable instrument. -----
 add("sterile_barrier_dressing", "Class I", "2.4(3)", NOT_IVD,
@@ -559,8 +580,7 @@ add("measuring_thermometer", "Class I", "2.1", THERMOMETERS,
     "nothing else in the set touches.",
     device("Non-powered clinical thermometer",
            "Clinical thermometer, not battery-powered, that measures body temperature "
-           "by contact with intact skin.",
-           body_contact=BodyContact.INTACT_SKIN, measuring=Tri.YES),
+           "by contact with intact skin.", measuring=Tri.YES),
     qualifiers=("measuring_function",))
 
 add("reusable_surgical_instrument", "Class I", "3.2(4)", NOT_IVD,
@@ -569,7 +589,6 @@ add("reusable_surgical_instrument", "Class I", "3.2(4)", NOT_IVD,
     device("Reusable surgical scissors",
            "Reusable surgical instrument for transient use during surgery.",
            invasiveness=Invasiveness.SURGICALLY_INVASIVE, duration=Duration.TRANSIENT,
-           body_contact=BodyContact.BREACHED_SKIN, absorbed_or_chemically_changed=Tri.NO,
            reusable_surgical_instrument=Tri.YES))
 
 # -- IVDs, Schedule 2A ------------------------------------------------------
@@ -661,7 +680,7 @@ add("saline_nasal_spray", "Class IIa", "5.11(c)", NOT_IVD,
            "Isotonic saline solution sprayed into the nasal cavity, where it achieves "
            "its intended purpose.",
            invasiveness=Invasiveness.BODY_ORIFICE, duration=Duration.TRANSIENT,
-           orifice_site=OrificeSite.NASAL_CAVITY, connected_to_active_device=Tri.NO,
+           orifice_site=OrificeSite.NASAL_CAVITY, connected_to_an_active_device=Tri.NO,
            is_substance_through_orifice_or_skin=Tri.YES,
            substance_acts_in_nose_mouth_or_on_skin=Tri.YES))
 
@@ -676,7 +695,7 @@ add("virtual_anatomical_model_software", "Class IIa", "5.4(3)", NOT_IVD,
            software=Tri.YES, active_type=ActiveType.DIAGNOSTIC,
            clinical_function=ClinicalFunction.NONE,
            delivers_hazardous_energy=Tri.NO, delivers_ionising_radiation=Tri.NO,
-           records_diagnostic_images=Tri.NO, body_contact=BodyContact.NONE,
+           records_diagnostic_images=Tri.NO,
            records_images_or_anatomical_model=Tri.YES,
            generates_virtual_anatomical_model=Tri.YES))
 
@@ -702,8 +721,7 @@ add_multi(
             fn("Lancet",
                "Single-use lancet for obtaining a capillary blood specimen.",
                invasiveness=Invasiveness.SURGICALLY_INVASIVE,
-               duration=Duration.TRANSIENT, body_contact=BodyContact.BREACHED_SKIN,
-               absorbed_or_chemically_changed=Tri.NO,
+               duration=Duration.TRANSIENT,
                reusable_surgical_instrument=Tri.NO),
         ],
         sterile=Tri.YES,
@@ -733,8 +751,7 @@ add_multi(
         [
             fn("Study archive",
                "Stores and transmits radiology studies without interpretation.",
-               status=IMAGE_STORAGE, software=Tri.YES, active_type=ActiveType.NOT_ACTIVE,
-               body_contact=BodyContact.NONE),
+               status=IMAGE_STORAGE, software=Tri.YES, active_type=ActiveType.NOT_ACTIVE),
             fn("Abnormality triage",
                "Flags studies showing suspected abnormality for priority review "
                "by a radiologist.",
@@ -744,7 +761,7 @@ add_multi(
                condition_severity=Severity.SERIOUS,
                public_health_risk=PublicHealthRisk.MODERATE,
                delivers_hazardous_energy=Tri.NO, delivers_ionising_radiation=Tri.NO,
-               records_diagnostic_images=Tri.NO, body_contact=BodyContact.NONE),
+               records_diagnostic_images=Tri.NO),
             fn("Follow-up interval suggestion",
                "Analyses the scan images and suggests a follow-up imaging interval "
                "to the reporting radiologist.",
@@ -754,7 +771,7 @@ add_multi(
                condition_severity=Severity.SERIOUS,
                public_health_risk=PublicHealthRisk.MODERATE,
                delivers_hazardous_energy=Tri.NO, delivers_ionising_radiation=Tri.NO,
-               records_diagnostic_images=Tri.NO, body_contact=BodyContact.NONE),
+               records_diagnostic_images=Tri.NO),
         ],
     ),
     [(None, "S1-14H", EXCLUDED),
@@ -777,8 +794,7 @@ add_multi(
         [
             fn("Activity and sleep tracking",
                "Records sleep and activity for general wellbeing.",
-               status=WELLNESS_TRACKING, software=Tri.YES, active_type=ActiveType.NOT_ACTIVE,
-               body_contact=BodyContact.NONE),
+               status=WELLNESS_TRACKING, software=Tri.YES, active_type=ActiveType.NOT_ACTIVE),
             fn("Symptom checker",
                "Asks a consumer about symptoms and suggests whether to seek "
                "medical care.",
@@ -789,7 +805,7 @@ add_multi(
                condition_severity=Severity.MODERATE,
                public_health_risk=PublicHealthRisk.LOW,
                delivers_hazardous_energy=Tri.NO, delivers_ionising_radiation=Tri.NO,
-               records_diagnostic_images=Tri.NO, body_contact=BodyContact.NONE),
+               records_diagnostic_images=Tri.NO),
         ],
     ),
     [(None, "S1-14B", EXCLUDED),
@@ -808,7 +824,7 @@ add("wellness_sleep_tracker", None, "S1-14B", GATE_TEXT,
     device("Sleep and activity tracker",
            "Records sleep and activity for general wellbeing.",
            status=WELLNESS_TRACKING, software=Tri.YES,
-           active_type=ActiveType.NOT_ACTIVE, body_contact=BodyContact.NONE),
+           active_type=ActiveType.NOT_ACTIVE),
     verified=False, status=EXCLUDED)
 
 add("anatomy_education_app", None, "no limb of s41BD reached", GATE_TEXT,
@@ -820,7 +836,7 @@ add("anatomy_education_app", None, "no limb of s41BD reached", GATE_TEXT,
            "Interactive 3D anatomy lessons for medical students, used for "
            "study only and never on a patient.",
            status=NO_PURPOSE, software=Tri.YES,
-           active_type=ActiveType.NOT_ACTIVE, body_contact=BodyContact.NONE),
+           active_type=ActiveType.NOT_ACTIVE),
     verified=False, status=NOT_A_DEVICE)
 
 add("cdss_followup_from_report_text", None, "Schedule 4 Part 2", GATE_TEXT,
@@ -841,7 +857,7 @@ add("cdss_followup_from_report_text", None, "Schedule 4 Part 2", GATE_TEXT,
            condition_severity=Severity.SERIOUS,
            public_health_risk=PublicHealthRisk.MODERATE,
            delivers_hazardous_energy=Tri.NO, delivers_ionising_radiation=Tri.NO,
-           records_diagnostic_images=Tri.NO, body_contact=BodyContact.NONE),
+           records_diagnostic_images=Tri.NO),
     verified=False, status=EXEMPT_CDSS)
 
 

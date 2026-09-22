@@ -1,41 +1,41 @@
 {
   "expected_status": "regulated_medical_device",
   "expected_classes": {
-    "general": "Class IIb"
+    "general": "Class IIa"
   },
   "functions": [
     {
-      "name": "Long-term indwelling orifice device",
+      "name": "Long-term nasal splint",
       "expected_status": "regulated_medical_device",
-      "expected_class": "Class IIb",
-      "expected_rule": "3.1(2)(c)(i)",
+      "expected_class": "Class IIa",
+      "expected_rule": "3.1(2)(c)(ii)",
       "expected_qualifiers": []
     }
   ],
-  "source": "TGA, Classifying medical devices that are not IVDs",
-  "verified": true,
-  "note": "Long-term use through a body orifice.",
+  "source": "Reasoned from Schedule 2 rule text, not a worked example",
+  "verified": false,
+  "note": "Reasoned from the 3.1 text, not a worked example: a long-term nasal device not liable to be absorbed by the mucous membrane is Class IIa under 3.1(2)(c)(ii); if it were liable to be absorbed it would stay at (c)(i), Class IIb. Exercises the absorption question, which nothing else reaches.",
   "profile": {
     "core": {
       "product_name": {
-        "value": "Long-term indwelling orifice device",
+        "value": "Long-term nasal splint",
         "basis": "stated",
-        "evidence": "Long-term indwelling orifice device"
+        "evidence": "Long-term nasal splint"
       },
       "intended_purpose": {
-        "value": "Invasive device used through a body orifice for longer than 30 days.",
+        "value": "Non-absorbable splint used in a nasal cavity for longer than 30 days.",
         "basis": "stated",
-        "evidence": "Invasive device used through a body orifice for longer than 30 days."
+        "evidence": "Non-absorbable splint used in a nasal cavity for longer than 30 days."
       },
       "supplied_sterile": {
         "value": "no",
         "basis": "stated",
-        "evidence": "Invasive device used through a body orifice for longer than 30 days."
+        "evidence": "Non-absorbable splint used in a nasal cavity for longer than 30 days."
       },
       "has_measuring_function": {
         "value": "no",
         "basis": "stated",
-        "evidence": "Invasive device used through a body orifice for longer than 30 days."
+        "evidence": "Non-absorbable splint used in a nasal cavity for longer than 30 days."
       },
       "functions_confirmed": {
         "value": "yes",
@@ -46,35 +46,35 @@
     "functions": [
       {
         "name": {
-          "value": "Long-term indwelling orifice device",
+          "value": "Long-term nasal splint",
           "basis": "stated",
-          "evidence": "Long-term indwelling orifice device"
+          "evidence": "Long-term nasal splint"
         },
         "description": {
-          "value": "Invasive device used through a body orifice for longer than 30 days.",
+          "value": "Non-absorbable splint used in a nasal cavity for longer than 30 days.",
           "basis": "stated",
-          "evidence": "Invasive device used through a body orifice for longer than 30 days."
+          "evidence": "Non-absorbable splint used in a nasal cavity for longer than 30 days."
         },
         "kind": {
           "value": "general_device",
           "basis": "stated",
-          "evidence": "Invasive device used through a body orifice for longer than 30 days."
+          "evidence": "Non-absorbable splint used in a nasal cavity for longer than 30 days."
         },
         "is_software": {
           "value": "no",
           "basis": "stated",
-          "evidence": "Invasive device used through a body orifice for longer than 30 days."
+          "evidence": "Non-absorbable splint used in a nasal cavity for longer than 30 days."
         },
         "status": {
           "therapeutic_purpose": {
             "value": "diagnosis_prevention_monitoring_prediction_treatment_of_disease",
             "basis": "stated",
-            "evidence": "Invasive device used through a body orifice for longer than 30 days."
+            "evidence": "Non-absorbable splint used in a nasal cavity for longer than 30 days."
           },
           "principal_action_pharmacological": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Invasive device used through a body orifice for longer than 30 days."
+            "evidence": "Non-absorbable splint used in a nasal cavity for longer than 30 days."
           },
           "is_accessory_to_device": {
             "value": null,
@@ -84,7 +84,7 @@
           "excluded_item": {
             "value": "none",
             "basis": "stated",
-            "evidence": "Invasive device used through a body orifice for longer than 30 days."
+            "evidence": "Non-absorbable splint used in a nasal cavity for longer than 30 days."
           },
           "exclusion_conditions_met": {
             "value": null,
@@ -111,17 +111,17 @@
           "invasiveness": {
             "value": "invasive_body_orifice",
             "basis": "stated",
-            "evidence": "Invasive device used through a body orifice for longer than 30 days."
+            "evidence": "Non-absorbable splint used in a nasal cavity for longer than 30 days."
           },
           "duration": {
             "value": "long_term",
             "basis": "stated",
-            "evidence": "Invasive device used through a body orifice for longer than 30 days."
+            "evidence": "Non-absorbable splint used in a nasal cavity for longer than 30 days."
           },
           "orifice_site": {
-            "value": "other_body_orifice",
+            "value": "nasal_cavity",
             "basis": "stated",
-            "evidence": "Invasive device used through a body orifice for longer than 30 days."
+            "evidence": "Non-absorbable splint used in a nasal cavity for longer than 30 days."
           },
           "handles_substances_for_administration": {
             "value": null,
@@ -181,12 +181,12 @@
           "connected_to_an_active_device": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Invasive device used through a body orifice for longer than 30 days."
+            "evidence": "Non-absorbable splint used in a nasal cavity for longer than 30 days."
           },
           "liable_to_be_absorbed_by_mucous_membrane": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Non-absorbable splint used in a nasal cavity for longer than 30 days."
           },
           "corrects_heart_or_circulatory_defect_by_contact": {
             "value": null,
@@ -251,7 +251,7 @@
           "active_type": {
             "value": "not_active",
             "basis": "stated",
-            "evidence": "Invasive device used through a body orifice for longer than 30 days."
+            "evidence": "Non-absorbable splint used in a nasal cavity for longer than 30 days."
           },
           "is_active_implantable": {
             "value": null,
@@ -296,37 +296,37 @@
           "is_export_only": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Invasive device used through a body orifice for longer than 30 days."
+            "evidence": "Non-absorbable splint used in a nasal cavity for longer than 30 days."
           },
           "incorporates_medicine": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Invasive device used through a body orifice for longer than 30 days."
+            "evidence": "Non-absorbable splint used in a nasal cavity for longer than 30 days."
           },
           "human_blood_derivative": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Invasive device used through a body orifice for longer than 30 days."
+            "evidence": "Non-absorbable splint used in a nasal cavity for longer than 30 days."
           },
           "contraceptive_or_sti_prevention": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Invasive device used through a body orifice for longer than 30 days."
+            "evidence": "Non-absorbable splint used in a nasal cavity for longer than 30 days."
           },
           "cares_for_contact_lenses": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Invasive device used through a body orifice for longer than 30 days."
+            "evidence": "Non-absorbable splint used in a nasal cavity for longer than 30 days."
           },
           "disinfects_another_device": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Invasive device used through a body orifice for longer than 30 days."
+            "evidence": "Non-absorbable splint used in a nasal cavity for longer than 30 days."
           },
           "records_images_or_anatomical_model": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Invasive device used through a body orifice for longer than 30 days."
+            "evidence": "Non-absorbable splint used in a nasal cavity for longer than 30 days."
           },
           "records_patient_images_outside_visible_spectrum": {
             "value": null,
@@ -346,7 +346,7 @@
           "contains_non_viable_animal_material": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Invasive device used through a body orifice for longer than 30 days."
+            "evidence": "Non-absorbable splint used in a nasal cavity for longer than 30 days."
           },
           "contacts_intact_skin_only": {
             "value": null,
@@ -356,7 +356,7 @@
           "is_blood_bag": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Invasive device used through a body orifice for longer than 30 days."
+            "evidence": "Non-absorbable splint used in a nasal cavity for longer than 30 days."
           },
           "implantable_accessory_to_active_implantable": {
             "value": null,
@@ -376,7 +376,7 @@
           "administers_by_inhalation": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Invasive device used through a body orifice for longer than 30 days."
+            "evidence": "Non-absorbable splint used in a nasal cavity for longer than 30 days."
           },
           "inhalation_mode_of_action_essential": {
             "value": null,
@@ -391,7 +391,7 @@
           "is_substance_through_orifice_or_skin": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Invasive device used through a body orifice for longer than 30 days."
+            "evidence": "Non-absorbable splint used in a nasal cavity for longer than 30 days."
           },
           "substance_acts_in_nose_mouth_or_on_skin": {
             "value": null,
@@ -403,7 +403,7 @@
       }
     ],
     "funding": null,
-    "source_text": "Long-term indwelling orifice device Invasive device used through a body orifice for longer than 30 days. Long-term indwelling orifice device Invasive device used through a body orifice for longer than 30 days. fixture decomposition is fixed by hand",
+    "source_text": "Long-term nasal splint Non-absorbable splint used in a nasal cavity for longer than 30 days. Long-term nasal splint Non-absorbable splint used in a nasal cavity for longer than 30 days. fixture decomposition is fixed by hand",
     "schema_version": "0.9"
   }
 }

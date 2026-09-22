@@ -18,10 +18,10 @@ from reguide.profile import (
     IVD_TYPING_FIELDS,
     PART_2_SUBSTANCE_FIELDS,
     PART_2_WOUND_FIELDS,
+    PART_3_FIELDS,
     ActiveType,
     Answer,
     Basis,
-    BodyContact,
     ClinicalFunction,
     CoreProfile,
     DeviceKind,
@@ -31,9 +31,11 @@ from reguide.profile import (
     GeneralDeviceProfile,
     Invasiveness,
     IvdProfile,
+    OrificeSite,
     TherapeuticPurpose,
     Tri,
     highest_class,
+    invasive_band,
     relevant_general_fields,
 )
 
@@ -138,8 +140,43 @@ class TestRelevanceGating:
         profile = general_profile(invasiveness=Invasiveness.SURGICALLY_INVASIVE)
         fields = relevant_general_fields(only(profile))
         assert "duration" in fields
-        assert "body_contact" in fields
+        assert "direct_contact_heart_circulation_or_nervous_system" not in fields
         assert "contacts_injured_skin_or_mucous_membrane" not in fields
+
+    @pytest.mark.parametrize("duration,band", [
+        (Duration.TRANSIENT, "3.2"), (Duration.SHORT_TERM, "3.3"), (Duration.LONG_TERM, "3.4"),
+    ])
+    def test_the_duration_band_opens_its_clause(self, duration, band):
+        profile = general_profile(invasiveness=Invasiveness.SURGICALLY_INVASIVE,
+                                  duration=duration)
+        fields = relevant_general_fields(only(profile))
+        assert set(PART_3_FIELDS[band]) <= set(fields)
+        assert ("reusable_surgical_instrument" in fields) is (band == "3.2")
+        assert ("joint_replacement_or_surgical_mesh" in fields) is (band == "3.4")
+
+    def test_an_implantable_device_is_always_clause_3_4(self):
+        profile = general_profile(invasiveness=Invasiveness.IMPLANTABLE,
+                                  duration=Duration.SHORT_TERM)
+        assert invasive_band(only(profile).general) == "3.4"
+
+    def test_chemical_change_in_3_3_opens_the_teeth_question(self):
+        profile = general_profile(invasiveness=Invasiveness.SURGICALLY_INVASIVE,
+                                  duration=Duration.SHORT_TERM,
+                                  undergoes_chemical_change=Tri.YES)
+        assert "placed_in_teeth" in relevant_general_fields(only(profile))
+
+    def test_an_orifice_device_is_asked_about_any_active_connection_first(self):
+        profile = general_profile(invasiveness=Invasiveness.BODY_ORIFICE)
+        fields = relevant_general_fields(only(profile))
+        assert "connected_to_an_active_device" in fields
+        assert "connected_to_active_device" not in fields
+
+    def test_only_a_long_term_nasal_device_is_asked_about_absorption(self):
+        profile = general_profile(invasiveness=Invasiveness.BODY_ORIFICE,
+                                  duration=Duration.LONG_TERM,
+                                  orifice_site=OrificeSite.NASAL_CAVITY)
+        assert "liable_to_be_absorbed_by_mucous_membrane" in relevant_general_fields(
+            only(profile))
 
     def test_injured_skin_opens_the_2_4_questions(self):
         profile = general_profile(
@@ -222,8 +259,6 @@ class TestPrune:
         profile = general_profile(
             invasiveness=Invasiveness.SURGICALLY_INVASIVE,
             duration=Duration.SHORT_TERM,
-            body_contact=BodyContact.BREACHED_SKIN,
-            absorbed_or_chemically_changed=Tri.NO,
             contacts_injured_skin_or_mucous_membrane=Tri.YES,
         )
         function = only(profile)
@@ -415,12 +450,12 @@ class TestRoundTrip:
         profile = general_profile(
             invasiveness=Invasiveness.SURGICALLY_INVASIVE,
             duration=Duration.SHORT_TERM,
-            body_contact=BodyContact.CENTRAL_CIRCULATION,
+            direct_contact_heart_circulation_or_nervous_system=Tri.YES,
         )
         profile.source_text = "a catheter"
         restored = DeviceProfile.model_validate(json.loads(profile.model_dump_json()))
         general = restored.functions[0].general
-        assert general.body_contact.value is BodyContact.CENTRAL_CIRCULATION
+        assert general.direct_contact_heart_circulation_or_nervous_system.value is Tri.YES
         assert general.duration.basis is Basis.STATED
         assert general.invasiveness.evidence == "test evidence"
         assert restored.source_text == "a catheter"

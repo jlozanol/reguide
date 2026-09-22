@@ -51,6 +51,15 @@ never asked about materials, only implantable devices about implants, only
 active devices or software about controlling an active implantable device.
 animal_or_microbial_origin becomes contains_non_viable_animal_material,
 because since July 2024 clause 5.5 covers animal material only.
+
+Version 0.9 covers Schedule 2 Part 3, the invasive clauses. body_contact
+conflated two conditions (a purpose to correct a heart defect, and plain
+direct contact with the heart, circulation or nerves), and
+absorbed_or_chemically_changed merged two paragraphs that give different
+classes in 3.3 (absorbed is Class III, chemical change Class IIb). Both are
+replaced by one field per condition, asked only in the duration band where
+the text uses it. Orifice devices get a gate for connection to any active
+device, because 3.1(2) and 3.1(3) turn on different connections.
 """
 
 from enum import Enum
@@ -147,16 +156,6 @@ class Duration(str, Enum):
     TRANSIENT = "transient"      # continuous use under 60 minutes
     SHORT_TERM = "short_term"    # 60 minutes to 30 days
     LONG_TERM = "long_term"      # over 30 days
-
-
-class BodyContact(str, Enum):
-    NONE = "none"
-    INTACT_SKIN = "intact_skin"
-    BREACHED_SKIN = "breached_skin_or_wound"
-    MUCOUS_MEMBRANE = "mucous_membrane"
-    CENTRAL_CIRCULATION = "central_circulatory_system"
-    CENTRAL_NERVOUS = "central_nervous_system"
-    TEETH = "teeth"
 
 
 class OrificeSite(str, Enum):
@@ -261,7 +260,6 @@ class GeneralDeviceProfile(BaseModel):
     # Route and contact
     invasiveness: Answer[Invasiveness] = Answer()
     duration: Answer[Duration] = Answer()
-    body_contact: Answer[BodyContact] = Answer()
     orifice_site: Answer[OrificeSite] = Answer()
 
     # Schedule 2 Part 2, non-invasive devices. Each comment names its paragraph.
@@ -281,10 +279,29 @@ class GeneralDeviceProfile(BaseModel):
     barrier_compression_or_absorption: Answer[Tri] = Answer()               # 2.4(3)
     principally_for_breached_dermis_secondary_intent: Answer[Tri] = Answer()  # 2.4(4)
 
-    # Surgically invasive specifics
-    reusable_surgical_instrument: Answer[Tri] = Answer()
-    absorbed_or_chemically_changed: Answer[Tri] = Answer()
-    delivers_ionising_radiation: Answer[Tri] = Answer()
+    # Schedule 2 Part 3, invasive devices. Each comment names its paragraphs.
+    # Orifice route (3.1). Gate: any active device; "Class IIa or higher" is
+    # connected_to_active_device above.
+    connected_to_an_active_device: Answer[Tri] = Answer()                   # 3.1(2), (3)
+    liable_to_be_absorbed_by_mucous_membrane: Answer[Tri] = Answer()        # 3.1(2)(c)(ii)
+    # Surgically invasive and implantable (3.2 to 3.4).
+    # 3.2(3), 3.3(4)(a)
+    corrects_heart_or_circulatory_defect_by_contact: Answer[Tri] = Answer()
+    # 3.2(3A), 3.3(4)(b), 3.4(4)(a)
+    direct_contact_heart_circulation_or_nervous_system: Answer[Tri] = Answer()
+    reusable_surgical_instrument: Answer[Tri] = Answer()                    # 3.2(4)
+    # "Supply energy in the form of ionising radiation"; also read by Part 4.
+    delivers_ionising_radiation: Answer[Tri] = Answer()                     # 3.2(5)(a), 3.3(3)(a)
+    # 3.2(5)(b), 3.3(4)(c), 3.4(4)(b)
+    has_biological_effect: Answer[Tri] = Answer()
+    # 3.2(5)(c), 3.3(4)(d), 3.4(4)(c)
+    wholly_or_mostly_absorbed: Answer[Tri] = Answer()
+    undergoes_chemical_change: Answer[Tri] = Answer()                       # 3.3(3)(b), 3.4(4)(d)
+    placed_in_teeth: Answer[Tri] = Answer()                                 # 3.3(3)(b), 3.4(3)
+    administers_medicine_hazardously_by_delivery_system: Answer[Tri] = Answer()  # 3.2(5)(d)
+    administers_medicine: Answer[Tri] = Answer()                            # 3.3(3)(c), 3.4(4)(e)
+    joint_replacement_or_surgical_mesh: Answer[Tri] = Answer()              # 3.4(4A)
+    spinal_motion_preserving: Answer[Tri] = Answer()                        # 3.4(4B)
 
     # Active devices and software, rules 4.1 to 4.7
     active_type: Answer[ActiveType] = Answer()
@@ -566,6 +583,38 @@ PART_2_WOUND_FIELDS = [
 ]
 
 
+PART_3_FIELDS = {
+    "3.2": ["corrects_heart_or_circulatory_defect_by_contact",
+            "direct_contact_heart_circulation_or_nervous_system",
+            "reusable_surgical_instrument", "delivers_ionising_radiation",
+            "has_biological_effect", "wholly_or_mostly_absorbed",
+            "administers_medicine_hazardously_by_delivery_system"],
+    "3.3": ["corrects_heart_or_circulatory_defect_by_contact",
+            "direct_contact_heart_circulation_or_nervous_system",
+            "delivers_ionising_radiation", "undergoes_chemical_change",
+            "administers_medicine", "has_biological_effect", "wholly_or_mostly_absorbed"],
+    "3.4": ["placed_in_teeth", "direct_contact_heart_circulation_or_nervous_system",
+            "has_biological_effect", "wholly_or_mostly_absorbed", "undergoes_chemical_change",
+            "administers_medicine", "joint_replacement_or_surgical_mesh",
+            "spinal_motion_preserving"],
+}
+
+
+def invasive_band(general: "GeneralDeviceProfile") -> str | None:
+    """Which of 3.2, 3.3 or 3.4 a surgically invasive or implantable device is in.
+
+    3.4 covers every implantable device and a surgically invasive device for
+    long-term use; 3.2 and 3.3 turn on duration. None until that is known.
+    """
+    route = _value(general.invasiveness)
+    if route is Invasiveness.IMPLANTABLE:
+        return "3.4"
+    if route is not Invasiveness.SURGICALLY_INVASIVE:
+        return None
+    return {Duration.TRANSIENT: "3.2", Duration.SHORT_TERM: "3.3",
+            Duration.LONG_TERM: "3.4"}.get(_value(general.duration))
+
+
 def relevant_general_fields(function: "FunctionProfile") -> list[str]:
     """Which Schedule 2 fields this function actually needs.
 
@@ -612,12 +661,19 @@ def relevant_general_fields(function: "FunctionProfile") -> list[str]:
             fields += PART_2_WOUND_FIELDS
 
     elif route is Invasiveness.BODY_ORIFICE:
-        fields += ["duration", "orifice_site", "connected_to_active_device"]
+        fields += ["duration", "orifice_site", "connected_to_an_active_device"]
+        if _value(general.connected_to_an_active_device) is Tri.YES:
+            fields += ["connected_to_active_device"]
+        if (_value(general.duration) is Duration.LONG_TERM
+                and _value(general.orifice_site) is OrificeSite.NASAL_CAVITY):
+            fields += ["liable_to_be_absorbed_by_mucous_membrane"]
 
     elif route in (Invasiveness.SURGICALLY_INVASIVE, Invasiveness.IMPLANTABLE):
-        fields += ["duration", "body_contact", "absorbed_or_chemically_changed"]
-        if _value(general.duration) is Duration.TRANSIENT:
-            fields += ["reusable_surgical_instrument"]
+        fields += ["duration"]
+        band = invasive_band(general)
+        fields += PART_3_FIELDS.get(band, [])
+        if band == "3.3" and _value(general.undergoes_chemical_change) is Tri.YES:
+            fields += ["placed_in_teeth"]
         if route is Invasiveness.IMPLANTABLE:
             fields += ["is_active_implantable", "implantable_accessory_to_active_implantable",
                        "is_mammary_implant"]
@@ -762,7 +818,7 @@ class DeviceProfile(BaseModel):
     funding: FundingProfile | None = None
 
     source_text: str = ""
-    schema_version: Literal["0.8"] = "0.8"
+    schema_version: Literal["0.9"] = "0.9"
 
     @property
     def single_function(self) -> bool:

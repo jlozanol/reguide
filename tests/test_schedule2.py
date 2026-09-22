@@ -1,6 +1,6 @@
-"""Tests for Schedule 2 Parts 2 and 5, and the unwritten Parts 3 and 4.
+"""Tests for Schedule 2 Parts 2, 3 and 5, and the unwritten Part 4.
 
-Five things are being tested:
+Six things are being tested:
 
 1. Each paragraph of 2.1 to 2.4 fires on its conditions, stays silent when a
    condition is no or the device is not non-invasive, and reports anything
@@ -10,8 +10,11 @@ Five things are being tested:
    governs as the higher class.
 3. Each Part 5 clause, its applicability (software, route, active), 5.8
    displacing everything, and the 5.5(2) no-contact flag.
-4. Parts 3 and 4 block a result only where they could apply.
-5. Every docstring quotes its clause verbatim, checked against the clause
+4. Each Part 3 paragraph by route and duration band, the "subject to"
+   defaults, the 5.10/5.11 exclusion from 3.1 and the Class I connection
+   gap in 3.1.
+5. Part 4 blocks a result only where it could apply.
+6. Every docstring quotes its clause verbatim, checked against the clause
    files split from the real Regulations. Skipped without the source. The
    rules write the clause's em dashes as spaced en dashes; the check treats
    them as the same.
@@ -77,9 +80,20 @@ PART_5_FIELDS = [
 ]
 
 
+PART_3_FIELDS = [
+    "connected_to_an_active_device", "liable_to_be_absorbed_by_mucous_membrane",
+    "corrects_heart_or_circulatory_defect_by_contact",
+    "direct_contact_heart_circulation_or_nervous_system", "reusable_surgical_instrument",
+    "delivers_ionising_radiation", "has_biological_effect", "wholly_or_mostly_absorbed",
+    "undergoes_chemical_change", "placed_in_teeth",
+    "administers_medicine_hazardously_by_delivery_system", "administers_medicine",
+    "joint_replacement_or_surgical_mesh", "spinal_motion_preserving",
+]
+
+
 def general(**given) -> GeneralDeviceProfile:
-    """A non-invasive, non-active device with every Part 2 and 5 field answered no."""
-    fields = {name: stated(Tri.NO) for name in PART_2_FIELDS + PART_5_FIELDS}
+    """A non-invasive, non-active device with every Part 2, 3 and 5 field answered no."""
+    fields = {name: stated(Tri.NO) for name in PART_2_FIELDS + PART_3_FIELDS + PART_5_FIELDS}
     fields["invasiveness"] = stated(Invasiveness.NON_INVASIVE)
     fields["active_type"] = stated(ActiveType.NOT_ACTIVE)
     fields.update({k: v if isinstance(v, Answer) else stated(v) for k, v in given.items()})
@@ -226,12 +240,6 @@ class TestSubjectTo:
 
 
 class TestUnwrittenParts:
-    def test_part_3_waits_only_for_an_invasive_route(self):
-        assert S2.part_3(function()) is None
-        pending = S2.part_3(function(invasiveness=Invasiveness.BODY_ORIFICE))
-        assert pending.reason.startswith("not implemented")
-        assert S2.part_3(function(invasiveness=Answer())).fields == ("general.invasiveness",)
-
     def test_part_4_waits_only_for_an_active_device_or_software(self):
         assert S2.part_4(function()) is None
         assert S2.part_4(function(active_type=ActiveType.THERAPEUTIC)).reason.startswith(
@@ -246,10 +254,11 @@ class TestUnwrittenParts:
         assert outcome.confident
         assert outcome.result == "Class I"
 
-    def test_an_invasive_device_waits_only_for_part_3(self):
+    def test_an_invasive_passive_device_is_classified(self):
         outcome = S2.evaluate(function(invasiveness=Invasiveness.SURGICALLY_INVASIVE,
                                        duration="long_term"))
-        assert outcome.unresolved == ["s2-3.1 (not implemented: Part 3, clauses 3.1 to 3.4)"]
+        assert outcome.confident
+        assert outcome.result == "Class IIb"
 
     def test_classify_function_routes_general_devices_here(self):
         outcome = E.classify_function(function())
@@ -402,6 +411,176 @@ class TestNoContactFlag:
 
 
 # --------------------------------------------------------------------------
+# Part 3
+# --------------------------------------------------------------------------
+
+
+def orifice(duration, site="other_body_orifice", **given):
+    return function(invasiveness=Invasiveness.BODY_ORIFICE, duration=duration,
+                    orifice_site=site, **given)
+
+
+def surgical(duration, **given):
+    return function(invasiveness=Invasiveness.SURGICALLY_INVASIVE, duration=duration, **given)
+
+
+def governing(f):
+    outcome = S2.evaluate(f)
+    return outcome.result, [h.rule_id for h in outcome.governing], outcome
+
+
+class TestClause31:
+    @pytest.mark.parametrize("duration,site,rule_id,result", [
+        ("transient", "other_body_orifice", "s2-3.1(2)(a)", "Class I"),
+        ("short_term", "other_body_orifice", "s2-3.1(2)(b)(i)", "Class IIa"),
+        ("short_term", "oral_cavity_as_far_as_pharynx", "s2-3.1(2)(b)(ii)", "Class I"),
+        ("short_term", "nasal_cavity", "s2-3.1(2)(b)(ii)", "Class I"),
+        ("long_term", "other_body_orifice", "s2-3.1(2)(c)(i)", "Class IIb"),
+        ("long_term", "stoma", "s2-3.1(2)(c)(i)", "Class IIb"),
+        ("long_term", "ear_canal_up_to_eardrum", "s2-3.1(2)(c)(ii)", "Class IIa"),
+        ("long_term", "nasal_cavity", "s2-3.1(2)(c)(ii)", "Class IIa"),
+    ])
+    def test_duration_and_site(self, duration, site, rule_id, result):
+        got, rules, outcome = governing(orifice(duration, site))
+        assert (got, rules) == (result, [rule_id])
+        assert outcome.flags == []
+
+    def test_a_long_term_nasal_device_liable_to_be_absorbed_stays_at_c_i(self):
+        got, rules, _ = governing(orifice("long_term", "nasal_cavity",
+                                          liable_to_be_absorbed_by_mucous_membrane=Tri.YES))
+        assert (got, rules) == ("Class IIb", ["s2-3.1(2)(c)(i)"])
+
+    def test_connection_to_a_class_iia_active_device_is_3_1_3_only(self):
+        got, rules, outcome = governing(orifice("long_term", connected_to_an_active_device=Tri.YES,
+                                                connected_to_active_device=Tri.YES))
+        assert (got, rules) == ("Class IIa", ["s2-3.1(3)"])
+        assert not any(h.rule_id.startswith("s2-3.1(2)") for h in outcome.hits)
+
+    def test_connection_to_a_class_i_active_device_uses_2_with_a_flag(self):
+        got, rules, outcome = governing(orifice("short_term", connected_to_an_active_device=Tri.YES,
+                                                connected_to_active_device=Tri.NO))
+        assert (got, rules) == ("Class IIa", ["s2-3.1(2)(b)(i)"])
+        assert [f.code for f in outcome.flags] == ["s2_3_1_class_i_active_connection"]
+
+    def test_an_unanswered_connection_is_pending(self):
+        pending = S2.rule_3_1_2_a(orifice("transient", connected_to_an_active_device=Answer()))
+        assert pending.fields == ("general.connected_to_an_active_device",)
+
+    def test_a_5_11_substance_is_outside_3_1(self):
+        f = orifice("transient", "nasal_cavity", is_substance_through_orifice_or_skin=Tri.YES,
+                    substance_acts_in_nose_mouth_or_on_skin=Tri.YES)
+        assert all(rule(f) is None for rule in S2.PART_3)
+        got, rules, _ = governing(f)
+        assert (got, rules) == ("Class IIa", ["s2-5.11(c)"])
+
+    def test_a_5_10_inhalation_device_is_outside_3_1(self):
+        f = orifice("transient", administers_by_inhalation=Tri.YES)
+        assert all(rule(f) is None for rule in S2.PART_3)
+
+    def test_a_surgical_device_is_outside_3_1(self):
+        assert S2.rule_3_1_2_a(surgical("transient")) is None
+
+
+class TestClause32:
+    def test_the_default_is_iia(self):
+        assert governing(surgical("transient"))[:2] == ("Class IIa", ["s2-3.2(2)"])
+
+    @pytest.mark.parametrize("field,rule_id,result", [
+        ("corrects_heart_or_circulatory_defect_by_contact", "s2-3.2(3)", "Class III"),
+        ("direct_contact_heart_circulation_or_nervous_system", "s2-3.2(3A)", "Class III"),
+        ("reusable_surgical_instrument", "s2-3.2(4)", "Class I"),
+        ("delivers_ionising_radiation", "s2-3.2(5)(a)", "Class IIb"),
+        ("has_biological_effect", "s2-3.2(5)(b)", "Class IIb"),
+        ("wholly_or_mostly_absorbed", "s2-3.2(5)(c)", "Class IIb"),
+        ("administers_medicine_hazardously_by_delivery_system", "s2-3.2(5)(d)", "Class IIb"),
+    ])
+    def test_each_subclause_replaces_the_default(self, field, rule_id, result):
+        got, rules, outcome = governing(surgical("transient", **{field: Tri.YES}))
+        assert (got, rules) == (result, [rule_id])
+        assert "s2-3.2(2)" not in [h.rule_id for h in outcome.hits]
+
+    def test_3A_does_not_reach_a_reusable_instrument(self):
+        got, rules, outcome = governing(surgical(
+            "transient", reusable_surgical_instrument=Tri.YES,
+            direct_contact_heart_circulation_or_nervous_system=Tri.YES))
+        assert (got, rules) == ("Class I", ["s2-3.2(4)"])
+
+    def test_the_highest_subclause_wins(self):
+        """A reusable instrument that supplies ionising radiation: IIb over I."""
+        got, rules, outcome = governing(surgical("transient", reusable_surgical_instrument=Tri.YES,
+                                                 delivers_ionising_radiation=Tri.YES))
+        assert (got, rules) == ("Class IIb", ["s2-3.2(5)(a)"])
+        assert "s2-3.2(4)" in [h.rule_id for h in outcome.hits]
+
+
+class TestClause33:
+    def test_the_default_is_iia(self):
+        assert governing(surgical("short_term"))[:2] == ("Class IIa", ["s2-3.3(2)"])
+
+    @pytest.mark.parametrize("field,rule_id,result", [
+        ("delivers_ionising_radiation", "s2-3.3(3)(a)", "Class IIb"),
+        ("undergoes_chemical_change", "s2-3.3(3)(b)", "Class IIb"),
+        ("administers_medicine", "s2-3.3(3)(c)", "Class IIb"),
+        ("corrects_heart_or_circulatory_defect_by_contact", "s2-3.3(4)(a)", "Class III"),
+        ("direct_contact_heart_circulation_or_nervous_system", "s2-3.3(4)(b)", "Class III"),
+        ("has_biological_effect", "s2-3.3(4)(c)", "Class III"),
+        ("wholly_or_mostly_absorbed", "s2-3.3(4)(d)", "Class III"),
+    ])
+    def test_each_subclause(self, field, rule_id, result):
+        assert governing(surgical("short_term", **{field: Tri.YES}))[:2] == (result, [rule_id])
+
+    def test_chemical_change_in_the_teeth_stays_at_iia(self):
+        """The note to 3.3(3)(b): placed in the teeth, back to subclause (2)."""
+        got, rules, _ = governing(surgical("short_term", undergoes_chemical_change=Tri.YES,
+                                           placed_in_teeth=Tri.YES))
+        assert (got, rules) == ("Class IIa", ["s2-3.3(2)"])
+
+    def test_absorbed_and_chemical_change_give_different_classes(self):
+        """The two conditions the old merged field could not tell apart."""
+        assert governing(surgical("short_term", wholly_or_mostly_absorbed=Tri.YES))[0] == \
+            "Class III"
+        assert governing(surgical("short_term", undergoes_chemical_change=Tri.YES))[0] == \
+            "Class IIb"
+
+
+class TestClause34:
+    def test_the_default_is_iib(self):
+        assert governing(surgical("long_term"))[:2] == ("Class IIb", ["s2-3.4(2)"])
+
+    def test_every_implantable_device_is_in_3_4(self):
+        f = function(invasiveness=Invasiveness.IMPLANTABLE, duration="short_term")
+        assert governing(f)[:2] == ("Class IIb", ["s2-3.4(2)"])
+
+    @pytest.mark.parametrize("field,rule_id,result", [
+        ("placed_in_teeth", "s2-3.4(3)", "Class IIa"),
+        ("direct_contact_heart_circulation_or_nervous_system", "s2-3.4(4)(a)", "Class III"),
+        ("has_biological_effect", "s2-3.4(4)(b)", "Class III"),
+        ("wholly_or_mostly_absorbed", "s2-3.4(4)(c)", "Class III"),
+        ("undergoes_chemical_change", "s2-3.4(4)(d)", "Class III"),
+        ("administers_medicine", "s2-3.4(4)(e)", "Class III"),
+        ("joint_replacement_or_surgical_mesh", "s2-3.4(4A)", "Class III"),
+        ("spinal_motion_preserving", "s2-3.4(4B)", "Class III"),
+    ])
+    def test_each_subclause(self, field, rule_id, result):
+        assert governing(surgical("long_term", **{field: Tri.YES}))[:2] == (result, [rule_id])
+
+    def test_teeth_and_medicine_is_iii(self):
+        got, rules, _ = governing(surgical("long_term", placed_in_teeth=Tri.YES,
+                                           administers_medicine=Tri.YES))
+        assert (got, rules) == ("Class III", ["s2-3.4(4)(e)"])
+
+    def test_chemical_change_in_the_teeth_is_not_4_d(self):
+        got, rules, _ = governing(surgical("long_term", placed_in_teeth=Tri.YES,
+                                           undergoes_chemical_change=Tri.YES))
+        assert (got, rules) == ("Class IIa", ["s2-3.4(3)"])
+
+
+def test_an_unknown_duration_blocks_the_surgical_clauses():
+    pending = S2.rule_3_2_2(surgical(Answer()))
+    assert pending.fields == ("general.duration",)
+
+
+# --------------------------------------------------------------------------
 # Part 2 against the answer key
 # --------------------------------------------------------------------------
 
@@ -418,6 +597,19 @@ DECIDED_BY_PART_2 = [
 DECIDED_BY_PART_5 = [
     "dressing_collagen_deep_wound",
     "trauma_covering_anaesthetic",
+    "saline_nasal_spray",
+    "condom_with_spermicide",
+    "heparin_coated_catheter",
+]
+
+DECIDED_BY_PART_3 = [
+    "screw_transient",
+    "screw_short_term",
+    "screw_long_term",
+    "screw_central_circulation",
+    "reusable_surgical_instrument",
+    "orifice_long_term",
+    "nasal_device_long_term",
 ]
 
 
@@ -471,8 +663,8 @@ def corpus(tmp_path_factory):
     return LEG.load(out)
 
 
-@pytest.mark.parametrize("slug", DECIDED_BY_PART_5)
-def test_part_5_decides_the_fixtures_it_decides(slug):
+@pytest.mark.parametrize("slug", DECIDED_BY_PART_5 + DECIDED_BY_PART_3)
+def test_parts_3_and_5_decide_the_fixtures_they_decide(slug):
     data = json.loads((FIXTURES / f"{slug}.json").read_text())
     profile = DeviceProfile.model_validate(data["profile"])
     expected = data["functions"][0]
@@ -483,8 +675,8 @@ def test_part_5_decides_the_fixtures_it_decides(slug):
 
 
 @needs_source
-@pytest.mark.parametrize("rule", S2.PART_2 + S2.PART_5,
-                         ids=[r.__name__ for r in S2.PART_2 + S2.PART_5])
+@pytest.mark.parametrize("rule", S2.PART_2 + S2.PART_3 + S2.PART_5,
+                         ids=[r.__name__ for r in S2.PART_2 + S2.PART_3 + S2.PART_5])
 def test_docstring_quotes_the_clause_verbatim(corpus, rule):
     heading, *paragraphs = inspect.getdoc(rule).split("\n\n")
     reference = heading.removeprefix("Schedule 2 clause ").rstrip(".")

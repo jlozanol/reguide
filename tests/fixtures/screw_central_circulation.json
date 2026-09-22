@@ -8,13 +8,13 @@
       "name": "Fixation screw contacting central circulatory system",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class III",
-      "expected_rule": "3.3(4)(a)",
+      "expected_rule": "3.3(4)(b)",
       "expected_qualifiers": []
     }
   ],
   "source": "TGA, Classifying medical devices that are not IVDs",
   "verified": true,
-  "note": "Location beats duration. Tests that body_contact is read first.",
+  "note": "Location beats duration. TGA case study 2 cites 3.3(4)(a), but a fixation screw does not diagnose, monitor, control or correct a heart defect; direct contact with the central circulatory or nervous system is 3.3(4)(b).",
   "profile": {
     "core": {
       "product_name": {
@@ -118,11 +118,6 @@
             "basis": "stated",
             "evidence": "Direct contact with the central circulatory or central nervous system."
           },
-          "body_contact": {
-            "value": "central_circulatory_system",
-            "basis": "stated",
-            "evidence": "Direct contact with the central circulatory or central nervous system."
-          },
           "orifice_site": {
             "value": null,
             "basis": "unknown",
@@ -183,17 +178,72 @@
             "basis": "unknown",
             "evidence": null
           },
+          "connected_to_an_active_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "liable_to_be_absorbed_by_mucous_membrane": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "corrects_heart_or_circulatory_defect_by_contact": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Direct contact with the central circulatory or central nervous system."
+          },
+          "direct_contact_heart_circulation_or_nervous_system": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Direct contact with the central circulatory or central nervous system."
+          },
           "reusable_surgical_instrument": {
             "value": null,
             "basis": "unknown",
             "evidence": null
           },
-          "absorbed_or_chemically_changed": {
+          "delivers_ionising_radiation": {
             "value": "no",
             "basis": "stated",
             "evidence": "Direct contact with the central circulatory or central nervous system."
           },
-          "delivers_ionising_radiation": {
+          "has_biological_effect": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Direct contact with the central circulatory or central nervous system."
+          },
+          "wholly_or_mostly_absorbed": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Direct contact with the central circulatory or central nervous system."
+          },
+          "undergoes_chemical_change": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Direct contact with the central circulatory or central nervous system."
+          },
+          "placed_in_teeth": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "administers_medicine_hazardously_by_delivery_system": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "administers_medicine": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Direct contact with the central circulatory or central nervous system."
+          },
+          "joint_replacement_or_surgical_mesh": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "spinal_motion_preserving": {
             "value": null,
             "basis": "unknown",
             "evidence": null
@@ -354,6 +404,6 @@
     ],
     "funding": null,
     "source_text": "Fixation screw contacting central circulatory system Direct contact with the central circulatory or central nervous system. Fixation screw contacting central circulatory system Direct contact with the central circulatory or central nervous system. fixture decomposition is fixed by hand",
-    "schema_version": "0.8"
+    "schema_version": "0.9"
   }
 }

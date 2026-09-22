@@ -23,18 +23,28 @@ from reguide.scoring import AGREE, FAMILY_PREFIX, NO_RESULT, RULE_REFERENCE, WRO
 KNOWN_AGREEING = {
     "abo_reagent_red_cells",
     "chlamydia_test",
+    "condom_with_spermicide",
     "culture_media",
     "dressing_collagen_deep_wound",
     "dressing_mechanical_barrier",
     "dressing_microenvironment",
     "dressing_secondary_intent",
     "haemodialyser",
+    "heparin_coated_catheter",
     "hiv_donor_screening",
     "infusion_pump_syringe",
     "measuring_thermometer",
+    "orifice_long_term",
     "prothrombin_meter",
     "prothrombin_self_test",
+    "prothrombin_self_test_pack",
     "quality_control_material",
+    "reusable_surgical_instrument",
+    "saline_nasal_spray",
+    "screw_central_circulation",
+    "screw_long_term",
+    "screw_short_term",
+    "screw_transient",
     "sterile_barrier_dressing",
     "trauma_covering_anaesthetic",
 }
@@ -68,7 +78,7 @@ def test_known_agreeing_is_up_to_date(verified):
 
 def test_every_verified_fixture_is_scored(verified, everything):
     assert len(verified.fixtures) == 36
-    assert len(everything.fixtures) == 41
+    assert len(everything.fixtures) == 42
 
 
 def test_unverified_fixtures_get_no_confident_wrong_class_either(everything):

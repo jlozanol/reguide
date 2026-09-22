@@ -118,11 +118,6 @@
             "basis": "stated",
             "evidence": "Reusable surgical instrument for transient use during surgery."
           },
-          "body_contact": {
-            "value": "breached_skin_or_wound",
-            "basis": "stated",
-            "evidence": "Reusable surgical instrument for transient use during surgery."
-          },
           "orifice_site": {
             "value": null,
             "basis": "unknown",
@@ -183,17 +178,72 @@
             "basis": "unknown",
             "evidence": null
           },
+          "connected_to_an_active_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "liable_to_be_absorbed_by_mucous_membrane": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "corrects_heart_or_circulatory_defect_by_contact": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Reusable surgical instrument for transient use during surgery."
+          },
+          "direct_contact_heart_circulation_or_nervous_system": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Reusable surgical instrument for transient use during surgery."
+          },
           "reusable_surgical_instrument": {
             "value": "yes",
             "basis": "stated",
             "evidence": "Reusable surgical instrument for transient use during surgery."
           },
-          "absorbed_or_chemically_changed": {
+          "delivers_ionising_radiation": {
             "value": "no",
             "basis": "stated",
             "evidence": "Reusable surgical instrument for transient use during surgery."
           },
-          "delivers_ionising_radiation": {
+          "has_biological_effect": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Reusable surgical instrument for transient use during surgery."
+          },
+          "wholly_or_mostly_absorbed": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Reusable surgical instrument for transient use during surgery."
+          },
+          "undergoes_chemical_change": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "placed_in_teeth": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "administers_medicine_hazardously_by_delivery_system": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Reusable surgical instrument for transient use during surgery."
+          },
+          "administers_medicine": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "joint_replacement_or_surgical_mesh": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "spinal_motion_preserving": {
             "value": null,
             "basis": "unknown",
             "evidence": null
@@ -354,6 +404,6 @@
     ],
     "funding": null,
     "source_text": "Reusable surgical scissors Reusable surgical instrument for transient use during surgery. Reusable surgical scissors Reusable surgical instrument for transient use during surgery. fixture decomposition is fixed by hand",
-    "schema_version": "0.8"
+    "schema_version": "0.9"
   }
 }

@@ -73,9 +73,9 @@ class TestVerdicts:
         assert row.got_class is None
 
     def test_no_result_names_what_stopped_it(self):
-        [row] = SC.score_fixture("screw_transient", fixture("screw_transient"))
+        [row] = SC.score_fixture("mri_equipment", fixture("mri_equipment"))
         assert row.verdict == SC.NO_RESULT
-        assert row.detail == "s2-3.1 (not implemented: Part 3, clauses 3.1 to 3.4)"
+        assert row.detail == "s2-4.1 (not implemented: Part 4, clauses 4.1 to 4.8)"
 
     def test_an_excluded_function_agrees_without_being_classified(self, monkeypatch):
         seen = []
@@ -138,15 +138,16 @@ class TestQualifiers:
 class TestScore:
     def test_a_fixture_agrees_only_when_every_function_does(self):
         pack = fixture("prothrombin_self_test_pack")
+        pack["functions"][2]["expected_status"] = "excluded_from_regulation"
         score = SC.Score(SC.score_fixture("pack", pack))
-        assert [r.verdict for r in score.rows] == [SC.AGREE, SC.AGREE, SC.NO_RESULT]
+        assert [r.verdict for r in score.rows] == [SC.AGREE, SC.AGREE, SC.GATE]
         assert score.agreeing_fixtures == []
         assert score.agreeing_functions == 2
 
     def test_misses_are_ordered_worst_first(self):
         wrong = copy.deepcopy(fixture("culture_media"))
         wrong["functions"][0]["expected_class"] = "Class 4 IVD"
-        rows = (SC.score_fixture("b_refused", fixture("screw_transient"))
+        rows = (SC.score_fixture("b_refused", fixture("mri_equipment"))
                 + SC.score_fixture("a_wrong", wrong))
         assert [r.verdict for r in SC.Score(rows).misses] == [SC.WRONG_CLASS, SC.NO_RESULT]
 
@@ -157,12 +158,12 @@ class TestScore:
 class TestReport:
     def test_headline_and_table(self):
         rows = (SC.score_fixture("culture_media", fixture("culture_media"))
-                + SC.score_fixture("screw_transient", fixture("screw_transient")))
+                + SC.score_fixture("mri_equipment", fixture("mri_equipment")))
         text = SC.report(SC.Score(rows))
         assert text.startswith("Agreement: 1/2 fixtures (50%), 1/2 functions\n")
         assert "Misses: 1 no result" in text
         assert "| fixture | function | expected | got | miss | detail |" in text
-        assert "| screw_transient | Metal fixation screw, intraoperative | Class IIa (3.2(2)) " \
+        assert "| mri_equipment | Magnetic resonance equipment | Class IIa (4.3(2)(a)) " \
                "| none | no result |" in text
 
     def test_no_table_when_nothing_is_missed(self):

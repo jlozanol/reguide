@@ -118,11 +118,6 @@
             "basis": "stated",
             "evidence": "Holds bone together for longer than 30 days, permanently implanted."
           },
-          "body_contact": {
-            "value": "breached_skin_or_wound",
-            "basis": "stated",
-            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
-          },
           "orifice_site": {
             "value": null,
             "basis": "unknown",
@@ -183,20 +178,75 @@
             "basis": "unknown",
             "evidence": null
           },
+          "connected_to_an_active_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "liable_to_be_absorbed_by_mucous_membrane": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "corrects_heart_or_circulatory_defect_by_contact": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "direct_contact_heart_circulation_or_nervous_system": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+          },
           "reusable_surgical_instrument": {
             "value": null,
             "basis": "unknown",
             "evidence": null
           },
-          "absorbed_or_chemically_changed": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
-          },
           "delivers_ionising_radiation": {
             "value": null,
             "basis": "unknown",
             "evidence": null
+          },
+          "has_biological_effect": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+          },
+          "wholly_or_mostly_absorbed": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+          },
+          "undergoes_chemical_change": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+          },
+          "placed_in_teeth": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+          },
+          "administers_medicine_hazardously_by_delivery_system": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "administers_medicine": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+          },
+          "joint_replacement_or_surgical_mesh": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+          },
+          "spinal_motion_preserving": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
           },
           "active_type": {
             "value": "not_active",
@@ -354,6 +404,6 @@
     ],
     "funding": null,
     "source_text": "Metal fixation screw, permanent Holds bone together for longer than 30 days, permanently implanted. Metal fixation screw, permanent Holds bone together for longer than 30 days, permanently implanted. fixture decomposition is fixed by hand",
-    "schema_version": "0.8"
+    "schema_version": "0.9"
   }
 }

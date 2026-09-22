@@ -30,15 +30,20 @@ The clause text keeps its own words and punctuation, except that its em
 dashes are written as spaced en dashes; the docstring test treats the two as
 the same character.
 
-Not written yet: Parts 3 and 4. Each returns a Pending that blocks the
-result where the Part could apply, so a class is never given while a higher
-clause might still be waiting:
+Part 3, the invasive clauses, is written in full. Within each clause the
+default subclause ("Subject to ...") fires only when none of the subclauses
+it names applies, and when several of those apply the highest class governs
+with every hit recorded. Clause 3.1(1) excludes a device covered by 5.10 or
+5.11, so a nasal spray is decided by 5.11 alone. Clause 3.1 has a gap: (2)
+needs a device not connected to any active device and (3) one connected to
+an active device of Class IIa or higher, so a device connected only to a
+Class I active device fits neither. It is given the (2) rules, as if
+unconnected, with an amber flag.
 
-- Part 3 applies only to invasive devices, so it blocks only when the route
-  is invasive or unknown.
-- Part 4 applies to active devices (4.1 to 4.4) and to programmed or
-  programmable devices and software (4.5 to 4.8), so it blocks only when the
-  device is active or software, or either is unknown.
+Not written yet: Part 4. It applies to active devices (4.1 to 4.4) and to
+programmed or programmable devices and software (4.5 to 4.8), so it returns
+a Pending that blocks the result only when the device is active or
+software, or either is unknown.
 """
 
 from ..flags import Flag, Severity
@@ -49,7 +54,9 @@ from ..profile import (
     FunctionProfile,
     GeneralDeviceProfile,
     Invasiveness,
+    OrificeSite,
     Tri,
+    invasive_band,
 )
 from .engine import REGULATIONS, Classification, Pending, RuleHit, clauses, known, resolve
 
@@ -284,15 +291,575 @@ PART_2 = [
 # --------------------------------------------------------------------------
 
 
-def part_3(function: FunctionProfile):
-    """Part 3, invasive devices. Blocks only an invasive or unknown route."""
-    route = function.general.invasiveness
-    if not route.resolved or route.value is None:
-        return Pending(f"{PREFIX}-3.1", cite("3.1"), "invasiveness is unresolved",
-                       ("general.invasiveness",))
-    if route.value is Invasiveness.NON_INVASIVE:
+# --------------------------------------------------------------------------
+# Part 3, invasive devices
+# --------------------------------------------------------------------------
+
+
+def _orifice_scope(function: FunctionProfile, rule_id: str, reference: str):
+    """3.1(1): through a body orifice, not surgically invasive, not 5.10 or 5.11."""
+    route = _route_is(function, (Invasiveness.BODY_ORIFICE,), rule_id, reference)
+    if route is not True:
+        return route
+    if _physical(function, rule_id, reference) is True:
+        for name in ("administers_by_inhalation", "is_substance_through_orifice_or_skin"):
+            covered = _yes(function, name, rule_id, reference)
+            if isinstance(covered, Pending):
+                return covered
+            if covered is Tri.YES:
+                return None
+    elif isinstance(_physical(function, rule_id, reference), Pending):
+        return _physical(function, rule_id, reference)
+    return True
+
+
+def _connection(function: FunctionProfile, rule_id: str, reference: str):
+    """'none', 'class I only' or 'IIa or higher', or a Pending."""
+    any_active = _yes(function, "connected_to_an_active_device", rule_id, reference)
+    if isinstance(any_active, Pending):
+        return any_active
+    if any_active is Tri.NO:
+        return "none"
+    high = _yes(function, "connected_to_active_device", rule_id, reference)
+    if isinstance(high, Pending):
+        return high
+    return "IIa or higher" if high is Tri.YES else "class I only"
+
+
+def _orifice(function: FunctionProfile, reference: str, result: str, durations,
+             sites=None, absorbed=None):
+    """One paragraph of 3.1(2): unconnected (or Class I only), by duration and site."""
+    rule_id = f"{PREFIX}-{reference}"
+    scope = _orifice_scope(function, rule_id, reference)
+    if scope is not True:
+        return scope
+    connection = _connection(function, rule_id, reference)
+    if isinstance(connection, Pending):
+        return connection
+    if connection == "IIa or higher":
         return None
-    return Pending(f"{PREFIX}-3.1", cite("3.1"), "not implemented: Part 3, clauses 3.1 to 3.4")
+    general = function.general
+    names = ["invasiveness", "connected_to_an_active_device", "duration"]
+    if connection == "class I only":
+        names.insert(2, "connected_to_active_device")
+    duration = general.duration
+    if not duration.resolved or duration.value is None:
+        return Pending(rule_id, cite(reference), "duration is unresolved", ("general.duration",))
+    if duration.value not in durations:
+        return None
+    if sites is not None:
+        site = general.orifice_site
+        if not site.resolved or site.value is None:
+            return Pending(rule_id, cite(reference), "orifice_site is unresolved",
+                           ("general.orifice_site",))
+        wanted, in_set = sites
+        if (site.value in wanted) is not in_set:
+            return None
+        names.append("orifice_site")
+    if absorbed is not None:
+        value = _yes(function, "liable_to_be_absorbed_by_mucous_membrane", rule_id, reference)
+        if isinstance(value, Pending):
+            return value
+        if value is not absorbed:
+            return None
+        names.append("liable_to_be_absorbed_by_mucous_membrane")
+    return RuleHit(rule_id, cite(reference), result, _because(general, *names))
+
+
+SHALLOW = {OrificeSite.ORAL_TO_PHARYNX, OrificeSite.EAR_TO_EARDRUM, OrificeSite.NASAL_CAVITY}
+MOUTH_OR_EAR = {OrificeSite.ORAL_TO_PHARYNX, OrificeSite.EAR_TO_EARDRUM}
+NASAL = {OrificeSite.NASAL_CAVITY}
+
+
+def rule_3_1_2_a(function: FunctionProfile):
+    """Schedule 2 clause 3.1(2)(a).
+
+    (2) If the device is not intended to be connected to an active medical
+    device, the following rules apply:
+
+    (a) if the device is intended for transient use, the device is classified
+    as Class I;
+    """
+    return _orifice(function, "3.1(2)(a)", "Class I", {Duration.TRANSIENT})
+
+
+def rule_3_1_2_b_i(function: FunctionProfile):
+    """Schedule 2 clause 3.1(2)(b)(i).
+
+    (2) If the device is not intended to be connected to an active medical
+    device, the following rules apply:
+
+    (b) if the device is intended for short-term use:
+
+    (i) the device is classified as Class IIa; or
+    """
+    return _orifice(function, "3.1(2)(b)(i)", "Class IIa", {Duration.SHORT_TERM},
+                    sites=(SHALLOW, False))
+
+
+def rule_3_1_2_b_ii(function: FunctionProfile):
+    """Schedule 2 clause 3.1(2)(b)(ii).
+
+    (2) If the device is not intended to be connected to an active medical
+    device, the following rules apply:
+
+    (b) if the device is intended for short-term use:
+
+    (ii) if the device is intended to be used in the oral cavity as far as the
+    pharynx, in an ear canal up to the ear drum, or in a nasal cavity – the
+    device is classified as Class I;
+    """
+    return _orifice(function, "3.1(2)(b)(ii)", "Class I", {Duration.SHORT_TERM},
+                    sites=(SHALLOW, True))
+
+
+def rule_3_1_2_c_i(function: FunctionProfile):
+    """Schedule 2 clause 3.1(2)(c)(i).
+
+    (2) If the device is not intended to be connected to an active medical
+    device, the following rules apply:
+
+    (c) if the device is intended for long-term use:
+
+    (i) the device is classified as Class IIb; or
+    """
+    other = _orifice(function, "3.1(2)(c)(i)", "Class IIb", {Duration.LONG_TERM},
+                     sites=(SHALLOW, False))
+    if other is not None:
+        return other
+    # A nasal device liable to be absorbed is outside (ii) and stays at (i).
+    return _orifice(function, "3.1(2)(c)(i)", "Class IIb", {Duration.LONG_TERM},
+                    sites=(NASAL, True), absorbed=Tri.YES)
+
+
+def rule_3_1_2_c_ii(function: FunctionProfile):
+    """Schedule 2 clause 3.1(2)(c)(ii).
+
+    (2) If the device is not intended to be connected to an active medical
+    device, the following rules apply:
+
+    (c) if the device is intended for long-term use:
+
+    (ii) if the device is intended to be used in the oral cavity as far as the
+    pharynx or in an ear canal up to the ear drum, or the device is intended
+    to be used in a nasal cavity and the device is not liable to be absorbed
+    by the skin or mucous membrane – the device is classified as Class IIa.
+    """
+    mouth_or_ear = _orifice(function, "3.1(2)(c)(ii)", "Class IIa", {Duration.LONG_TERM},
+                            sites=(MOUTH_OR_EAR, True))
+    if mouth_or_ear is not None:
+        return mouth_or_ear
+    return _orifice(function, "3.1(2)(c)(ii)", "Class IIa", {Duration.LONG_TERM},
+                    sites=(NASAL, True), absorbed=Tri.NO)
+
+
+def rule_3_1_3(function: FunctionProfile):
+    """Schedule 2 clause 3.1(3).
+
+    (3) If the device is intended to be connected to an active medical device
+    that is classified as Class IIa or higher, the device is classified as
+    Class IIa.
+    """
+    rule_id, reference = f"{PREFIX}-3.1(3)", "3.1(3)"
+    scope = _orifice_scope(function, rule_id, reference)
+    if scope is not True:
+        return scope
+    connection = _connection(function, rule_id, reference)
+    if connection != "IIa or higher":
+        return connection if isinstance(connection, Pending) else None
+    return RuleHit(rule_id, cite(reference), "Class IIa",
+                   _because(function.general, "invasiveness", "connected_to_an_active_device",
+                            "connected_to_active_device"))
+
+
+def _band(function: FunctionProfile, band: str, rule_id: str, reference: str):
+    """True when the device is in clause 3.2, 3.3 or 3.4, None if not, else Pending."""
+    general = function.general
+    route = general.invasiveness
+    if not route.resolved or route.value is None:
+        return Pending(rule_id, cite(reference), "invasiveness is unresolved",
+                       ("general.invasiveness",))
+    if route.value not in (Invasiveness.SURGICALLY_INVASIVE, Invasiveness.IMPLANTABLE):
+        return None
+    found = invasive_band(general)
+    if found is None:
+        return Pending(rule_id, cite(reference), "duration is unresolved", ("general.duration",))
+    return True if found == band else None
+
+
+def _surgical(function: FunctionProfile, band: str, reference: str, result: str,
+              yes=(), no=()):
+    rule_id = f"{PREFIX}-{reference}"
+    inside = _band(function, band, rule_id, reference)
+    if inside is not True:
+        return inside
+    hit = _chain(function, rule_id, reference, result, (), yes=yes, no=no)
+    if isinstance(hit, RuleHit):
+        return RuleHit(hit.rule_id, hit.citation, hit.result,
+                       _because(function.general, "invasiveness", "duration", *yes, *no))
+    return hit
+
+
+HEART_DEFECT = "corrects_heart_or_circulatory_defect_by_contact"
+CONTACT = "direct_contact_heart_circulation_or_nervous_system"
+REUSABLE = "reusable_surgical_instrument"
+IONISING = "delivers_ionising_radiation"
+BIOLOGICAL = "has_biological_effect"
+ABSORBED = "wholly_or_mostly_absorbed"
+CHEMICAL = "undergoes_chemical_change"
+TEETH = "placed_in_teeth"
+MEDICINE = "administers_medicine"
+HAZARDOUS_DELIVERY = "administers_medicine_hazardously_by_delivery_system"
+
+
+def rule_3_2_2(function: FunctionProfile):
+    """Schedule 2 clause 3.2(2).
+
+    (1) This clause applies to a surgically invasive medical device that is
+    intended for transient use.
+
+    (2) Subject to subclauses (3) to (5), the device is classified as Class
+    IIa.
+    """
+    return _surgical(function, "3.2", "3.2(2)", "Class IIa",
+                     no=(HEART_DEFECT, CONTACT, REUSABLE, IONISING, BIOLOGICAL, ABSORBED,
+                         HAZARDOUS_DELIVERY))
+
+
+def rule_3_2_3(function: FunctionProfile):
+    """Schedule 2 clause 3.2(3).
+
+    (3) If the device is intended by the manufacturer specifically to be used
+    to diagnose, monitor, control or correct a defect of the heart, or the
+    central circulatory system, of a patient through direct contact with
+    these parts of the body, the device is classified as Class III.
+    """
+    return _surgical(function, "3.2", "3.2(3)", "Class III", yes=(HEART_DEFECT,))
+
+
+def rule_3_2_3A(function: FunctionProfile):
+    """Schedule 2 clause 3.2(3A).
+
+    (3A) If the device is not a reusable surgical instrument and the device is
+    intended by the manufacturer specifically to be used in direct contact
+    with the heart, the central circulatory system or the central nervous
+    system of a patient, the device is classified as Class III.
+    """
+    return _surgical(function, "3.2", "3.2(3A)", "Class III", yes=(CONTACT,), no=(REUSABLE,))
+
+
+def rule_3_2_4(function: FunctionProfile):
+    """Schedule 2 clause 3.2(4).
+
+    (4) If the device is a reusable surgical instrument, the device is
+    classified as Class I.
+    """
+    return _surgical(function, "3.2", "3.2(4)", "Class I", yes=(REUSABLE,))
+
+
+def rule_3_2_5_a(function: FunctionProfile):
+    """Schedule 2 clause 3.2(5)(a).
+
+    (5) If:
+
+    (a) the device is intended by the manufacturer to be used to supply
+    energy in the form of ionising radiation; or
+
+    the device is classified as Class IIb.
+    """
+    return _surgical(function, "3.2", "3.2(5)(a)", "Class IIb", yes=(IONISING,))
+
+
+def rule_3_2_5_b(function: FunctionProfile):
+    """Schedule 2 clause 3.2(5)(b).
+
+    (5) If:
+
+    (b) the device is intended by the manufacturer to have a biological
+    effect; or
+
+    the device is classified as Class IIb.
+    """
+    return _surgical(function, "3.2", "3.2(5)(b)", "Class IIb", yes=(BIOLOGICAL,))
+
+
+def rule_3_2_5_c(function: FunctionProfile):
+    """Schedule 2 clause 3.2(5)(c).
+
+    (5) If:
+
+    (c) the device is intended by the manufacturer to be wholly, or mostly,
+    absorbed by the patient’s body; or
+
+    the device is classified as Class IIb.
+    """
+    return _surgical(function, "3.2", "3.2(5)(c)", "Class IIb", yes=(ABSORBED,))
+
+
+def rule_3_2_5_d(function: FunctionProfile):
+    """Schedule 2 clause 3.2(5)(d).
+
+    (5) If:
+
+    (d) the device is intended by the manufacturer to be used to administer
+    medicine to a patient by means of a delivery system, and the
+    administration is potentially hazardous to the patient having regard to
+    the characteristics of the device;
+
+    the device is classified as Class IIb.
+    """
+    return _surgical(function, "3.2", "3.2(5)(d)", "Class IIb", yes=(HAZARDOUS_DELIVERY,))
+
+
+def rule_3_3_2(function: FunctionProfile):
+    """Schedule 2 clause 3.3(2).
+
+    (1) This clause applies to a surgically invasive medical device that is
+    intended for short-term use.
+
+    (2) Subject to subclauses (3) and (4), the device is classified as Class
+    IIa.
+    """
+    hit = _surgical(function, "3.3", "3.3(2)", "Class IIa",
+                    no=(IONISING, MEDICINE, HEART_DEFECT, CONTACT, BIOLOGICAL, ABSORBED))
+    if not isinstance(hit, RuleHit):
+        return hit
+    # Chemical change is (3)(b) only outside the teeth; in the teeth it stays here.
+    chemical = _yes(function, CHEMICAL, hit.rule_id, "3.3(2)")
+    if isinstance(chemical, Pending):
+        return chemical
+    if chemical is Tri.YES:
+        teeth = _yes(function, TEETH, hit.rule_id, "3.3(2)")
+        if teeth is not Tri.YES:
+            return teeth if isinstance(teeth, Pending) else None
+    return hit
+
+
+def rule_3_3_3_a(function: FunctionProfile):
+    """Schedule 2 clause 3.3(3)(a).
+
+    (3) If:
+
+    (a) the device is intended by the manufacturer to be used to supply
+    energy in the form of ionising radiation; or
+
+    the device is classified as Class IIb.
+    """
+    return _surgical(function, "3.3", "3.3(3)(a)", "Class IIb", yes=(IONISING,))
+
+
+def rule_3_3_3_b(function: FunctionProfile):
+    """Schedule 2 clause 3.3(3)(b).
+
+    (3) If:
+
+    (b) the device is intended by the manufacturer to undergo a chemical
+    change in a patient’s body (other than a device that is intended by the
+    manufacturer to be placed in the teeth); or
+
+    the device is classified as Class IIb.
+    """
+    return _surgical(function, "3.3", "3.3(3)(b)", "Class IIb", yes=(CHEMICAL,), no=(TEETH,))
+
+
+def rule_3_3_3_c(function: FunctionProfile):
+    """Schedule 2 clause 3.3(3)(c).
+
+    (3) If:
+
+    (c) the device is intended by the manufacturer to administer medicine;
+
+    the device is classified as Class IIb.
+    """
+    return _surgical(function, "3.3", "3.3(3)(c)", "Class IIb", yes=(MEDICINE,))
+
+
+def rule_3_3_4_a(function: FunctionProfile):
+    """Schedule 2 clause 3.3(4)(a).
+
+    (4) If the device is intended by the manufacturer:
+
+    (a) specifically to be used to diagnose, monitor, control or correct a
+    defect of the heart, or the central circulatory system, of a patient
+    through direct contact with these parts of the body; or
+
+    the device is classified as Class III.
+    """
+    return _surgical(function, "3.3", "3.3(4)(a)", "Class III", yes=(HEART_DEFECT,))
+
+
+def rule_3_3_4_b(function: FunctionProfile):
+    """Schedule 2 clause 3.3(4)(b).
+
+    (4) If the device is intended by the manufacturer:
+
+    (b) specifically to be used in direct contact with the heart, the central
+    circulatory system or the central nervous system of a patient; or
+
+    the device is classified as Class III.
+    """
+    return _surgical(function, "3.3", "3.3(4)(b)", "Class III", yes=(CONTACT,))
+
+
+def rule_3_3_4_c(function: FunctionProfile):
+    """Schedule 2 clause 3.3(4)(c).
+
+    (4) If the device is intended by the manufacturer:
+
+    (c) to have a biological effect; or
+
+    the device is classified as Class III.
+    """
+    return _surgical(function, "3.3", "3.3(4)(c)", "Class III", yes=(BIOLOGICAL,))
+
+
+def rule_3_3_4_d(function: FunctionProfile):
+    """Schedule 2 clause 3.3(4)(d).
+
+    (4) If the device is intended by the manufacturer:
+
+    (d) to be wholly, or mostly, absorbed by a patient’s body;
+
+    the device is classified as Class III.
+    """
+    return _surgical(function, "3.3", "3.3(4)(d)", "Class III", yes=(ABSORBED,))
+
+
+def rule_3_4_2(function: FunctionProfile):
+    """Schedule 2 clause 3.4(2).
+
+    (1) This clause applies to:
+
+    (a) a surgically invasive medical device that is intended for long-term
+    use; and
+
+    (b) an implantable medical device.
+
+    (2) Subject to subclauses (3), (4), (4A) and (4B), the device is
+    classified as Class IIb.
+    """
+    return _surgical(function, "3.4", "3.4(2)", "Class IIb",
+                     no=(TEETH, CONTACT, BIOLOGICAL, ABSORBED, CHEMICAL, MEDICINE,
+                         "joint_replacement_or_surgical_mesh", "spinal_motion_preserving"))
+
+
+def rule_3_4_3(function: FunctionProfile):
+    """Schedule 2 clause 3.4(3).
+
+    (3) If the device is intended by the manufacturer to be placed in the
+    teeth of a patient, the device is classified as Class IIa.
+    """
+    return _surgical(function, "3.4", "3.4(3)", "Class IIa", yes=(TEETH,))
+
+
+def rule_3_4_4_a(function: FunctionProfile):
+    """Schedule 2 clause 3.4(4)(a).
+
+    (4) If the device is intended by the manufacturer:
+
+    (a) to be used in direct contact with the heart, the central circulatory
+    system or the central nervous system of a patient; or
+
+    the device is classified as Class III.
+    """
+    return _surgical(function, "3.4", "3.4(4)(a)", "Class III", yes=(CONTACT,))
+
+
+def rule_3_4_4_b(function: FunctionProfile):
+    """Schedule 2 clause 3.4(4)(b).
+
+    (4) If the device is intended by the manufacturer:
+
+    (b) to have a biological effect; or
+
+    the device is classified as Class III.
+    """
+    return _surgical(function, "3.4", "3.4(4)(b)", "Class III", yes=(BIOLOGICAL,))
+
+
+def rule_3_4_4_c(function: FunctionProfile):
+    """Schedule 2 clause 3.4(4)(c).
+
+    (4) If the device is intended by the manufacturer:
+
+    (c) to be wholly, or mostly, absorbed by a patient’s body; or
+
+    the device is classified as Class III.
+    """
+    return _surgical(function, "3.4", "3.4(4)(c)", "Class III", yes=(ABSORBED,))
+
+
+def rule_3_4_4_d(function: FunctionProfile):
+    """Schedule 2 clause 3.4(4)(d).
+
+    (4) If the device is intended by the manufacturer:
+
+    (d) to undergo a chemical change in a patient’s body (other than a device
+    that is intended by the manufacturer to be placed in the teeth); or
+
+    the device is classified as Class III.
+    """
+    return _surgical(function, "3.4", "3.4(4)(d)", "Class III", yes=(CHEMICAL,), no=(TEETH,))
+
+
+def rule_3_4_4_e(function: FunctionProfile):
+    """Schedule 2 clause 3.4(4)(e).
+
+    (4) If the device is intended by the manufacturer:
+
+    (e) to be used to administer medicine;
+
+    the device is classified as Class III.
+    """
+    return _surgical(function, "3.4", "3.4(4)(e)", "Class III", yes=(MEDICINE,))
+
+
+def rule_3_4_4A(function: FunctionProfile):
+    """Schedule 2 clause 3.4(4A).
+
+    (4A) The device is classified as Class III if it is:
+
+    (a) a joint replacement medical device; or
+
+    (b) surgical mesh.
+    """
+    return _surgical(function, "3.4", "3.4(4A)", "Class III",
+                     yes=("joint_replacement_or_surgical_mesh",))
+
+
+def rule_3_4_4B(function: FunctionProfile):
+    """Schedule 2 clause 3.4(4B).
+
+    (4B) If the device is intended by the manufacturer to be a
+    motion-preserving device for the spine (such as a spinal disc
+    replacement), the device is classified as Class III.
+    """
+    return _surgical(function, "3.4", "3.4(4B)", "Class III", yes=("spinal_motion_preserving",))
+
+
+PART_3 = [
+    rule_3_1_2_a, rule_3_1_2_b_i, rule_3_1_2_b_ii, rule_3_1_2_c_i, rule_3_1_2_c_ii,
+    rule_3_1_3,
+    rule_3_2_2, rule_3_2_3, rule_3_2_3A, rule_3_2_4,
+    rule_3_2_5_a, rule_3_2_5_b, rule_3_2_5_c, rule_3_2_5_d,
+    rule_3_3_2, rule_3_3_3_a, rule_3_3_3_b, rule_3_3_3_c,
+    rule_3_3_4_a, rule_3_3_4_b, rule_3_3_4_c, rule_3_3_4_d,
+    rule_3_4_2, rule_3_4_3, rule_3_4_4_a, rule_3_4_4_b, rule_3_4_4_c, rule_3_4_4_d,
+    rule_3_4_4_e, rule_3_4_4A, rule_3_4_4B,
+]
+
+
+CLASS_I_ACTIVE_CONNECTION = Flag(
+    severity=Severity.AMBER,
+    code="s2_3_1_class_i_active_connection",
+    message=(
+        "Schedule 2 clause 3.1(2) covers orifice devices not connected to any "
+        "active device, and 3.1(3) those connected to an active device of Class "
+        "IIa or higher. This device connects only to a Class I active device, "
+        "which neither subclause names. It has been classified under 3.1(2) as "
+        "if unconnected. Confirm that reading before relying on the class."
+    ),
+)
 
 
 def part_4(function: FunctionProfile):
@@ -764,20 +1331,27 @@ NO_PATIENT_CONTACT = Flag(
 def _flags(function: FunctionProfile, result: Classification) -> list[Flag]:
     live = {h.rule_id for h in result.hits if h.rule_id not in result.displaced}
     general = function.general
+    flags = []
     if (
         f"{PREFIX}-5.5(3)" in live
         and general.invasiveness.value is Invasiveness.NON_INVASIVE
         and known(general.contacts_injured_skin_or_mucous_membrane) is Tri.NO
     ):
-        return [NO_PATIENT_CONTACT]
-    return []
+        flags.append(NO_PATIENT_CONTACT)
+    if (
+        any(rule_id.startswith(f"{PREFIX}-3.1(2)") for rule_id in live)
+        and known(general.connected_to_an_active_device) is Tri.YES
+    ):
+        flags.append(CLASS_I_ACTIVE_CONNECTION)
+    return flags
 
 
 def evaluate(function: FunctionProfile) -> Classification:
     general = function.general
     outcomes = [rule(general) for rule in PART_2]
+    outcomes += [rule(function) for rule in PART_3]
     outcomes += [rule(function) for rule in PART_5]
-    outcomes += [part_3(function), part_4(function)]
+    outcomes += [part_4(function)]
     result = resolve(outcomes, GENERAL_ORDER)
     result.flags = _flags(function, result)
     return result

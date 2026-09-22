@@ -120,11 +120,6 @@
             "basis": "unknown",
             "evidence": null
           },
-          "body_contact": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
-          },
           "orifice_site": {
             "value": null,
             "basis": "unknown",
@@ -185,17 +180,72 @@
             "basis": "stated",
             "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
           },
+          "connected_to_an_active_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "liable_to_be_absorbed_by_mucous_membrane": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "corrects_heart_or_circulatory_defect_by_contact": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "direct_contact_heart_circulation_or_nervous_system": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
           "reusable_surgical_instrument": {
             "value": null,
             "basis": "unknown",
             "evidence": null
           },
-          "absorbed_or_chemically_changed": {
+          "delivers_ionising_radiation": {
             "value": null,
             "basis": "unknown",
             "evidence": null
           },
-          "delivers_ionising_radiation": {
+          "has_biological_effect": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "wholly_or_mostly_absorbed": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "undergoes_chemical_change": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "placed_in_teeth": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "administers_medicine_hazardously_by_delivery_system": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "administers_medicine": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "joint_replacement_or_surgical_mesh": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "spinal_motion_preserving": {
             "value": null,
             "basis": "unknown",
             "evidence": null
@@ -356,6 +406,6 @@
     ],
     "funding": null,
     "source_text": "Sterile adhesive dressing strip Adhesive dressing strip that absorbs exudate from a wound, supplied sterile. Sterile adhesive dressing strip Adhesive dressing strip that absorbs exudate from a wound, supplied sterile. fixture decomposition is fixed by hand",
-    "schema_version": "0.8"
+    "schema_version": "0.9"
   }
 }
