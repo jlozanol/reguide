@@ -1,4 +1,4 @@
-"""Tests for Schedule 2 Parts 2, 3 and 5, and the unwritten Part 4.
+"""Tests for Schedule 2, all five Parts.
 
 Six things are being tested:
 
@@ -13,7 +13,8 @@ Six things are being tested:
 4. Each Part 3 paragraph by route and duration band, the "subject to"
    defaults, the 5.10/5.11 exclusion from 3.1 and the Class I connection
    gap in 3.1.
-5. Part 4 blocks a result only where it could apply.
+5. Each Part 4 paragraph: the active and programmable scopes, therapy and
+   diagnosis gates, and the graded software rules at every level.
 6. Every docstring quotes its clause verbatim, checked against the clause
    files split from the real Regulations. Skipped without the source. The
    rules write the clause's em dashes as spaced en dashes; the check treats
@@ -31,7 +32,6 @@ import pytest
 from reguide import legislation as LEG
 from reguide.profile import (
     GENERAL_ORDER,
-    ActiveType,
     Answer,
     Basis,
     DeviceKind,
@@ -91,11 +91,26 @@ PART_3_FIELDS = [
 ]
 
 
+PART_4_FIELDS = [
+    "is_active_device", "is_programmed_or_programmable", "active_for_therapy",
+    "administers_or_exchanges_energy", "delivers_hazardous_energy",
+    "controls_hazardous_therapy_device", "diagnostic_function_determines_patient_management",
+    "active_for_diagnosis", "supplies_absorbed_energy_for_diagnosis",
+    "images_radiopharmaceutical_distribution", "diagnoses_or_monitors_vital_processes",
+    "monitors_vital_parameters_immediate_danger",
+    "emits_ionising_radiation_for_interventional_radiology",
+    "controls_interventional_radiology_device", "administers_or_removes_substances",
+    "substance_administration_potentially_hazardous", "diagnoses_or_screens",
+    "monitors_disease_state", "specifies_or_recommends_treatment",
+    "provides_therapy_through_information",
+]
+
+
 def general(**given) -> GeneralDeviceProfile:
     """A non-invasive, non-active device with every Part 2, 3 and 5 field answered no."""
     fields = {name: stated(Tri.NO) for name in PART_2_FIELDS + PART_3_FIELDS + PART_5_FIELDS}
     fields["invasiveness"] = stated(Invasiveness.NON_INVASIVE)
-    fields["active_type"] = stated(ActiveType.NOT_ACTIVE)
+    fields.update({name: stated(Tri.NO) for name in PART_4_FIELDS})
     fields.update({k: v if isinstance(v, Answer) else stated(v) for k, v in given.items()})
     return GeneralDeviceProfile(**fields)
 
@@ -239,15 +254,7 @@ class TestSubjectTo:
 # --------------------------------------------------------------------------
 
 
-class TestUnwrittenParts:
-    def test_part_4_waits_only_for_an_active_device_or_software(self):
-        assert S2.part_4(function()) is None
-        assert S2.part_4(function(active_type=ActiveType.THERAPEUTIC)).reason.startswith(
-            "not implemented")
-        assert S2.part_4(function(software=Tri.YES)).reason.startswith("not implemented")
-        unknown = S2.part_4(function(active_type=Answer()))
-        assert unknown.fields == ("general.active_type",)
-
+class TestWholeSchedule:
     def test_a_non_invasive_passive_device_is_classified(self):
         outcome = S2.evaluate(function(**{WOUND: Tri.YES,
                                           "barrier_compression_or_absorption": Tri.YES}))
@@ -365,7 +372,7 @@ class TestApplicability:
     def test_5_7_3_needs_an_active_device_or_software(self):
         assert S2.rule_5_7_3(function(controls_active_implantable=Tri.YES)) is None
         hit = S2.rule_5_7_3(function(controls_active_implantable=Tri.YES,
-                                     active_type=ActiveType.THERAPEUTIC))
+                                     is_active_device=Tri.YES))
         assert (hit.rule_id, hit.result) == ("s2-5.7(3)", "Class III")
         assert S2.rule_5_7_3(function(software=Tri.YES, controls_active_implantable=Tri.YES))
 
@@ -392,10 +399,11 @@ class TestExportOnly:
         assert [h.rule_id for h in outcome.governing] == ["s2-5.8"]
         assert set(outcome.displaced) >= {"s2-5.1(2)", "s2-5.9"}
 
-    def test_5_8_also_clears_the_unwritten_parts(self):
+    def test_5_8_also_clears_an_unanswered_software_question(self):
         outcome = S2.evaluate(function(is_export_only=Tri.YES, software=Tri.YES,
-                                       active_type=ActiveType.DIAGNOSTIC))
+                                       diagnoses_or_screens=Tri.YES))
         assert outcome.unresolved == []
+        assert outcome.result == "Class I"
 
 
 class TestNoContactFlag:
@@ -581,6 +589,196 @@ def test_an_unknown_duration_blocks_the_surgical_clauses():
 
 
 # --------------------------------------------------------------------------
+# Part 4
+# --------------------------------------------------------------------------
+
+
+LAY = "device_gives_the_decision_to_a_lay_user"
+
+
+def active(**given):
+    return function(is_active_device=Tri.YES, **given)
+
+
+def software(**given):
+    return function(software=Tri.YES, **given)
+
+
+class TestActiveScope:
+    def test_4_1_is_the_floor_for_any_active_device(self):
+        assert governing(active())[:2] == ("Class I", ["s2-2.1", "s2-4.1"])
+
+    def test_software_is_active_without_being_asked(self):
+        """Dictionary: software that is a medical device is an active device."""
+        assert S2.rule_4_1(software(is_active_device=Answer())).rule_id == "s2-4.1"
+
+    def test_a_passive_device_is_outside_part_4(self):
+        assert all(rule(function()) is None for rule in S2.PART_4)
+
+    def test_an_unanswered_active_question_is_pending(self):
+        assert S2.rule_4_1(function(is_active_device=Answer())).fields == (
+            "general.is_active_device",)
+
+    def test_the_software_rules_need_a_programmable_device(self):
+        f = active(diagnoses_or_screens=Tri.YES, decision_maker=LAY,
+                   condition_severity="any_other_case", public_health_risk="low")
+        assert S2.rule_4_5_1_e(f) is None
+        programmable = active(is_programmed_or_programmable=Tri.YES, diagnoses_or_screens=Tri.YES,
+                              decision_maker=LAY, condition_severity="any_other_case",
+                              public_health_risk="low")
+        assert S2.rule_4_5_1_e(programmable).result == "Class IIa"
+
+
+PART_4_LOOKUPS = [
+    ({"active_for_therapy": Tri.YES, "administers_or_exchanges_energy": Tri.YES},
+     "s2-4.2(1)", "Class IIa"),
+    ({"active_for_therapy": Tri.YES, "administers_or_exchanges_energy": Tri.YES,
+      "delivers_hazardous_energy": Tri.YES}, "s2-4.2(2)", "Class IIb"),
+    ({"active_for_therapy": Tri.YES, "controls_hazardous_therapy_device": Tri.YES},
+     "s2-4.2(3)", "Class IIb"),
+    ({"active_for_therapy": Tri.YES,
+      "diagnostic_function_determines_patient_management": Tri.YES}, "s2-4.2(4)", "Class III"),
+    ({"active_for_diagnosis": Tri.YES, "supplies_absorbed_energy_for_diagnosis": Tri.YES},
+     "s2-4.3(2)(a)", "Class IIa"),
+    ({"active_for_diagnosis": Tri.YES, "images_radiopharmaceutical_distribution": Tri.YES},
+     "s2-4.3(2)(b)", "Class IIa"),
+    ({"active_for_diagnosis": Tri.YES, "diagnoses_or_monitors_vital_processes": Tri.YES},
+     "s2-4.3(2)(c)", "Class IIa"),
+    ({"active_for_diagnosis": Tri.YES, "monitors_vital_parameters_immediate_danger": Tri.YES},
+     "s2-4.3(3)(a)", "Class IIb"),
+    ({"active_for_diagnosis": Tri.YES,
+      "emits_ionising_radiation_for_interventional_radiology": Tri.YES},
+     "s2-4.3(3)(b)", "Class IIb"),
+    ({"active_for_diagnosis": Tri.YES, "controls_interventional_radiology_device": Tri.YES},
+     "s2-4.3(3)(c)", "Class IIb"),
+    ({"administers_or_removes_substances": Tri.YES}, "s2-4.4(1)", "Class IIa"),
+    ({"administers_or_removes_substances": Tri.YES,
+      "substance_administration_potentially_hazardous": Tri.YES}, "s2-4.4(2)", "Class IIb"),
+]
+
+
+@pytest.mark.parametrize("answers,rule_id,result", PART_4_LOOKUPS,
+                         ids=[p[1] for p in PART_4_LOOKUPS])
+def test_each_part_4_lookup_governs_alone(answers, rule_id, result):
+    got, rules, _ = governing(active(**answers))
+    assert (got, rules) == (result, [rule_id])
+
+
+def test_4_2_1_gives_way_to_4_2_2():
+    outcome = S2.evaluate(active(active_for_therapy=Tri.YES,
+                                 administers_or_exchanges_energy=Tri.YES,
+                                 delivers_hazardous_energy=Tri.YES))
+    assert "s2-4.2(1)" not in [h.rule_id for h in outcome.hits]
+
+
+def test_4_3_2_c_gives_way_to_4_3_3_a():
+    outcome = S2.evaluate(active(active_for_diagnosis=Tri.YES,
+                                 diagnoses_or_monitors_vital_processes=Tri.YES,
+                                 monitors_vital_parameters_immediate_danger=Tri.YES))
+    assert "s2-4.3(2)(c)" not in [h.rule_id for h in outcome.hits]
+
+
+def test_a_device_for_therapy_and_diagnosis_meets_both_clauses():
+    """TGA's example of the overlap: a defibrillator."""
+    outcome = S2.evaluate(active(active_for_therapy=Tri.YES, active_for_diagnosis=Tri.YES,
+                                 administers_or_exchanges_energy=Tri.YES,
+                                 delivers_hazardous_energy=Tri.YES,
+                                 diagnostic_function_determines_patient_management=Tri.YES,
+                                 monitors_vital_parameters_immediate_danger=Tri.YES))
+    assert outcome.result == "Class III"
+    assert {"s2-4.2(2)", "s2-4.2(4)", "s2-4.3(3)(a)"} <= {h.rule_id for h in outcome.hits}
+
+
+PRO = "informs_a_health_professional_who_decides"
+DEATH = "death_or_severe_deterioration_without_urgent_treatment"
+SERIOUS = "serious_disease_or_condition"
+OTHER = "any_other_case"
+
+
+@pytest.mark.parametrize("decision,severity,risk,rule_id,result", [
+    (LAY, DEATH, "low", "s2-4.5(1)(c)(i)", "Class III"),
+    (LAY, OTHER, "high", "s2-4.5(1)(c)(ii)", "Class III"),
+    (LAY, SERIOUS, "low", "s2-4.5(1)(d)", "Class IIb"),
+    (LAY, OTHER, "moderate", "s2-4.5(1)(d)", "Class IIb"),
+    (LAY, OTHER, "none", "s2-4.5(1)(e)", "Class IIa"),
+    ("device_gives_the_decision_to_a_health_professional", SERIOUS, "low", "s2-4.5(1)(d)",
+     "Class IIb"),
+    (PRO, DEATH, "low", "s2-4.5(2)(a)(i)", "Class IIb"),
+    (PRO, OTHER, "high", "s2-4.5(2)(a)(ii)", "Class IIb"),
+    (PRO, SERIOUS, "low", "s2-4.5(2)(b)", "Class IIa"),
+    (PRO, OTHER, "low", "s2-4.5(2)(c)", "Class I"),
+])
+def test_4_5_every_level(decision, severity, risk, rule_id, result):
+    f = software(diagnoses_or_screens=Tri.YES, decision_maker=decision,
+                 condition_severity=severity, public_health_risk=risk)
+    got, rules, _ = governing(f)
+    assert got == result
+    assert rule_id in rules
+
+
+def test_4_5_both_limbs_of_c_are_cited_when_both_apply():
+    f = software(diagnoses_or_screens=Tri.YES, decision_maker=LAY, condition_severity=DEATH,
+                 public_health_risk="high")
+    assert governing(f)[1] == ["s2-4.5(1)(c)(i)", "s2-4.5(1)(c)(ii)"]
+
+
+@pytest.mark.parametrize("danger,risk,rule_id,result", [
+    ("immediate_danger", "low", "s2-4.6(a)", "Class IIb"),
+    ("any_other_case", "high", "s2-4.6(a)", "Class IIb"),
+    ("other_danger", "low", "s2-4.6(b)", "Class IIa"),
+    ("any_other_case", "moderate", "s2-4.6(b)", "Class IIa"),
+    ("any_other_case", "none", "s2-4.6(c)", "Class I"),
+])
+def test_4_6_every_level(danger, risk, rule_id, result):
+    f = software(monitors_disease_state=Tri.YES, monitoring_danger=danger,
+                 public_health_risk=risk)
+    got, rules, _ = governing(f)
+    assert got == result
+    assert rule_id in rules
+
+
+@pytest.mark.parametrize("decision,treatment,risk,rule_id,result", [
+    (LAY, "death_or_severe_deterioration", "low", "s2-4.7(1)(a)(i)", "Class III"),
+    (LAY, "any_other_case", "high", "s2-4.7(1)(a)(ii)", "Class III"),
+    (LAY, "otherwise_harmful", "low", "s2-4.7(1)(b)(i)", "Class IIb"),
+    (LAY, "any_other_case", "moderate", "s2-4.7(1)(b)(ii)", "Class IIb"),
+    (LAY, "any_other_case", "none", "s2-4.7(1)(c)", "Class IIa"),
+    (PRO, "death_or_severe_deterioration", "low", "s2-4.7(2)(a)(i)", "Class IIb"),
+    (PRO, "any_other_case", "high", "s2-4.7(2)(a)(ii)", "Class IIb"),
+    (PRO, "otherwise_harmful", "low", "s2-4.7(2)(b)(i)", "Class IIa"),
+    (PRO, "any_other_case", "moderate", "s2-4.7(2)(b)(ii)", "Class IIa"),
+    (PRO, "any_other_case", "none", "s2-4.7(2)(c)", "Class I"),
+])
+def test_4_7_every_level(decision, treatment, risk, rule_id, result):
+    f = software(specifies_or_recommends_treatment=Tri.YES, decision_maker=decision,
+                 treatment_risk=treatment, public_health_risk=risk)
+    got, rules, _ = governing(f)
+    assert got == result
+    assert rule_id in rules
+
+
+@pytest.mark.parametrize("harm,rule_id,result", [
+    ("death_or_severe_deterioration", "s2-4.8(a)", "Class III"),
+    ("serious_harm", "s2-4.8(b)", "Class IIb"),
+    ("harm", "s2-4.8(c)", "Class IIa"),
+    ("any_other_case", "s2-4.8(d)", "Class I"),
+])
+def test_4_8_every_level(harm, rule_id, result):
+    f = software(provides_therapy_through_information=Tri.YES, information_therapy_harm=harm)
+    got, rules, _ = governing(f)
+    assert got == result
+    assert rule_id in rules
+
+
+def test_an_unanswered_level_is_pending():
+    f = software(diagnoses_or_screens=Tri.YES, decision_maker=LAY,
+                 condition_severity=Answer(), public_health_risk="low")
+    outcome = S2.evaluate(f)
+    assert outcome.result is None
+    assert "general.condition_severity" in outcome.unresolved
+
+
+# --------------------------------------------------------------------------
 # Part 2 against the answer key
 # --------------------------------------------------------------------------
 
@@ -600,6 +798,12 @@ DECIDED_BY_PART_5 = [
     "saline_nasal_spray",
     "condom_with_spermicide",
     "heparin_coated_catheter",
+]
+
+DECIDED_BY_PART_4 = [
+    "diagnostic_ultrasound", "mri_equipment", "radiotherapy_afterloading_control",
+    "infusion_pump", "melanoma_screening_app", "emphysema_ct_software",
+    "spect_cardiac_monitoring", "emg_dystrophy_monitoring",
 ]
 
 DECIDED_BY_PART_3 = [
@@ -663,8 +867,8 @@ def corpus(tmp_path_factory):
     return LEG.load(out)
 
 
-@pytest.mark.parametrize("slug", DECIDED_BY_PART_5 + DECIDED_BY_PART_3)
-def test_parts_3_and_5_decide_the_fixtures_they_decide(slug):
+@pytest.mark.parametrize("slug", DECIDED_BY_PART_5 + DECIDED_BY_PART_3 + DECIDED_BY_PART_4)
+def test_parts_3_4_and_5_decide_the_fixtures_they_decide(slug):
     data = json.loads((FIXTURES / f"{slug}.json").read_text())
     profile = DeviceProfile.model_validate(data["profile"])
     expected = data["functions"][0]
@@ -674,9 +878,11 @@ def test_parts_3_and_5_decide_the_fixtures_they_decide(slug):
     assert any(h.rule_id.startswith(f"s2-{expected['expected_rule']}") for h in outcome.governing)
 
 
+ALL_RULES = S2.PART_2 + S2.PART_3 + S2.PART_4 + S2.PART_5
+
+
 @needs_source
-@pytest.mark.parametrize("rule", S2.PART_2 + S2.PART_3 + S2.PART_5,
-                         ids=[r.__name__ for r in S2.PART_2 + S2.PART_3 + S2.PART_5])
+@pytest.mark.parametrize("rule", ALL_RULES, ids=[r.__name__ for r in ALL_RULES])
 def test_docstring_quotes_the_clause_verbatim(corpus, rule):
     heading, *paragraphs = inspect.getdoc(rule).split("\n\n")
     reference = heading.removeprefix("Schedule 2 clause ").rstrip(".")

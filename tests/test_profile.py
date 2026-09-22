@@ -19,10 +19,8 @@ from reguide.profile import (
     PART_2_SUBSTANCE_FIELDS,
     PART_2_WOUND_FIELDS,
     PART_3_FIELDS,
-    ActiveType,
     Answer,
     Basis,
-    ClinicalFunction,
     CoreProfile,
     DeviceKind,
     DeviceProfile,
@@ -222,32 +220,74 @@ class TestRelevanceGating:
 
     def test_a_bandage_is_not_asked_about_ionising_radiation(self):
         profile = general_profile(
-            invasiveness=Invasiveness.NON_INVASIVE, active_type=ActiveType.NOT_ACTIVE
+            invasiveness=Invasiveness.NON_INVASIVE, is_active_device=Tri.NO
         )
         fields = relevant_general_fields(only(profile))
         assert "delivers_ionising_radiation" not in fields
+        assert "active_for_therapy" not in fields
 
     def test_diagnostic_software_is_asked_who_decides(self):
         profile = general_profile(
             is_software=Tri.YES,
             invasiveness=Invasiveness.NON_INVASIVE,
-            active_type=ActiveType.DIAGNOSTIC,
-            clinical_function=ClinicalFunction.DIAGNOSE_OR_SCREEN,
+            diagnoses_or_screens=Tri.YES,
         )
         missing = profile.missing()
         assert "functions.0.general.decision_maker" in missing
         assert "functions.0.general.condition_severity" in missing
+        assert "functions.0.general.monitoring_danger" not in missing
+
+    def test_software_is_never_asked_whether_it_is_active_or_programmable(self):
+        """Dictionary: software that is a medical device is an active device."""
+        profile = general_profile(is_software=Tri.YES, invasiveness=Invasiveness.NON_INVASIVE)
+        fields = relevant_general_fields(only(profile))
+        assert "is_active_device" not in fields
+        assert "is_programmed_or_programmable" not in fields
+        assert "diagnoses_or_screens" in fields
+
+    def test_active_hardware_is_asked_whether_it_is_programmable(self):
+        profile = general_profile(invasiveness=Invasiveness.NON_INVASIVE,
+                                  is_active_device=Tri.YES)
+        fields = relevant_general_fields(only(profile))
+        assert "is_programmed_or_programmable" in fields
+        assert "diagnoses_or_screens" not in fields
+
+    @pytest.mark.parametrize("gate,opened", [
+        ("active_for_therapy", "controls_hazardous_therapy_device"),
+        ("active_for_diagnosis", "monitors_vital_parameters_immediate_danger"),
+        ("administers_or_removes_substances", "substance_administration_potentially_hazardous"),
+    ])
+    def test_each_part_4_gate_opens_its_paragraphs(self, gate, opened):
+        closed = general_profile(invasiveness=Invasiveness.NON_INVASIVE,
+                                 is_active_device=Tri.YES)
+        assert opened not in relevant_general_fields(only(closed))
+        profile = general_profile(invasiveness=Invasiveness.NON_INVASIVE,
+                                  is_active_device=Tri.YES, **{gate: Tri.YES})
+        assert opened in relevant_general_fields(only(profile))
+
+    @pytest.mark.parametrize("gate,level", [
+        ("monitors_disease_state", "monitoring_danger"),
+        ("specifies_or_recommends_treatment", "treatment_risk"),
+        ("provides_therapy_through_information", "information_therapy_harm"),
+    ])
+    def test_each_software_rule_asks_its_own_level(self, gate, level):
+        profile = general_profile(is_software=Tri.YES, invasiveness=Invasiveness.NON_INVASIVE,
+                                  **{gate: Tri.YES})
+        fields = relevant_general_fields(only(profile))
+        assert level in fields
+        assert "condition_severity" not in fields
 
     def test_relevant_never_repeats_a_field(self):
         profile = general_profile(
-            invasiveness=Invasiveness.IMPLANTABLE, active_type=ActiveType.THERAPEUTIC
+            invasiveness=Invasiveness.IMPLANTABLE, is_active_device=Tri.YES,
+            active_for_therapy=Tri.YES, active_for_diagnosis=Tri.YES
         )
         fields = relevant_general_fields(only(profile))
         assert len(fields) == len(set(fields))
 
     def test_gating_asks_far_fewer_than_every_field(self):
         profile = general_profile(
-            invasiveness=Invasiveness.NON_INVASIVE, active_type=ActiveType.NOT_ACTIVE
+            invasiveness=Invasiveness.NON_INVASIVE, is_active_device=Tri.NO
         )
         fields = relevant_general_fields(only(profile))
         assert len(fields) < len(GeneralDeviceProfile.model_fields) / 2
@@ -270,7 +310,7 @@ class TestPrune:
     def test_pruning_leaves_a_complete_function_complete(self):
         profile = general_profile(
             invasiveness=Invasiveness.NON_INVASIVE,
-            active_type=ActiveType.NOT_ACTIVE,
+            is_active_device=Tri.NO,
             contacts_injured_skin_or_mucous_membrane=Tri.YES,
             barrier_compression_or_absorption=Tri.YES,
             principally_for_breached_dermis_secondary_intent=Tri.NO,
@@ -299,8 +339,9 @@ class TestTermination:
         profile = general_profile()
         answers = {
             "invasiveness": Invasiveness.NON_INVASIVE,
-            "active_type": ActiveType.DIAGNOSTIC,
-            "clinical_function": ClinicalFunction.DIAGNOSE_OR_SCREEN,
+            "is_active_device": Tri.YES,
+            "is_programmed_or_programmable": Tri.YES,
+            "diagnoses_or_screens": Tri.YES,
             "contacts_injured_skin_or_mucous_membrane": Tri.YES,
             "barrier_compression_or_absorption": Tri.NO,
             "principally_for_breached_dermis_secondary_intent": Tri.YES,

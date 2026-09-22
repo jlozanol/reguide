@@ -22,31 +22,43 @@ from reguide.scoring import AGREE, FAMILY_PREFIX, NO_RESULT, RULE_REFERENCE, WRO
 
 KNOWN_AGREEING = {
     "abo_reagent_red_cells",
+    "cbt_app_bipolar",
     "chlamydia_test",
     "condom_with_spermicide",
     "culture_media",
+    "diagnostic_ultrasound",
     "dressing_collagen_deep_wound",
     "dressing_mechanical_barrier",
     "dressing_microenvironment",
     "dressing_secondary_intent",
+    "emg_dystrophy_monitoring",
+    "emphysema_ct_software",
     "haemodialyser",
     "heparin_coated_catheter",
     "hiv_donor_screening",
+    "infusion_pump",
     "infusion_pump_syringe",
     "measuring_thermometer",
+    "melanoma_screening_app",
+    "mri_equipment",
+    "nebuliser",
     "orifice_long_term",
     "prothrombin_meter",
     "prothrombin_self_test",
     "prothrombin_self_test_pack",
     "quality_control_material",
+    "radiotherapy_afterloading_control",
     "reusable_surgical_instrument",
     "saline_nasal_spray",
     "screw_central_circulation",
     "screw_long_term",
     "screw_short_term",
     "screw_transient",
+    "spect_cardiac_monitoring",
     "sterile_barrier_dressing",
+    "tens_device",
     "trauma_covering_anaesthetic",
+    "virtual_anatomical_model_software",
 }
 
 
@@ -77,8 +89,8 @@ def test_known_agreeing_is_up_to_date(verified):
 
 
 def test_every_verified_fixture_is_scored(verified, everything):
-    assert len(verified.fixtures) == 36
-    assert len(everything.fixtures) == 42
+    assert len(verified.fixtures) == 38
+    assert len(everything.fixtures) == 44
 
 
 def test_unverified_fixtures_get_no_confident_wrong_class_either(everything):

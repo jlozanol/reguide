@@ -5,37 +5,37 @@
   },
   "functions": [
     {
-      "name": "Metal fixation screw, short term",
+      "name": "TENS device",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class IIa",
-      "expected_rule": "3.3(2)",
+      "expected_rule": "4.2(1)",
       "expected_qualifiers": []
     }
   ],
-  "source": "TGA, Classifying medical devices that are not IVDs",
+  "source": "TGA, Classifying active medical devices in Australia",
   "verified": true,
-  "note": "Up to 30 days. Same class as transient, different rule.",
+  "note": "TGA lists TENS devices under 4.2(1): an active device for therapy that administers energy, not in a potentially hazardous way.",
   "profile": {
     "core": {
       "product_name": {
-        "value": "Metal fixation screw, short term",
+        "value": "TENS device",
         "basis": "stated",
-        "evidence": "Metal fixation screw, short term"
+        "evidence": "TENS device"
       },
       "intended_purpose": {
-        "value": "Holds bone together for up to 30 days to support fracture healing.",
+        "value": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way.",
         "basis": "stated",
-        "evidence": "Holds bone together for up to 30 days to support fracture healing."
+        "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
       },
       "supplied_sterile": {
-        "value": "yes",
+        "value": "no",
         "basis": "stated",
-        "evidence": "Holds bone together for up to 30 days to support fracture healing."
+        "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
       },
       "has_measuring_function": {
         "value": "no",
         "basis": "stated",
-        "evidence": "Holds bone together for up to 30 days to support fracture healing."
+        "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
       },
       "functions_confirmed": {
         "value": "yes",
@@ -46,35 +46,35 @@
     "functions": [
       {
         "name": {
-          "value": "Metal fixation screw, short term",
+          "value": "TENS device",
           "basis": "stated",
-          "evidence": "Metal fixation screw, short term"
+          "evidence": "TENS device"
         },
         "description": {
-          "value": "Holds bone together for up to 30 days to support fracture healing.",
+          "value": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way.",
           "basis": "stated",
-          "evidence": "Holds bone together for up to 30 days to support fracture healing."
+          "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
         },
         "kind": {
           "value": "general_device",
           "basis": "stated",
-          "evidence": "Holds bone together for up to 30 days to support fracture healing."
+          "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
         },
         "is_software": {
           "value": "no",
           "basis": "stated",
-          "evidence": "Holds bone together for up to 30 days to support fracture healing."
+          "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
         },
         "status": {
           "therapeutic_purpose": {
-            "value": "diagnosis_monitoring_treatment_or_compensation_for_injury",
+            "value": "diagnosis_prevention_monitoring_prediction_treatment_of_disease",
             "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
           },
           "principal_action_pharmacological": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
           },
           "is_accessory_to_device": {
             "value": null,
@@ -84,7 +84,7 @@
           "excluded_item": {
             "value": "none",
             "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
           },
           "exclusion_conditions_met": {
             "value": null,
@@ -109,14 +109,14 @@
         },
         "general": {
           "invasiveness": {
-            "value": "surgically_invasive",
+            "value": "non_invasive",
             "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
           },
           "duration": {
-            "value": "short_term",
-            "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "orifice_site": {
             "value": null,
@@ -124,9 +124,9 @@
             "evidence": null
           },
           "handles_substances_for_administration": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
           },
           "channels_or_stores_blood_for_administration": {
             "value": null,
@@ -164,9 +164,9 @@
             "evidence": null
           },
           "contacts_injured_skin_or_mucous_membrane": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
           },
           "barrier_compression_or_absorption": {
             "value": null,
@@ -189,14 +189,14 @@
             "evidence": null
           },
           "corrects_heart_or_circulatory_defect_by_contact": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "direct_contact_heart_circulation_or_nervous_system": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "reusable_surgical_instrument": {
             "value": null,
@@ -204,24 +204,24 @@
             "evidence": null
           },
           "delivers_ionising_radiation": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "has_biological_effect": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "wholly_or_mostly_absorbed": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "undergoes_chemical_change": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "placed_in_teeth": {
             "value": null,
@@ -234,9 +234,9 @@
             "evidence": null
           },
           "administers_medicine": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "joint_replacement_or_surgical_mesh": {
             "value": null,
@@ -249,14 +249,14 @@
             "evidence": null
           },
           "is_active_device": {
-            "value": "no",
+            "value": "yes",
             "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
           },
           "is_programmed_or_programmable": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
           },
           "is_active_implantable": {
             "value": null,
@@ -264,34 +264,34 @@
             "evidence": null
           },
           "active_for_therapy": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
           },
           "administers_or_exchanges_energy": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
           },
           "delivers_hazardous_energy": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
           },
           "controls_hazardous_therapy_device": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
           },
           "diagnostic_function_determines_patient_management": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
           },
           "active_for_diagnosis": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
           },
           "supplies_absorbed_energy_for_diagnosis": {
             "value": null,
@@ -324,9 +324,9 @@
             "evidence": null
           },
           "administers_or_removes_substances": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
           },
           "substance_administration_potentially_hazardous": {
             "value": null,
@@ -386,37 +386,37 @@
           "is_export_only": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
           },
           "incorporates_medicine": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
           },
           "human_blood_derivative": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
           },
           "contraceptive_or_sti_prevention": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
           },
           "cares_for_contact_lenses": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
           },
           "disinfects_another_device": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
           },
           "records_images_or_anatomical_model": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
           },
           "records_patient_images_outside_visible_spectrum": {
             "value": null,
@@ -436,7 +436,7 @@
           "contains_non_viable_animal_material": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
           },
           "contacts_intact_skin_only": {
             "value": null,
@@ -446,7 +446,7 @@
           "is_blood_bag": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
           },
           "implantable_accessory_to_active_implantable": {
             "value": null,
@@ -454,9 +454,9 @@
             "evidence": null
           },
           "controls_active_implantable": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
           },
           "is_mammary_implant": {
             "value": null,
@@ -466,7 +466,7 @@
           "administers_by_inhalation": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
           },
           "inhalation_mode_of_action_essential": {
             "value": null,
@@ -481,7 +481,7 @@
           "is_substance_through_orifice_or_skin": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
           },
           "substance_acts_in_nose_mouth_or_on_skin": {
             "value": null,
@@ -493,7 +493,7 @@
       }
     ],
     "funding": null,
-    "source_text": "Metal fixation screw, short term Holds bone together for up to 30 days to support fracture healing. Metal fixation screw, short term Holds bone together for up to 30 days to support fracture healing. fixture decomposition is fixed by hand",
+    "source_text": "TENS device Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way. TENS device Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way. fixture decomposition is fixed by hand",
     "schema_version": "0.10"
   }
 }

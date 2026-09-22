@@ -248,17 +248,27 @@
             "basis": "unknown",
             "evidence": null
           },
-          "active_type": {
-            "value": "not_active",
+          "is_active_device": {
+            "value": "no",
             "basis": "stated",
             "evidence": "Dressing for deep wounds and ulcers that have breached the dermis, containing collagen for wound healing."
+          },
+          "is_programmed_or_programmable": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "is_active_implantable": {
             "value": null,
             "basis": "unknown",
             "evidence": null
           },
-          "clinical_function": {
+          "active_for_therapy": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "administers_or_exchanges_energy": {
             "value": null,
             "basis": "unknown",
             "evidence": null
@@ -268,7 +278,77 @@
             "basis": "unknown",
             "evidence": null
           },
-          "administers_or_removes_medicine": {
+          "controls_hazardous_therapy_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "diagnostic_function_determines_patient_management": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "active_for_diagnosis": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "supplies_absorbed_energy_for_diagnosis": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "images_radiopharmaceutical_distribution": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "diagnoses_or_monitors_vital_processes": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "monitors_vital_parameters_immediate_danger": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "emits_ionising_radiation_for_interventional_radiology": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "controls_interventional_radiology_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "administers_or_removes_substances": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "substance_administration_potentially_hazardous": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "diagnoses_or_screens": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "monitors_disease_state": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "specifies_or_recommends_treatment": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "provides_therapy_through_information": {
             "value": null,
             "basis": "unknown",
             "evidence": null
@@ -288,7 +368,17 @@
             "basis": "unknown",
             "evidence": null
           },
-          "records_diagnostic_images": {
+          "monitoring_danger": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "treatment_risk": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "information_therapy_harm": {
             "value": null,
             "basis": "unknown",
             "evidence": null
@@ -404,6 +494,6 @@
     ],
     "funding": null,
     "source_text": "Collagen dressing for deep ulcers Dressing for deep wounds and ulcers that have breached the dermis, containing collagen for wound healing. Collagen dressing for deep ulcers Dressing for deep wounds and ulcers that have breached the dermis, containing collagen for wound healing. fixture decomposition is fixed by hand",
-    "schema_version": "0.9"
+    "schema_version": "0.10"
   }
 }

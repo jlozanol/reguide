@@ -5,37 +5,37 @@
   },
   "functions": [
     {
-      "name": "Metal fixation screw, short term",
+      "name": "Cognitive behavioural therapy app",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class IIa",
-      "expected_rule": "3.3(2)",
+      "expected_rule": "4.8(c)",
       "expected_qualifiers": []
     }
   ],
-  "source": "TGA, Classifying medical devices that are not IVDs",
+  "source": "TGA, Classifying active medical devices in Australia",
   "verified": true,
-  "note": "Up to 30 days. Same class as transient, different rule.",
+  "note": "TGA's 4.8 example: an app providing cognitive behavioural therapy for bipolar disorder that does not reference an established clinical practice guideline is Class IIa under 4.8(c), therapy that may cause harm. A tool based on displayed, established guidelines would not be a medical device.",
   "profile": {
     "core": {
       "product_name": {
-        "value": "Metal fixation screw, short term",
+        "value": "Cognitive behavioural therapy app",
         "basis": "stated",
-        "evidence": "Metal fixation screw, short term"
+        "evidence": "Cognitive behavioural therapy app"
       },
       "intended_purpose": {
-        "value": "Holds bone together for up to 30 days to support fracture healing.",
+        "value": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm.",
         "basis": "stated",
-        "evidence": "Holds bone together for up to 30 days to support fracture healing."
+        "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
       },
       "supplied_sterile": {
-        "value": "yes",
+        "value": "no",
         "basis": "stated",
-        "evidence": "Holds bone together for up to 30 days to support fracture healing."
+        "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
       },
       "has_measuring_function": {
         "value": "no",
         "basis": "stated",
-        "evidence": "Holds bone together for up to 30 days to support fracture healing."
+        "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
       },
       "functions_confirmed": {
         "value": "yes",
@@ -46,35 +46,35 @@
     "functions": [
       {
         "name": {
-          "value": "Metal fixation screw, short term",
+          "value": "Cognitive behavioural therapy app",
           "basis": "stated",
-          "evidence": "Metal fixation screw, short term"
+          "evidence": "Cognitive behavioural therapy app"
         },
         "description": {
-          "value": "Holds bone together for up to 30 days to support fracture healing.",
+          "value": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm.",
           "basis": "stated",
-          "evidence": "Holds bone together for up to 30 days to support fracture healing."
+          "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
         },
         "kind": {
           "value": "general_device",
           "basis": "stated",
-          "evidence": "Holds bone together for up to 30 days to support fracture healing."
+          "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
         },
         "is_software": {
-          "value": "no",
+          "value": "yes",
           "basis": "stated",
-          "evidence": "Holds bone together for up to 30 days to support fracture healing."
+          "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
         },
         "status": {
           "therapeutic_purpose": {
-            "value": "diagnosis_monitoring_treatment_or_compensation_for_injury",
+            "value": "diagnosis_prevention_monitoring_prediction_treatment_of_disease",
             "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
           },
           "principal_action_pharmacological": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
           },
           "is_accessory_to_device": {
             "value": null,
@@ -84,7 +84,7 @@
           "excluded_item": {
             "value": "none",
             "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
           },
           "exclusion_conditions_met": {
             "value": null,
@@ -92,31 +92,31 @@
             "evidence": null
           },
           "cdss_sole_purpose_recommendation": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
           },
           "cdss_processes_device_signal_or_image": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
           },
           "cdss_replaces_clinical_judgement": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
           }
         },
         "general": {
           "invasiveness": {
-            "value": "surgically_invasive",
+            "value": "non_invasive",
             "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
           },
           "duration": {
-            "value": "short_term",
-            "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "orifice_site": {
             "value": null,
@@ -124,9 +124,9 @@
             "evidence": null
           },
           "handles_substances_for_administration": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
           },
           "channels_or_stores_blood_for_administration": {
             "value": null,
@@ -164,9 +164,9 @@
             "evidence": null
           },
           "contacts_injured_skin_or_mucous_membrane": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
           },
           "barrier_compression_or_absorption": {
             "value": null,
@@ -189,14 +189,14 @@
             "evidence": null
           },
           "corrects_heart_or_circulatory_defect_by_contact": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "direct_contact_heart_circulation_or_nervous_system": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "reusable_surgical_instrument": {
             "value": null,
@@ -204,24 +204,24 @@
             "evidence": null
           },
           "delivers_ionising_radiation": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "has_biological_effect": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "wholly_or_mostly_absorbed": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "undergoes_chemical_change": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "placed_in_teeth": {
             "value": null,
@@ -234,9 +234,9 @@
             "evidence": null
           },
           "administers_medicine": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "joint_replacement_or_surgical_mesh": {
             "value": null,
@@ -249,9 +249,9 @@
             "evidence": null
           },
           "is_active_device": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "is_programmed_or_programmable": {
             "value": null,
@@ -264,9 +264,9 @@
             "evidence": null
           },
           "active_for_therapy": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
           },
           "administers_or_exchanges_energy": {
             "value": null,
@@ -289,9 +289,9 @@
             "evidence": null
           },
           "active_for_diagnosis": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
           },
           "supplies_absorbed_energy_for_diagnosis": {
             "value": null,
@@ -324,9 +324,9 @@
             "evidence": null
           },
           "administers_or_removes_substances": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
           },
           "substance_administration_potentially_hazardous": {
             "value": null,
@@ -334,24 +334,24 @@
             "evidence": null
           },
           "diagnoses_or_screens": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
           },
           "monitors_disease_state": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
           },
           "specifies_or_recommends_treatment": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
           },
           "provides_therapy_through_information": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
           },
           "decision_maker": {
             "value": null,
@@ -379,44 +379,44 @@
             "evidence": null
           },
           "information_therapy_harm": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "harm",
+            "basis": "stated",
+            "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
           },
           "is_export_only": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
           },
           "incorporates_medicine": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
           },
           "human_blood_derivative": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "contraceptive_or_sti_prevention": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
           },
           "cares_for_contact_lenses": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
           },
           "disinfects_another_device": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
           },
           "records_images_or_anatomical_model": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
           },
           "records_patient_images_outside_visible_spectrum": {
             "value": null,
@@ -434,9 +434,9 @@
             "evidence": null
           },
           "contains_non_viable_animal_material": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "contacts_intact_skin_only": {
             "value": null,
@@ -444,9 +444,9 @@
             "evidence": null
           },
           "is_blood_bag": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "implantable_accessory_to_active_implantable": {
             "value": null,
@@ -454,9 +454,9 @@
             "evidence": null
           },
           "controls_active_implantable": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
           },
           "is_mammary_implant": {
             "value": null,
@@ -464,9 +464,9 @@
             "evidence": null
           },
           "administers_by_inhalation": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "inhalation_mode_of_action_essential": {
             "value": null,
@@ -479,9 +479,9 @@
             "evidence": null
           },
           "is_substance_through_orifice_or_skin": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Holds bone together for up to 30 days to support fracture healing."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "substance_acts_in_nose_mouth_or_on_skin": {
             "value": null,
@@ -493,7 +493,7 @@
       }
     ],
     "funding": null,
-    "source_text": "Metal fixation screw, short term Holds bone together for up to 30 days to support fracture healing. Metal fixation screw, short term Holds bone together for up to 30 days to support fracture healing. fixture decomposition is fixed by hand",
+    "source_text": "Cognitive behavioural therapy app Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm. Cognitive behavioural therapy app Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm. fixture decomposition is fixed by hand",
     "schema_version": "0.10"
   }
 }

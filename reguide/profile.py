@@ -60,6 +60,20 @@ classes in 3.3 (absorbed is Class III, chemical change Class IIb). Both are
 replaced by one field per condition, asked only in the duration band where
 the text uses it. Orifice devices get a gate for connection to any active
 device, because 3.1(2) and 3.1(3) turn on different connections.
+
+Version 0.10 covers Schedule 2 Part 4, active devices and software, and
+completes the Schedule 2 inputs. The single-choice active_type and
+clinical_function could not hold a device that is both for therapy and for
+diagnosis, or one that both monitors vital signs (4.3) and tracks a disease
+(4.6). They are replaced by two yes/no questions, "active device for
+therapy" and "for diagnosis" (dictionary terms; a device can be both), with
+one field per paragraph behind each, and four gates for the software rules
+4.5 to 4.8. Those rules reach "a programmed or programmable medical device,
+or software", so active hardware is asked whether it is programmable;
+software always is, and is always active (dictionary). 4.6, 4.7 and 4.8
+each grade on their own scale, so each has its own level question;
+condition_severity keeps the 4.5 scale only and loses its "moderate" value,
+which no clause uses.
 """
 
 from enum import Enum
@@ -168,24 +182,6 @@ class OrificeSite(str, Enum):
     STOMA = "stoma"
 
 
-class ActiveType(str, Enum):
-    NOT_ACTIVE = "not_active"
-    THERAPEUTIC = "active_therapeutic"
-    DIAGNOSTIC = "active_diagnostic"
-
-
-class ClinicalFunction(str, Enum):
-    """Which rule in the 4.x family applies. Software lives or dies here."""
-
-    NONE = "none"
-    DIAGNOSE_OR_SCREEN = "diagnose_or_screen_for_a_condition"
-    MONITOR = "monitor_a_condition_or_parameter"
-    SPECIFY_THERAPY = "specify_treatment_or_intervention"
-    SUPPLY_ENERGY = "supply_or_exchange_energy"
-    ADMINISTER_SUBSTANCE = "administer_or_remove_medicines_or_fluids"
-    CONTROL_ANOTHER_DEVICE = "control_or_monitor_another_active_device"
-
-
 class DecisionMaker(str, Enum):
     """Who acts on the output. The single biggest lever on software class."""
 
@@ -195,12 +191,36 @@ class DecisionMaker(str, Enum):
 
 
 class Severity(str, Enum):
-    """The severity ladder the 4.5 to 4.7 rules step through."""
+    """The disease or condition, as clause 4.5 grades it."""
 
     DEATH_WITHOUT_URGENT_TREATMENT = "death_or_severe_deterioration_without_urgent_treatment"
     SERIOUS = "serious_disease_or_condition"
-    MODERATE = "moderate"
     OTHER = "any_other_case"
+
+
+class MonitoringDanger(str, Enum):
+    """What the monitoring information could indicate, as clause 4.6 grades it."""
+
+    IMMEDIATE = "immediate_danger"
+    OTHER = "other_danger"
+    NONE = "any_other_case"
+
+
+class TreatmentRisk(str, Enum):
+    """The treatment or its absence, as clause 4.7 grades it."""
+
+    DEATH_OR_SEVERE_DETERIORATION = "death_or_severe_deterioration"
+    OTHER_HARM = "otherwise_harmful"
+    NONE = "any_other_case"
+
+
+class InformationTherapyHarm(str, Enum):
+    """The therapy given through information, as clause 4.8 grades it."""
+
+    DEATH_OR_SEVERE_DETERIORATION = "death_or_severe_deterioration"
+    SERIOUS_HARM = "serious_harm"
+    HARM = "harm"
+    NONE = "any_other_case"
 
 
 class PublicHealthRisk(str, Enum):
@@ -303,16 +323,39 @@ class GeneralDeviceProfile(BaseModel):
     joint_replacement_or_surgical_mesh: Answer[Tri] = Answer()              # 3.4(4A)
     spinal_motion_preserving: Answer[Tri] = Answer()                        # 3.4(4B)
 
-    # Active devices and software, rules 4.1 to 4.7
-    active_type: Answer[ActiveType] = Answer()
+    # Schedule 2 Part 4, active devices and software. Software is always an
+    # active device and always programmed, so neither is asked of it.
+    is_active_device: Answer[Tri] = Answer()                                # 4.1
+    is_programmed_or_programmable: Answer[Tri] = Answer()                   # 4.5 to 4.8
     is_active_implantable: Answer[Tri] = Answer()                           # 5.7(1)
-    clinical_function: Answer[ClinicalFunction] = Answer()
-    delivers_hazardous_energy: Answer[Tri] = Answer()
-    administers_or_removes_medicine: Answer[Tri] = Answer()
-    decision_maker: Answer[DecisionMaker] = Answer()
-    condition_severity: Answer[Severity] = Answer()
-    public_health_risk: Answer[PublicHealthRisk] = Answer()
-    records_diagnostic_images: Answer[Tri] = Answer()
+    # Gate: active medical device for therapy (dictionary), opens 4.2.
+    active_for_therapy: Answer[Tri] = Answer()
+    administers_or_exchanges_energy: Answer[Tri] = Answer()                 # 4.2(1)
+    delivers_hazardous_energy: Answer[Tri] = Answer()                       # 4.2(2)
+    controls_hazardous_therapy_device: Answer[Tri] = Answer()               # 4.2(3)
+    diagnostic_function_determines_patient_management: Answer[Tri] = Answer()  # 4.2(4)
+    # Gate: active medical device for diagnosis (dictionary), opens 4.3.
+    active_for_diagnosis: Answer[Tri] = Answer()
+    supplies_absorbed_energy_for_diagnosis: Answer[Tri] = Answer()          # 4.3(2)(a)
+    images_radiopharmaceutical_distribution: Answer[Tri] = Answer()         # 4.3(2)(b)
+    diagnoses_or_monitors_vital_processes: Answer[Tri] = Answer()           # 4.3(2)(c)
+    monitors_vital_parameters_immediate_danger: Answer[Tri] = Answer()      # 4.3(3)(a)
+    emits_ionising_radiation_for_interventional_radiology: Answer[Tri] = Answer()  # 4.3(3)(b)
+    controls_interventional_radiology_device: Answer[Tri] = Answer()        # 4.3(3)(c)
+    # Any active device.
+    administers_or_removes_substances: Answer[Tri] = Answer()               # 4.4(1)
+    substance_administration_potentially_hazardous: Answer[Tri] = Answer()  # 4.4(2)
+    # Programmed or programmable devices and software, 4.5 to 4.8.
+    diagnoses_or_screens: Answer[Tri] = Answer()                            # 4.5
+    monitors_disease_state: Answer[Tri] = Answer()                          # 4.6
+    specifies_or_recommends_treatment: Answer[Tri] = Answer()               # 4.7
+    provides_therapy_through_information: Answer[Tri] = Answer()            # 4.8
+    decision_maker: Answer[DecisionMaker] = Answer()                        # 4.5, 4.7
+    condition_severity: Answer[Severity] = Answer()                         # 4.5
+    public_health_risk: Answer[PublicHealthRisk] = Answer()                 # 4.5 to 4.7
+    monitoring_danger: Answer[MonitoringDanger] = Answer()                  # 4.6
+    treatment_risk: Answer[TreatmentRisk] = Answer()                        # 4.7
+    information_therapy_harm: Answer[InformationTherapyHarm] = Answer()     # 4.8
 
     # Schedule 2 Part 5, particular kinds of devices. Any can outrank the
     # clauses above; 5.8 displaces all of them. Each comment names its clause.
@@ -503,7 +546,6 @@ class FunctionProfile(BaseModel):
 
 ALWAYS_GENERAL = [
     "invasiveness",
-    "active_type",
     "is_export_only",
     "incorporates_medicine",
     "contraceptive_or_sti_prevention",
@@ -615,6 +657,41 @@ def invasive_band(general: "GeneralDeviceProfile") -> str | None:
             Duration.LONG_TERM: "3.4"}.get(_value(general.duration))
 
 
+def part_4_fields(function: "FunctionProfile") -> list[str]:
+    """The Part 4 questions for an active device, gate by gate."""
+    general = function.general
+    software = _value(function.is_software) is Tri.YES
+    fields = ["active_for_therapy", "active_for_diagnosis", "administers_or_removes_substances"]
+    if not software:
+        fields += ["is_programmed_or_programmable"]
+    if _value(general.active_for_therapy) is Tri.YES:
+        fields += ["administers_or_exchanges_energy", "controls_hazardous_therapy_device",
+                   "diagnostic_function_determines_patient_management"]
+        if _value(general.administers_or_exchanges_energy) is Tri.YES:
+            fields += ["delivers_hazardous_energy"]
+    if _value(general.active_for_diagnosis) is Tri.YES:
+        fields += ["supplies_absorbed_energy_for_diagnosis",
+                   "images_radiopharmaceutical_distribution",
+                   "diagnoses_or_monitors_vital_processes",
+                   "monitors_vital_parameters_immediate_danger",
+                   "emits_ionising_radiation_for_interventional_radiology",
+                   "controls_interventional_radiology_device"]
+    if _value(general.administers_or_removes_substances) is Tri.YES:
+        fields += ["substance_administration_potentially_hazardous"]
+    if software or _value(general.is_programmed_or_programmable) is Tri.YES:
+        fields += ["diagnoses_or_screens", "monitors_disease_state",
+                   "specifies_or_recommends_treatment", "provides_therapy_through_information"]
+        if _value(general.diagnoses_or_screens) is Tri.YES:
+            fields += ["decision_maker", "condition_severity", "public_health_risk"]
+        if _value(general.monitors_disease_state) is Tri.YES:
+            fields += ["monitoring_danger", "public_health_risk"]
+        if _value(general.specifies_or_recommends_treatment) is Tri.YES:
+            fields += ["decision_maker", "treatment_risk", "public_health_risk"]
+        if _value(general.provides_therapy_through_information) is Tri.YES:
+            fields += ["information_therapy_harm"]
+    return fields
+
+
 def relevant_general_fields(function: "FunctionProfile") -> list[str]:
     """Which Schedule 2 fields this function actually needs.
 
@@ -629,10 +706,10 @@ def relevant_general_fields(function: "FunctionProfile") -> list[str]:
     fields = list(ALWAYS_GENERAL)
     software = _value(function.is_software) is Tri.YES
     route = _value(general.invasiveness)
-    active = _value(general.active_type)
+    active = software or _value(general.is_active_device) is Tri.YES
 
     if not software:
-        fields += MATERIAL_FIELDS
+        fields += ["is_active_device"] + MATERIAL_FIELDS
         if _value(general.contains_non_viable_animal_material) is Tri.YES:
             fields += ["contacts_intact_skin_only"]
         if _value(general.administers_by_inhalation) is Tri.YES:
@@ -645,7 +722,7 @@ def relevant_general_fields(function: "FunctionProfile") -> list[str]:
                    "is_anatomical_model_for_diagnosis"]
         if software:
             fields += ["generates_virtual_anatomical_model"]
-    if active in (ActiveType.THERAPEUTIC, ActiveType.DIAGNOSTIC) or software:
+    if active:
         fields += ["controls_active_implantable"]
 
     if route is Invasiveness.NON_INVASIVE:
@@ -678,19 +755,8 @@ def relevant_general_fields(function: "FunctionProfile") -> list[str]:
             fields += ["is_active_implantable", "implantable_accessory_to_active_implantable",
                        "is_mammary_implant"]
 
-    if active in (ActiveType.THERAPEUTIC, ActiveType.DIAGNOSTIC):
-        fields += ["clinical_function", "delivers_hazardous_energy"]
-        if active is ActiveType.DIAGNOSTIC:
-            fields += ["delivers_ionising_radiation", "records_diagnostic_images"]
-        function_kind = _value(general.clinical_function)
-        if function_kind in (
-            ClinicalFunction.DIAGNOSE_OR_SCREEN,
-            ClinicalFunction.MONITOR,
-            ClinicalFunction.SPECIFY_THERAPY,
-        ):
-            fields += ["decision_maker", "condition_severity", "public_health_risk"]
-        if function_kind is ClinicalFunction.ADMINISTER_SUBSTANCE:
-            fields += ["administers_or_removes_medicine"]
+    if active:
+        fields += part_4_fields(function)
 
     return _dedupe(fields)
 
@@ -818,7 +884,7 @@ class DeviceProfile(BaseModel):
     funding: FundingProfile | None = None
 
     source_text: str = ""
-    schema_version: Literal["0.9"] = "0.9"
+    schema_version: Literal["0.10"] = "0.10"
 
     @property
     def single_function(self) -> bool:

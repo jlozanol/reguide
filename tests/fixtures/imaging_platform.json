@@ -262,17 +262,27 @@
             "basis": "unknown",
             "evidence": null
           },
-          "active_type": {
-            "value": "not_active",
-            "basis": "stated",
-            "evidence": "Stores and transmits radiology studies without interpretation."
+          "is_active_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_programmed_or_programmable": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "is_active_implantable": {
             "value": null,
             "basis": "unknown",
             "evidence": null
           },
-          "clinical_function": {
+          "active_for_therapy": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Stores and transmits radiology studies without interpretation."
+          },
+          "administers_or_exchanges_energy": {
             "value": null,
             "basis": "unknown",
             "evidence": null
@@ -282,10 +292,80 @@
             "basis": "unknown",
             "evidence": null
           },
-          "administers_or_removes_medicine": {
+          "controls_hazardous_therapy_device": {
             "value": null,
             "basis": "unknown",
             "evidence": null
+          },
+          "diagnostic_function_determines_patient_management": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "active_for_diagnosis": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Stores and transmits radiology studies without interpretation."
+          },
+          "supplies_absorbed_energy_for_diagnosis": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "images_radiopharmaceutical_distribution": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "diagnoses_or_monitors_vital_processes": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "monitors_vital_parameters_immediate_danger": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "emits_ionising_radiation_for_interventional_radiology": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "controls_interventional_radiology_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "administers_or_removes_substances": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Stores and transmits radiology studies without interpretation."
+          },
+          "substance_administration_potentially_hazardous": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "diagnoses_or_screens": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Stores and transmits radiology studies without interpretation."
+          },
+          "monitors_disease_state": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Stores and transmits radiology studies without interpretation."
+          },
+          "specifies_or_recommends_treatment": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Stores and transmits radiology studies without interpretation."
+          },
+          "provides_therapy_through_information": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Stores and transmits radiology studies without interpretation."
           },
           "decision_maker": {
             "value": null,
@@ -302,7 +382,17 @@
             "basis": "unknown",
             "evidence": null
           },
-          "records_diagnostic_images": {
+          "monitoring_danger": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "treatment_risk": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "information_therapy_harm": {
             "value": null,
             "basis": "unknown",
             "evidence": null
@@ -575,9 +665,9 @@
             "evidence": null
           },
           "delivers_ionising_radiation": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "has_biological_effect": {
             "value": null,
@@ -619,30 +709,110 @@
             "basis": "unknown",
             "evidence": null
           },
-          "active_type": {
-            "value": "active_diagnostic",
-            "basis": "stated",
-            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          "is_active_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_programmed_or_programmable": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "is_active_implantable": {
             "value": null,
             "basis": "unknown",
             "evidence": null
           },
-          "clinical_function": {
-            "value": "diagnose_or_screen_for_a_condition",
-            "basis": "stated",
-            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
-          },
-          "delivers_hazardous_energy": {
+          "active_for_therapy": {
             "value": "no",
             "basis": "stated",
             "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
           },
-          "administers_or_removes_medicine": {
+          "administers_or_exchanges_energy": {
             "value": null,
             "basis": "unknown",
             "evidence": null
+          },
+          "delivers_hazardous_energy": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "controls_hazardous_therapy_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "diagnostic_function_determines_patient_management": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "active_for_diagnosis": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "supplies_absorbed_energy_for_diagnosis": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "images_radiopharmaceutical_distribution": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "diagnoses_or_monitors_vital_processes": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "monitors_vital_parameters_immediate_danger": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "emits_ionising_radiation_for_interventional_radiology": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "controls_interventional_radiology_device": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "administers_or_removes_substances": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "substance_administration_potentially_hazardous": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "diagnoses_or_screens": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "monitors_disease_state": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "specifies_or_recommends_treatment": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "provides_therapy_through_information": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
           },
           "decision_maker": {
             "value": "informs_a_health_professional_who_decides",
@@ -659,10 +829,20 @@
             "basis": "stated",
             "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
           },
-          "records_diagnostic_images": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          "monitoring_danger": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "treatment_risk": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "information_therapy_harm": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "is_export_only": {
             "value": "no",
@@ -932,9 +1112,9 @@
             "evidence": null
           },
           "delivers_ionising_radiation": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "has_biological_effect": {
             "value": null,
@@ -976,30 +1156,110 @@
             "basis": "unknown",
             "evidence": null
           },
-          "active_type": {
-            "value": "active_diagnostic",
-            "basis": "stated",
-            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
+          "is_active_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_programmed_or_programmable": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "is_active_implantable": {
             "value": null,
             "basis": "unknown",
             "evidence": null
           },
-          "clinical_function": {
-            "value": "specify_treatment_or_intervention",
-            "basis": "stated",
-            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
-          },
-          "delivers_hazardous_energy": {
+          "active_for_therapy": {
             "value": "no",
             "basis": "stated",
             "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
           },
-          "administers_or_removes_medicine": {
+          "administers_or_exchanges_energy": {
             "value": null,
             "basis": "unknown",
             "evidence": null
+          },
+          "delivers_hazardous_energy": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "controls_hazardous_therapy_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "diagnostic_function_determines_patient_management": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "active_for_diagnosis": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
+          },
+          "supplies_absorbed_energy_for_diagnosis": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "images_radiopharmaceutical_distribution": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "diagnoses_or_monitors_vital_processes": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "monitors_vital_parameters_immediate_danger": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "emits_ionising_radiation_for_interventional_radiology": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "controls_interventional_radiology_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "administers_or_removes_substances": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
+          },
+          "substance_administration_potentially_hazardous": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "diagnoses_or_screens": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
+          },
+          "monitors_disease_state": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
+          },
+          "specifies_or_recommends_treatment": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
+          },
+          "provides_therapy_through_information": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
           },
           "decision_maker": {
             "value": "informs_a_health_professional_who_decides",
@@ -1007,19 +1267,29 @@
             "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
           },
           "condition_severity": {
-            "value": "serious_disease_or_condition",
-            "basis": "stated",
-            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "public_health_risk": {
-            "value": "moderate",
+            "value": "low",
             "basis": "stated",
             "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
           },
-          "records_diagnostic_images": {
-            "value": "no",
+          "monitoring_danger": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "treatment_risk": {
+            "value": "otherwise_harmful",
             "basis": "stated",
             "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
+          },
+          "information_therapy_harm": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "is_export_only": {
             "value": "no",
@@ -1132,6 +1402,6 @@
     ],
     "funding": null,
     "source_text": "Radiology reporting platform Stores radiology studies, flags abnormal ones for priority review and suggests a follow-up imaging interval. Study archive Stores and transmits radiology studies without interpretation. Abnormality triage Flags studies showing suspected abnormality for priority review by a radiologist. Follow-up interval suggestion Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist. fixture decomposition is fixed by hand",
-    "schema_version": "0.9"
+    "schema_version": "0.10"
   }
 }

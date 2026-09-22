@@ -204,9 +204,9 @@
             "evidence": null
           },
           "delivers_ionising_radiation": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "has_biological_effect": {
             "value": null,
@@ -248,30 +248,110 @@
             "basis": "unknown",
             "evidence": null
           },
-          "active_type": {
-            "value": "active_diagnostic",
-            "basis": "stated",
-            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          "is_active_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_programmed_or_programmable": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "is_active_implantable": {
             "value": null,
             "basis": "unknown",
             "evidence": null
           },
-          "clinical_function": {
-            "value": "diagnose_or_screen_for_a_condition",
-            "basis": "stated",
-            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
-          },
-          "delivers_hazardous_energy": {
+          "active_for_therapy": {
             "value": "no",
             "basis": "stated",
             "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
           },
-          "administers_or_removes_medicine": {
+          "administers_or_exchanges_energy": {
             "value": null,
             "basis": "unknown",
             "evidence": null
+          },
+          "delivers_hazardous_energy": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "controls_hazardous_therapy_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "diagnostic_function_determines_patient_management": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "active_for_diagnosis": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          },
+          "supplies_absorbed_energy_for_diagnosis": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          },
+          "images_radiopharmaceutical_distribution": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          },
+          "diagnoses_or_monitors_vital_processes": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          },
+          "monitors_vital_parameters_immediate_danger": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          },
+          "emits_ionising_radiation_for_interventional_radiology": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          },
+          "controls_interventional_radiology_device": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          },
+          "administers_or_removes_substances": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          },
+          "substance_administration_potentially_hazardous": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "diagnoses_or_screens": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          },
+          "monitors_disease_state": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          },
+          "specifies_or_recommends_treatment": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          },
+          "provides_therapy_through_information": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
           },
           "decision_maker": {
             "value": "device_gives_the_decision_to_a_lay_user",
@@ -288,10 +368,20 @@
             "basis": "stated",
             "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
           },
-          "records_diagnostic_images": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+          "monitoring_danger": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "treatment_risk": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "information_therapy_harm": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "is_export_only": {
             "value": "no",
@@ -404,6 +494,6 @@
     ],
     "funding": null,
     "source_text": "Consumer melanoma screening app Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer. Consumer melanoma screening app Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer. fixture decomposition is fixed by hand",
-    "schema_version": "0.9"
+    "schema_version": "0.10"
   }
 }

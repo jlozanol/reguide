@@ -204,9 +204,9 @@
             "evidence": null
           },
           "delivers_ionising_radiation": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "has_biological_effect": {
             "value": null,
@@ -248,8 +248,13 @@
             "basis": "unknown",
             "evidence": null
           },
-          "active_type": {
-            "value": "active_diagnostic",
+          "is_active_device": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+          },
+          "is_programmed_or_programmable": {
+            "value": "no",
             "basis": "stated",
             "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
           },
@@ -258,17 +263,92 @@
             "basis": "unknown",
             "evidence": null
           },
-          "clinical_function": {
-            "value": "supply_or_exchange_energy",
-            "basis": "stated",
-            "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
-          },
-          "delivers_hazardous_energy": {
+          "active_for_therapy": {
             "value": "no",
             "basis": "stated",
             "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
           },
-          "administers_or_removes_medicine": {
+          "administers_or_exchanges_energy": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "delivers_hazardous_energy": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "controls_hazardous_therapy_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "diagnostic_function_determines_patient_management": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "active_for_diagnosis": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+          },
+          "supplies_absorbed_energy_for_diagnosis": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+          },
+          "images_radiopharmaceutical_distribution": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+          },
+          "diagnoses_or_monitors_vital_processes": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+          },
+          "monitors_vital_parameters_immediate_danger": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+          },
+          "emits_ionising_radiation_for_interventional_radiology": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+          },
+          "controls_interventional_radiology_device": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+          },
+          "administers_or_removes_substances": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+          },
+          "substance_administration_potentially_hazardous": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "diagnoses_or_screens": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "monitors_disease_state": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "specifies_or_recommends_treatment": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "provides_therapy_through_information": {
             "value": null,
             "basis": "unknown",
             "evidence": null
@@ -288,10 +368,20 @@
             "basis": "unknown",
             "evidence": null
           },
-          "records_diagnostic_images": {
-            "value": "yes",
-            "basis": "stated",
-            "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+          "monitoring_danger": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "treatment_risk": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "information_therapy_harm": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "is_export_only": {
             "value": "no",
@@ -404,6 +494,6 @@
     ],
     "funding": null,
     "source_text": "Magnetic resonance equipment Supplies energy absorbed by the patient's body for diagnostic imaging. Magnetic resonance equipment Supplies energy absorbed by the patient's body for diagnostic imaging. fixture decomposition is fixed by hand",
-    "schema_version": "0.9"
+    "schema_version": "0.10"
   }
 }

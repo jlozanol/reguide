@@ -40,24 +40,35 @@ an active device of Class IIa or higher, so a device connected only to a
 Class I active device fits neither. It is given the (2) rules, as if
 unconnected, with an amber flag.
 
-Not written yet: Part 4. It applies to active devices (4.1 to 4.4) and to
-programmed or programmable devices and software (4.5 to 4.8), so it returns
-a Pending that blocks the result only when the device is active or
-software, or either is unknown.
+Part 4, active devices and software, is written in full, which completes
+Schedule 2. Software is always an active device and always programmed
+(dictionary), so 4.1 to 4.4 reach it as well as 4.5 to 4.8. 4.1 is the
+floor for every active device. The graded software rules take the level
+their paragraph names: 4.5 the disease and public health risk, 4.6 the
+danger the information could indicate, 4.7 the harm of the treatment or its
+absence, 4.8 the harm of the therapy. Where a paragraph splits into (i) and
+(ii), each is its own rule, so the citation names the limb that applies. A
+decision_maker that informs a relevant health professional selects 4.5(2)
+and 4.7(2); anything else selects (1).
 """
 
 from ..flags import Flag, Severity
 from ..profile import (
     GENERAL_ORDER,
-    ActiveType,
+    DecisionMaker,
     Duration,
     FunctionProfile,
     GeneralDeviceProfile,
+    InformationTherapyHarm,
     Invasiveness,
+    MonitoringDanger,
     OrificeSite,
+    PublicHealthRisk,
+    TreatmentRisk,
     Tri,
     invasive_band,
 )
+from ..profile import Severity as ConditionSeverity
 from .engine import REGULATIONS, Classification, Pending, RuleHit, clauses, known, resolve
 
 PREFIX = "s2"
@@ -862,23 +873,781 @@ CLASS_I_ACTIVE_CONNECTION = Flag(
 )
 
 
-def part_4(function: FunctionProfile):
-    """Part 4, active devices and software. Blocks only where it could apply."""
-    active = function.general.active_type
+# --------------------------------------------------------------------------
+# Part 4, active devices and software
+# --------------------------------------------------------------------------
+
+
+def _active(function: FunctionProfile, rule_id: str, reference: str):
+    """True for an active device. Software always is (dictionary)."""
     software = known(function.is_software)
-    if active.resolved and active.value in (ActiveType.THERAPEUTIC, ActiveType.DIAGNOSTIC):
-        return Pending(f"{PREFIX}-4.1", cite("4.1"), "not implemented: Part 4, clauses 4.1 to 4.8")
     if software is Tri.YES:
-        return Pending(f"{PREFIX}-4.1", cite("4.1"), "not implemented: Part 4, clauses 4.1 to 4.8")
-    unknown = []
-    if not active.resolved or active.value is None:
-        unknown.append("general.active_type")
+        return True
     if software is None:
-        unknown.append("is_software")
-    if unknown:
-        return Pending(f"{PREFIX}-4.1", cite("4.1"), "Part 4 applicability is unresolved",
-                       tuple(unknown))
-    return None
+        return Pending(rule_id, cite(reference), "is_software is unresolved", ("is_software",))
+    value = _yes(function, "is_active_device", rule_id, reference)
+    if isinstance(value, Pending):
+        return value
+    return True if value is Tri.YES else None
+
+
+def _programmable(function: FunctionProfile, rule_id: str, reference: str):
+    """True for software or a programmed or programmable active device (4.5 to 4.8)."""
+    active = _active(function, rule_id, reference)
+    if active is not True:
+        return active
+    if known(function.is_software) is Tri.YES:
+        return True
+    value = _yes(function, "is_programmed_or_programmable", rule_id, reference)
+    if isinstance(value, Pending):
+        return value
+    return True if value is Tri.YES else None
+
+
+def _enum(function: FunctionProfile, name: str, rule_id: str, reference: str):
+    answer = getattr(function.general, name)
+    if not answer.resolved or answer.value is None:
+        return Pending(rule_id, cite(reference), f"{name} is unresolved", (f"general.{name}",))
+    return answer.value
+
+
+def _active_chain(function, reference, result, scope, yes=(), no=()):
+    rule_id = f"{PREFIX}-{reference}"
+    inside = scope(function, rule_id, reference)
+    if inside is not True:
+        return inside
+    return _chain(function, rule_id, reference, result, (), yes=yes, no=no)
+
+
+THERAPY = "active_for_therapy"
+DIAGNOSIS = "active_for_diagnosis"
+
+
+def rule_4_1(function: FunctionProfile):
+    """Schedule 2 clause 4.1.
+
+    An active medical device is classified as Class I, unless the device is
+    classified at a higher level under another clause in this Part or in Part
+    2, 3 or 5.
+    """
+    rule_id = f"{PREFIX}-4.1"
+    active = _active(function, rule_id, "4.1")
+    if active is not True:
+        return active
+    return RuleHit(rule_id, cite("4.1"), "Class I", "an active medical device (dictionary)")
+
+
+def rule_4_2_1(function: FunctionProfile):
+    """Schedule 2 clause 4.2(1).
+
+    (1) Subject to subclause (2), an active medical device for therapy that is
+    intended by the manufacturer to be used to administer energy to a patient,
+    or exchange energy to or from a patient, is classified as Class IIa.
+    """
+    return _active_chain(function, "4.2(1)", "Class IIa", _active,
+                         yes=(THERAPY, "administers_or_exchanges_energy"),
+                         no=("delivers_hazardous_energy",))
+
+
+def rule_4_2_2(function: FunctionProfile):
+    """Schedule 2 clause 4.2(2).
+
+    (2) If the device is of a kind such that the administration or exchange of
+    energy occurs in a potentially hazardous way, having regard to the nature,
+    density and site of application of the energy, the device is classified as
+    Class IIb.
+    """
+    return _active_chain(function, "4.2(2)", "Class IIb", _active,
+                         yes=(THERAPY, "administers_or_exchanges_energy",
+                              "delivers_hazardous_energy"))
+
+
+def rule_4_2_3(function: FunctionProfile):
+    """Schedule 2 clause 4.2(3).
+
+    (3) An active medical device that is intended by the manufacturer to be
+    used to control or monitor, or directly influence, the performance of an
+    active medical device for therapy of the kind mentioned in subclause (2)
+    is classified as Class IIb.
+    """
+    return _active_chain(function, "4.2(3)", "Class IIb", _active,
+                         yes=(THERAPY, "controls_hazardous_therapy_device"))
+
+
+def rule_4_2_4(function: FunctionProfile):
+    """Schedule 2 clause 4.2(4).
+
+    (4) An active medical device for therapy that includes a diagnostic
+    function the purpose of which is to significantly determine patient
+    management by the device is classified as Class III.
+    """
+    return _active_chain(function, "4.2(4)", "Class III", _active,
+                         yes=(THERAPY, "diagnostic_function_determines_patient_management"))
+
+
+def rule_4_3_2_a(function: FunctionProfile):
+    """Schedule 2 clause 4.3(2)(a).
+
+    (1) This clause applies to an active medical device for diagnosis.
+
+    (2) If:
+
+    (a) the device is intended by the manufacturer to be used to supply
+    energy that will be absorbed by a patient’s body (other than a device that
+    is intended only to illuminate the patient’s body in the visible
+    spectrum); or
+
+    the device is classified as Class IIa.
+    """
+    return _active_chain(function, "4.3(2)(a)", "Class IIa", _active,
+                         yes=(DIAGNOSIS, "supplies_absorbed_energy_for_diagnosis"))
+
+
+def rule_4_3_2_b(function: FunctionProfile):
+    """Schedule 2 clause 4.3(2)(b).
+
+    (1) This clause applies to an active medical device for diagnosis.
+
+    (2) If:
+
+    (b) the device is intended by the manufacturer to be used to image in
+    vivo distribution of radiopharmaceuticals in a patient; or
+
+    the device is classified as Class IIa.
+    """
+    return _active_chain(function, "4.3(2)(b)", "Class IIa", _active,
+                         yes=(DIAGNOSIS, "images_radiopharmaceutical_distribution"))
+
+
+def rule_4_3_2_c(function: FunctionProfile):
+    """Schedule 2 clause 4.3(2)(c).
+
+    (1) This clause applies to an active medical device for diagnosis.
+
+    (2) If:
+
+    (c) the device is intended by the manufacturer to be used to allow direct
+    diagnosis or monitoring of vital physiological processes of a patient
+    (other than a device of a kind mentioned in paragraph (3)(a));
+
+    the device is classified as Class IIa.
+    """
+    return _active_chain(function, "4.3(2)(c)", "Class IIa", _active,
+                         yes=(DIAGNOSIS, "diagnoses_or_monitors_vital_processes"),
+                         no=("monitors_vital_parameters_immediate_danger",))
+
+
+def rule_4_3_3_a(function: FunctionProfile):
+    """Schedule 2 clause 4.3(3)(a).
+
+    (1) This clause applies to an active medical device for diagnosis.
+
+    (3) If:
+
+    (a) the device is intended by the manufacturer specifically to be used to
+    monitor vital physiological parameters of a patient, and the nature of the
+    variations monitored is of a kind that could result in immediate danger to
+    the patient (for example, variations in cardiac performance, respiration,
+    activity of the central nervous system); or
+
+    the device is classified as Class IIb.
+    """
+    return _active_chain(function, "4.3(3)(a)", "Class IIb", _active,
+                         yes=(DIAGNOSIS, "monitors_vital_parameters_immediate_danger"))
+
+
+def rule_4_3_3_b(function: FunctionProfile):
+    """Schedule 2 clause 4.3(3)(b).
+
+    (1) This clause applies to an active medical device for diagnosis.
+
+    (3) If:
+
+    (b) the device is intended by the manufacturer to emit ionising radiation
+    and to be used for diagnostic or therapeutic interventional radiology; or
+
+    the device is classified as Class IIb.
+    """
+    return _active_chain(function, "4.3(3)(b)", "Class IIb", _active,
+                         yes=(DIAGNOSIS, "emits_ionising_radiation_for_interventional_radiology"))
+
+
+def rule_4_3_3_c(function: FunctionProfile):
+    """Schedule 2 clause 4.3(3)(c).
+
+    (1) This clause applies to an active medical device for diagnosis.
+
+    (3) If:
+
+    (c) the device is intended by the manufacturer to be used to control or
+    monitor, or directly influence, the performance of a device of the kind
+    mentioned in paragraph (b);
+
+    the device is classified as Class IIb.
+    """
+    return _active_chain(function, "4.3(3)(c)", "Class IIb", _active,
+                         yes=(DIAGNOSIS, "controls_interventional_radiology_device"))
+
+
+def rule_4_4_1(function: FunctionProfile):
+    """Schedule 2 clause 4.4(1).
+
+    (1) Subject to subclause (2), an active medical device that is intended by
+    the manufacturer to be used to administer medicine, body liquids or other
+    substances to a patient, or to remove medicine, body liquids or other
+    substances from a patient, is classified as Class IIa.
+    """
+    return _active_chain(function, "4.4(1)", "Class IIa", _active,
+                         yes=("administers_or_removes_substances",),
+                         no=("substance_administration_potentially_hazardous",))
+
+
+def rule_4_4_2(function: FunctionProfile):
+    """Schedule 2 clause 4.4(2).
+
+    (2) If the device is of a kind such that the administration or removal of
+    the medicine, body liquids or other substances is potentially hazardous to
+    the patient, having regard to the nature of the substances involved, the
+    part of the patient’s body concerned, and the characteristics of the
+    device, the device is classified as Class IIb.
+    """
+    return _active_chain(function, "4.4(2)", "Class IIb", _active,
+                         yes=("administers_or_removes_substances",
+                              "substance_administration_potentially_hazardous"))
+
+
+# The software rules grade by a level. Each helper returns the level a
+# function reaches, or a Pending, and each paragraph rule fires on its level.
+
+HIGH_RISK = PublicHealthRisk.HIGH
+MODERATE_RISK = PublicHealthRisk.MODERATE
+
+
+def _software_rule(function, reference, result, gate, want):
+    """A 4.5 to 4.8 paragraph: programmable, gate yes, then want(level) true."""
+    rule_id = f"{PREFIX}-{reference}"
+    inside = _programmable(function, rule_id, reference)
+    if inside is not True:
+        return inside
+    opened = _yes(function, gate, rule_id, reference)
+    if opened is not Tri.YES:
+        return opened if isinstance(opened, Pending) else None
+    outcome = want(function, rule_id, reference)
+    if outcome is not True:
+        return outcome if isinstance(outcome, Pending) else None
+    return RuleHit(rule_id, cite(reference), result, _because(function.general, gate))
+
+
+def _level(function, rule_id, reference, names):
+    values = {}
+    for name in names:
+        value = _enum(function, name, rule_id, reference)
+        if isinstance(value, Pending):
+            return value
+        values[name] = value
+    return values
+
+
+def _to_professional(function, rule_id, reference):
+    value = _enum(function, "decision_maker", rule_id, reference)
+    if isinstance(value, Pending):
+        return value
+    return value is DecisionMaker.INFORMS_PROFESSIONAL
+
+
+def _diagnosis_level(professional: bool, which: str):
+    """want() for 4.5: professional selects (1) or (2); which is the level."""
+    def want(function, rule_id, reference):
+        to_pro = _to_professional(function, rule_id, reference)
+        if isinstance(to_pro, Pending):
+            return to_pro
+        if to_pro is not professional:
+            return None
+        v = _level(function, rule_id, reference, ("condition_severity", "public_health_risk"))
+        if isinstance(v, Pending):
+            return v
+        death = v["condition_severity"] is ConditionSeverity.DEATH_WITHOUT_URGENT_TREATMENT
+        high = v["public_health_risk"] is HIGH_RISK
+        serious = (v["condition_severity"] is ConditionSeverity.SERIOUS
+                   or v["public_health_risk"] is MODERATE_RISK)
+        return {"death": death, "high": high, "serious": serious and not (death or high),
+                "other": not (death or high or serious)}[which]
+    return want
+
+
+def _monitoring_level(which: str):
+    def want(function, rule_id, reference):
+        v = _level(function, rule_id, reference, ("monitoring_danger", "public_health_risk"))
+        if isinstance(v, Pending):
+            return v
+        top = (v["monitoring_danger"] is MonitoringDanger.IMMEDIATE
+               or v["public_health_risk"] is HIGH_RISK)
+        mid = (v["monitoring_danger"] is MonitoringDanger.OTHER
+               or v["public_health_risk"] is MODERATE_RISK)
+        return {"a": top, "b": mid and not top, "c": not (top or mid)}[which]
+    return want
+
+
+def _treatment_level(professional: bool, which: str):
+    def want(function, rule_id, reference):
+        to_pro = _to_professional(function, rule_id, reference)
+        if isinstance(to_pro, Pending):
+            return to_pro
+        if to_pro is not professional:
+            return None
+        v = _level(function, rule_id, reference, ("treatment_risk", "public_health_risk"))
+        if isinstance(v, Pending):
+            return v
+        death = v["treatment_risk"] is TreatmentRisk.DEATH_OR_SEVERE_DETERIORATION
+        high = v["public_health_risk"] is HIGH_RISK
+        harm = v["treatment_risk"] is TreatmentRisk.OTHER_HARM
+        moderate = v["public_health_risk"] is MODERATE_RISK
+        top = death or high
+        return {"a(i)": death, "a(ii)": high, "b(i)": harm and not top,
+                "b(ii)": moderate and not top,
+                "c": not (top or harm or moderate)}[which]
+    return want
+
+
+def _information_level(level):
+    def want(function, rule_id, reference):
+        value = _enum(function, "information_therapy_harm", rule_id, reference)
+        if isinstance(value, Pending):
+            return value
+        return value is level
+    return want
+
+
+DIAGNOSES = "diagnoses_or_screens"
+MONITORS = "monitors_disease_state"
+TREATS = "specifies_or_recommends_treatment"
+INFORMS = "provides_therapy_through_information"
+
+
+def rule_4_5_1_c_i(function: FunctionProfile):
+    """Schedule 2 clause 4.5(1)(c)(i).
+
+    (1) A programmed or programmable medical device, or software that is a
+    medical device, that is intended by the manufacturer to be used to:
+
+    (a) provide a diagnosis of a disease or condition; or
+
+    (b) screen for a disease or condition;
+
+    is classified as:
+
+    (c) in the case of a disease or condition that:
+
+    (i) may lead to the death of a person, or a severe deterioration in the
+    state of a person’s health, without urgent treatment; or
+
+    Class III; or
+    """
+    return _software_rule(function, "4.5(1)(c)(i)", "Class III", DIAGNOSES,
+                          _diagnosis_level(False, "death"))
+
+
+def rule_4_5_1_c_ii(function: FunctionProfile):
+    """Schedule 2 clause 4.5(1)(c)(ii).
+
+    (1) A programmed or programmable medical device, or software that is a
+    medical device, that is intended by the manufacturer to be used to:
+
+    (c) in the case of a disease or condition that:
+
+    (ii) may pose a high risk to public health;
+
+    Class III; or
+    """
+    return _software_rule(function, "4.5(1)(c)(ii)", "Class III", DIAGNOSES,
+                          _diagnosis_level(False, "high"))
+
+
+def rule_4_5_1_d(function: FunctionProfile):
+    """Schedule 2 clause 4.5(1)(d).
+
+    (1) A programmed or programmable medical device, or software that is a
+    medical device, that is intended by the manufacturer to be used to:
+
+    (d) in the case of a serious disease or serious condition or a disease or
+    condition that may pose a moderate risk to public health, and where
+    paragraph (c) does not apply – Class IIb; or
+    """
+    return _software_rule(function, "4.5(1)(d)", "Class IIb", DIAGNOSES,
+                          _diagnosis_level(False, "serious"))
+
+
+def rule_4_5_1_e(function: FunctionProfile):
+    """Schedule 2 clause 4.5(1)(e).
+
+    (1) A programmed or programmable medical device, or software that is a
+    medical device, that is intended by the manufacturer to be used to:
+
+    (e) in any other case – Class IIa.
+    """
+    return _software_rule(function, "4.5(1)(e)", "Class IIa", DIAGNOSES,
+                          _diagnosis_level(False, "other"))
+
+
+def rule_4_5_2_a_i(function: FunctionProfile):
+    """Schedule 2 clause 4.5(2)(a)(i).
+
+    (2) A programmed or programmable medical device, or software that is a
+    medical device, that is intended by the manufacturer to be used to provide
+    information to a relevant health professional for the purposes of the
+    health professional making a diagnosis of a disease or condition:
+
+    (a) in the case of a disease or condition that:
+
+    (i) may lead to the death of a person, or a severe deterioration in the
+    state of a person’s health, without urgent treatment; or
+
+    is classified as Class IIb; or
+    """
+    return _software_rule(function, "4.5(2)(a)(i)", "Class IIb", DIAGNOSES,
+                          _diagnosis_level(True, "death"))
+
+
+def rule_4_5_2_a_ii(function: FunctionProfile):
+    """Schedule 2 clause 4.5(2)(a)(ii).
+
+    (2) A programmed or programmable medical device, or software that is a
+    medical device, that is intended by the manufacturer to be used to provide
+    information to a relevant health professional for the purposes of the
+    health professional making a diagnosis of a disease or condition:
+
+    (ii) may pose a high risk to public health;
+
+    is classified as Class IIb; or
+    """
+    return _software_rule(function, "4.5(2)(a)(ii)", "Class IIb", DIAGNOSES,
+                          _diagnosis_level(True, "high"))
+
+
+def rule_4_5_2_b(function: FunctionProfile):
+    """Schedule 2 clause 4.5(2)(b).
+
+    (2) A programmed or programmable medical device, or software that is a
+    medical device, that is intended by the manufacturer to be used to provide
+    information to a relevant health professional for the purposes of the
+    health professional making a diagnosis of a disease or condition:
+
+    (b) in the case of a serious disease or serious condition or a disease or
+    condition that may pose a moderate risk to public health, and where
+    paragraph (a) does not apply – is classified as Class IIa; or
+    """
+    return _software_rule(function, "4.5(2)(b)", "Class IIa", DIAGNOSES,
+                          _diagnosis_level(True, "serious"))
+
+
+def rule_4_5_2_c(function: FunctionProfile):
+    """Schedule 2 clause 4.5(2)(c).
+
+    (2) A programmed or programmable medical device, or software that is a
+    medical device, that is intended by the manufacturer to be used to provide
+    information to a relevant health professional for the purposes of the
+    health professional making a diagnosis of a disease or condition:
+
+    (c) in any other case – is classified as Class I.
+    """
+    return _software_rule(function, "4.5(2)(c)", "Class I", DIAGNOSES,
+                          _diagnosis_level(True, "other"))
+
+
+def rule_4_6_a(function: FunctionProfile):
+    """Schedule 2 clause 4.6(a).
+
+    A programmed or programmable medical device, or software that is a
+    medical device, that is intended by the manufacturer to be used to provide
+    information that is to be used for monitoring the state or progression of
+    a disease or condition of a person or the parameters in relation to a
+    person:
+
+    (a) in the case where the information to be provided could indicate that
+    the person or another person may be in immediate danger or that there may
+    be a high risk to public health – is classified as Class IIb; or
+    """
+    return _software_rule(function, "4.6(a)", "Class IIb", MONITORS, _monitoring_level("a"))
+
+
+def rule_4_6_b(function: FunctionProfile):
+    """Schedule 2 clause 4.6(b).
+
+    A programmed or programmable medical device, or software that is a
+    medical device, that is intended by the manufacturer to be used to provide
+    information that is to be used for monitoring the state or progression of
+    a disease or condition of a person or the parameters in relation to a
+    person:
+
+    (b) in the case where the information to be provided could indicate that
+    the person or another person may be in other danger or that there may be
+    a moderate risk to public health – is classified as Class IIa; or
+    """
+    return _software_rule(function, "4.6(b)", "Class IIa", MONITORS, _monitoring_level("b"))
+
+
+def rule_4_6_c(function: FunctionProfile):
+    """Schedule 2 clause 4.6(c).
+
+    A programmed or programmable medical device, or software that is a
+    medical device, that is intended by the manufacturer to be used to provide
+    information that is to be used for monitoring the state or progression of
+    a disease or condition of a person or the parameters in relation to a
+    person:
+
+    (c) in any other case – is classified as Class I.
+    """
+    return _software_rule(function, "4.6(c)", "Class I", MONITORS, _monitoring_level("c"))
+
+
+def rule_4_7_1_a_i(function: FunctionProfile):
+    """Schedule 2 clause 4.7(1)(a)(i).
+
+    (1) Subject to subclause (2), a programmed or programmable medical
+    device, or software that is a medical device, that is intended by the
+    manufacturer to be used to specify or recommend a treatment or
+    intervention:
+
+    (a) in the case where the absence of the treatment or intervention or
+    where the treatment or intervention itself:
+
+    (i) may lead to the death of a person or a severe deterioration in the
+    state of a person’s health; or
+
+    is classified as Class III; or
+    """
+    return _software_rule(function, "4.7(1)(a)(i)", "Class III", TREATS,
+                          _treatment_level(False, "a(i)"))
+
+
+def rule_4_7_1_a_ii(function: FunctionProfile):
+    """Schedule 2 clause 4.7(1)(a)(ii).
+
+    (1) Subject to subclause (2), a programmed or programmable medical
+    device, or software that is a medical device, that is intended by the
+    manufacturer to be used to specify or recommend a treatment or
+    intervention:
+
+    (ii) may pose a high risk to public health;
+
+    is classified as Class III; or
+    """
+    return _software_rule(function, "4.7(1)(a)(ii)", "Class III", TREATS,
+                          _treatment_level(False, "a(ii)"))
+
+
+def rule_4_7_1_b_i(function: FunctionProfile):
+    """Schedule 2 clause 4.7(1)(b)(i).
+
+    (1) Subject to subclause (2), a programmed or programmable medical
+    device, or software that is a medical device, that is intended by the
+    manufacturer to be used to specify or recommend a treatment or
+    intervention:
+
+    (b) in the case where the absence of the treatment or intervention or
+    where the treatment or intervention itself:
+
+    (i) may otherwise be harmful to a person; or
+
+    is classified as Class IIb; or
+    """
+    return _software_rule(function, "4.7(1)(b)(i)", "Class IIb", TREATS,
+                          _treatment_level(False, "b(i)"))
+
+
+def rule_4_7_1_b_ii(function: FunctionProfile):
+    """Schedule 2 clause 4.7(1)(b)(ii).
+
+    (1) Subject to subclause (2), a programmed or programmable medical
+    device, or software that is a medical device, that is intended by the
+    manufacturer to be used to specify or recommend a treatment or
+    intervention:
+
+    (ii) may pose a moderate risk to public health;
+
+    is classified as Class IIb; or
+    """
+    return _software_rule(function, "4.7(1)(b)(ii)", "Class IIb", TREATS,
+                          _treatment_level(False, "b(ii)"))
+
+
+def rule_4_7_1_c(function: FunctionProfile):
+    """Schedule 2 clause 4.7(1)(c).
+
+    (1) Subject to subclause (2), a programmed or programmable medical
+    device, or software that is a medical device, that is intended by the
+    manufacturer to be used to specify or recommend a treatment or
+    intervention:
+
+    (c) in any other case – is classified as Class IIa.
+    """
+    return _software_rule(function, "4.7(1)(c)", "Class IIa", TREATS,
+                          _treatment_level(False, "c"))
+
+
+def rule_4_7_2_a_i(function: FunctionProfile):
+    """Schedule 2 clause 4.7(2)(a)(i).
+
+    (2) A programmed or programmable medical device, or software that is a
+    medical device, that is intended by the manufacturer to be used to
+    recommend a treatment or intervention (the recommended treatment or
+    intervention) to a relevant health professional for the purposes of the
+    health professional making a decision about the treatment or
+    intervention:
+
+    (a) in the case where the absence of the recommended treatment or
+    intervention or where the recommended treatment or intervention itself:
+
+    (i) may lead to the death of a person or a severe deterioration in the
+    state of a person’s health; or
+
+    is classified as Class IIb; or
+    """
+    return _software_rule(function, "4.7(2)(a)(i)", "Class IIb", TREATS,
+                          _treatment_level(True, "a(i)"))
+
+
+def rule_4_7_2_a_ii(function: FunctionProfile):
+    """Schedule 2 clause 4.7(2)(a)(ii).
+
+    (2) A programmed or programmable medical device, or software that is a
+    medical device, that is intended by the manufacturer to be used to
+    recommend a treatment or intervention (the recommended treatment or
+    intervention) to a relevant health professional for the purposes of the
+    health professional making a decision about the treatment or
+    intervention:
+
+    (ii) may pose a high risk to public health;
+
+    is classified as Class IIb; or
+    """
+    return _software_rule(function, "4.7(2)(a)(ii)", "Class IIb", TREATS,
+                          _treatment_level(True, "a(ii)"))
+
+
+def rule_4_7_2_b_i(function: FunctionProfile):
+    """Schedule 2 clause 4.7(2)(b)(i).
+
+    (2) A programmed or programmable medical device, or software that is a
+    medical device, that is intended by the manufacturer to be used to
+    recommend a treatment or intervention (the recommended treatment or
+    intervention) to a relevant health professional for the purposes of the
+    health professional making a decision about the treatment or
+    intervention:
+
+    (b) in the case where the absence of the recommended treatment or
+    intervention or where the recommended treatment or intervention itself:
+
+    (i) may otherwise be harmful to a person; or
+
+    is classified as Class IIa; or
+    """
+    return _software_rule(function, "4.7(2)(b)(i)", "Class IIa", TREATS,
+                          _treatment_level(True, "b(i)"))
+
+
+def rule_4_7_2_b_ii(function: FunctionProfile):
+    """Schedule 2 clause 4.7(2)(b)(ii).
+
+    (2) A programmed or programmable medical device, or software that is a
+    medical device, that is intended by the manufacturer to be used to
+    recommend a treatment or intervention (the recommended treatment or
+    intervention) to a relevant health professional for the purposes of the
+    health professional making a decision about the treatment or
+    intervention:
+
+    (ii) may pose a moderate risk to public health;
+
+    is classified as Class IIa; or
+    """
+    return _software_rule(function, "4.7(2)(b)(ii)", "Class IIa", TREATS,
+                          _treatment_level(True, "b(ii)"))
+
+
+def rule_4_7_2_c(function: FunctionProfile):
+    """Schedule 2 clause 4.7(2)(c).
+
+    (2) A programmed or programmable medical device, or software that is a
+    medical device, that is intended by the manufacturer to be used to
+    recommend a treatment or intervention (the recommended treatment or
+    intervention) to a relevant health professional for the purposes of the
+    health professional making a decision about the treatment or
+    intervention:
+
+    (c) in any other case – is classified as Class I.
+    """
+    return _software_rule(function, "4.7(2)(c)", "Class I", TREATS,
+                          _treatment_level(True, "c"))
+
+
+def rule_4_8_a(function: FunctionProfile):
+    """Schedule 2 clause 4.8(a).
+
+    A programmed or programmable medical device, or software that is a
+    medical device, that is intended by the manufacturer to provide therapy to
+    a person through the provision of information to the person:
+
+    (a) in the case of therapy that may result in the death of the person or a
+    severe deterioration in the state of the person’s health – is classified
+    as Class III; or
+    """
+    return _software_rule(function, "4.8(a)", "Class III", INFORMS,
+                          _information_level(InformationTherapyHarm.DEATH_OR_SEVERE_DETERIORATION))
+
+
+def rule_4_8_b(function: FunctionProfile):
+    """Schedule 2 clause 4.8(b).
+
+    A programmed or programmable medical device, or software that is a
+    medical device, that is intended by the manufacturer to provide therapy to
+    a person through the provision of information to the person:
+
+    (b) in the case of therapy that may cause serious harm to the person and
+    where paragraph (a) does not apply – is classified as Class IIb; or
+    """
+    return _software_rule(function, "4.8(b)", "Class IIb", INFORMS,
+                          _information_level(InformationTherapyHarm.SERIOUS_HARM))
+
+
+def rule_4_8_c(function: FunctionProfile):
+    """Schedule 2 clause 4.8(c).
+
+    A programmed or programmable medical device, or software that is a
+    medical device, that is intended by the manufacturer to provide therapy to
+    a person through the provision of information to the person:
+
+    (c) in the case of therapy that may cause harm to the person and where
+    neither paragraph (a) nor (b) applies – is classified as Class IIa; or
+    """
+    return _software_rule(function, "4.8(c)", "Class IIa", INFORMS,
+                          _information_level(InformationTherapyHarm.HARM))
+
+
+def rule_4_8_d(function: FunctionProfile):
+    """Schedule 2 clause 4.8(d).
+
+    A programmed or programmable medical device, or software that is a
+    medical device, that is intended by the manufacturer to provide therapy to
+    a person through the provision of information to the person:
+
+    (d) in any other case – is classified as Class I.
+    """
+    return _software_rule(function, "4.8(d)", "Class I", INFORMS,
+                          _information_level(InformationTherapyHarm.NONE))
+
+
+PART_4 = [
+    rule_4_1,
+    rule_4_2_1, rule_4_2_2, rule_4_2_3, rule_4_2_4,
+    rule_4_3_2_a, rule_4_3_2_b, rule_4_3_2_c, rule_4_3_3_a, rule_4_3_3_b, rule_4_3_3_c,
+    rule_4_4_1, rule_4_4_2,
+    rule_4_5_1_c_i, rule_4_5_1_c_ii, rule_4_5_1_d, rule_4_5_1_e,
+    rule_4_5_2_a_i, rule_4_5_2_a_ii, rule_4_5_2_b, rule_4_5_2_c,
+    rule_4_6_a, rule_4_6_b, rule_4_6_c,
+    rule_4_7_1_a_i, rule_4_7_1_a_ii, rule_4_7_1_b_i, rule_4_7_1_b_ii, rule_4_7_1_c,
+    rule_4_7_2_a_i, rule_4_7_2_a_ii, rule_4_7_2_b_i, rule_4_7_2_b_ii, rule_4_7_2_c,
+    rule_4_8_a, rule_4_8_b, rule_4_8_c, rule_4_8_d,
+]
 
 
 # --------------------------------------------------------------------------
@@ -908,20 +1677,8 @@ def _route_is(function: FunctionProfile, routes, rule_id: str, reference: str):
 
 
 def _active_or_software(function: FunctionProfile, rule_id: str, reference: str):
-    active = function.general.active_type
-    software = known(function.is_software)
-    if active.resolved and active.value in (ActiveType.THERAPEUTIC, ActiveType.DIAGNOSTIC):
-        return True
-    if software is Tri.YES:
-        return True
-    missing = []
-    if not active.resolved or active.value is None:
-        missing.append("general.active_type")
-    if software is None:
-        missing.append("is_software")
-    if missing:
-        return Pending(rule_id, cite(reference), "applicability is unresolved", tuple(missing))
-    return None
+    """5.7(3) needs an active medical device; software always is one."""
+    return _active(function, rule_id, reference)
 
 
 def _chain(function: FunctionProfile, rule_id: str, reference: str, result: str,
@@ -1350,8 +2107,8 @@ def evaluate(function: FunctionProfile) -> Classification:
     general = function.general
     outcomes = [rule(general) for rule in PART_2]
     outcomes += [rule(function) for rule in PART_3]
+    outcomes += [rule(function) for rule in PART_4]
     outcomes += [rule(function) for rule in PART_5]
-    outcomes += [part_4(function)]
     result = resolve(outcomes, GENERAL_ORDER)
     result.flags = _flags(function, result)
     return result

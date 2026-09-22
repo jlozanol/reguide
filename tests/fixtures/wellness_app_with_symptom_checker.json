@@ -15,7 +15,7 @@
       "name": "Symptom checker",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class IIa",
-      "expected_rule": "4.5(2)",
+      "expected_rule": "4.5(1)(e)",
       "expected_qualifiers": []
     }
   ],
@@ -255,17 +255,27 @@
             "basis": "unknown",
             "evidence": null
           },
-          "active_type": {
-            "value": "not_active",
-            "basis": "stated",
-            "evidence": "Records sleep and activity for general wellbeing."
+          "is_active_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_programmed_or_programmable": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "is_active_implantable": {
             "value": null,
             "basis": "unknown",
             "evidence": null
           },
-          "clinical_function": {
+          "active_for_therapy": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Records sleep and activity for general wellbeing."
+          },
+          "administers_or_exchanges_energy": {
             "value": null,
             "basis": "unknown",
             "evidence": null
@@ -275,10 +285,80 @@
             "basis": "unknown",
             "evidence": null
           },
-          "administers_or_removes_medicine": {
+          "controls_hazardous_therapy_device": {
             "value": null,
             "basis": "unknown",
             "evidence": null
+          },
+          "diagnostic_function_determines_patient_management": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "active_for_diagnosis": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Records sleep and activity for general wellbeing."
+          },
+          "supplies_absorbed_energy_for_diagnosis": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "images_radiopharmaceutical_distribution": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "diagnoses_or_monitors_vital_processes": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "monitors_vital_parameters_immediate_danger": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "emits_ionising_radiation_for_interventional_radiology": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "controls_interventional_radiology_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "administers_or_removes_substances": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Records sleep and activity for general wellbeing."
+          },
+          "substance_administration_potentially_hazardous": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "diagnoses_or_screens": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Records sleep and activity for general wellbeing."
+          },
+          "monitors_disease_state": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Records sleep and activity for general wellbeing."
+          },
+          "specifies_or_recommends_treatment": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Records sleep and activity for general wellbeing."
+          },
+          "provides_therapy_through_information": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Records sleep and activity for general wellbeing."
           },
           "decision_maker": {
             "value": null,
@@ -295,7 +375,17 @@
             "basis": "unknown",
             "evidence": null
           },
-          "records_diagnostic_images": {
+          "monitoring_danger": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "treatment_risk": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "information_therapy_harm": {
             "value": null,
             "basis": "unknown",
             "evidence": null
@@ -568,9 +658,9 @@
             "evidence": null
           },
           "delivers_ionising_radiation": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "has_biological_effect": {
             "value": null,
@@ -612,30 +702,110 @@
             "basis": "unknown",
             "evidence": null
           },
-          "active_type": {
-            "value": "active_diagnostic",
-            "basis": "stated",
-            "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
+          "is_active_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_programmed_or_programmable": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "is_active_implantable": {
             "value": null,
             "basis": "unknown",
             "evidence": null
           },
-          "clinical_function": {
-            "value": "diagnose_or_screen_for_a_condition",
-            "basis": "stated",
-            "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
-          },
-          "delivers_hazardous_energy": {
+          "active_for_therapy": {
             "value": "no",
             "basis": "stated",
             "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
           },
-          "administers_or_removes_medicine": {
+          "administers_or_exchanges_energy": {
             "value": null,
             "basis": "unknown",
             "evidence": null
+          },
+          "delivers_hazardous_energy": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "controls_hazardous_therapy_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "diagnostic_function_determines_patient_management": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "active_for_diagnosis": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
+          },
+          "supplies_absorbed_energy_for_diagnosis": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
+          },
+          "images_radiopharmaceutical_distribution": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
+          },
+          "diagnoses_or_monitors_vital_processes": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
+          },
+          "monitors_vital_parameters_immediate_danger": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
+          },
+          "emits_ionising_radiation_for_interventional_radiology": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
+          },
+          "controls_interventional_radiology_device": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
+          },
+          "administers_or_removes_substances": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
+          },
+          "substance_administration_potentially_hazardous": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "diagnoses_or_screens": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
+          },
+          "monitors_disease_state": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
+          },
+          "specifies_or_recommends_treatment": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
+          },
+          "provides_therapy_through_information": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
           },
           "decision_maker": {
             "value": "device_gives_the_decision_to_a_lay_user",
@@ -643,7 +813,7 @@
             "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
           },
           "condition_severity": {
-            "value": "moderate",
+            "value": "any_other_case",
             "basis": "stated",
             "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
           },
@@ -652,10 +822,20 @@
             "basis": "stated",
             "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
           },
-          "records_diagnostic_images": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
+          "monitoring_danger": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "treatment_risk": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "information_therapy_harm": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "is_export_only": {
             "value": "no",
@@ -768,6 +948,6 @@
     ],
     "funding": null,
     "source_text": "Consumer wellbeing app Tracks sleep and activity for general wellbeing and includes a symptom checker that suggests whether to seek care. Activity and sleep tracking Records sleep and activity for general wellbeing. Symptom checker Asks a consumer about symptoms and suggests whether to seek medical care. fixture decomposition is fixed by hand",
-    "schema_version": "0.9"
+    "schema_version": "0.10"
   }
 }

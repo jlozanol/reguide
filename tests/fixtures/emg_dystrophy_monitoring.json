@@ -204,9 +204,9 @@
             "evidence": null
           },
           "delivers_ionising_radiation": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "has_biological_effect": {
             "value": null,
@@ -248,50 +248,140 @@
             "basis": "unknown",
             "evidence": null
           },
-          "active_type": {
-            "value": "active_diagnostic",
-            "basis": "stated",
-            "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
+          "is_active_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_programmed_or_programmable": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "is_active_implantable": {
             "value": null,
             "basis": "unknown",
             "evidence": null
           },
-          "clinical_function": {
-            "value": "monitor_a_condition_or_parameter",
-            "basis": "stated",
-            "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
-          },
-          "delivers_hazardous_energy": {
+          "active_for_therapy": {
             "value": "no",
             "basis": "stated",
             "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
           },
-          "administers_or_removes_medicine": {
+          "administers_or_exchanges_energy": {
             "value": null,
             "basis": "unknown",
             "evidence": null
           },
-          "decision_maker": {
-            "value": "informs_a_health_professional_who_decides",
+          "delivers_hazardous_energy": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "controls_hazardous_therapy_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "diagnostic_function_determines_patient_management": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "active_for_diagnosis": {
+            "value": "yes",
             "basis": "stated",
             "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
           },
-          "condition_severity": {
-            "value": "moderate",
+          "supplies_absorbed_energy_for_diagnosis": {
+            "value": "no",
             "basis": "stated",
             "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
+          },
+          "images_radiopharmaceutical_distribution": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
+          },
+          "diagnoses_or_monitors_vital_processes": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
+          },
+          "monitors_vital_parameters_immediate_danger": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
+          },
+          "emits_ionising_radiation_for_interventional_radiology": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
+          },
+          "controls_interventional_radiology_device": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
+          },
+          "administers_or_removes_substances": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
+          },
+          "substance_administration_potentially_hazardous": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "diagnoses_or_screens": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
+          },
+          "monitors_disease_state": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
+          },
+          "specifies_or_recommends_treatment": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
+          },
+          "provides_therapy_through_information": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
+          },
+          "decision_maker": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "condition_severity": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "public_health_risk": {
             "value": "low",
             "basis": "stated",
             "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
           },
-          "records_diagnostic_images": {
-            "value": "no",
+          "monitoring_danger": {
+            "value": "other_danger",
             "basis": "stated",
             "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
+          },
+          "treatment_risk": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "information_therapy_harm": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "is_export_only": {
             "value": "no",
@@ -404,6 +494,6 @@
     ],
     "funding": null,
     "source_text": "Muscle response monitoring app Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy. Muscle response monitoring app Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy. fixture decomposition is fixed by hand",
-    "schema_version": "0.9"
+    "schema_version": "0.10"
   }
 }

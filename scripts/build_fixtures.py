@@ -22,10 +22,8 @@ import json
 from pathlib import Path
 
 from reguide.profile import (
-    ActiveType,
     Answer,
     Basis,
-    ClinicalFunction,
     CoreProfile,
     DecisionMaker,
     DeviceKind,
@@ -34,13 +32,16 @@ from reguide.profile import (
     FunctionProfile,
     GeneralDeviceProfile,
     highest_class,
+    InformationTherapyHarm,
     Invasiveness,
+    MonitoringDanger,
     IvdProfile,
     OrificeSite,
     PublicHealthRisk,
     Severity,
     StatusProfile,
     TherapeuticPurpose,
+    TreatmentRisk,
     Tri,
 )
 from reguide.status import StatusOutcome
@@ -68,7 +69,26 @@ def a(value, evidence):
 
 GENERAL_DEFAULTS = dict(
     invasiveness=Invasiveness.NON_INVASIVE,
-    active_type=ActiveType.NOT_ACTIVE,
+    is_active_device=Tri.NO,
+    is_programmed_or_programmable=Tri.NO,
+    active_for_therapy=Tri.NO,
+    active_for_diagnosis=Tri.NO,
+    administers_or_exchanges_energy=Tri.NO,
+    delivers_hazardous_energy=Tri.NO,
+    controls_hazardous_therapy_device=Tri.NO,
+    diagnostic_function_determines_patient_management=Tri.NO,
+    supplies_absorbed_energy_for_diagnosis=Tri.NO,
+    images_radiopharmaceutical_distribution=Tri.NO,
+    diagnoses_or_monitors_vital_processes=Tri.NO,
+    monitors_vital_parameters_immediate_danger=Tri.NO,
+    emits_ionising_radiation_for_interventional_radiology=Tri.NO,
+    controls_interventional_radiology_device=Tri.NO,
+    administers_or_removes_substances=Tri.NO,
+    substance_administration_potentially_hazardous=Tri.NO,
+    diagnoses_or_screens=Tri.NO,
+    monitors_disease_state=Tri.NO,
+    specifies_or_recommends_treatment=Tri.NO,
+    provides_therapy_through_information=Tri.NO,
     incorporates_medicine=Tri.NO,
     contraceptive_or_sti_prevention=Tri.NO,
     disinfects_another_device=Tri.NO,
@@ -207,7 +227,8 @@ def fn(name, text, **given):
     fields = dict(GENERAL_DEFAULTS)
     fields.update(given)
     if software is Tri.YES:
-        for key in ("human_blood_derivative", "contains_non_viable_animal_material",
+        for key in ("is_active_device", "is_programmed_or_programmable",
+                    "human_blood_derivative", "contains_non_viable_animal_material",
                     "is_blood_bag", "administers_by_inhalation",
                     "is_substance_through_orifice_or_skin"):
             fields.pop(key, None)
@@ -475,9 +496,8 @@ add("diagnostic_ultrasound", "Class IIa", "4.3(2)(a)", ACTIVE,
     "Supplies energy absorbed by the body for diagnosis.",
     device("General purpose diagnostic ultrasound",
            "Supplies ultrasonic energy absorbed by the patient for imaging.",
-           active_type=ActiveType.DIAGNOSTIC, clinical_function=ClinicalFunction.SUPPLY_ENERGY,
-           delivers_hazardous_energy=Tri.NO, delivers_ionising_radiation=Tri.NO,
-           records_diagnostic_images=Tri.YES,
+           is_active_device=Tri.YES, active_for_diagnosis=Tri.YES,
+           supplies_absorbed_energy_for_diagnosis=Tri.YES,
            records_images_or_anatomical_model=Tri.YES,
            records_patient_images_outside_visible_spectrum=Tri.YES))
 
@@ -485,21 +505,32 @@ add("mri_equipment", "Class IIa", "4.3(2)(a)", ACTIVE,
     "Same rule as ultrasound. Confirms the rule is not imaging-modality specific.",
     device("Magnetic resonance equipment",
            "Supplies energy absorbed by the patient's body for diagnostic imaging.",
-           active_type=ActiveType.DIAGNOSTIC, clinical_function=ClinicalFunction.SUPPLY_ENERGY,
-           delivers_hazardous_energy=Tri.NO, delivers_ionising_radiation=Tri.NO,
-           records_diagnostic_images=Tri.YES,
+           is_active_device=Tri.YES, active_for_diagnosis=Tri.YES,
+           supplies_absorbed_energy_for_diagnosis=Tri.YES,
            records_images_or_anatomical_model=Tri.YES,
            records_patient_images_outside_visible_spectrum=Tri.YES))
 
-add("radiotherapy_afterloading_control", "Class IIb", "4.3(3)(c)", ACTIVE,
-    "Controls a device that emits ionising radiation. Control inherits the risk.",
+add("radiotherapy_afterloading_control", "Class IIb", "4.2(3)", ACTIVE,
+    "Class IIb either way. TGA's active device guidance lists radiotherapy "
+    "after-loading control systems under 4.3(3)(c), but clause 4.3 applies only "
+    "to an active medical device for diagnosis (4.3(1)). The same guidance puts "
+    "radioactive sources for after-loading therapy under 4.2(2), so controlling "
+    "one is 4.2(3), which is what the text supports.",
     device("Radiotherapy after-loading control system",
-           "Controls and monitors the performance of a device emitting ionising "
-           "radiation for therapeutic interventional radiology.",
-           active_type=ActiveType.DIAGNOSTIC,
-           clinical_function=ClinicalFunction.CONTROL_ANOTHER_DEVICE,
-           delivers_hazardous_energy=Tri.YES, delivers_ionising_radiation=Tri.YES,
-           records_diagnostic_images=Tri.NO))
+           "Controls and monitors the performance of a radioactive source for "
+           "after-loading therapy, which delivers radiation in a potentially "
+           "hazardous way.",
+           is_active_device=Tri.YES, active_for_therapy=Tri.YES,
+           controls_hazardous_therapy_device=Tri.YES))
+
+add("tens_device", "Class IIa", "4.2(1)", ACTIVE,
+    "TGA lists TENS devices under 4.2(1): an active device for therapy that "
+    "administers energy, not in a potentially hazardous way.",
+    device("TENS device",
+           "Transcutaneous electrical nerve stimulator that administers electrical "
+           "energy to a patient for pain relief, not in a potentially hazardous way.",
+           is_active_device=Tri.YES, active_for_therapy=Tri.YES,
+           administers_or_exchanges_energy=Tri.YES, delivers_hazardous_energy=Tri.NO))
 
 # -- Software. The pairs that matter most. ----------------------------------
 add("melanoma_screening_app", "Class III", "4.5(1)(c)(i)", ACTIVE,
@@ -508,28 +539,39 @@ add("melanoma_screening_app", "Class III", "4.5(1)(c)(i)", ACTIVE,
     device("Consumer melanoma screening app",
            "Analyses an image of a mole to screen for malignant melanoma, giving "
            "the screening decision to the consumer.",
-           software=Tri.YES, active_type=ActiveType.DIAGNOSTIC,
-           clinical_function=ClinicalFunction.DIAGNOSE_OR_SCREEN,
+           software=Tri.YES, active_for_diagnosis=Tri.YES,
+           diagnoses_or_screens=Tri.YES,
            decision_maker=DecisionMaker.DEVICE_TO_LAY_USER,
            status=dict(cdss_replaces_clinical_judgement=Tri.YES),
            condition_severity=Severity.DEATH_WITHOUT_URGENT_TREATMENT,
-           public_health_risk=PublicHealthRisk.LOW,
-           delivers_hazardous_energy=Tri.NO, delivers_ionising_radiation=Tri.NO,
-           records_diagnostic_images=Tri.NO))
+           public_health_risk=PublicHealthRisk.LOW))
 
-add("emphysema_ct_software", "Class IIa", "4.5(2)(b)", ACTIVE,
-    "Same rule family as the melanoma app. A clinician decides, so it drops.",
+add("cbt_app_bipolar", "Class IIa", "4.8(c)", ACTIVE,
+    "TGA's 4.8 example: an app providing cognitive behavioural therapy for "
+    "bipolar disorder that does not reference an established clinical practice "
+    "guideline is Class IIa under 4.8(c), therapy that may cause harm. A tool "
+    "based on displayed, established guidelines would not be a medical device.",
+    device("Cognitive behavioural therapy app",
+           "Provides cognitive behavioural therapy to a patient for treating bipolar "
+           "disorder, without referencing an established clinical practice "
+           "guideline; the therapy may cause harm.",
+           software=Tri.YES,
+           status=dict(cdss_replaces_clinical_judgement=Tri.YES),
+           provides_therapy_through_information=Tri.YES,
+           information_therapy_harm=InformationTherapyHarm.HARM))
+
+add("emphysema_ct_software", "Class IIb", "4.5(1)(d)", ACTIVE,
+    "TGA's own example: a device that diagnoses emphysema from CT scans makes "
+    "the diagnosis itself, and emphysema is a serious disease, so 4.5(1)(d), "
+    "Class IIb. Same rule family as the melanoma app, one level lower.",
     device("Emphysema detection software",
-           "Diagnoses emphysema from CT scans, providing information to a health "
-           "professional to support diagnostic decision making.",
+           "Diagnoses emphysema, a serious disease, from computed tomography scans.",
            status=PROCESSES_DEVICE_DATA,
-           software=Tri.YES, active_type=ActiveType.DIAGNOSTIC,
-           clinical_function=ClinicalFunction.DIAGNOSE_OR_SCREEN,
-           decision_maker=DecisionMaker.INFORMS_PROFESSIONAL,
+           software=Tri.YES, active_for_diagnosis=Tri.YES,
+           diagnoses_or_screens=Tri.YES,
+           decision_maker=DecisionMaker.DEVICE_TO_PROFESSIONAL,
            condition_severity=Severity.SERIOUS,
-           public_health_risk=PublicHealthRisk.MODERATE,
-           delivers_hazardous_energy=Tri.NO, delivers_ionising_radiation=Tri.NO,
-           records_diagnostic_images=Tri.NO))
+           public_health_risk=PublicHealthRisk.LOW))
 
 add("spect_cardiac_monitoring", "Class IIb", "4.6(a)", ACTIVE,
     "Monitoring where the information could indicate immediate danger.",
@@ -537,13 +579,10 @@ add("spect_cardiac_monitoring", "Class IIb", "4.6(a)", ACTIVE,
            "Analyses gamma camera imagery from a SPECT scan to track progression "
            "of heart disease from cardiac muscle blood flow.",
            status=PROCESSES_DEVICE_DATA,
-           software=Tri.YES, active_type=ActiveType.DIAGNOSTIC,
-           clinical_function=ClinicalFunction.MONITOR,
-           decision_maker=DecisionMaker.INFORMS_PROFESSIONAL,
-           condition_severity=Severity.DEATH_WITHOUT_URGENT_TREATMENT,
-           public_health_risk=PublicHealthRisk.LOW,
-           delivers_hazardous_energy=Tri.NO, delivers_ionising_radiation=Tri.NO,
-           records_diagnostic_images=Tri.NO))
+           software=Tri.YES, active_for_diagnosis=Tri.YES,
+           monitors_disease_state=Tri.YES,
+           monitoring_danger=MonitoringDanger.IMMEDIATE,
+           public_health_risk=PublicHealthRisk.LOW))
 
 add("emg_dystrophy_monitoring", "Class IIa", "4.6(b)", ACTIVE,
     "Paired with the SPECT fixture. Same rule, lower danger, lower class.",
@@ -551,13 +590,10 @@ add("emg_dystrophy_monitoring", "Class IIa", "4.6(b)", ACTIVE,
            "Receives electromyography data by Bluetooth to monitor muscle fibre "
            "response in a person with muscular dystrophy.",
            status=PROCESSES_DEVICE_DATA,
-           software=Tri.YES, active_type=ActiveType.DIAGNOSTIC,
-           clinical_function=ClinicalFunction.MONITOR,
-           decision_maker=DecisionMaker.INFORMS_PROFESSIONAL,
-           condition_severity=Severity.MODERATE,
-           public_health_risk=PublicHealthRisk.LOW,
-           delivers_hazardous_energy=Tri.NO, delivers_ionising_radiation=Tri.NO,
-           records_diagnostic_images=Tri.NO))
+           software=Tri.YES, active_for_diagnosis=Tri.YES,
+           monitors_disease_state=Tri.YES,
+           monitoring_danger=MonitoringDanger.OTHER,
+           public_health_risk=PublicHealthRisk.LOW))
 
 # -- Class I with regulation 3.9 qualifiers, and a reusable instrument. -----
 add("sterile_barrier_dressing", "Class I", "2.4(3)", NOT_IVD,
@@ -645,14 +681,13 @@ add("abo_reagent_red_cells", "Class 4 IVD", "1.2(2)", IHR_GUIDE,
 add("infusion_pump", "Class IIb", "4.4(2)", ACTIVE,
     "TGA's active device guidance lists infusion pumps under 4.4(2), Class IIb: "
     "administration that is potentially hazardous lifts it above the 4.4(1) "
-    "baseline. Reaches administers_or_removes_medicine, which nothing else touches.",
+    "baseline.",
     device("Volumetric infusion pump",
            "Administers medicines to a patient at a controlled rate, where the "
            "manner of administration is potentially hazardous.",
-           active_type=ActiveType.THERAPEUTIC,
-           clinical_function=ClinicalFunction.ADMINISTER_SUBSTANCE,
-           administers_or_removes_medicine=Tri.YES,
-           delivers_hazardous_energy=Tri.YES))
+           is_active_device=Tri.YES, active_for_therapy=Tri.YES,
+           administers_or_removes_substances=Tri.YES,
+           substance_administration_potentially_hazardous=Tri.YES))
 
 
 # -- Schedule 2 Part 5, clauses no other fixture reaches. -----------------
@@ -662,9 +697,8 @@ add("nebuliser", "Class IIb", "5.10(a)", NOT_IVD,
     device("Nebuliser",
            "Aerosolises a liquid medicine for the patient to inhale; failure to "
            "aerosolise the medicine would affect its efficacy.",
-           active_type=ActiveType.THERAPEUTIC,
-           clinical_function=ClinicalFunction.ADMINISTER_SUBSTANCE,
-           administers_or_removes_medicine=Tri.YES, delivers_hazardous_energy=Tri.NO,
+           is_active_device=Tri.YES, active_for_therapy=Tri.YES,
+           administers_or_removes_substances=Tri.YES,
            handles_substances_for_administration=Tri.YES,
            channels_or_stores_liquid_or_gas_for_administration=Tri.YES,
            connected_to_active_device=Tri.NO,
@@ -687,15 +721,13 @@ add("saline_nasal_spray", "Class IIa", "5.11(c)", NOT_IVD,
 add("virtual_anatomical_model_software", "Class IIa", "5.4(3)", NOT_IVD,
     "TGA's 5.4(3) example: software that generates a 3D anatomical virtual model "
     "from patient scans for a health professional diagnosing a stress fracture. "
-    "Its Part 4 answers are left minimal until Part 4 is written.",
+    "5.4(3) is the only rule the source names; the software's own Part 4 "
+    "questions are answered no.",
     device("Virtual anatomical model software",
            "Generates a 3D anatomical virtual model from patient scans for a health "
            "professional diagnosing a stress fracture.",
            status=PROCESSES_DEVICE_DATA,
-           software=Tri.YES, active_type=ActiveType.DIAGNOSTIC,
-           clinical_function=ClinicalFunction.NONE,
-           delivers_hazardous_energy=Tri.NO, delivers_ionising_radiation=Tri.NO,
-           records_diagnostic_images=Tri.NO,
+           software=Tri.YES, active_for_diagnosis=Tri.YES,
            records_images_or_anatomical_model=Tri.YES,
            generates_virtual_anatomical_model=Tri.YES))
 
@@ -751,27 +783,23 @@ add_multi(
         [
             fn("Study archive",
                "Stores and transmits radiology studies without interpretation.",
-               status=IMAGE_STORAGE, software=Tri.YES, active_type=ActiveType.NOT_ACTIVE),
+               status=IMAGE_STORAGE, software=Tri.YES),
             fn("Abnormality triage",
                "Flags studies showing suspected abnormality for priority review "
                "by a radiologist.",
-               status=PROCESSES_DEVICE_DATA, software=Tri.YES, active_type=ActiveType.DIAGNOSTIC,
-               clinical_function=ClinicalFunction.DIAGNOSE_OR_SCREEN,
+               status=PROCESSES_DEVICE_DATA, software=Tri.YES, active_for_diagnosis=Tri.YES,
+               diagnoses_or_screens=Tri.YES,
                decision_maker=DecisionMaker.INFORMS_PROFESSIONAL,
                condition_severity=Severity.SERIOUS,
-               public_health_risk=PublicHealthRisk.MODERATE,
-               delivers_hazardous_energy=Tri.NO, delivers_ionising_radiation=Tri.NO,
-               records_diagnostic_images=Tri.NO),
+               public_health_risk=PublicHealthRisk.MODERATE),
             fn("Follow-up interval suggestion",
                "Analyses the scan images and suggests a follow-up imaging interval "
                "to the reporting radiologist.",
-               status=PROCESSES_DEVICE_DATA, software=Tri.YES, active_type=ActiveType.DIAGNOSTIC,
-               clinical_function=ClinicalFunction.SPECIFY_THERAPY,
+               status=PROCESSES_DEVICE_DATA, software=Tri.YES,
+               specifies_or_recommends_treatment=Tri.YES,
                decision_maker=DecisionMaker.INFORMS_PROFESSIONAL,
-               condition_severity=Severity.SERIOUS,
-               public_health_risk=PublicHealthRisk.MODERATE,
-               delivers_hazardous_energy=Tri.NO, delivers_ionising_radiation=Tri.NO,
-               records_diagnostic_images=Tri.NO),
+               treatment_risk=TreatmentRisk.OTHER_HARM,
+               public_health_risk=PublicHealthRisk.LOW),
         ],
     ),
     [(None, "S1-14H", EXCLUDED),
@@ -794,22 +822,20 @@ add_multi(
         [
             fn("Activity and sleep tracking",
                "Records sleep and activity for general wellbeing.",
-               status=WELLNESS_TRACKING, software=Tri.YES, active_type=ActiveType.NOT_ACTIVE),
+               status=WELLNESS_TRACKING, software=Tri.YES),
             fn("Symptom checker",
                "Asks a consumer about symptoms and suggests whether to seek "
                "medical care.",
                status=dict(cdss_replaces_clinical_judgement=Tri.YES),
-               software=Tri.YES, active_type=ActiveType.DIAGNOSTIC,
-               clinical_function=ClinicalFunction.DIAGNOSE_OR_SCREEN,
+               software=Tri.YES, active_for_diagnosis=Tri.YES,
+               diagnoses_or_screens=Tri.YES,
                decision_maker=DecisionMaker.DEVICE_TO_LAY_USER,
-               condition_severity=Severity.MODERATE,
-               public_health_risk=PublicHealthRisk.LOW,
-               delivers_hazardous_energy=Tri.NO, delivers_ionising_radiation=Tri.NO,
-               records_diagnostic_images=Tri.NO),
+               condition_severity=Severity.OTHER,
+               public_health_risk=PublicHealthRisk.LOW),
         ],
     ),
     [(None, "S1-14B", EXCLUDED),
-     ("Class IIa", "4.5(2)")],
+     ("Class IIa", "4.5(1)(e)")],
     verified=False,
 )
 
@@ -823,8 +849,7 @@ add("wellness_sleep_tracker", None, "S1-14B", GATE_TEXT,
     "function.",
     device("Sleep and activity tracker",
            "Records sleep and activity for general wellbeing.",
-           status=WELLNESS_TRACKING, software=Tri.YES,
-           active_type=ActiveType.NOT_ACTIVE),
+           status=WELLNESS_TRACKING, software=Tri.YES),
     verified=False, status=EXCLUDED)
 
 add("anatomy_education_app", None, "no limb of s41BD reached", GATE_TEXT,
@@ -835,8 +860,7 @@ add("anatomy_education_app", None, "no limb of s41BD reached", GATE_TEXT,
     device("Anatomy teaching app",
            "Interactive 3D anatomy lessons for medical students, used for "
            "study only and never on a patient.",
-           status=NO_PURPOSE, software=Tri.YES,
-           active_type=ActiveType.NOT_ACTIVE),
+           status=NO_PURPOSE, software=Tri.YES),
     verified=False, status=NOT_A_DEVICE)
 
 add("cdss_followup_from_report_text", None, "Schedule 4 Part 2", GATE_TEXT,
@@ -851,13 +875,11 @@ add("cdss_followup_from_report_text", None, "Schedule 4 Part 2", GATE_TEXT,
            status=dict(cdss_sole_purpose_recommendation=Tri.YES,
                        cdss_processes_device_signal_or_image=Tri.NO,
                        cdss_replaces_clinical_judgement=Tri.NO),
-           software=Tri.YES, active_type=ActiveType.DIAGNOSTIC,
-           clinical_function=ClinicalFunction.SPECIFY_THERAPY,
+           software=Tri.YES,
+           specifies_or_recommends_treatment=Tri.YES,
            decision_maker=DecisionMaker.INFORMS_PROFESSIONAL,
-           condition_severity=Severity.SERIOUS,
-           public_health_risk=PublicHealthRisk.MODERATE,
-           delivers_hazardous_energy=Tri.NO, delivers_ionising_radiation=Tri.NO,
-           records_diagnostic_images=Tri.NO),
+           treatment_risk=TreatmentRisk.OTHER_HARM,
+           public_health_risk=PublicHealthRisk.LOW),
     verified=False, status=EXEMPT_CDSS)
 
 

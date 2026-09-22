@@ -8,13 +8,13 @@
       "name": "Radiotherapy after-loading control system",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class IIb",
-      "expected_rule": "4.3(3)(c)",
+      "expected_rule": "4.2(3)",
       "expected_qualifiers": []
     }
   ],
   "source": "TGA, Classifying active medical devices in Australia",
   "verified": true,
-  "note": "Controls a device that emits ionising radiation. Control inherits the risk.",
+  "note": "Class IIb either way. TGA's active device guidance lists radiotherapy after-loading control systems under 4.3(3)(c), but clause 4.3 applies only to an active medical device for diagnosis (4.3(1)). The same guidance puts radioactive sources for after-loading therapy under 4.2(2), so controlling one is 4.2(3), which is what the text supports.",
   "profile": {
     "core": {
       "product_name": {
@@ -23,19 +23,19 @@
         "evidence": "Radiotherapy after-loading control system"
       },
       "intended_purpose": {
-        "value": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology.",
+        "value": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way.",
         "basis": "stated",
-        "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+        "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
       },
       "supplied_sterile": {
         "value": "no",
         "basis": "stated",
-        "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+        "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
       },
       "has_measuring_function": {
         "value": "no",
         "basis": "stated",
-        "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+        "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
       },
       "functions_confirmed": {
         "value": "yes",
@@ -51,30 +51,30 @@
           "evidence": "Radiotherapy after-loading control system"
         },
         "description": {
-          "value": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology.",
+          "value": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way.",
           "basis": "stated",
-          "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+          "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
         },
         "kind": {
           "value": "general_device",
           "basis": "stated",
-          "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+          "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
         },
         "is_software": {
           "value": "no",
           "basis": "stated",
-          "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+          "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
         },
         "status": {
           "therapeutic_purpose": {
             "value": "diagnosis_prevention_monitoring_prediction_treatment_of_disease",
             "basis": "stated",
-            "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+            "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
           },
           "principal_action_pharmacological": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+            "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
           },
           "is_accessory_to_device": {
             "value": null,
@@ -84,7 +84,7 @@
           "excluded_item": {
             "value": "none",
             "basis": "stated",
-            "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+            "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
           },
           "exclusion_conditions_met": {
             "value": null,
@@ -111,7 +111,7 @@
           "invasiveness": {
             "value": "non_invasive",
             "basis": "stated",
-            "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+            "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
           },
           "duration": {
             "value": null,
@@ -126,7 +126,7 @@
           "handles_substances_for_administration": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+            "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
           },
           "channels_or_stores_blood_for_administration": {
             "value": null,
@@ -166,7 +166,7 @@
           "contacts_injured_skin_or_mucous_membrane": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+            "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
           },
           "barrier_compression_or_absorption": {
             "value": null,
@@ -204,9 +204,9 @@
             "evidence": null
           },
           "delivers_ionising_radiation": {
-            "value": "yes",
-            "basis": "stated",
-            "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "has_biological_effect": {
             "value": null,
@@ -248,27 +248,107 @@
             "basis": "unknown",
             "evidence": null
           },
-          "active_type": {
-            "value": "active_diagnostic",
+          "is_active_device": {
+            "value": "yes",
             "basis": "stated",
-            "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+            "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
+          },
+          "is_programmed_or_programmable": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
           },
           "is_active_implantable": {
             "value": null,
             "basis": "unknown",
             "evidence": null
           },
-          "clinical_function": {
-            "value": "control_or_monitor_another_active_device",
-            "basis": "stated",
-            "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
-          },
-          "delivers_hazardous_energy": {
+          "active_for_therapy": {
             "value": "yes",
             "basis": "stated",
-            "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+            "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
           },
-          "administers_or_removes_medicine": {
+          "administers_or_exchanges_energy": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
+          },
+          "delivers_hazardous_energy": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "controls_hazardous_therapy_device": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
+          },
+          "diagnostic_function_determines_patient_management": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
+          },
+          "active_for_diagnosis": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
+          },
+          "supplies_absorbed_energy_for_diagnosis": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "images_radiopharmaceutical_distribution": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "diagnoses_or_monitors_vital_processes": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "monitors_vital_parameters_immediate_danger": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "emits_ionising_radiation_for_interventional_radiology": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "controls_interventional_radiology_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "administers_or_removes_substances": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
+          },
+          "substance_administration_potentially_hazardous": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "diagnoses_or_screens": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "monitors_disease_state": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "specifies_or_recommends_treatment": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "provides_therapy_through_information": {
             "value": null,
             "basis": "unknown",
             "evidence": null
@@ -288,45 +368,55 @@
             "basis": "unknown",
             "evidence": null
           },
-          "records_diagnostic_images": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+          "monitoring_danger": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "treatment_risk": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "information_therapy_harm": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "is_export_only": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+            "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
           },
           "incorporates_medicine": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+            "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
           },
           "human_blood_derivative": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+            "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
           },
           "contraceptive_or_sti_prevention": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+            "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
           },
           "cares_for_contact_lenses": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+            "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
           },
           "disinfects_another_device": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+            "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
           },
           "records_images_or_anatomical_model": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+            "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
           },
           "records_patient_images_outside_visible_spectrum": {
             "value": null,
@@ -346,7 +436,7 @@
           "contains_non_viable_animal_material": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+            "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
           },
           "contacts_intact_skin_only": {
             "value": null,
@@ -356,7 +446,7 @@
           "is_blood_bag": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+            "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
           },
           "implantable_accessory_to_active_implantable": {
             "value": null,
@@ -366,7 +456,7 @@
           "controls_active_implantable": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+            "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
           },
           "is_mammary_implant": {
             "value": null,
@@ -376,7 +466,7 @@
           "administers_by_inhalation": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+            "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
           },
           "inhalation_mode_of_action_essential": {
             "value": null,
@@ -391,7 +481,7 @@
           "is_substance_through_orifice_or_skin": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology."
+            "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
           },
           "substance_acts_in_nose_mouth_or_on_skin": {
             "value": null,
@@ -403,7 +493,7 @@
       }
     ],
     "funding": null,
-    "source_text": "Radiotherapy after-loading control system Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology. Radiotherapy after-loading control system Controls and monitors the performance of a device emitting ionising radiation for therapeutic interventional radiology. fixture decomposition is fixed by hand",
-    "schema_version": "0.9"
+    "source_text": "Radiotherapy after-loading control system Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way. Radiotherapy after-loading control system Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way. fixture decomposition is fixed by hand",
+    "schema_version": "0.10"
   }
 }

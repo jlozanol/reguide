@@ -11,10 +11,19 @@ from pathlib import Path
 import pytest
 
 from reguide import scoring as SC
-from reguide.profile import DeviceKind
+from reguide.profile import Answer, DeviceKind, DeviceProfile
 from reguide.rules import engine as E
 
 FIXTURES = Path(__file__).resolve().parent / "fixtures"
+
+
+def refused() -> dict:
+    """The MRI fixture with one Part 4 answer blanked, so the engine refuses."""
+    data = fixture("mri_equipment")
+    profile = DeviceProfile.model_validate(data["profile"])
+    profile.functions[0].general.supplies_absorbed_energy_for_diagnosis = Answer()
+    data["profile"] = json.loads(profile.model_dump_json())
+    return data
 
 
 def fixture(slug: str) -> dict:
@@ -73,9 +82,9 @@ class TestVerdicts:
         assert row.got_class is None
 
     def test_no_result_names_what_stopped_it(self):
-        [row] = SC.score_fixture("mri_equipment", fixture("mri_equipment"))
+        [row] = SC.score_fixture("mri_equipment", refused())
         assert row.verdict == SC.NO_RESULT
-        assert row.detail == "s2-4.1 (not implemented: Part 4, clauses 4.1 to 4.8)"
+        assert row.detail == "general.supplies_absorbed_energy_for_diagnosis"
 
     def test_an_excluded_function_agrees_without_being_classified(self, monkeypatch):
         seen = []
@@ -147,7 +156,7 @@ class TestScore:
     def test_misses_are_ordered_worst_first(self):
         wrong = copy.deepcopy(fixture("culture_media"))
         wrong["functions"][0]["expected_class"] = "Class 4 IVD"
-        rows = (SC.score_fixture("b_refused", fixture("mri_equipment"))
+        rows = (SC.score_fixture("b_refused", refused())
                 + SC.score_fixture("a_wrong", wrong))
         assert [r.verdict for r in SC.Score(rows).misses] == [SC.WRONG_CLASS, SC.NO_RESULT]
 
@@ -158,7 +167,7 @@ class TestScore:
 class TestReport:
     def test_headline_and_table(self):
         rows = (SC.score_fixture("culture_media", fixture("culture_media"))
-                + SC.score_fixture("mri_equipment", fixture("mri_equipment")))
+                + SC.score_fixture("mri_equipment", refused()))
         text = SC.report(SC.Score(rows))
         assert text.startswith("Agreement: 1/2 fixtures (50%), 1/2 functions\n")
         assert "Misses: 1 no result" in text

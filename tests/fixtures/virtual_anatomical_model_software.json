@@ -14,7 +14,7 @@
   ],
   "source": "TGA, Classifying medical devices that are not IVDs",
   "verified": true,
-  "note": "TGA's 5.4(3) example: software that generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture. Its Part 4 answers are left minimal until Part 4 is written.",
+  "note": "TGA's 5.4(3) example: software that generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture. 5.4(3) is the only rule the source names; the software's own Part 4 questions are answered no.",
   "profile": {
     "core": {
       "product_name": {
@@ -204,9 +204,9 @@
             "evidence": null
           },
           "delivers_ionising_radiation": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "has_biological_effect": {
             "value": null,
@@ -248,30 +248,110 @@
             "basis": "unknown",
             "evidence": null
           },
-          "active_type": {
-            "value": "active_diagnostic",
-            "basis": "stated",
-            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
+          "is_active_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_programmed_or_programmable": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "is_active_implantable": {
             "value": null,
             "basis": "unknown",
             "evidence": null
           },
-          "clinical_function": {
-            "value": "none",
-            "basis": "stated",
-            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
-          },
-          "delivers_hazardous_energy": {
+          "active_for_therapy": {
             "value": "no",
             "basis": "stated",
             "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
           },
-          "administers_or_removes_medicine": {
+          "administers_or_exchanges_energy": {
             "value": null,
             "basis": "unknown",
             "evidence": null
+          },
+          "delivers_hazardous_energy": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "controls_hazardous_therapy_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "diagnostic_function_determines_patient_management": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "active_for_diagnosis": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
+          },
+          "supplies_absorbed_energy_for_diagnosis": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
+          },
+          "images_radiopharmaceutical_distribution": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
+          },
+          "diagnoses_or_monitors_vital_processes": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
+          },
+          "monitors_vital_parameters_immediate_danger": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
+          },
+          "emits_ionising_radiation_for_interventional_radiology": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
+          },
+          "controls_interventional_radiology_device": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
+          },
+          "administers_or_removes_substances": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
+          },
+          "substance_administration_potentially_hazardous": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "diagnoses_or_screens": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
+          },
+          "monitors_disease_state": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
+          },
+          "specifies_or_recommends_treatment": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
+          },
+          "provides_therapy_through_information": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
           },
           "decision_maker": {
             "value": null,
@@ -288,10 +368,20 @@
             "basis": "unknown",
             "evidence": null
           },
-          "records_diagnostic_images": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
+          "monitoring_danger": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "treatment_risk": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "information_therapy_harm": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "is_export_only": {
             "value": "no",
@@ -404,6 +494,6 @@
     ],
     "funding": null,
     "source_text": "Virtual anatomical model software Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture. Virtual anatomical model software Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture. fixture decomposition is fixed by hand",
-    "schema_version": "0.9"
+    "schema_version": "0.10"
   }
 }
