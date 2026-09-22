@@ -494,6 +494,6 @@
     ],
     "funding": null,
     "source_text": "Nebuliser Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy. Nebuliser Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy. fixture decomposition is fixed by hand",
-    "schema_version": "0.10"
+    "schema_version": "0.11"
   }
 }

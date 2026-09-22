@@ -74,6 +74,14 @@ software always is, and is always active (dictionary). 4.6, 4.7 and 4.8
 each grade on their own scale, so each has its own level question;
 condition_severity keeps the 4.5 scale only and loses its "moderate" value,
 which no clause uses.
+
+Version 0.11 adds the Schedule 2A fallback question for clause 1.6(1):
+whether the IVD is an ancillary reagent or article used in a specific
+examination (a buffer, a wash solution, a general reagent) rather than the
+test itself. Read literally, 1.6(1) would catch almost every test kit and
+leave clause 1.7 nearly empty; it is read the way the international model
+the rules came from reads it (IMDRF/GHTF rule 5: wash solutions, general
+culture media, plain urine cups).
 """
 
 from enum import Enum
@@ -432,6 +440,11 @@ class IvdProfile(BaseModel):
     is_quality_control_material: Answer[Tri] = Answer()      # clause 1.5
     is_export_only: Answer[Tri] = Answer()                   # clause 1.8
 
+    # Clause 1.6(1), read narrowly: an ancillary reagent or article used in a
+    # specific examination (buffer, wash solution, general reagent), not the
+    # test itself. Asked on the ordinary route with the other 1.3 questions.
+    is_ancillary_reagent_or_article: Answer[Tri] = Answer()  # clause 1.6(1)
+
 
 class FundingProfile(BaseModel):
     """Inputs to reimbursement triage. Product level, not per function."""
@@ -783,6 +796,7 @@ IVD_GENERAL_FIELDS = [
     "is_human_genetic_test",
     "monitors_levels_error_life_threatening",
     "screens_foetus_for_congenital_disorders",
+    "is_ancillary_reagent_or_article",
 ]
 IVD_SELF_TEST_FIELDS = [
     "result_not_determining_serious_condition",
@@ -884,7 +898,7 @@ class DeviceProfile(BaseModel):
     funding: FundingProfile | None = None
 
     source_text: str = ""
-    schema_version: Literal["0.10"] = "0.10"
+    schema_version: Literal["0.11"] = "0.11"
 
     @property
     def single_function(self) -> bool:

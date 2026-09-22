@@ -492,6 +492,6 @@
     ],
     "funding": null,
     "source_text": "Anatomy teaching app Interactive 3D anatomy lessons for medical students, used for study only and never on a patient. Anatomy teaching app Interactive 3D anatomy lessons for medical students, used for study only and never on a patient. fixture decomposition is fixed by hand",
-    "schema_version": "0.10"
+    "schema_version": "0.11"
   }
 }

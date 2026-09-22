@@ -15,7 +15,9 @@ follows the Regulations:
 A rule whose inputs are unresolved, or that is not written yet, returns a
 Pending. A Pending blocks the result unless a hit displaces its clause,
 because a rule nobody could evaluate might have applied. A partial answer here
-is worse than no answer.
+is worse than no answer. The one relief is a Pending that carries a ceiling:
+a rule with no "despite" can only change the result by outranking it, so once
+a live hit is at or above its ceiling it no longer blocks.
 
 Rule functions never call a model and never read free text. They read
 resolved profile fields and nothing else.
@@ -48,6 +50,10 @@ class Pending:
     citation: str
     reason: str                       # plain words for the report
     fields: tuple[str, ...] = ()      # unresolved inputs, e.g. "ivd.is_self_test"
+    # The highest class the rule could give, for a rule with no "despite".
+    # Such a rule can only change the result by outranking it, so it stops
+    # blocking once a live hit is already at or above its ceiling.
+    ceiling: str | None = None
 
 
 @dataclass(frozen=True)
@@ -118,6 +124,10 @@ def resolve(outcomes: list[Outcome], order: list[str]) -> Classification:
     set_aside = {c for h in hits for c in h.displaces}
     live = [h for h in hits if clause_of(h.rule_id) not in set_aside]
     blocking = [p for p in pending if clause_of(p.rule_id) not in set_aside]
+    if live:
+        best = max((h.result for h in live), key=order.index)
+        blocking = [p for p in blocking
+                    if p.ceiling is None or order.index(p.ceiling) > order.index(best)]
 
     unresolved = []
     for p in blocking:

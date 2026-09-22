@@ -243,12 +243,17 @@
             "value": "no",
             "basis": "stated",
             "evidence": "Prepared culture medium for microbiological laboratory use."
+          },
+          "is_ancillary_reagent_or_article": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           }
         }
       }
     ],
     "funding": null,
     "source_text": "Microbiological culture medium Prepared culture medium for microbiological laboratory use. Microbiological culture medium Prepared culture medium for microbiological laboratory use. fixture decomposition is fixed by hand",
-    "schema_version": "0.10"
+    "schema_version": "0.11"
   }
 }

@@ -1,41 +1,41 @@
 {
   "expected_status": "regulated_medical_device",
   "expected_classes": {
-    "ivd": "Class 4 IVD"
+    "ivd": "Class 1 IVD"
   },
   "functions": [
     {
-      "name": "Reagent red blood cells for ABO reverse grouping",
+      "name": "Assay wash solution",
       "expected_status": "regulated_medical_device",
-      "expected_class": "Class 4 IVD",
-      "expected_rule": "1.2(2)",
+      "expected_class": "Class 1 IVD",
+      "expected_rule": "1.6(1)",
       "expected_qualifiers": []
     }
   ],
-  "source": "TGA, Completing Conformity Assessment for immunohaematology reagents (IHRs)",
-  "verified": true,
-  "note": "TGA's worked example: reagent red cells for ABO reverse grouping are Class 4 under 1.2(2). Used in pretransfusion testing, so 1.2(1) is met too, but its paragraph (b) excludes a device mentioned in 1.2(2).",
+  "source": "IMDRF/IVD WG/N64FINAL:2021 (formerly GHTF/SG1/N045:2008), Principles of IVD medical devices classification, rule 5 examples",
+  "verified": false,
+  "note": "The international model the Schedule 2A rules come from gives wash solutions as an example of its rule 5, which clause 1.6(1) follows: an ancillary reagent used in a specific examination. Not an Australian source, so unverified.",
   "profile": {
     "core": {
       "product_name": {
-        "value": "Reagent red blood cells for ABO reverse grouping",
+        "value": "Assay wash solution",
         "basis": "stated",
-        "evidence": "Reagent red blood cells for ABO reverse grouping"
+        "evidence": "Assay wash solution"
       },
       "intended_purpose": {
-        "value": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing.",
+        "value": "Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself.",
         "basis": "stated",
-        "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
+        "evidence": "Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself."
       },
       "supplied_sterile": {
         "value": "no",
         "basis": "stated",
-        "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
+        "evidence": "Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself."
       },
       "has_measuring_function": {
         "value": "no",
         "basis": "stated",
-        "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
+        "evidence": "Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself."
       },
       "functions_confirmed": {
         "value": "yes",
@@ -46,35 +46,35 @@
     "functions": [
       {
         "name": {
-          "value": "Reagent red blood cells for ABO reverse grouping",
+          "value": "Assay wash solution",
           "basis": "stated",
-          "evidence": "Reagent red blood cells for ABO reverse grouping"
+          "evidence": "Assay wash solution"
         },
         "description": {
-          "value": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing.",
+          "value": "Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself.",
           "basis": "stated",
-          "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
+          "evidence": "Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself."
         },
         "kind": {
           "value": "ivd",
           "basis": "stated",
-          "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
+          "evidence": "Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself."
         },
         "is_software": {
           "value": "no",
           "basis": "stated",
-          "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
+          "evidence": "Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself."
         },
         "status": {
           "therapeutic_purpose": {
             "value": "in_vitro_examination_of_specimen_for_medical_purpose",
             "basis": "stated",
-            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
+            "evidence": "Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself."
           },
           "principal_action_pharmacological": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
+            "evidence": "Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself."
           },
           "is_accessory_to_device": {
             "value": null,
@@ -84,7 +84,7 @@
           "excluded_item": {
             "value": "none",
             "basis": "stated",
-            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
+            "evidence": "Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself."
           },
           "exclusion_conditions_met": {
             "value": null,
@@ -112,17 +112,17 @@
           "detects_infectious_agent": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
+            "evidence": "Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself."
           },
           "types_blood_or_tissue": {
-            "value": "yes",
+            "value": "no",
             "basis": "stated",
-            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
+            "evidence": "Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself."
           },
           "is_self_test": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
+            "evidence": "Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself."
           },
           "screens_donations_for_transmissible_agents": {
             "value": null,
@@ -135,14 +135,14 @@
             "evidence": null
           },
           "assesses_transfusion_or_transplant_compatibility": {
-            "value": "yes",
-            "basis": "stated",
-            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "detects_listed_blood_group_marker": {
-            "value": "yes",
-            "basis": "stated",
-            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "detects_sexually_transmitted_agent": {
             "value": null,
@@ -177,37 +177,37 @@
           "selects_patients_for_therapy": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
+            "evidence": "Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself."
           },
           "selects_patients_for_disease_staging": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
+            "evidence": "Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself."
           },
           "selects_patients_in_cancer_diagnosis": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
+            "evidence": "Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself."
           },
           "is_companion_diagnostic": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
+            "evidence": "Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself."
           },
           "is_human_genetic_test": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
+            "evidence": "Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself."
           },
           "monitors_levels_error_life_threatening": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
+            "evidence": "Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself."
           },
           "screens_foetus_for_congenital_disorders": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
+            "evidence": "Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself."
           },
           "result_not_determining_serious_condition": {
             "value": null,
@@ -222,38 +222,38 @@
           "is_ivd_instrument": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
+            "evidence": "Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself."
           },
           "is_specimen_receptacle": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
+            "evidence": "Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself."
           },
           "is_culture_medium": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
+            "evidence": "Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself."
           },
           "is_quality_control_material": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
+            "evidence": "Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself."
           },
           "is_export_only": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
+            "evidence": "Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself."
           },
           "is_ancillary_reagent_or_article": {
-            "value": "no",
+            "value": "yes",
             "basis": "stated",
-            "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
+            "evidence": "Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself."
           }
         }
       }
     ],
     "funding": null,
-    "source_text": "Reagent red blood cells for ABO reverse grouping Kit of red blood cells for performing ABO reverse groups in pretransfusion testing. Reagent red blood cells for ABO reverse grouping Kit of red blood cells for performing ABO reverse groups in pretransfusion testing. fixture decomposition is fixed by hand",
+    "source_text": "Assay wash solution Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself. Assay wash solution Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself. fixture decomposition is fixed by hand",
     "schema_version": "0.11"
   }
 }

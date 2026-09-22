@@ -51,6 +51,8 @@ NOT_IVD = "TGA, Classifying medical devices that are not IVDs"
 ACTIVE = "TGA, Classifying active medical devices in Australia"
 IVD_GUIDE = "TGA, Classifying IVDs for supply in Australia"
 RULE_TEXT = "Reasoned from Schedule 2 rule text, not a worked example"
+IMDRF_IVD = ("IMDRF/IVD WG/N64FINAL:2021 (formerly GHTF/SG1/N045:2008), "
+             "Principles of IVD medical devices classification, rule 5 examples")
 IHR_GUIDE = "TGA, Completing Conformity Assessment for immunohaematology reagents (IHRs)"
 THERMOMETERS = ("TGA, Regulation of thermometers and other temperature measuring medical "
                 "devices and products for COVID-19")
@@ -164,6 +166,7 @@ IVD_DEFAULTS = dict(
     screens_foetus_for_congenital_disorders=Tri.NO,
     result_not_determining_serious_condition=Tri.NO,
     preliminary_with_follow_up_testing=Tri.NO,
+    is_ancillary_reagent_or_article=Tri.NO,
 )
 
 
@@ -665,6 +668,27 @@ add("chlamydia_test", "Class 3 IVD", "1.3(a)", IVD_GUIDE,
     ivd("Chlamydia trachomatis assay",
         "Detects Chlamydia trachomatis in a clinical specimen for diagnosis.",
         detects_infectious_agent=Tri.YES, detects_sexually_transmitted_agent=Tri.YES))
+
+add("pregnancy_self_test", "Class 2 IVD", "1.7", IVD_GUIDE,
+    "TGA: pregnancy and fertility self-testing kits are Class 2 IVDs, because "
+    "the result does not determine a serious condition. That is exception "
+    "(a) to clause 1.4, so no clause of Schedule 2A mentions the device and "
+    "1.7 gives Class 2. Exercises the fallback.",
+    ivd("Pregnancy self-test",
+        "Self-test for pregnancy used by a lay person at home; the result does "
+        "not determine a serious condition.",
+        is_self_test=Tri.YES, result_not_determining_serious_condition=Tri.YES))
+
+add("wash_solution", "Class 1 IVD", "1.6(1)", IMDRF_IVD,
+    "The international model the Schedule 2A rules come from gives wash "
+    "solutions as an example of its rule 5, which clause 1.6(1) follows: an "
+    "ancillary reagent used in a specific examination. Not an Australian "
+    "source, so unverified.",
+    ivd("Assay wash solution",
+        "Wash solution with specific characteristics for use in a specific "
+        "immunoassay examination; an ancillary reagent, not the test itself.",
+        is_ancillary_reagent_or_article=Tri.YES),
+    verified=False)
 
 add("abo_reagent_red_cells", "Class 4 IVD", "1.2(2)", IHR_GUIDE,
     "TGA's worked example: reagent red cells for ABO reverse grouping are Class 4 "

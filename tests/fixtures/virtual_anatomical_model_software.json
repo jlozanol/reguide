@@ -494,6 +494,6 @@
     ],
     "funding": null,
     "source_text": "Virtual anatomical model software Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture. Virtual anatomical model software Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture. fixture decomposition is fixed by hand",
-    "schema_version": "0.10"
+    "schema_version": "0.11"
   }
 }

@@ -494,6 +494,6 @@
     ],
     "funding": null,
     "source_text": "Consumer melanoma screening app Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer. Consumer melanoma screening app Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer. fixture decomposition is fixed by hand",
-    "schema_version": "0.10"
+    "schema_version": "0.11"
   }
 }

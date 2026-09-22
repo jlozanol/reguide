@@ -258,6 +258,11 @@
             "value": "no",
             "basis": "stated",
             "evidence": "Instrument that reads prothrombin time test strips."
+          },
+          "is_ancillary_reagent_or_article": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           }
         }
       },
@@ -457,6 +462,11 @@
             "evidence": "Test strips for prothrombin time self-testing by a lay person."
           },
           "is_export_only": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Test strips for prothrombin time self-testing by a lay person."
+          },
+          "is_ancillary_reagent_or_article": {
             "value": "no",
             "basis": "stated",
             "evidence": "Test strips for prothrombin time self-testing by a lay person."
@@ -913,6 +923,6 @@
     ],
     "funding": null,
     "source_text": "Prothrombin time self-testing pack Procedure pack for prothrombin time self-testing at home, containing a portable meter, test strips and a lancet. Portable prothrombin time meter Instrument that reads prothrombin time test strips. Prothrombin time test strips Test strips for prothrombin time self-testing by a lay person. Lancet Single-use lancet for obtaining a capillary blood specimen. fixture decomposition is fixed by hand",
-    "schema_version": "0.10"
+    "schema_version": "0.11"
   }
 }

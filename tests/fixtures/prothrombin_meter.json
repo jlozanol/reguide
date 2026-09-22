@@ -243,12 +243,17 @@
             "value": "no",
             "basis": "stated",
             "evidence": "Instrument that reads prothrombin time test strips."
+          },
+          "is_ancillary_reagent_or_article": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           }
         }
       }
     ],
     "funding": null,
     "source_text": "Portable prothrombin time meter Instrument that reads prothrombin time test strips. Portable prothrombin time meter Instrument that reads prothrombin time test strips. fixture decomposition is fixed by hand",
-    "schema_version": "0.10"
+    "schema_version": "0.11"
   }
 }

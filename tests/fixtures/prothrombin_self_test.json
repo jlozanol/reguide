@@ -243,12 +243,17 @@
             "value": "no",
             "basis": "stated",
             "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
+          },
+          "is_ancillary_reagent_or_article": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
           }
         }
       }
     ],
     "funding": null,
     "source_text": "Prothrombin time self-test strips Test strips for prothrombin time self-testing by a lay person at home. Prothrombin time self-test strips Test strips for prothrombin time self-testing by a lay person at home. fixture decomposition is fixed by hand",
-    "schema_version": "0.10"
+    "schema_version": "0.11"
   }
 }

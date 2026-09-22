@@ -17,9 +17,15 @@ Clauses 1.5, 1.6(2) and 1.8 each open "Despite clauses ...", so each
 displaces the clauses it names even though it gives a lower class (see
 engine.py).
 
-Not written yet: the fallback, 1.6(1) with 1.7, which applies only when no
-other clause does. It returns a Pending that blocks the result, so a device
-no clause reaches gets no class rather than a guessed Class 2.
+The fallback is written. Clause 1.6(1) is read narrowly, as the
+international model the rules came from reads it (IMDRF/GHTF rule 5): an
+ancillary reagent or article used in a specific examination, such as a
+buffer, a wash solution or a general reagent, not the test itself. Read
+literally it would catch almost every test kit and leave 1.7 nearly empty.
+1.6(1) has no "despite", so any other clause that applies outranks it.
+Clause 1.7 applies to a device "not mentioned in this Schedule": it fires
+only when no other clause hits and nothing is left unanswered. Either way an
+amber flag asks a person to confirm the reading.
 
 Classes are reported as "Class N IVD". Clauses 1.1 to 1.3 and 1.5 to 1.7 also
 name the in-house equivalent; 1.4 and 1.8 do not. The profile has no
@@ -460,6 +466,58 @@ def rule_1_8(ivd: IvdProfile):
 # Evaluation
 # --------------------------------------------------------------------------
 
+def rule_1_6_1(ivd: IvdProfile):
+    """Schedule 2A clause 1.6(1).
+
+    (1) A reagent or other article that possesses specific characteristics,
+    intended by the manufacturer, to make it suitable for in vitro diagnostic
+    procedures related to a specific examination is classified as a Class 1
+    IVD medical device or a Class 1 in-house IVD medical device.
+    """
+    rule_id = f"{PREFIX}-1.6(1)"
+    value = _lookup(ivd, "is_ancillary_reagent_or_article", rule_id, "1.6(1)")
+    if isinstance(value, Pending):
+        # No "despite" and the lowest class: it can never outrank another hit.
+        return replace(value, ceiling="Class 1 IVD")
+    if value is not Tri.YES:
+        return None
+    return RuleHit(rule_id, cite("1.6(1)"), "Class 1 IVD",
+                   _because(ivd, "is_ancillary_reagent_or_article"))
+
+
+def rule_1_7(ivd: IvdProfile):
+    """Schedule 2A clause 1.7.
+
+    An IVD medical device not mentioned in this Schedule is classified as a
+    Class 2 IVD medical device or a Class 2 in-house IVD medical device.
+    """
+    return RuleHit(f"{PREFIX}-1.7", cite("1.7"), "Class 2 IVD",
+                   "no other clause of Schedule 2A applies; "
+                   + _because(ivd, "is_ancillary_reagent_or_article"))
+
+
+FALLBACK_READING = Flag(
+    severity=Severity.AMBER,
+    code="s2a_fallback_reading",
+    message=(
+        "Classified under the Schedule 2A fallback (clause 1.6(1) or 1.7). "
+        "Clause 1.6(1) has been read as covering ancillary reagents and "
+        "articles used in a specific examination (buffers, wash solutions, "
+        "general reagents), not the test itself; read literally it would make "
+        "almost every test Class 1. Confirm that reading before relying on "
+        "the class."
+    ),
+)
+
+
+def _fallback_flag(result: Classification) -> list[Flag]:
+    governing = result.governing
+    fallback = {f"{PREFIX}-1.6(1)", f"{PREFIX}-1.7"}
+    if governing and all(h.rule_id in fallback for h in governing):
+        return [FALLBACK_READING]
+    return []
+
+
 ALL_RULES = [
     rule_1_1_a,
     rule_1_1_b,
@@ -483,17 +541,9 @@ ALL_RULES = [
     rule_1_6_2_a,
     rule_1_6_2_b,
     rule_1_6_2_c,
+    rule_1_6_1,
     rule_1_8,
 ]
-
-
-def fallback(ivd: IvdProfile):
-    """Clauses 1.6(1) and 1.7, which apply only when no other clause does.
-
-    Not implemented. Whether 1.6(1) catches the assay itself or only general
-    purpose reagents used in one is a judgement still to make.
-    """
-    return Pending(f"{PREFIX}-1.7", cite("1.6(1) and 1.7"), "not implemented")
 
 
 NOTE_1_3_F = Flag(
@@ -527,10 +577,10 @@ def _note_to_1_3_f(ivd: IvdProfile, result: Classification) -> list[Flag]:
 def evaluate(ivd: IvdProfile) -> Classification:
     outcomes = [rule(ivd) for rule in ALL_RULES]
     result = resolve(outcomes, IVD_ORDER)
-    if result.result is None and not any(
-        h.rule_id not in result.displaced for h in result.hits
-    ):
-        outcomes.append(fallback(ivd))
+    live = [h for h in result.hits if h.rule_id not in result.displaced]
+    if not live and not result.unresolved:
+        # "Not mentioned in this Schedule": every other clause answered, none hit.
+        outcomes.append(rule_1_7(ivd))
         result = resolve(outcomes, IVD_ORDER)
-    result.flags = _note_to_1_3_f(ivd, result)
+    result.flags = _note_to_1_3_f(ivd, result) + _fallback_flag(result)
     return result

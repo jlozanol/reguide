@@ -183,11 +183,11 @@ class TestBlocking:
         assert outcome.confident
         assert outcome.result == "Class 1 IVD"
 
-    def test_the_unwritten_fallback_blocks_when_no_clause_applies(self):
-        """1.6(1) and 1.7 are not written, so no clause means no class."""
-        outcome = S2A.evaluate(ivd())
+    def test_an_unanswered_ancillary_question_keeps_1_7_waiting(self):
+        """1.7 needs every other clause answered, 1.6(1) included."""
+        outcome = S2A.evaluate(ivd(is_ancillary_reagent_or_article=Answer()))
         assert outcome.result is None
-        assert outcome.unresolved == ["s2a-1.7 (not implemented)"]
+        assert outcome.unresolved == ["ivd.is_ancillary_reagent_or_article"]
 
     def test_an_unanswered_gate_blocks_its_paragraphs(self):
         outcome = S2A.evaluate(ivd(detects_infectious_agent=Answer()))
@@ -314,11 +314,12 @@ class TestClause14:
     def test_either_exception_takes_it_out(self, exception):
         assert S2A.rule_1_4(ivd(is_self_test=Tri.YES, **{exception: Tri.YES})) is None
 
-    def test_an_excepted_self_test_gets_no_class_until_1_7_is_written(self):
+    def test_an_excepted_self_test_falls_to_1_7(self):
+        """A pregnancy self-test: 1.4(a) applies, nothing else mentions it."""
         outcome = S2A.evaluate(ivd(is_self_test=Tri.YES,
                                    preliminary_with_follow_up_testing=Tri.YES))
-        assert outcome.result is None
-        assert outcome.unresolved == ["s2a-1.7 (not implemented)"]
+        assert outcome.result == "Class 2 IVD"
+        assert [h.rule_id for h in outcome.governing] == ["s2a-1.7"]
 
     def test_an_unanswered_exception_is_pending(self):
         pending = S2A.rule_1_4(ivd(is_self_test=Tri.YES,
@@ -389,6 +390,66 @@ class TestNoteTo13f:
 
 
 # --------------------------------------------------------------------------
+# The fallback: 1.6(1) and 1.7
+# --------------------------------------------------------------------------
+
+
+class TestFallback:
+    def test_no_clause_means_1_7_class_2_with_the_flag(self):
+        outcome = S2A.evaluate(ivd())
+        assert outcome.confident
+        assert outcome.result == "Class 2 IVD"
+        assert [h.rule_id for h in outcome.governing] == ["s2a-1.7"]
+        assert [f.code for f in outcome.flags] == ["s2a_fallback_reading"]
+
+    def test_an_ancillary_reagent_is_1_6_1_class_1_with_the_flag(self):
+        outcome = S2A.evaluate(ivd(is_ancillary_reagent_or_article=Tri.YES))
+        assert outcome.result == "Class 1 IVD"
+        assert [h.rule_id for h in outcome.governing] == ["s2a-1.6(1)"]
+        assert "s2a-1.7" not in [h.rule_id for h in outcome.hits]
+        assert [f.code for f in outcome.flags] == ["s2a_fallback_reading"]
+
+    def test_1_6_1_has_no_despite_so_a_higher_clause_outranks_it(self):
+        outcome = S2A.evaluate(ivd(is_ancillary_reagent_or_article=Tri.YES,
+                                   detects_infectious_agent=Tri.YES,
+                                   detects_sexually_transmitted_agent=Tri.YES))
+        assert outcome.result == "Class 3 IVD"
+        assert outcome.flags == []
+
+    def test_1_7_never_fires_beside_another_clause(self):
+        outcome = S2A.evaluate(ivd(is_human_genetic_test=Tri.YES))
+        assert "s2a-1.7" not in [h.rule_id for h in outcome.hits]
+
+    def test_1_8_displaces_1_6_1(self):
+        outcome = S2A.evaluate(ivd(is_ancillary_reagent_or_article=Tri.YES,
+                                   is_export_only=Tri.YES))
+        assert [h.rule_id for h in outcome.governing] == ["s2a-1.8"]
+        assert outcome.displaced == ["s2a-1.6(1)"]
+        assert outcome.flags == []
+
+    def test_an_unanswered_1_6_1_cannot_block_a_higher_result(self):
+        """Its ceiling is Class 1 IVD: a live Class 2 hit can't be outranked."""
+        outcome = S2A.evaluate(ivd(is_quality_control_material=Tri.YES,
+                                   is_ancillary_reagent_or_article=Answer()))
+        assert outcome.confident
+        assert outcome.result == "Class 2 IVD"
+
+    def test_an_unanswered_1_6_1_does_not_block_an_equal_class(self):
+        outcome = S2A.evaluate(ivd(is_culture_medium=Tri.YES,
+                                   is_ancillary_reagent_or_article=Answer()))
+        assert outcome.confident
+
+
+def test_a_ceiling_only_relieves_a_pending_at_or_below_the_best_hit():
+    low = E.Pending("s2a-1.6(1)", "c", "unresolved", ("ivd.x",), ceiling="Class 1 IVD")
+    high = E.Pending("s2a-1.3(a)", "c", "unresolved", ("ivd.y",), ceiling="Class 3 IVD")
+    hit = E.RuleHit("s2a-1.5", "c", "Class 2 IVD", "b")
+    assert E.resolve([hit, low], IVD_ORDER).confident
+    assert not E.resolve([hit, high], IVD_ORDER).confident
+    assert not E.resolve([low], IVD_ORDER).confident
+
+
+# --------------------------------------------------------------------------
 # The lookup fixtures, directly
 # --------------------------------------------------------------------------
 
@@ -402,6 +463,8 @@ LOOKUP_FIXTURES = [
     ("chlamydia_test", 0),
     ("hiv_donor_screening", 0),
     ("abo_reagent_red_cells", 0),
+    ("pregnancy_self_test", 0),
+    ("wash_solution", 0),
 ]
 
 
@@ -431,7 +494,7 @@ needs_source = pytest.mark.skipif(
     not L.SOURCE.exists(), reason=f"legislation source not downloaded: {L.SOURCE.name}"
 )
 
-WRITTEN = S2A.ALL_RULES
+WRITTEN = [*S2A.ALL_RULES, S2A.rule_1_7]
 
 
 def _flatten(text: str) -> str:

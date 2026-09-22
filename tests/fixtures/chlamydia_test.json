@@ -243,12 +243,17 @@
             "value": "no",
             "basis": "stated",
             "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+          },
+          "is_ancillary_reagent_or_article": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
           }
         }
       }
     ],
     "funding": null,
     "source_text": "Chlamydia trachomatis assay Detects Chlamydia trachomatis in a clinical specimen for diagnosis. Chlamydia trachomatis assay Detects Chlamydia trachomatis in a clinical specimen for diagnosis. fixture decomposition is fixed by hand",
-    "schema_version": "0.10"
+    "schema_version": "0.11"
   }
 }

@@ -492,6 +492,6 @@
     ],
     "funding": null,
     "source_text": "Follow-up interval recommender Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides. Follow-up interval recommender Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides. fixture decomposition is fixed by hand",
-    "schema_version": "0.10"
+    "schema_version": "0.11"
   }
 }

@@ -43,6 +43,7 @@ KNOWN_AGREEING = {
     "mri_equipment",
     "nebuliser",
     "orifice_long_term",
+    "pregnancy_self_test",
     "prothrombin_meter",
     "prothrombin_self_test",
     "prothrombin_self_test_pack",
@@ -89,8 +90,8 @@ def test_known_agreeing_is_up_to_date(verified):
 
 
 def test_every_verified_fixture_is_scored(verified, everything):
-    assert len(verified.fixtures) == 38
-    assert len(everything.fixtures) == 44
+    assert len(verified.fixtures) == 39
+    assert len(everything.fixtures) == 46
 
 
 def test_unverified_fixtures_get_no_confident_wrong_class_either(everything):

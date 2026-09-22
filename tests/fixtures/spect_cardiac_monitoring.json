@@ -494,6 +494,6 @@
     ],
     "funding": null,
     "source_text": "SPECT cardiac monitoring software Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow. SPECT cardiac monitoring software Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow. fixture decomposition is fixed by hand",
-    "schema_version": "0.10"
+    "schema_version": "0.11"
   }
 }
