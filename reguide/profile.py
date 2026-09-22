@@ -44,6 +44,13 @@ wound_function fields could not record a device meeting two paragraphs, and
 had nothing for organ storage (2.2(1)(b)) or saline flushes (2.2A).
 contacts_injured_skin missed the mucous membranes 2.4(1) names, and
 breaches_dermis split the one condition in 2.4(4) across two fields.
+
+Version 0.8 covers Schedule 2 Part 5, the rules for particular kinds of
+devices, one field per paragraph gated by facts already held: software is
+never asked about materials, only implantable devices about implants, only
+active devices or software about controlling an active implantable device.
+animal_or_microbial_origin becomes contains_non_viable_animal_material,
+because since July 2024 clause 5.5 covers animal material only.
 """
 
 from enum import Enum
@@ -281,7 +288,7 @@ class GeneralDeviceProfile(BaseModel):
 
     # Active devices and software, rules 4.1 to 4.7
     active_type: Answer[ActiveType] = Answer()
-    is_active_implantable: Answer[Tri] = Answer()
+    is_active_implantable: Answer[Tri] = Answer()                           # 5.7(1)
     clinical_function: Answer[ClinicalFunction] = Answer()
     delivers_hazardous_energy: Answer[Tri] = Answer()
     administers_or_removes_medicine: Answer[Tri] = Answer()
@@ -290,13 +297,35 @@ class GeneralDeviceProfile(BaseModel):
     public_health_risk: Answer[PublicHealthRisk] = Answer()
     records_diagnostic_images: Answer[Tri] = Answer()
 
-    # Special rules, 5.x. Any of these can override everything above.
-    incorporates_medicine: Answer[Tri] = Answer()
-    animal_or_microbial_origin: Answer[Tri] = Answer()
-    human_blood_derivative: Answer[Tri] = Answer()
-    contraceptive_or_sti_prevention: Answer[Tri] = Answer()
-    disinfects_another_device: Answer[Tri] = Answer()
-
+    # Schedule 2 Part 5, particular kinds of devices. Any can outrank the
+    # clauses above; 5.8 displaces all of them. Each comment names its clause.
+    is_export_only: Answer[Tri] = Answer()                                  # 5.8
+    incorporates_medicine: Answer[Tri] = Answer()                           # 5.1(1)
+    human_blood_derivative: Answer[Tri] = Answer()                          # 5.1(3)
+    contraceptive_or_sti_prevention: Answer[Tri] = Answer()                 # 5.2
+    cares_for_contact_lenses: Answer[Tri] = Answer()                        # 5.3(1)
+    disinfects_another_device: Answer[Tri] = Answer()                       # 5.3(2)
+    # Gate: records patient images or is an anatomical model, opens 5.4.
+    records_images_or_anatomical_model: Answer[Tri] = Answer()
+    records_patient_images_outside_visible_spectrum: Answer[Tri] = Answer()  # 5.4(1)
+    is_anatomical_model_for_diagnosis: Answer[Tri] = Answer()               # 5.4(2)
+    generates_virtual_anatomical_model: Answer[Tri] = Answer()              # 5.4(3), software
+    # Non-viable animal tissue, cells or derivatives, other than hair or wool,
+    # sintered hydroxyapatite or tallow derivatives.
+    contains_non_viable_animal_material: Answer[Tri] = Answer()             # 5.5(1)
+    contacts_intact_skin_only: Answer[Tri] = Answer()                       # 5.5(2)
+    is_blood_bag: Answer[Tri] = Answer()                                    # 5.6
+    implantable_accessory_to_active_implantable: Answer[Tri] = Answer()     # 5.7(2)
+    controls_active_implantable: Answer[Tri] = Answer()                     # 5.7(3)
+    is_mammary_implant: Answer[Tri] = Answer()                              # 5.9
+    # Gate: administers medicines or biologicals by inhalation, opens 5.10.
+    administers_by_inhalation: Answer[Tri] = Answer()
+    inhalation_mode_of_action_essential: Answer[Tri] = Answer()             # 5.10(a)
+    inhalation_treats_life_threatening_condition: Answer[Tri] = Answer()    # 5.10(b)
+    # Gate: composed of substances introduced through an orifice or absorbed
+    # by the skin, opens 5.11.
+    is_substance_through_orifice_or_skin: Answer[Tri] = Answer()
+    substance_acts_in_nose_mouth_or_on_skin: Answer[Tri] = Answer()         # 5.11(c)
 
 class IvdProfile(BaseModel):
     """Inputs to the Schedule 2A rules. Each comment names the clause it feeds."""
@@ -458,12 +487,22 @@ class FunctionProfile(BaseModel):
 ALWAYS_GENERAL = [
     "invasiveness",
     "active_type",
+    "is_export_only",
     "incorporates_medicine",
     "contraceptive_or_sti_prevention",
+    "cares_for_contact_lenses",
     "disinfects_another_device",
+    "records_images_or_anatomical_model",
 ]
 
-MATERIAL_FIELDS = ["animal_or_microbial_origin", "human_blood_derivative"]
+# Asked only of a physical device, never of software alone.
+MATERIAL_FIELDS = [
+    "human_blood_derivative",
+    "contains_non_viable_animal_material",
+    "is_blood_bag",
+    "administers_by_inhalation",
+    "is_substance_through_orifice_or_skin",
+]
 
 
 def _value(answer: Answer):
@@ -545,6 +584,20 @@ def relevant_general_fields(function: "FunctionProfile") -> list[str]:
 
     if not software:
         fields += MATERIAL_FIELDS
+        if _value(general.contains_non_viable_animal_material) is Tri.YES:
+            fields += ["contacts_intact_skin_only"]
+        if _value(general.administers_by_inhalation) is Tri.YES:
+            fields += ["inhalation_mode_of_action_essential",
+                       "inhalation_treats_life_threatening_condition"]
+        if _value(general.is_substance_through_orifice_or_skin) is Tri.YES:
+            fields += ["substance_acts_in_nose_mouth_or_on_skin"]
+    if _value(general.records_images_or_anatomical_model) is Tri.YES:
+        fields += ["records_patient_images_outside_visible_spectrum",
+                   "is_anatomical_model_for_diagnosis"]
+        if software:
+            fields += ["generates_virtual_anatomical_model"]
+    if active in (ActiveType.THERAPEUTIC, ActiveType.DIAGNOSTIC) or software:
+        fields += ["controls_active_implantable"]
 
     if route is Invasiveness.NON_INVASIVE:
         fields += ["handles_substances_for_administration",
@@ -566,7 +619,8 @@ def relevant_general_fields(function: "FunctionProfile") -> list[str]:
         if _value(general.duration) is Duration.TRANSIENT:
             fields += ["reusable_surgical_instrument"]
         if route is Invasiveness.IMPLANTABLE:
-            fields += ["is_active_implantable"]
+            fields += ["is_active_implantable", "implantable_accessory_to_active_implantable",
+                       "is_mammary_implant"]
 
     if active in (ActiveType.THERAPEUTIC, ActiveType.DIAGNOSTIC):
         fields += ["clinical_function", "delivers_hazardous_energy"]
@@ -708,7 +762,7 @@ class DeviceProfile(BaseModel):
     funding: FundingProfile | None = None
 
     source_text: str = ""
-    schema_version: Literal["0.7"] = "0.7"
+    schema_version: Literal["0.8"] = "0.8"
 
     @property
     def single_function(self) -> bool:

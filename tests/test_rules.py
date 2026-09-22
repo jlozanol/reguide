@@ -24,10 +24,19 @@ KNOWN_AGREEING = {
     "abo_reagent_red_cells",
     "chlamydia_test",
     "culture_media",
+    "dressing_collagen_deep_wound",
+    "dressing_mechanical_barrier",
+    "dressing_microenvironment",
+    "dressing_secondary_intent",
+    "haemodialyser",
     "hiv_donor_screening",
+    "infusion_pump_syringe",
+    "measuring_thermometer",
     "prothrombin_meter",
     "prothrombin_self_test",
     "quality_control_material",
+    "sterile_barrier_dressing",
+    "trauma_covering_anaesthetic",
 }
 
 
@@ -58,8 +67,8 @@ def test_known_agreeing_is_up_to_date(verified):
 
 
 def test_every_verified_fixture_is_scored(verified, everything):
-    assert len(verified.fixtures) == 33
-    assert len(everything.fixtures) == 38
+    assert len(verified.fixtures) == 36
+    assert len(everything.fixtures) == 41
 
 
 def test_unverified_fixtures_get_no_confident_wrong_class_either(everything):

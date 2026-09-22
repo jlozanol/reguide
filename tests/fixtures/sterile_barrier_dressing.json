@@ -245,12 +245,12 @@
             "basis": "unknown",
             "evidence": null
           },
-          "incorporates_medicine": {
+          "is_export_only": {
             "value": "no",
             "basis": "stated",
             "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
           },
-          "animal_or_microbial_origin": {
+          "incorporates_medicine": {
             "value": "no",
             "basis": "stated",
             "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
@@ -265,10 +265,90 @@
             "basis": "stated",
             "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
           },
+          "cares_for_contact_lenses": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
+          },
           "disinfects_another_device": {
             "value": "no",
             "basis": "stated",
             "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
+          },
+          "records_images_or_anatomical_model": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
+          },
+          "records_patient_images_outside_visible_spectrum": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_anatomical_model_for_diagnosis": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "generates_virtual_anatomical_model": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contains_non_viable_animal_material": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
+          },
+          "contacts_intact_skin_only": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_blood_bag": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
+          },
+          "implantable_accessory_to_active_implantable": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "controls_active_implantable": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_mammary_implant": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "administers_by_inhalation": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
+          },
+          "inhalation_mode_of_action_essential": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "inhalation_treats_life_threatening_condition": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_substance_through_orifice_or_skin": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
+          },
+          "substance_acts_in_nose_mouth_or_on_skin": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           }
         },
         "ivd": null
@@ -276,6 +356,6 @@
     ],
     "funding": null,
     "source_text": "Sterile adhesive dressing strip Adhesive dressing strip that absorbs exudate from a wound, supplied sterile. Sterile adhesive dressing strip Adhesive dressing strip that absorbs exudate from a wound, supplied sterile. fixture decomposition is fixed by hand",
-    "schema_version": "0.7"
+    "schema_version": "0.8"
   }
 }

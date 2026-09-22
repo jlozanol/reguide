@@ -5,37 +5,37 @@
   },
   "functions": [
     {
-      "name": "Metal fixation screw, intraoperative",
+      "name": "Isotonic saline nasal spray",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class IIa",
-      "expected_rule": "3.2(2)",
+      "expected_rule": "5.11(c)",
       "expected_qualifiers": []
     }
   ],
   "source": "TGA, Classifying medical devices that are not IVDs",
   "verified": true,
-  "note": "Transient use during surgery.",
+  "note": "TGA lists isotonic saline nasal sprays under 5.11; its decision tree puts a substance introduced into the nasal cavity that achieves its purpose there at Class IIa. Saline is not a medicine, so 5.1 does not apply.",
   "profile": {
     "core": {
       "product_name": {
-        "value": "Metal fixation screw, intraoperative",
+        "value": "Isotonic saline nasal spray",
         "basis": "stated",
-        "evidence": "Metal fixation screw, intraoperative"
+        "evidence": "Isotonic saline nasal spray"
       },
       "intended_purpose": {
-        "value": "Holds bone together temporarily during surgery.",
+        "value": "Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose.",
         "basis": "stated",
-        "evidence": "Holds bone together temporarily during surgery."
+        "evidence": "Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose."
       },
       "supplied_sterile": {
-        "value": "yes",
+        "value": "no",
         "basis": "stated",
-        "evidence": "Holds bone together temporarily during surgery."
+        "evidence": "Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose."
       },
       "has_measuring_function": {
         "value": "no",
         "basis": "stated",
-        "evidence": "Holds bone together temporarily during surgery."
+        "evidence": "Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose."
       },
       "functions_confirmed": {
         "value": "yes",
@@ -46,35 +46,35 @@
     "functions": [
       {
         "name": {
-          "value": "Metal fixation screw, intraoperative",
+          "value": "Isotonic saline nasal spray",
           "basis": "stated",
-          "evidence": "Metal fixation screw, intraoperative"
+          "evidence": "Isotonic saline nasal spray"
         },
         "description": {
-          "value": "Holds bone together temporarily during surgery.",
+          "value": "Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose.",
           "basis": "stated",
-          "evidence": "Holds bone together temporarily during surgery."
+          "evidence": "Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose."
         },
         "kind": {
           "value": "general_device",
           "basis": "stated",
-          "evidence": "Holds bone together temporarily during surgery."
+          "evidence": "Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose."
         },
         "is_software": {
           "value": "no",
           "basis": "stated",
-          "evidence": "Holds bone together temporarily during surgery."
+          "evidence": "Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose."
         },
         "status": {
           "therapeutic_purpose": {
-            "value": "diagnosis_monitoring_treatment_or_compensation_for_injury",
+            "value": "diagnosis_prevention_monitoring_prediction_treatment_of_disease",
             "basis": "stated",
-            "evidence": "Holds bone together temporarily during surgery."
+            "evidence": "Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose."
           },
           "principal_action_pharmacological": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Holds bone together temporarily during surgery."
+            "evidence": "Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose."
           },
           "is_accessory_to_device": {
             "value": null,
@@ -84,7 +84,7 @@
           "excluded_item": {
             "value": "none",
             "basis": "stated",
-            "evidence": "Holds bone together temporarily during surgery."
+            "evidence": "Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose."
           },
           "exclusion_conditions_met": {
             "value": null,
@@ -109,24 +109,24 @@
         },
         "general": {
           "invasiveness": {
-            "value": "surgically_invasive",
+            "value": "invasive_body_orifice",
             "basis": "stated",
-            "evidence": "Holds bone together temporarily during surgery."
+            "evidence": "Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose."
           },
           "duration": {
             "value": "transient",
             "basis": "stated",
-            "evidence": "Holds bone together temporarily during surgery."
+            "evidence": "Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose."
           },
           "body_contact": {
-            "value": "breached_skin_or_wound",
-            "basis": "stated",
-            "evidence": "Holds bone together temporarily during surgery."
-          },
-          "orifice_site": {
             "value": null,
             "basis": "unknown",
             "evidence": null
+          },
+          "orifice_site": {
+            "value": "nasal_cavity",
+            "basis": "stated",
+            "evidence": "Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose."
           },
           "handles_substances_for_administration": {
             "value": null,
@@ -149,9 +149,9 @@
             "evidence": null
           },
           "connected_to_active_device": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose."
           },
           "saline_only_flush_or_patency": {
             "value": null,
@@ -184,14 +184,14 @@
             "evidence": null
           },
           "reusable_surgical_instrument": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Holds bone together temporarily during surgery."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "absorbed_or_chemically_changed": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Holds bone together temporarily during surgery."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "delivers_ionising_radiation": {
             "value": null,
@@ -201,7 +201,7 @@
           "active_type": {
             "value": "not_active",
             "basis": "stated",
-            "evidence": "Holds bone together temporarily during surgery."
+            "evidence": "Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose."
           },
           "is_active_implantable": {
             "value": null,
@@ -246,37 +246,37 @@
           "is_export_only": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Holds bone together temporarily during surgery."
+            "evidence": "Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose."
           },
           "incorporates_medicine": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Holds bone together temporarily during surgery."
+            "evidence": "Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose."
           },
           "human_blood_derivative": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Holds bone together temporarily during surgery."
+            "evidence": "Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose."
           },
           "contraceptive_or_sti_prevention": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Holds bone together temporarily during surgery."
+            "evidence": "Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose."
           },
           "cares_for_contact_lenses": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Holds bone together temporarily during surgery."
+            "evidence": "Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose."
           },
           "disinfects_another_device": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Holds bone together temporarily during surgery."
+            "evidence": "Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose."
           },
           "records_images_or_anatomical_model": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Holds bone together temporarily during surgery."
+            "evidence": "Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose."
           },
           "records_patient_images_outside_visible_spectrum": {
             "value": null,
@@ -296,7 +296,7 @@
           "contains_non_viable_animal_material": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Holds bone together temporarily during surgery."
+            "evidence": "Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose."
           },
           "contacts_intact_skin_only": {
             "value": null,
@@ -306,7 +306,7 @@
           "is_blood_bag": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Holds bone together temporarily during surgery."
+            "evidence": "Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose."
           },
           "implantable_accessory_to_active_implantable": {
             "value": null,
@@ -326,7 +326,7 @@
           "administers_by_inhalation": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Holds bone together temporarily during surgery."
+            "evidence": "Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose."
           },
           "inhalation_mode_of_action_essential": {
             "value": null,
@@ -339,21 +339,21 @@
             "evidence": null
           },
           "is_substance_through_orifice_or_skin": {
-            "value": "no",
+            "value": "yes",
             "basis": "stated",
-            "evidence": "Holds bone together temporarily during surgery."
+            "evidence": "Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose."
           },
           "substance_acts_in_nose_mouth_or_on_skin": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose."
           }
         },
         "ivd": null
       }
     ],
     "funding": null,
-    "source_text": "Metal fixation screw, intraoperative Holds bone together temporarily during surgery. Metal fixation screw, intraoperative Holds bone together temporarily during surgery. fixture decomposition is fixed by hand",
+    "source_text": "Isotonic saline nasal spray Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose. Isotonic saline nasal spray Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose. fixture decomposition is fixed by hand",
     "schema_version": "0.8"
   }
 }

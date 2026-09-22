@@ -1,43 +1,41 @@
 {
   "expected_status": "regulated_medical_device",
   "expected_classes": {
-    "general": "Class I"
+    "general": "Class IIb"
   },
   "functions": [
     {
-      "name": "Non-powered clinical thermometer",
+      "name": "Nebuliser",
       "expected_status": "regulated_medical_device",
-      "expected_class": "Class I",
-      "expected_rule": "2.1",
-      "expected_qualifiers": [
-        "measuring_function"
-      ]
+      "expected_class": "Class IIb",
+      "expected_rule": "5.10(a)",
+      "expected_qualifiers": []
     }
   ],
-  "source": "TGA, Regulation of thermometers and other temperature measuring medical devices and products for COVID-19",
+  "source": "TGA, Classifying medical devices that are not IVDs",
   "verified": true,
-  "note": "TGA: clinical thermometers that are not battery-powered are Class I (measuring); battery-powered digital thermometers are Class IIa. The source gives the class, not the rule: 2.1 follows from the Schedule 2 text for a non-active device on intact skin. Exercises has_measuring_function, which nothing else in the set touches.",
+  "note": "TGA gives a nebuliser as its 5.10(a) example: the device's mode of action has an essential impact on the efficacy and safety of the inhaled medicine.",
   "profile": {
     "core": {
       "product_name": {
-        "value": "Non-powered clinical thermometer",
+        "value": "Nebuliser",
         "basis": "stated",
-        "evidence": "Non-powered clinical thermometer"
+        "evidence": "Nebuliser"
       },
       "intended_purpose": {
-        "value": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin.",
+        "value": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy.",
         "basis": "stated",
-        "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+        "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
       },
       "supplied_sterile": {
         "value": "no",
         "basis": "stated",
-        "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+        "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
       },
       "has_measuring_function": {
-        "value": "yes",
+        "value": "no",
         "basis": "stated",
-        "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+        "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
       },
       "functions_confirmed": {
         "value": "yes",
@@ -48,35 +46,35 @@
     "functions": [
       {
         "name": {
-          "value": "Non-powered clinical thermometer",
+          "value": "Nebuliser",
           "basis": "stated",
-          "evidence": "Non-powered clinical thermometer"
+          "evidence": "Nebuliser"
         },
         "description": {
-          "value": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin.",
+          "value": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy.",
           "basis": "stated",
-          "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+          "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
         },
         "kind": {
           "value": "general_device",
           "basis": "stated",
-          "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+          "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
         },
         "is_software": {
           "value": "no",
           "basis": "stated",
-          "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+          "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
         },
         "status": {
           "therapeutic_purpose": {
             "value": "diagnosis_prevention_monitoring_prediction_treatment_of_disease",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
           },
           "principal_action_pharmacological": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
           },
           "is_accessory_to_device": {
             "value": null,
@@ -86,7 +84,7 @@
           "excluded_item": {
             "value": "none",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
           },
           "exclusion_conditions_met": {
             "value": null,
@@ -113,7 +111,7 @@
           "invasiveness": {
             "value": "non_invasive",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
           },
           "duration": {
             "value": null,
@@ -131,39 +129,39 @@
             "evidence": null
           },
           "handles_substances_for_administration": {
-            "value": "no",
+            "value": "yes",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
           },
           "channels_or_stores_blood_for_administration": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
           },
           "stores_organ_or_tissue_for_introduction": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
           },
           "channels_or_stores_liquid_or_gas_for_administration": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
           },
           "connected_to_active_device": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
           },
           "saline_only_flush_or_patency": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
           },
           "modifies_composition_of_blood_or_infusion": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
           },
           "treatment_is_filtration_centrifugation_or_exchange": {
             "value": null,
@@ -173,7 +171,7 @@
           "contacts_injured_skin_or_mucous_membrane": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
           },
           "barrier_compression_or_absorption": {
             "value": null,
@@ -201,9 +199,9 @@
             "evidence": null
           },
           "active_type": {
-            "value": "not_active",
+            "value": "active_therapeutic",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
           },
           "is_active_implantable": {
             "value": null,
@@ -211,19 +209,19 @@
             "evidence": null
           },
           "clinical_function": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "administer_or_remove_medicines_or_fluids",
+            "basis": "stated",
+            "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
           },
           "delivers_hazardous_energy": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
           },
           "administers_or_removes_medicine": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
           },
           "decision_maker": {
             "value": null,
@@ -248,37 +246,37 @@
           "is_export_only": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
           },
           "incorporates_medicine": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
           },
           "human_blood_derivative": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
           },
           "contraceptive_or_sti_prevention": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
           },
           "cares_for_contact_lenses": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
           },
           "disinfects_another_device": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
           },
           "records_images_or_anatomical_model": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
           },
           "records_patient_images_outside_visible_spectrum": {
             "value": null,
@@ -298,7 +296,7 @@
           "contains_non_viable_animal_material": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
           },
           "contacts_intact_skin_only": {
             "value": null,
@@ -308,7 +306,7 @@
           "is_blood_bag": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
           },
           "implantable_accessory_to_active_implantable": {
             "value": null,
@@ -316,9 +314,9 @@
             "evidence": null
           },
           "controls_active_implantable": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
           },
           "is_mammary_implant": {
             "value": null,
@@ -326,24 +324,24 @@
             "evidence": null
           },
           "administers_by_inhalation": {
-            "value": "no",
+            "value": "yes",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
           },
           "inhalation_mode_of_action_essential": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
           },
           "inhalation_treats_life_threatening_condition": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
           },
           "is_substance_through_orifice_or_skin": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
           },
           "substance_acts_in_nose_mouth_or_on_skin": {
             "value": null,
@@ -355,7 +353,7 @@
       }
     ],
     "funding": null,
-    "source_text": "Non-powered clinical thermometer Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin. Non-powered clinical thermometer Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin. fixture decomposition is fixed by hand",
+    "source_text": "Nebuliser Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy. Nebuliser Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy. fixture decomposition is fixed by hand",
     "schema_version": "0.8"
   }
 }

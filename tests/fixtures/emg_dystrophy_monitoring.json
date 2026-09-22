@@ -243,15 +243,15 @@
             "basis": "stated",
             "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
           },
-          "incorporates_medicine": {
+          "is_export_only": {
             "value": "no",
             "basis": "stated",
             "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
           },
-          "animal_or_microbial_origin": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+          "incorporates_medicine": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
           },
           "human_blood_derivative": {
             "value": null,
@@ -263,10 +263,90 @@
             "basis": "stated",
             "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
           },
+          "cares_for_contact_lenses": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
+          },
           "disinfects_another_device": {
             "value": "no",
             "basis": "stated",
             "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
+          },
+          "records_images_or_anatomical_model": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
+          },
+          "records_patient_images_outside_visible_spectrum": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_anatomical_model_for_diagnosis": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "generates_virtual_anatomical_model": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contains_non_viable_animal_material": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contacts_intact_skin_only": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_blood_bag": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "implantable_accessory_to_active_implantable": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "controls_active_implantable": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
+          },
+          "is_mammary_implant": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "administers_by_inhalation": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "inhalation_mode_of_action_essential": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "inhalation_treats_life_threatening_condition": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_substance_through_orifice_or_skin": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "substance_acts_in_nose_mouth_or_on_skin": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           }
         },
         "ivd": null
@@ -274,6 +354,6 @@
     ],
     "funding": null,
     "source_text": "Muscle response monitoring app Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy. Muscle response monitoring app Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy. fixture decomposition is fixed by hand",
-    "schema_version": "0.7"
+    "schema_version": "0.8"
   }
 }

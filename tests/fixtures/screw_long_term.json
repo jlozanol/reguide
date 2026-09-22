@@ -243,12 +243,12 @@
             "basis": "unknown",
             "evidence": null
           },
-          "incorporates_medicine": {
+          "is_export_only": {
             "value": "no",
             "basis": "stated",
             "evidence": "Holds bone together for longer than 30 days, permanently implanted."
           },
-          "animal_or_microbial_origin": {
+          "incorporates_medicine": {
             "value": "no",
             "basis": "stated",
             "evidence": "Holds bone together for longer than 30 days, permanently implanted."
@@ -263,10 +263,90 @@
             "basis": "stated",
             "evidence": "Holds bone together for longer than 30 days, permanently implanted."
           },
+          "cares_for_contact_lenses": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+          },
           "disinfects_another_device": {
             "value": "no",
             "basis": "stated",
             "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+          },
+          "records_images_or_anatomical_model": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+          },
+          "records_patient_images_outside_visible_spectrum": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_anatomical_model_for_diagnosis": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "generates_virtual_anatomical_model": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contains_non_viable_animal_material": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+          },
+          "contacts_intact_skin_only": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_blood_bag": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+          },
+          "implantable_accessory_to_active_implantable": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+          },
+          "controls_active_implantable": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_mammary_implant": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+          },
+          "administers_by_inhalation": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+          },
+          "inhalation_mode_of_action_essential": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "inhalation_treats_life_threatening_condition": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_substance_through_orifice_or_skin": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+          },
+          "substance_acts_in_nose_mouth_or_on_skin": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           }
         },
         "ivd": null
@@ -274,6 +354,6 @@
     ],
     "funding": null,
     "source_text": "Metal fixation screw, permanent Holds bone together for longer than 30 days, permanently implanted. Metal fixation screw, permanent Holds bone together for longer than 30 days, permanently implanted. fixture decomposition is fixed by hand",
-    "schema_version": "0.7"
+    "schema_version": "0.8"
   }
 }

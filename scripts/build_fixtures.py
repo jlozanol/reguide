@@ -73,8 +73,24 @@ GENERAL_DEFAULTS = dict(
     incorporates_medicine=Tri.NO,
     contraceptive_or_sti_prevention=Tri.NO,
     disinfects_another_device=Tri.NO,
-    animal_or_microbial_origin=Tri.NO,
     human_blood_derivative=Tri.NO,
+    is_export_only=Tri.NO,
+    cares_for_contact_lenses=Tri.NO,
+    records_images_or_anatomical_model=Tri.NO,
+    records_patient_images_outside_visible_spectrum=Tri.NO,
+    is_anatomical_model_for_diagnosis=Tri.NO,
+    generates_virtual_anatomical_model=Tri.NO,
+    contains_non_viable_animal_material=Tri.NO,
+    contacts_intact_skin_only=Tri.NO,
+    is_blood_bag=Tri.NO,
+    implantable_accessory_to_active_implantable=Tri.NO,
+    controls_active_implantable=Tri.NO,
+    is_mammary_implant=Tri.NO,
+    administers_by_inhalation=Tri.NO,
+    inhalation_mode_of_action_essential=Tri.NO,
+    inhalation_treats_life_threatening_condition=Tri.NO,
+    is_substance_through_orifice_or_skin=Tri.NO,
+    substance_acts_in_nose_mouth_or_on_skin=Tri.NO,
     handles_substances_for_administration=Tri.NO,
     contacts_injured_skin_or_mucous_membrane=Tri.NO,
     channels_or_stores_blood_for_administration=Tri.NO,
@@ -178,7 +194,9 @@ def fn(name, text, **given):
     fields = dict(GENERAL_DEFAULTS)
     fields.update(given)
     if software is Tri.YES:
-        for key in ("animal_or_microbial_origin", "human_blood_derivative"):
+        for key in ("human_blood_derivative", "contains_non_viable_animal_material",
+                    "is_blood_bag", "administers_by_inhalation",
+                    "is_substance_through_orifice_or_skin"):
             fields.pop(key, None)
     return FunctionProfile(
         name=a(name, name),
@@ -366,7 +384,8 @@ add("dressing_collagen_deep_wound", "Class III", "5.5", NOT_IVD,
            "containing collagen for wound healing.",
            contacts_injured_skin_or_mucous_membrane=Tri.YES,
            status=dict(therapeutic_purpose=TherapeuticPurpose.INJURY),
-           principally_for_breached_dermis_secondary_intent=Tri.YES, animal_or_microbial_origin=Tri.YES,
+           principally_for_breached_dermis_secondary_intent=Tri.YES,
+           contains_non_viable_animal_material=Tri.YES, contacts_intact_skin_only=Tri.NO,
            sterile=Tri.YES))
 
 # -- Substances for administration, sub-rules 2.2 and 2.3. -----------------
@@ -437,7 +456,9 @@ add("diagnostic_ultrasound", "Class IIa", "4.3(2)(a)", ACTIVE,
            "Supplies ultrasonic energy absorbed by the patient for imaging.",
            active_type=ActiveType.DIAGNOSTIC, clinical_function=ClinicalFunction.SUPPLY_ENERGY,
            delivers_hazardous_energy=Tri.NO, delivers_ionising_radiation=Tri.NO,
-           records_diagnostic_images=Tri.YES, body_contact=BodyContact.INTACT_SKIN))
+           records_diagnostic_images=Tri.YES, body_contact=BodyContact.INTACT_SKIN,
+           records_images_or_anatomical_model=Tri.YES,
+           records_patient_images_outside_visible_spectrum=Tri.YES))
 
 add("mri_equipment", "Class IIa", "4.3(2)(a)", ACTIVE,
     "Same rule as ultrasound. Confirms the rule is not imaging-modality specific.",
@@ -445,7 +466,9 @@ add("mri_equipment", "Class IIa", "4.3(2)(a)", ACTIVE,
            "Supplies energy absorbed by the patient's body for diagnostic imaging.",
            active_type=ActiveType.DIAGNOSTIC, clinical_function=ClinicalFunction.SUPPLY_ENERGY,
            delivers_hazardous_energy=Tri.NO, delivers_ionising_radiation=Tri.NO,
-           records_diagnostic_images=Tri.YES, body_contact=BodyContact.NONE))
+           records_diagnostic_images=Tri.YES, body_contact=BodyContact.NONE,
+           records_images_or_anatomical_model=Tri.YES,
+           records_patient_images_outside_visible_spectrum=Tri.YES))
 
 add("radiotherapy_afterloading_control", "Class IIb", "4.3(3)(c)", ACTIVE,
     "Controls a device that emits ionising radiation. Control inherits the risk.",
@@ -611,6 +634,51 @@ add("infusion_pump", "Class IIb", "4.4(2)", ACTIVE,
            clinical_function=ClinicalFunction.ADMINISTER_SUBSTANCE,
            administers_or_removes_medicine=Tri.YES,
            delivers_hazardous_energy=Tri.YES))
+
+
+# -- Schedule 2 Part 5, clauses no other fixture reaches. -----------------
+add("nebuliser", "Class IIb", "5.10(a)", NOT_IVD,
+    "TGA gives a nebuliser as its 5.10(a) example: the device's mode of action "
+    "has an essential impact on the efficacy and safety of the inhaled medicine.",
+    device("Nebuliser",
+           "Aerosolises a liquid medicine for the patient to inhale; failure to "
+           "aerosolise the medicine would affect its efficacy.",
+           active_type=ActiveType.THERAPEUTIC,
+           clinical_function=ClinicalFunction.ADMINISTER_SUBSTANCE,
+           administers_or_removes_medicine=Tri.YES, delivers_hazardous_energy=Tri.NO,
+           handles_substances_for_administration=Tri.YES,
+           channels_or_stores_liquid_or_gas_for_administration=Tri.YES,
+           connected_to_active_device=Tri.NO,
+           administers_by_inhalation=Tri.YES,
+           inhalation_mode_of_action_essential=Tri.YES,
+           inhalation_treats_life_threatening_condition=Tri.NO))
+
+add("saline_nasal_spray", "Class IIa", "5.11(c)", NOT_IVD,
+    "TGA lists isotonic saline nasal sprays under 5.11; its decision tree puts a "
+    "substance introduced into the nasal cavity that achieves its purpose there "
+    "at Class IIa. Saline is not a medicine, so 5.1 does not apply.",
+    device("Isotonic saline nasal spray",
+           "Isotonic saline solution sprayed into the nasal cavity, where it achieves "
+           "its intended purpose.",
+           invasiveness=Invasiveness.BODY_ORIFICE, duration=Duration.TRANSIENT,
+           orifice_site=OrificeSite.NASAL_CAVITY, connected_to_active_device=Tri.NO,
+           is_substance_through_orifice_or_skin=Tri.YES,
+           substance_acts_in_nose_mouth_or_on_skin=Tri.YES))
+
+add("virtual_anatomical_model_software", "Class IIa", "5.4(3)", NOT_IVD,
+    "TGA's 5.4(3) example: software that generates a 3D anatomical virtual model "
+    "from patient scans for a health professional diagnosing a stress fracture. "
+    "Its Part 4 answers are left minimal until Part 4 is written.",
+    device("Virtual anatomical model software",
+           "Generates a 3D anatomical virtual model from patient scans for a health "
+           "professional diagnosing a stress fracture.",
+           status=PROCESSES_DEVICE_DATA,
+           software=Tri.YES, active_type=ActiveType.DIAGNOSTIC,
+           clinical_function=ClinicalFunction.NONE,
+           delivers_hazardous_energy=Tri.NO, delivers_ionising_radiation=Tri.NO,
+           records_diagnostic_images=Tri.NO, body_contact=BodyContact.NONE,
+           records_images_or_anatomical_model=Tri.YES,
+           generates_virtual_anatomical_model=Tri.YES))
 
 
 # -- Multi-function products. The reason functions are first-class. ---------

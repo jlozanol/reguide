@@ -243,12 +243,12 @@
             "basis": "stated",
             "evidence": "Supplies ultrasonic energy absorbed by the patient for imaging."
           },
-          "incorporates_medicine": {
+          "is_export_only": {
             "value": "no",
             "basis": "stated",
             "evidence": "Supplies ultrasonic energy absorbed by the patient for imaging."
           },
-          "animal_or_microbial_origin": {
+          "incorporates_medicine": {
             "value": "no",
             "basis": "stated",
             "evidence": "Supplies ultrasonic energy absorbed by the patient for imaging."
@@ -263,10 +263,90 @@
             "basis": "stated",
             "evidence": "Supplies ultrasonic energy absorbed by the patient for imaging."
           },
+          "cares_for_contact_lenses": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Supplies ultrasonic energy absorbed by the patient for imaging."
+          },
           "disinfects_another_device": {
             "value": "no",
             "basis": "stated",
             "evidence": "Supplies ultrasonic energy absorbed by the patient for imaging."
+          },
+          "records_images_or_anatomical_model": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Supplies ultrasonic energy absorbed by the patient for imaging."
+          },
+          "records_patient_images_outside_visible_spectrum": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Supplies ultrasonic energy absorbed by the patient for imaging."
+          },
+          "is_anatomical_model_for_diagnosis": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Supplies ultrasonic energy absorbed by the patient for imaging."
+          },
+          "generates_virtual_anatomical_model": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contains_non_viable_animal_material": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Supplies ultrasonic energy absorbed by the patient for imaging."
+          },
+          "contacts_intact_skin_only": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_blood_bag": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Supplies ultrasonic energy absorbed by the patient for imaging."
+          },
+          "implantable_accessory_to_active_implantable": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "controls_active_implantable": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Supplies ultrasonic energy absorbed by the patient for imaging."
+          },
+          "is_mammary_implant": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "administers_by_inhalation": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Supplies ultrasonic energy absorbed by the patient for imaging."
+          },
+          "inhalation_mode_of_action_essential": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "inhalation_treats_life_threatening_condition": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_substance_through_orifice_or_skin": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Supplies ultrasonic energy absorbed by the patient for imaging."
+          },
+          "substance_acts_in_nose_mouth_or_on_skin": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           }
         },
         "ivd": null
@@ -274,6 +354,6 @@
     ],
     "funding": null,
     "source_text": "General purpose diagnostic ultrasound Supplies ultrasonic energy absorbed by the patient for imaging. General purpose diagnostic ultrasound Supplies ultrasonic energy absorbed by the patient for imaging. fixture decomposition is fixed by hand",
-    "schema_version": "0.7"
+    "schema_version": "0.8"
   }
 }

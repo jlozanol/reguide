@@ -1,43 +1,41 @@
 {
   "expected_status": "regulated_medical_device",
   "expected_classes": {
-    "general": "Class I"
+    "general": "Class IIa"
   },
   "functions": [
     {
-      "name": "Non-powered clinical thermometer",
+      "name": "Virtual anatomical model software",
       "expected_status": "regulated_medical_device",
-      "expected_class": "Class I",
-      "expected_rule": "2.1",
-      "expected_qualifiers": [
-        "measuring_function"
-      ]
+      "expected_class": "Class IIa",
+      "expected_rule": "5.4(3)",
+      "expected_qualifiers": []
     }
   ],
-  "source": "TGA, Regulation of thermometers and other temperature measuring medical devices and products for COVID-19",
+  "source": "TGA, Classifying medical devices that are not IVDs",
   "verified": true,
-  "note": "TGA: clinical thermometers that are not battery-powered are Class I (measuring); battery-powered digital thermometers are Class IIa. The source gives the class, not the rule: 2.1 follows from the Schedule 2 text for a non-active device on intact skin. Exercises has_measuring_function, which nothing else in the set touches.",
+  "note": "TGA's 5.4(3) example: software that generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture. Its Part 4 answers are left minimal until Part 4 is written.",
   "profile": {
     "core": {
       "product_name": {
-        "value": "Non-powered clinical thermometer",
+        "value": "Virtual anatomical model software",
         "basis": "stated",
-        "evidence": "Non-powered clinical thermometer"
+        "evidence": "Virtual anatomical model software"
       },
       "intended_purpose": {
-        "value": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin.",
+        "value": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture.",
         "basis": "stated",
-        "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+        "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
       },
       "supplied_sterile": {
         "value": "no",
         "basis": "stated",
-        "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+        "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
       },
       "has_measuring_function": {
-        "value": "yes",
+        "value": "no",
         "basis": "stated",
-        "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+        "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
       },
       "functions_confirmed": {
         "value": "yes",
@@ -48,35 +46,35 @@
     "functions": [
       {
         "name": {
-          "value": "Non-powered clinical thermometer",
+          "value": "Virtual anatomical model software",
           "basis": "stated",
-          "evidence": "Non-powered clinical thermometer"
+          "evidence": "Virtual anatomical model software"
         },
         "description": {
-          "value": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin.",
+          "value": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture.",
           "basis": "stated",
-          "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+          "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
         },
         "kind": {
           "value": "general_device",
           "basis": "stated",
-          "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+          "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
         },
         "is_software": {
-          "value": "no",
+          "value": "yes",
           "basis": "stated",
-          "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+          "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
         },
         "status": {
           "therapeutic_purpose": {
             "value": "diagnosis_prevention_monitoring_prediction_treatment_of_disease",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
           },
           "principal_action_pharmacological": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
           },
           "is_accessory_to_device": {
             "value": null,
@@ -86,7 +84,7 @@
           "excluded_item": {
             "value": "none",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
           },
           "exclusion_conditions_met": {
             "value": null,
@@ -94,26 +92,26 @@
             "evidence": null
           },
           "cdss_sole_purpose_recommendation": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
           },
           "cdss_processes_device_signal_or_image": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
           },
           "cdss_replaces_clinical_judgement": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
           }
         },
         "general": {
           "invasiveness": {
             "value": "non_invasive",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
           },
           "duration": {
             "value": null,
@@ -133,7 +131,7 @@
           "handles_substances_for_administration": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
           },
           "channels_or_stores_blood_for_administration": {
             "value": null,
@@ -173,7 +171,7 @@
           "contacts_injured_skin_or_mucous_membrane": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
           },
           "barrier_compression_or_absorption": {
             "value": null,
@@ -196,14 +194,14 @@
             "evidence": null
           },
           "delivers_ionising_radiation": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
           },
           "active_type": {
-            "value": "not_active",
+            "value": "active_diagnostic",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
           },
           "is_active_implantable": {
             "value": null,
@@ -211,14 +209,14 @@
             "evidence": null
           },
           "clinical_function": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "none",
+            "basis": "stated",
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
           },
           "delivers_hazardous_energy": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
           },
           "administers_or_removes_medicine": {
             "value": null,
@@ -241,64 +239,64 @@
             "evidence": null
           },
           "records_diagnostic_images": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
           },
           "is_export_only": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
           },
           "incorporates_medicine": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
           },
           "human_blood_derivative": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "contraceptive_or_sti_prevention": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
           },
           "cares_for_contact_lenses": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
           },
           "disinfects_another_device": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
           },
           "records_images_or_anatomical_model": {
-            "value": "no",
+            "value": "yes",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
           },
           "records_patient_images_outside_visible_spectrum": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
-          },
-          "is_anatomical_model_for_diagnosis": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
-          },
-          "generates_virtual_anatomical_model": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
-          },
-          "contains_non_viable_animal_material": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
+          },
+          "is_anatomical_model_for_diagnosis": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
+          },
+          "generates_virtual_anatomical_model": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
+          },
+          "contains_non_viable_animal_material": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "contacts_intact_skin_only": {
             "value": null,
@@ -306,9 +304,9 @@
             "evidence": null
           },
           "is_blood_bag": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "implantable_accessory_to_active_implantable": {
             "value": null,
@@ -316,9 +314,9 @@
             "evidence": null
           },
           "controls_active_implantable": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
           },
           "is_mammary_implant": {
             "value": null,
@@ -326,9 +324,9 @@
             "evidence": null
           },
           "administers_by_inhalation": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "inhalation_mode_of_action_essential": {
             "value": null,
@@ -341,9 +339,9 @@
             "evidence": null
           },
           "is_substance_through_orifice_or_skin": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "substance_acts_in_nose_mouth_or_on_skin": {
             "value": null,
@@ -355,7 +353,7 @@
       }
     ],
     "funding": null,
-    "source_text": "Non-powered clinical thermometer Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin. Non-powered clinical thermometer Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin. fixture decomposition is fixed by hand",
+    "source_text": "Virtual anatomical model software Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture. Virtual anatomical model software Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture. fixture decomposition is fixed by hand",
     "schema_version": "0.8"
   }
 }

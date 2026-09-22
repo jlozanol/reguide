@@ -249,6 +249,6 @@
     ],
     "funding": null,
     "source_text": "HIV blood donor screening assay Screens donated blood for HIV before transfusion. HIV blood donor screening assay Screens donated blood for HIV before transfusion. fixture decomposition is fixed by hand",
-    "schema_version": "0.7"
+    "schema_version": "0.8"
   }
 }

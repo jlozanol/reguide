@@ -243,8 +243,14 @@ class TestPrune:
             incorporates_medicine=Tri.NO,
             contraceptive_or_sti_prevention=Tri.NO,
             disinfects_another_device=Tri.NO,
-            animal_or_microbial_origin=Tri.NO,
             human_blood_derivative=Tri.NO,
+            is_export_only=Tri.NO,
+            cares_for_contact_lenses=Tri.NO,
+            records_images_or_anatomical_model=Tri.NO,
+            contains_non_viable_animal_material=Tri.NO,
+            is_blood_bag=Tri.NO,
+            administers_by_inhalation=Tri.NO,
+            is_substance_through_orifice_or_skin=Tri.NO,
         )
         before = only(profile).missing()
         only(profile).prune()

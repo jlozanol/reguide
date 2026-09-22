@@ -75,8 +75,7 @@ class TestVerdicts:
     def test_no_result_names_what_stopped_it(self):
         [row] = SC.score_fixture("screw_transient", fixture("screw_transient"))
         assert row.verdict == SC.NO_RESULT
-        assert row.detail == ("s2-3.1 (not implemented: Part 3, clauses 3.1 to 3.4), "
-                              "s2-5.1 (not implemented: Part 5, clauses 5.1 to 5.11)")
+        assert row.detail == "s2-3.1 (not implemented: Part 3, clauses 3.1 to 3.4)"
 
     def test_an_excluded_function_agrees_without_being_classified(self, monkeypatch):
         seen = []

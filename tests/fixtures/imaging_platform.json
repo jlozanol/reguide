@@ -257,15 +257,15 @@
             "basis": "unknown",
             "evidence": null
           },
-          "incorporates_medicine": {
+          "is_export_only": {
             "value": "no",
             "basis": "stated",
             "evidence": "Stores and transmits radiology studies without interpretation."
           },
-          "animal_or_microbial_origin": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+          "incorporates_medicine": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Stores and transmits radiology studies without interpretation."
           },
           "human_blood_derivative": {
             "value": null,
@@ -277,10 +277,90 @@
             "basis": "stated",
             "evidence": "Stores and transmits radiology studies without interpretation."
           },
+          "cares_for_contact_lenses": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Stores and transmits radiology studies without interpretation."
+          },
           "disinfects_another_device": {
             "value": "no",
             "basis": "stated",
             "evidence": "Stores and transmits radiology studies without interpretation."
+          },
+          "records_images_or_anatomical_model": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Stores and transmits radiology studies without interpretation."
+          },
+          "records_patient_images_outside_visible_spectrum": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_anatomical_model_for_diagnosis": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "generates_virtual_anatomical_model": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contains_non_viable_animal_material": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contacts_intact_skin_only": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_blood_bag": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "implantable_accessory_to_active_implantable": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "controls_active_implantable": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Stores and transmits radiology studies without interpretation."
+          },
+          "is_mammary_implant": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "administers_by_inhalation": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "inhalation_mode_of_action_essential": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "inhalation_treats_life_threatening_condition": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_substance_through_orifice_or_skin": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "substance_acts_in_nose_mouth_or_on_skin": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           }
         },
         "ivd": null
@@ -484,15 +564,15 @@
             "basis": "stated",
             "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
           },
-          "incorporates_medicine": {
+          "is_export_only": {
             "value": "no",
             "basis": "stated",
             "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
           },
-          "animal_or_microbial_origin": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+          "incorporates_medicine": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
           },
           "human_blood_derivative": {
             "value": null,
@@ -504,10 +584,90 @@
             "basis": "stated",
             "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
           },
+          "cares_for_contact_lenses": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
           "disinfects_another_device": {
             "value": "no",
             "basis": "stated",
             "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "records_images_or_anatomical_model": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "records_patient_images_outside_visible_spectrum": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_anatomical_model_for_diagnosis": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "generates_virtual_anatomical_model": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contains_non_viable_animal_material": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contacts_intact_skin_only": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_blood_bag": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "implantable_accessory_to_active_implantable": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "controls_active_implantable": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+          },
+          "is_mammary_implant": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "administers_by_inhalation": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "inhalation_mode_of_action_essential": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "inhalation_treats_life_threatening_condition": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_substance_through_orifice_or_skin": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "substance_acts_in_nose_mouth_or_on_skin": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           }
         },
         "ivd": null
@@ -711,15 +871,15 @@
             "basis": "stated",
             "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
           },
-          "incorporates_medicine": {
+          "is_export_only": {
             "value": "no",
             "basis": "stated",
             "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
           },
-          "animal_or_microbial_origin": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+          "incorporates_medicine": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
           },
           "human_blood_derivative": {
             "value": null,
@@ -731,10 +891,90 @@
             "basis": "stated",
             "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
           },
+          "cares_for_contact_lenses": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
+          },
           "disinfects_another_device": {
             "value": "no",
             "basis": "stated",
             "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
+          },
+          "records_images_or_anatomical_model": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
+          },
+          "records_patient_images_outside_visible_spectrum": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_anatomical_model_for_diagnosis": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "generates_virtual_anatomical_model": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contains_non_viable_animal_material": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contacts_intact_skin_only": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_blood_bag": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "implantable_accessory_to_active_implantable": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "controls_active_implantable": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
+          },
+          "is_mammary_implant": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "administers_by_inhalation": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "inhalation_mode_of_action_essential": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "inhalation_treats_life_threatening_condition": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "is_substance_through_orifice_or_skin": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "substance_acts_in_nose_mouth_or_on_skin": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           }
         },
         "ivd": null
@@ -742,6 +982,6 @@
     ],
     "funding": null,
     "source_text": "Radiology reporting platform Stores radiology studies, flags abnormal ones for priority review and suggests a follow-up imaging interval. Study archive Stores and transmits radiology studies without interpretation. Abnormality triage Flags studies showing suspected abnormality for priority review by a radiologist. Follow-up interval suggestion Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist. fixture decomposition is fixed by hand",
-    "schema_version": "0.7"
+    "schema_version": "0.8"
   }
 }
