@@ -135,27 +135,57 @@
             "basis": "unknown",
             "evidence": null
           },
-          "contacts_injured_skin": {
+          "handles_substances_for_administration": {
             "value": "no",
             "basis": "stated",
             "evidence": "Records sleep and activity for general wellbeing."
           },
-          "wound_function": {
+          "channels_or_stores_blood_for_administration": {
             "value": null,
             "basis": "unknown",
             "evidence": null
           },
-          "breaches_dermis": {
+          "stores_organ_or_tissue_for_introduction": {
             "value": null,
             "basis": "unknown",
             "evidence": null
           },
-          "fluid_handling": {
-            "value": "none",
+          "channels_or_stores_liquid_or_gas_for_administration": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "connected_to_active_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "saline_only_flush_or_patency": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "modifies_composition_of_blood_or_infusion": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "treatment_is_filtration_centrifugation_or_exchange": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contacts_injured_skin_or_mucous_membrane": {
+            "value": "no",
             "basis": "stated",
             "evidence": "Records sleep and activity for general wellbeing."
           },
-          "connected_to_active_device": {
+          "barrier_compression_or_absorption": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "principally_for_breached_dermis_secondary_intent": {
             "value": null,
             "basis": "unknown",
             "evidence": null
@@ -332,27 +362,57 @@
             "basis": "unknown",
             "evidence": null
           },
-          "contacts_injured_skin": {
+          "handles_substances_for_administration": {
             "value": "no",
             "basis": "stated",
             "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
           },
-          "wound_function": {
+          "channels_or_stores_blood_for_administration": {
             "value": null,
             "basis": "unknown",
             "evidence": null
           },
-          "breaches_dermis": {
+          "stores_organ_or_tissue_for_introduction": {
             "value": null,
             "basis": "unknown",
             "evidence": null
           },
-          "fluid_handling": {
-            "value": "none",
+          "channels_or_stores_liquid_or_gas_for_administration": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "connected_to_active_device": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "saline_only_flush_or_patency": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "modifies_composition_of_blood_or_infusion": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "treatment_is_filtration_centrifugation_or_exchange": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contacts_injured_skin_or_mucous_membrane": {
+            "value": "no",
             "basis": "stated",
             "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
           },
-          "connected_to_active_device": {
+          "barrier_compression_or_absorption": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "principally_for_breached_dermis_secondary_intent": {
             "value": null,
             "basis": "unknown",
             "evidence": null
@@ -448,6 +508,6 @@
     ],
     "funding": null,
     "source_text": "Consumer wellbeing app Tracks sleep and activity for general wellbeing and includes a symptom checker that suggests whether to seek care. Activity and sleep tracking Records sleep and activity for general wellbeing. Symptom checker Asks a consumer about symptoms and suggests whether to seek medical care. fixture decomposition is fixed by hand",
-    "schema_version": "0.6"
+    "schema_version": "0.7"
   }
 }

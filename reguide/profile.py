@@ -35,6 +35,15 @@ near-patient testing has no clause in Schedule 2A at all.
 
 Whether an agent poses "a high risk of propagation in Australia" is a
 regulatory judgement. It is asked, with evidence, never inferred.
+
+Version 0.7 does the same for Schedule 2 Part 2, the non-invasive clauses.
+One field per paragraph of 2.2, 2.2A, 2.3 and 2.4 behind two gates: a device
+that handles substances for administration, and a device in contact with
+injured skin or a mucous membrane. The single-choice fluid_handling and
+wound_function fields could not record a device meeting two paragraphs, and
+had nothing for organ storage (2.2(1)(b)) or saline flushes (2.2A).
+contacts_injured_skin missed the mucous membranes 2.4(1) names, and
+breaches_dermis split the one condition in 2.4(4) across two fields.
 """
 
 from enum import Enum
@@ -143,20 +152,6 @@ class BodyContact(str, Enum):
     TEETH = "teeth"
 
 
-class WoundFunction(str, Enum):
-    """Sub-rule 2.4 turns on this, not on the wound itself.
-
-    The same film dressing is one class as a barrier and another as a
-    microenvironment manager. Physical description cannot settle it, so this
-    has to be asked, and the answer has to be the manufacturer's own claim.
-    """
-
-    MECHANICAL_BARRIER = "mechanical_barrier_compression_or_absorption"
-    MICROENVIRONMENT = "manage_microenvironment_of_wound"
-    SECONDARY_INTENT = "breached_dermis_healing_by_secondary_intent"
-    OTHER = "other"
-
-
 class OrificeSite(str, Enum):
     """Sub-rule 3.1 treats the shallow orifices differently from the rest."""
 
@@ -165,15 +160,6 @@ class OrificeSite(str, Enum):
     NASAL_CAVITY = "nasal_cavity"
     OTHER_ORIFICE = "other_body_orifice"
     STOMA = "stoma"
-
-
-class FluidHandling(str, Enum):
-    """Sub-rules 2.2 and 2.3, non-invasive devices handling body substances."""
-
-    NONE = "none"
-    CHANNEL_OR_STORE = "channel_or_store_for_administration"
-    MODIFY_COMPOSITION = "modify_biological_or_chemical_composition"
-    FILTER_OR_EXCHANGE = "filtration_centrifugation_or_gas_or_heat_exchange"
 
 
 class ActiveType(str, Enum):
@@ -271,14 +257,22 @@ class GeneralDeviceProfile(BaseModel):
     body_contact: Answer[BodyContact] = Answer()
     orifice_site: Answer[OrificeSite] = Answer()
 
-    # Injured skin, sub-rule 2.4
-    contacts_injured_skin: Answer[Tri] = Answer()
-    wound_function: Answer[WoundFunction] = Answer()
-    breaches_dermis: Answer[Tri] = Answer()
-
-    # Body substances, sub-rules 2.2 and 2.3
-    fluid_handling: Answer[FluidHandling] = Answer()
+    # Schedule 2 Part 2, non-invasive devices. Each comment names its paragraph.
+    # Gate: substances for administration opens 2.2, 2.2A and 2.3.
+    handles_substances_for_administration: Answer[Tri] = Answer()
+    channels_or_stores_blood_for_administration: Answer[Tri] = Answer()     # 2.2(1)(a)
+    stores_organ_or_tissue_for_introduction: Answer[Tri] = Answer()         # 2.2(1)(b)
+    channels_or_stores_liquid_or_gas_for_administration: Answer[Tri] = Answer()  # 2.2(1)(c)(i)
+    # "May be connected to an active medical device classified as Class IIa or
+    # higher". Read by 2.2(1)(c)(ii) and by 3.1(3).
     connected_to_active_device: Answer[Tri] = Answer()
+    saline_only_flush_or_patency: Answer[Tri] = Answer()                    # 2.2A
+    modifies_composition_of_blood_or_infusion: Answer[Tri] = Answer()       # 2.3(1)
+    treatment_is_filtration_centrifugation_or_exchange: Answer[Tri] = Answer()  # 2.3(2)
+    # Gate: injured skin or a mucous membrane opens 2.4.
+    contacts_injured_skin_or_mucous_membrane: Answer[Tri] = Answer()        # 2.4(1)
+    barrier_compression_or_absorption: Answer[Tri] = Answer()               # 2.4(3)
+    principally_for_breached_dermis_secondary_intent: Answer[Tri] = Answer()  # 2.4(4)
 
     # Surgically invasive specifics
     reusable_surgical_instrument: Answer[Tri] = Answer()
@@ -520,6 +514,19 @@ def relevant_status_fields(function: "FunctionProfile") -> list[str]:
     return _dedupe(fields)
 
 
+PART_2_SUBSTANCE_FIELDS = [
+    "channels_or_stores_blood_for_administration",
+    "stores_organ_or_tissue_for_introduction",
+    "channels_or_stores_liquid_or_gas_for_administration",
+    "saline_only_flush_or_patency",
+    "modifies_composition_of_blood_or_infusion",
+]
+PART_2_WOUND_FIELDS = [
+    "barrier_compression_or_absorption",
+    "principally_for_breached_dermis_secondary_intent",
+]
+
+
 def relevant_general_fields(function: "FunctionProfile") -> list[str]:
     """Which Schedule 2 fields this function actually needs.
 
@@ -540,16 +547,16 @@ def relevant_general_fields(function: "FunctionProfile") -> list[str]:
         fields += MATERIAL_FIELDS
 
     if route is Invasiveness.NON_INVASIVE:
-        fields += ["contacts_injured_skin", "fluid_handling"]
-        if _value(general.contacts_injured_skin) is Tri.YES:
-            fields += ["wound_function"]
-            if _value(general.wound_function) is WoundFunction.SECONDARY_INTENT:
-                fields += ["breaches_dermis"]
-        if _value(general.fluid_handling) in (
-            FluidHandling.CHANNEL_OR_STORE,
-            FluidHandling.MODIFY_COMPOSITION,
-        ):
-            fields += ["connected_to_active_device"]
+        fields += ["handles_substances_for_administration",
+                   "contacts_injured_skin_or_mucous_membrane"]
+        if _value(general.handles_substances_for_administration) is Tri.YES:
+            fields += PART_2_SUBSTANCE_FIELDS
+            if _value(general.channels_or_stores_liquid_or_gas_for_administration) is Tri.YES:
+                fields += ["connected_to_active_device"]
+            if _value(general.modifies_composition_of_blood_or_infusion) is Tri.YES:
+                fields += ["treatment_is_filtration_centrifugation_or_exchange"]
+        if _value(general.contacts_injured_skin_or_mucous_membrane) is Tri.YES:
+            fields += PART_2_WOUND_FIELDS
 
     elif route is Invasiveness.BODY_ORIFICE:
         fields += ["duration", "orifice_site", "connected_to_active_device"]
@@ -701,7 +708,7 @@ class DeviceProfile(BaseModel):
     funding: FundingProfile | None = None
 
     source_text: str = ""
-    schema_version: Literal["0.6"] = "0.6"
+    schema_version: Literal["0.7"] = "0.7"
 
     @property
     def single_function(self) -> bool:

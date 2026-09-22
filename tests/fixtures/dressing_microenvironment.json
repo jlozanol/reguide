@@ -8,13 +8,13 @@
       "name": "Negative wound therapy dressing bandage",
       "expected_status": "regulated_medical_device",
       "expected_class": "Class IIa",
-      "expected_rule": "2.4(1)",
+      "expected_rule": "2.4(2)",
       "expected_qualifiers": []
     }
   ],
   "source": "TGA, Classifying medical devices that are not IVDs",
   "verified": true,
-  "note": "Same contact as the barrier pad. Only the claim differs.",
+  "note": "Same contact as the barrier pad. Only the claim differs. TGA's guidance numbers this 2.4(1); in the Regulations 2.4(1) sets the scope and the Class IIa comes from 2.4(2).",
   "profile": {
     "core": {
       "product_name": {
@@ -128,30 +128,60 @@
             "basis": "unknown",
             "evidence": null
           },
-          "contacts_injured_skin": {
-            "value": "yes",
+          "handles_substances_for_administration": {
+            "value": "no",
             "basis": "stated",
             "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
           },
-          "wound_function": {
-            "value": "manage_microenvironment_of_wound",
-            "basis": "stated",
-            "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
-          },
-          "breaches_dermis": {
+          "channels_or_stores_blood_for_administration": {
             "value": null,
             "basis": "unknown",
             "evidence": null
           },
-          "fluid_handling": {
-            "value": "none",
-            "basis": "stated",
-            "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
+          "stores_organ_or_tissue_for_introduction": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "channels_or_stores_liquid_or_gas_for_administration": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "connected_to_active_device": {
             "value": null,
             "basis": "unknown",
             "evidence": null
+          },
+          "saline_only_flush_or_patency": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "modifies_composition_of_blood_or_infusion": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "treatment_is_filtration_centrifugation_or_exchange": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contacts_injured_skin_or_mucous_membrane": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
+          },
+          "barrier_compression_or_absorption": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
+          },
+          "principally_for_breached_dermis_secondary_intent": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
           },
           "reusable_surgical_instrument": {
             "value": null,
@@ -244,6 +274,6 @@
     ],
     "funding": null,
     "source_text": "Negative wound therapy dressing bandage Used together with an active medical device to manage the microenvironment of a wound. Negative wound therapy dressing bandage Used together with an active medical device to manage the microenvironment of a wound. fixture decomposition is fixed by hand",
-    "schema_version": "0.6"
+    "schema_version": "0.7"
   }
 }

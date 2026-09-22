@@ -32,7 +32,6 @@ from reguide.profile import (
     DeviceKind,
     DeviceProfile,
     Duration,
-    FluidHandling,
     FunctionProfile,
     GeneralDeviceProfile,
     highest_class,
@@ -44,7 +43,6 @@ from reguide.profile import (
     StatusProfile,
     TherapeuticPurpose,
     Tri,
-    WoundFunction,
 )
 from reguide.status import StatusOutcome
 
@@ -77,8 +75,16 @@ GENERAL_DEFAULTS = dict(
     disinfects_another_device=Tri.NO,
     animal_or_microbial_origin=Tri.NO,
     human_blood_derivative=Tri.NO,
-    contacts_injured_skin=Tri.NO,
-    fluid_handling=FluidHandling.NONE,
+    handles_substances_for_administration=Tri.NO,
+    contacts_injured_skin_or_mucous_membrane=Tri.NO,
+    channels_or_stores_blood_for_administration=Tri.NO,
+    stores_organ_or_tissue_for_introduction=Tri.NO,
+    channels_or_stores_liquid_or_gas_for_administration=Tri.NO,
+    saline_only_flush_or_patency=Tri.NO,
+    modifies_composition_of_blood_or_infusion=Tri.NO,
+    treatment_is_filtration_centrifugation_or_exchange=Tri.NO,
+    barrier_compression_or_absorption=Tri.NO,
+    principally_for_breached_dermis_secondary_intent=Tri.NO,
 )
 
 IVD_DEFAULTS = dict(
@@ -325,29 +331,29 @@ add("dressing_mechanical_barrier", "Class I", "2.4(3)", NOT_IVD,
     "Barrier, compression or absorption only. The floor of sub-rule 2.4.",
     device("Absorbent pad",
            "Acts as a barrier to and absorbs exudate from a wound.",
-           contacts_injured_skin=Tri.YES,
+           contacts_injured_skin_or_mucous_membrane=Tri.YES,
            status=dict(therapeutic_purpose=TherapeuticPurpose.INJURY),
-           wound_function=WoundFunction.MECHANICAL_BARRIER))
+           barrier_compression_or_absorption=Tri.YES))
 
-add("dressing_microenvironment", "Class IIa", "2.4(1)", NOT_IVD,
-    "Same contact as the barrier pad. Only the claim differs.",
+add("dressing_microenvironment", "Class IIa", "2.4(2)", NOT_IVD,
+    "Same contact as the barrier pad. Only the claim differs. TGA's guidance "
+    "numbers this 2.4(1); in the Regulations 2.4(1) sets the scope and the "
+    "Class IIa comes from 2.4(2).",
     device("Negative wound therapy dressing bandage",
            "Used together with an active medical device to manage the "
            "microenvironment of a wound.",
-           contacts_injured_skin=Tri.YES,
+           contacts_injured_skin_or_mucous_membrane=Tri.YES,
            status=dict(therapeutic_purpose=TherapeuticPurpose.INJURY),
-           wound_function=WoundFunction.MICROENVIRONMENT,
-           connected_to_active_device=Tri.YES))
+           barrier_compression_or_absorption=Tri.NO))
 
 add("dressing_secondary_intent", "Class IIb", "2.4(4)", NOT_IVD,
     "Breached dermis healing by secondary intent. Top of sub-rule 2.4.",
     device("Dressing for chronic extensive ulceration",
            "For wounds that have breached the dermis and can only heal by "
            "secondary intent.",
-           contacts_injured_skin=Tri.YES,
+           contacts_injured_skin_or_mucous_membrane=Tri.YES,
            status=dict(therapeutic_purpose=TherapeuticPurpose.INJURY),
-           wound_function=WoundFunction.SECONDARY_INTENT,
-           breaches_dermis=Tri.YES, sterile=Tri.YES))
+           principally_for_breached_dermis_secondary_intent=Tri.YES, sterile=Tri.YES))
 
 add("dressing_collagen_deep_wound", "Class III", "5.5", NOT_IVD,
     "TGA case study 1 (dressings) gives this exact device as Class III under "
@@ -358,20 +364,42 @@ add("dressing_collagen_deep_wound", "Class III", "5.5", NOT_IVD,
     device("Collagen dressing for deep ulcers",
            "Dressing for deep wounds and ulcers that have breached the dermis, "
            "containing collagen for wound healing.",
-           contacts_injured_skin=Tri.YES,
+           contacts_injured_skin_or_mucous_membrane=Tri.YES,
            status=dict(therapeutic_purpose=TherapeuticPurpose.INJURY),
-           wound_function=WoundFunction.SECONDARY_INTENT,
-           breaches_dermis=Tri.YES, animal_or_microbial_origin=Tri.YES,
+           principally_for_breached_dermis_secondary_intent=Tri.YES, animal_or_microbial_origin=Tri.YES,
            sterile=Tri.YES))
+
+# -- Substances for administration, sub-rules 2.2 and 2.3. -----------------
+add("infusion_pump_syringe", "Class IIa", "2.2(1)(c)", NOT_IVD,
+    "TGA lists syringes and tubing for infusion pumps under 2.2(1)(c), Class "
+    "IIa: a liquid for administration, and connectable to an active device of "
+    "Class IIa or higher.",
+    device("Infusion pump syringe",
+           "Syringe for use with an infusion pump, holding liquid medicine to be "
+           "administered to a patient.",
+           handles_substances_for_administration=Tri.YES,
+           channels_or_stores_liquid_or_gas_for_administration=Tri.YES,
+           connected_to_active_device=Tri.YES))
+
+add("haemodialyser", "Class IIb", "2.3(1)", NOT_IVD,
+    "TGA gives haemodialysers, which remove undesirable substances from blood by "
+    "exchange of solutes, as 2.3(1) Class IIb. The source places them under (1), "
+    "not the filtration or exchange of gas or heat in (2).",
+    device("Haemodialyser",
+           "Removes undesirable substances from blood by exchange of solutes before "
+           "the blood is returned to the patient.",
+           handles_substances_for_administration=Tri.YES,
+           modifies_composition_of_blood_or_infusion=Tri.YES,
+           treatment_is_filtration_centrifugation_or_exchange=Tri.NO))
 
 add("trauma_covering_anaesthetic", "Class III", "5.1(2)", NOT_IVD,
     "A medicine overrides sub-rule 2.4 entirely. Tests special-rule priority.",
     device("Trauma covering with anaesthetic gel",
            "Non-sterile trauma covering to maintain stability of a burn patient "
            "en route to hospital, coated in a gel containing anaesthetic.",
-           contacts_injured_skin=Tri.YES,
+           contacts_injured_skin_or_mucous_membrane=Tri.YES,
            status=dict(therapeutic_purpose=TherapeuticPurpose.INJURY),
-           wound_function=WoundFunction.MECHANICAL_BARRIER,
+           barrier_compression_or_absorption=Tri.YES,
            incorporates_medicine=Tri.YES))
 
 add("heparin_coated_catheter", "Class III", "5.1", NOT_IVD,
@@ -495,9 +523,9 @@ add("sterile_barrier_dressing", "Class I", "2.4(3)", NOT_IVD,
     "regulation 3.9(2) qualifier.",
     device("Sterile adhesive dressing strip",
            "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile.",
-           contacts_injured_skin=Tri.YES,
+           contacts_injured_skin_or_mucous_membrane=Tri.YES,
            status=dict(therapeutic_purpose=TherapeuticPurpose.INJURY),
-           wound_function=WoundFunction.MECHANICAL_BARRIER, sterile=Tri.YES),
+           barrier_compression_or_absorption=Tri.YES, sterile=Tri.YES),
     qualifiers=("supplied_sterile",))
 
 add("measuring_thermometer", "Class I", "2.1", THERMOMETERS,

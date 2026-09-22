@@ -184,8 +184,11 @@ class TestBoundaryFamilies:
             load(FIXTURE_DIR / f"{n}.json")["profile"]) for n in names}
         functions = {n: p.functions[0].general for n, p in profiles.items()}
         for general in functions.values():
-            assert general.contacts_injured_skin.value.value == "yes"
-        assert len({g.wound_function.value for g in functions.values()}) == 3
+            assert general.contacts_injured_skin_or_mucous_membrane.value.value == "yes"
+        claims = {(g.barrier_compression_or_absorption.value,
+                   g.principally_for_breached_dermis_secondary_intent.value)
+                  for g in functions.values()}
+        assert len(claims) == 3
         classes = {load(FIXTURE_DIR / f"{n}.json")["functions"][0]["expected_class"]
                    for n in names}
         assert classes == {"Class I", "Class IIa", "Class IIb"}

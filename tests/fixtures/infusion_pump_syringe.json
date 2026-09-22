@@ -1,41 +1,41 @@
 {
   "expected_status": "regulated_medical_device",
   "expected_classes": {
-    "general": "Class III"
+    "general": "Class IIa"
   },
   "functions": [
     {
-      "name": "Fixation screw contacting central circulatory system",
+      "name": "Infusion pump syringe",
       "expected_status": "regulated_medical_device",
-      "expected_class": "Class III",
-      "expected_rule": "3.3(4)(a)",
+      "expected_class": "Class IIa",
+      "expected_rule": "2.2(1)(c)",
       "expected_qualifiers": []
     }
   ],
   "source": "TGA, Classifying medical devices that are not IVDs",
   "verified": true,
-  "note": "Location beats duration. Tests that body_contact is read first.",
+  "note": "TGA lists syringes and tubing for infusion pumps under 2.2(1)(c), Class IIa: a liquid for administration, and connectable to an active device of Class IIa or higher.",
   "profile": {
     "core": {
       "product_name": {
-        "value": "Fixation screw contacting central circulatory system",
+        "value": "Infusion pump syringe",
         "basis": "stated",
-        "evidence": "Fixation screw contacting central circulatory system"
+        "evidence": "Infusion pump syringe"
       },
       "intended_purpose": {
-        "value": "Direct contact with the central circulatory or central nervous system.",
+        "value": "Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient.",
         "basis": "stated",
-        "evidence": "Direct contact with the central circulatory or central nervous system."
+        "evidence": "Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient."
       },
       "supplied_sterile": {
-        "value": "yes",
+        "value": "no",
         "basis": "stated",
-        "evidence": "Direct contact with the central circulatory or central nervous system."
+        "evidence": "Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient."
       },
       "has_measuring_function": {
         "value": "no",
         "basis": "stated",
-        "evidence": "Direct contact with the central circulatory or central nervous system."
+        "evidence": "Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient."
       },
       "functions_confirmed": {
         "value": "yes",
@@ -46,35 +46,35 @@
     "functions": [
       {
         "name": {
-          "value": "Fixation screw contacting central circulatory system",
+          "value": "Infusion pump syringe",
           "basis": "stated",
-          "evidence": "Fixation screw contacting central circulatory system"
+          "evidence": "Infusion pump syringe"
         },
         "description": {
-          "value": "Direct contact with the central circulatory or central nervous system.",
+          "value": "Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient.",
           "basis": "stated",
-          "evidence": "Direct contact with the central circulatory or central nervous system."
+          "evidence": "Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient."
         },
         "kind": {
           "value": "general_device",
           "basis": "stated",
-          "evidence": "Direct contact with the central circulatory or central nervous system."
+          "evidence": "Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient."
         },
         "is_software": {
           "value": "no",
           "basis": "stated",
-          "evidence": "Direct contact with the central circulatory or central nervous system."
+          "evidence": "Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient."
         },
         "status": {
           "therapeutic_purpose": {
             "value": "diagnosis_prevention_monitoring_prediction_treatment_of_disease",
             "basis": "stated",
-            "evidence": "Direct contact with the central circulatory or central nervous system."
+            "evidence": "Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient."
           },
           "principal_action_pharmacological": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Direct contact with the central circulatory or central nervous system."
+            "evidence": "Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient."
           },
           "is_accessory_to_device": {
             "value": null,
@@ -84,7 +84,7 @@
           "excluded_item": {
             "value": "none",
             "basis": "stated",
-            "evidence": "Direct contact with the central circulatory or central nervous system."
+            "evidence": "Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient."
           },
           "exclusion_conditions_met": {
             "value": null,
@@ -109,19 +109,19 @@
         },
         "general": {
           "invasiveness": {
-            "value": "surgically_invasive",
+            "value": "non_invasive",
             "basis": "stated",
-            "evidence": "Direct contact with the central circulatory or central nervous system."
+            "evidence": "Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient."
           },
           "duration": {
-            "value": "short_term",
-            "basis": "stated",
-            "evidence": "Direct contact with the central circulatory or central nervous system."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "body_contact": {
-            "value": "central_circulatory_system",
-            "basis": "stated",
-            "evidence": "Direct contact with the central circulatory or central nervous system."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "orifice_site": {
             "value": null,
@@ -129,39 +129,39 @@
             "evidence": null
           },
           "handles_substances_for_administration": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient."
           },
           "channels_or_stores_blood_for_administration": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient."
           },
           "stores_organ_or_tissue_for_introduction": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient."
           },
           "channels_or_stores_liquid_or_gas_for_administration": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient."
           },
           "connected_to_active_device": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient."
           },
           "saline_only_flush_or_patency": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient."
           },
           "modifies_composition_of_blood_or_infusion": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient."
           },
           "treatment_is_filtration_centrifugation_or_exchange": {
             "value": null,
@@ -169,9 +169,9 @@
             "evidence": null
           },
           "contacts_injured_skin_or_mucous_membrane": {
-            "value": null,
-            "basis": "unknown",
-            "evidence": null
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient."
           },
           "barrier_compression_or_absorption": {
             "value": null,
@@ -189,9 +189,9 @@
             "evidence": null
           },
           "absorbed_or_chemically_changed": {
-            "value": "no",
-            "basis": "stated",
-            "evidence": "Direct contact with the central circulatory or central nervous system."
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "delivers_ionising_radiation": {
             "value": null,
@@ -201,7 +201,7 @@
           "active_type": {
             "value": "not_active",
             "basis": "stated",
-            "evidence": "Direct contact with the central circulatory or central nervous system."
+            "evidence": "Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient."
           },
           "is_active_implantable": {
             "value": null,
@@ -246,34 +246,34 @@
           "incorporates_medicine": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Direct contact with the central circulatory or central nervous system."
+            "evidence": "Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient."
           },
           "animal_or_microbial_origin": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Direct contact with the central circulatory or central nervous system."
+            "evidence": "Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient."
           },
           "human_blood_derivative": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Direct contact with the central circulatory or central nervous system."
+            "evidence": "Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient."
           },
           "contraceptive_or_sti_prevention": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Direct contact with the central circulatory or central nervous system."
+            "evidence": "Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient."
           },
           "disinfects_another_device": {
             "value": "no",
             "basis": "stated",
-            "evidence": "Direct contact with the central circulatory or central nervous system."
+            "evidence": "Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient."
           }
         },
         "ivd": null
       }
     ],
     "funding": null,
-    "source_text": "Fixation screw contacting central circulatory system Direct contact with the central circulatory or central nervous system. Fixation screw contacting central circulatory system Direct contact with the central circulatory or central nervous system. fixture decomposition is fixed by hand",
+    "source_text": "Infusion pump syringe Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient. Infusion pump syringe Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient. fixture decomposition is fixed by hand",
     "schema_version": "0.7"
   }
 }

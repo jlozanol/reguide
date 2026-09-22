@@ -16,6 +16,8 @@ from reguide.profile import (
     IVD_GENERAL_FIELDS,
     IVD_SELF_TEST_FIELDS,
     IVD_TYPING_FIELDS,
+    PART_2_SUBSTANCE_FIELDS,
+    PART_2_WOUND_FIELDS,
     ActiveType,
     Answer,
     Basis,
@@ -25,14 +27,12 @@ from reguide.profile import (
     DeviceKind,
     DeviceProfile,
     Duration,
-    FluidHandling,
     FunctionProfile,
     GeneralDeviceProfile,
     Invasiveness,
     IvdProfile,
     TherapeuticPurpose,
     Tri,
-    WoundFunction,
     highest_class,
     relevant_general_fields,
 )
@@ -132,37 +132,48 @@ class TestRelevanceGating:
         fields = relevant_general_fields(only(profile))
         assert "invasiveness" in fields
         assert "duration" not in fields
-        assert "wound_function" not in fields
+        assert "barrier_compression_or_absorption" not in fields
 
     def test_establishing_the_route_opens_the_branch(self):
         profile = general_profile(invasiveness=Invasiveness.SURGICALLY_INVASIVE)
         fields = relevant_general_fields(only(profile))
         assert "duration" in fields
         assert "body_contact" in fields
-        assert "contacts_injured_skin" not in fields
+        assert "contacts_injured_skin_or_mucous_membrane" not in fields
 
-    def test_injured_skin_opens_the_wound_function_question(self):
-        profile = general_profile(
-            invasiveness=Invasiveness.NON_INVASIVE, contacts_injured_skin=Tri.YES
-        )
-        assert "functions.0.general.wound_function" in profile.missing()
-
-    def test_secondary_intent_opens_one_more_question(self):
-        """Answering can lengthen the list. That is correct behaviour."""
+    def test_injured_skin_opens_the_2_4_questions(self):
         profile = general_profile(
             invasiveness=Invasiveness.NON_INVASIVE,
-            contacts_injured_skin=Tri.YES,
-            wound_function=WoundFunction.SECONDARY_INTENT,
+            contacts_injured_skin_or_mucous_membrane=Tri.YES,
         )
-        assert "functions.0.general.breaches_dermis" in profile.missing()
+        missing = profile.missing()
+        assert "functions.0.general.barrier_compression_or_absorption" in missing
+        assert ("functions.0.general.principally_for_breached_dermis_secondary_intent"
+                in missing)
+        assert "functions.0.general.channels_or_stores_blood_for_administration" not in missing
 
-    def test_a_barrier_dressing_is_never_asked_about_the_dermis(self):
+    def test_substances_open_the_2_2_and_2_3_questions(self):
         profile = general_profile(
             invasiveness=Invasiveness.NON_INVASIVE,
-            contacts_injured_skin=Tri.YES,
-            wound_function=WoundFunction.MECHANICAL_BARRIER,
+            handles_substances_for_administration=Tri.YES,
         )
-        assert "functions.0.general.breaches_dermis" not in profile.missing()
+        missing = profile.missing()
+        assert "functions.0.general.saline_only_flush_or_patency" in missing
+        assert "functions.0.general.connected_to_active_device" not in missing
+        assert "functions.0.general.barrier_compression_or_absorption" not in missing
+
+    def test_answering_can_open_one_more_question(self):
+        """Other liquids need the connection question; modifying needs 2.3(2)."""
+        profile = general_profile(
+            invasiveness=Invasiveness.NON_INVASIVE,
+            handles_substances_for_administration=Tri.YES,
+            channels_or_stores_liquid_or_gas_for_administration=Tri.YES,
+            modifies_composition_of_blood_or_infusion=Tri.YES,
+        )
+        missing = profile.missing()
+        assert "functions.0.general.connected_to_active_device" in missing
+        assert ("functions.0.general.treatment_is_filtration_centrifugation_or_exchange"
+                in missing)
 
     def test_software_is_not_asked_about_animal_tissue(self):
         profile = general_profile(
@@ -213,21 +224,22 @@ class TestPrune:
             duration=Duration.SHORT_TERM,
             body_contact=BodyContact.BREACHED_SKIN,
             absorbed_or_chemically_changed=Tri.NO,
-            contacts_injured_skin=Tri.YES,
+            contacts_injured_skin_or_mucous_membrane=Tri.YES,
         )
         function = only(profile)
-        assert function.general.contacts_injured_skin.resolved
+        assert function.general.contacts_injured_skin_or_mucous_membrane.resolved
         function.prune()
-        assert function.general.contacts_injured_skin.resolved is False
+        assert function.general.contacts_injured_skin_or_mucous_membrane.resolved is False
         assert function.general.duration.resolved is True
 
     def test_pruning_leaves_a_complete_function_complete(self):
         profile = general_profile(
             invasiveness=Invasiveness.NON_INVASIVE,
             active_type=ActiveType.NOT_ACTIVE,
-            contacts_injured_skin=Tri.YES,
-            wound_function=WoundFunction.MECHANICAL_BARRIER,
-            fluid_handling=FluidHandling.NONE,
+            contacts_injured_skin_or_mucous_membrane=Tri.YES,
+            barrier_compression_or_absorption=Tri.YES,
+            principally_for_breached_dermis_secondary_intent=Tri.NO,
+            handles_substances_for_administration=Tri.NO,
             incorporates_medicine=Tri.NO,
             contraceptive_or_sti_prevention=Tri.NO,
             disinfects_another_device=Tri.NO,
@@ -248,9 +260,10 @@ class TestTermination:
             "invasiveness": Invasiveness.NON_INVASIVE,
             "active_type": ActiveType.DIAGNOSTIC,
             "clinical_function": ClinicalFunction.DIAGNOSE_OR_SCREEN,
-            "contacts_injured_skin": Tri.YES,
-            "wound_function": WoundFunction.SECONDARY_INTENT,
-            "fluid_handling": FluidHandling.NONE,
+            "contacts_injured_skin_or_mucous_membrane": Tri.YES,
+            "barrier_compression_or_absorption": Tri.NO,
+            "principally_for_breached_dermis_secondary_intent": Tri.YES,
+            "handles_substances_for_administration": Tri.NO,
             "therapeutic_purpose": TherapeuticPurpose.DISEASE,
             "excluded_item": "none",
         }
@@ -427,5 +440,13 @@ class TestLegalVocabulary:
     def test_duration_bands_are_the_legal_ones(self):
         assert {d.value for d in Duration} == {"transient", "short_term", "long_term"}
 
-    def test_wound_function_covers_every_limb_of_sub_rule_2_4(self):
-        assert len(WoundFunction) == 4
+    def test_part_2_has_a_field_for_every_paragraph(self):
+        """2.2(1)(a)-(c), 2.2A, 2.3(1)-(2), 2.4(3)-(4), plus the two gates."""
+        names = set(GeneralDeviceProfile.model_fields)
+        for field in PART_2_SUBSTANCE_FIELDS + PART_2_WOUND_FIELDS + [
+            "handles_substances_for_administration",
+            "contacts_injured_skin_or_mucous_membrane",
+            "connected_to_active_device",
+            "treatment_is_filtration_centrifugation_or_exchange",
+        ]:
+            assert field in names

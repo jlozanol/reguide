@@ -150,7 +150,10 @@ def classify_function(function: FunctionProfile) -> Classification:
             return Classification(unresolved=["ivd"])
         return schedule2a.evaluate(function.ivd)
     if kind is DeviceKind.GENERAL:
-        return Classification(unresolved=["s2 (Schedule 2 rules not implemented)"])
+        from . import schedule2
+        if function.general is None:
+            return Classification(unresolved=["general"])
+        return schedule2.evaluate(function)
     return Classification(unresolved=["kind"])
 
 

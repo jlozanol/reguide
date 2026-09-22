@@ -130,30 +130,60 @@
             "basis": "unknown",
             "evidence": null
           },
-          "contacts_injured_skin": {
-            "value": "yes",
+          "handles_substances_for_administration": {
+            "value": "no",
             "basis": "stated",
             "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
           },
-          "wound_function": {
-            "value": "mechanical_barrier_compression_or_absorption",
-            "basis": "stated",
-            "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
-          },
-          "breaches_dermis": {
+          "channels_or_stores_blood_for_administration": {
             "value": null,
             "basis": "unknown",
             "evidence": null
           },
-          "fluid_handling": {
-            "value": "none",
-            "basis": "stated",
-            "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
+          "stores_organ_or_tissue_for_introduction": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "channels_or_stores_liquid_or_gas_for_administration": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "connected_to_active_device": {
             "value": null,
             "basis": "unknown",
             "evidence": null
+          },
+          "saline_only_flush_or_patency": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "modifies_composition_of_blood_or_infusion": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "treatment_is_filtration_centrifugation_or_exchange": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contacts_injured_skin_or_mucous_membrane": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
+          },
+          "barrier_compression_or_absorption": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
+          },
+          "principally_for_breached_dermis_secondary_intent": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
           },
           "reusable_surgical_instrument": {
             "value": null,
@@ -246,6 +276,6 @@
     ],
     "funding": null,
     "source_text": "Sterile adhesive dressing strip Adhesive dressing strip that absorbs exudate from a wound, supplied sterile. Sterile adhesive dressing strip Adhesive dressing strip that absorbs exudate from a wound, supplied sterile. fixture decomposition is fixed by hand",
-    "schema_version": "0.6"
+    "schema_version": "0.7"
   }
 }

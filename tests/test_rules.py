@@ -58,8 +58,8 @@ def test_known_agreeing_is_up_to_date(verified):
 
 
 def test_every_verified_fixture_is_scored(verified, everything):
-    assert len(verified.fixtures) == 31
-    assert len(everything.fixtures) == 36
+    assert len(verified.fixtures) == 33
+    assert len(everything.fixtures) == 38
 
 
 def test_unverified_fixtures_get_no_confident_wrong_class_either(everything):

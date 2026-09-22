@@ -128,30 +128,60 @@
             "basis": "unknown",
             "evidence": null
           },
-          "contacts_injured_skin": {
-            "value": "yes",
+          "handles_substances_for_administration": {
+            "value": "no",
             "basis": "stated",
             "evidence": "For wounds that have breached the dermis and can only heal by secondary intent."
           },
-          "wound_function": {
-            "value": "breached_dermis_healing_by_secondary_intent",
-            "basis": "stated",
-            "evidence": "For wounds that have breached the dermis and can only heal by secondary intent."
+          "channels_or_stores_blood_for_administration": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
-          "breaches_dermis": {
-            "value": "yes",
-            "basis": "stated",
-            "evidence": "For wounds that have breached the dermis and can only heal by secondary intent."
+          "stores_organ_or_tissue_for_introduction": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
-          "fluid_handling": {
-            "value": "none",
-            "basis": "stated",
-            "evidence": "For wounds that have breached the dermis and can only heal by secondary intent."
+          "channels_or_stores_liquid_or_gas_for_administration": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
           },
           "connected_to_active_device": {
             "value": null,
             "basis": "unknown",
             "evidence": null
+          },
+          "saline_only_flush_or_patency": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "modifies_composition_of_blood_or_infusion": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "treatment_is_filtration_centrifugation_or_exchange": {
+            "value": null,
+            "basis": "unknown",
+            "evidence": null
+          },
+          "contacts_injured_skin_or_mucous_membrane": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "For wounds that have breached the dermis and can only heal by secondary intent."
+          },
+          "barrier_compression_or_absorption": {
+            "value": "no",
+            "basis": "stated",
+            "evidence": "For wounds that have breached the dermis and can only heal by secondary intent."
+          },
+          "principally_for_breached_dermis_secondary_intent": {
+            "value": "yes",
+            "basis": "stated",
+            "evidence": "For wounds that have breached the dermis and can only heal by secondary intent."
           },
           "reusable_surgical_instrument": {
             "value": null,
@@ -244,6 +274,6 @@
     ],
     "funding": null,
     "source_text": "Dressing for chronic extensive ulceration For wounds that have breached the dermis and can only heal by secondary intent. Dressing for chronic extensive ulceration For wounds that have breached the dermis and can only heal by secondary intent. fixture decomposition is fixed by hand",
-    "schema_version": "0.6"
+    "schema_version": "0.7"
   }
 }
