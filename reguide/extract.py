@@ -92,9 +92,10 @@ class Option(BaseModel):
 class Question(BaseModel):
     """What next_question hands to the interface.
 
-    text is written for someone who has never read the Regulations. clause
-    names the provision the answer feeds, for the report, not for the founder.
-    multi is true for a "tick every one that applies" checklist.
+    text is written for someone who has never read the Regulations. hint is
+    an optional line under it: a carve-out the clause makes, or an example.
+    clause names the provision the answer feeds, for the report, not for the
+    founder. multi is true for a "tick every one that applies" checklist.
     """
 
     id: str
@@ -103,6 +104,7 @@ class Question(BaseModel):
     options: list[Option]
     multi: bool = False
     clause: str = ""
+    hint: str = ""
 
     @model_validator(mode="after")
     def _options_stay_inside_the_question(self):
