@@ -256,5 +256,17 @@
     "source_text": "Reagent red blood cells for ABO reverse grouping Kit of red blood cells for performing ABO reverse groups in pretransfusion testing. Reagent red blood cells for ABO reverse grouping Kit of red blood cells for performing ABO reverse groups in pretransfusion testing. fixture decomposition is fixed by hand",
     "transcript": [],
     "schema_version": "0.12"
+  },
+  "intake": {
+    "cases": {
+      "described": "Reagent red blood cells for ABO reverse grouping. Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
+    },
+    "specific": [
+      "functions.0.kind",
+      "functions.0.status.therapeutic_purpose",
+      "functions.0.ivd.types_blood_or_tissue",
+      "functions.0.ivd.assesses_transfusion_or_transplant_compatibility",
+      "functions.0.ivd.detects_listed_blood_group_marker"
+    ]
   }
 }

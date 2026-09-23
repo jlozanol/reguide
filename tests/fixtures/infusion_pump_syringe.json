@@ -496,5 +496,17 @@
     "source_text": "Infusion pump syringe Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient. Infusion pump syringe Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient. fixture decomposition is fixed by hand",
     "transcript": [],
     "schema_version": "0.12"
+  },
+  "intake": {
+    "cases": {
+      "described": "Infusion pump syringe. Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient."
+    },
+    "specific": [
+      "functions.0.kind",
+      "functions.0.status.therapeutic_purpose",
+      "functions.0.general.handles_substances_for_administration",
+      "functions.0.general.channels_or_stores_liquid_or_gas_for_administration",
+      "functions.0.general.connected_to_active_device"
+    ]
   }
 }

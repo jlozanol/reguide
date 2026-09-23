@@ -496,5 +496,20 @@
     "source_text": "Muscle response monitoring app Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy. Muscle response monitoring app Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy. fixture decomposition is fixed by hand",
     "transcript": [],
     "schema_version": "0.12"
+  },
+  "intake": {
+    "cases": {
+      "described": "Muscle response monitoring app. Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
+    },
+    "specific": [
+      "functions.0.kind",
+      "functions.0.is_software",
+      "functions.0.status.therapeutic_purpose",
+      "functions.0.status.cdss_sole_purpose_recommendation",
+      "functions.0.status.cdss_processes_device_signal_or_image",
+      "functions.0.general.active_for_diagnosis",
+      "functions.0.general.monitors_disease_state",
+      "functions.0.general.monitoring_danger"
+    ]
   }
 }

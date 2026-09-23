@@ -496,5 +496,19 @@
     "source_text": "Metal fixation screw, permanent Holds bone together for longer than 30 days, permanently implanted. Metal fixation screw, permanent Holds bone together for longer than 30 days, permanently implanted. fixture decomposition is fixed by hand",
     "transcript": [],
     "schema_version": "0.12"
+  },
+  "intake": {
+    "cases": {
+      "described": "Metal fixation screw, permanent. Holds bone together for longer than 30 days, permanently implanted.",
+      "founder": "We make titanium bone screws that surgeons put in to hold a broken bone together. They stay in the patient permanently. Every screw is packed sterile."
+    },
+    "specific": [
+      "core.supplied_sterile",
+      "functions.0.kind",
+      "functions.0.status.therapeutic_purpose",
+      "functions.0.general.invasiveness",
+      "functions.0.general.duration",
+      "functions.0.general.is_active_implantable"
+    ]
   }
 }

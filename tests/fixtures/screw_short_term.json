@@ -496,5 +496,17 @@
     "source_text": "Metal fixation screw, short term Holds bone together for up to 30 days to support fracture healing. Metal fixation screw, short term Holds bone together for up to 30 days to support fracture healing. fixture decomposition is fixed by hand",
     "transcript": [],
     "schema_version": "0.12"
+  },
+  "intake": {
+    "cases": {
+      "described": "Metal fixation screw, short term. Holds bone together for up to 30 days to support fracture healing."
+    },
+    "specific": [
+      "core.supplied_sterile",
+      "functions.0.kind",
+      "functions.0.status.therapeutic_purpose",
+      "functions.0.general.invasiveness",
+      "functions.0.general.duration"
+    ]
   }
 }

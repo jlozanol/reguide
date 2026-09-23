@@ -496,5 +496,19 @@
     "source_text": "Condom with spermicide Barrier contraceptive incorporating a spermicidal agent. Condom with spermicide Barrier contraceptive incorporating a spermicidal agent. fixture decomposition is fixed by hand",
     "transcript": [],
     "schema_version": "0.12"
+  },
+  "intake": {
+    "cases": {
+      "described": "Condom with spermicide. Barrier contraceptive incorporating a spermicidal agent."
+    },
+    "specific": [
+      "functions.0.kind",
+      "functions.0.status.therapeutic_purpose",
+      "functions.0.general.invasiveness",
+      "functions.0.general.duration",
+      "functions.0.general.orifice_site",
+      "functions.0.general.incorporates_medicine",
+      "functions.0.general.contraceptive_or_sti_prevention"
+    ]
   }
 }

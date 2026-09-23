@@ -950,5 +950,23 @@
     "source_text": "Consumer wellbeing app Tracks sleep and activity for general wellbeing and includes a symptom checker that suggests whether to seek care. Activity and sleep tracking Records sleep and activity for general wellbeing. Symptom checker Asks a consumer about symptoms and suggests whether to seek medical care. fixture decomposition is fixed by hand",
     "transcript": [],
     "schema_version": "0.12"
+  },
+  "intake": {
+    "cases": {
+      "described": "Consumer wellbeing app. Tracks sleep and activity for general wellbeing and includes a symptom checker that suggests whether to seek care. Activity and sleep tracking: Records sleep and activity for general wellbeing. Symptom checker: Asks a consumer about symptoms and suggests whether to seek medical care."
+    },
+    "specific": [
+      "functions.0.kind",
+      "functions.0.is_software",
+      "functions.0.status.therapeutic_purpose",
+      "functions.1.kind",
+      "functions.1.is_software",
+      "functions.1.status.therapeutic_purpose",
+      "functions.1.status.cdss_replaces_clinical_judgement",
+      "functions.1.general.active_for_diagnosis",
+      "functions.1.general.diagnoses_or_screens",
+      "functions.1.general.decision_maker",
+      "functions.1.general.condition_severity"
+    ]
   }
 }

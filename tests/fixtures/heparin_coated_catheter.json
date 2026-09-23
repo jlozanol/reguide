@@ -496,5 +496,18 @@
     "source_text": "Heparin-coated catheter Catheter incorporating heparin as an ancillary medicinal substance. Heparin-coated catheter Catheter incorporating heparin as an ancillary medicinal substance. fixture decomposition is fixed by hand",
     "transcript": [],
     "schema_version": "0.12"
+  },
+  "intake": {
+    "cases": {
+      "described": "Heparin-coated catheter. Catheter incorporating heparin as an ancillary medicinal substance."
+    },
+    "specific": [
+      "core.supplied_sterile",
+      "functions.0.kind",
+      "functions.0.status.therapeutic_purpose",
+      "functions.0.general.invasiveness",
+      "functions.0.general.duration",
+      "functions.0.general.incorporates_medicine"
+    ]
   }
 }

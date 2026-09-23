@@ -496,5 +496,17 @@
     "source_text": "Radiotherapy after-loading control system Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way. Radiotherapy after-loading control system Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way. fixture decomposition is fixed by hand",
     "transcript": [],
     "schema_version": "0.12"
+  },
+  "intake": {
+    "cases": {
+      "described": "Radiotherapy after-loading control system. Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
+    },
+    "specific": [
+      "functions.0.kind",
+      "functions.0.status.therapeutic_purpose",
+      "functions.0.general.is_active_device",
+      "functions.0.general.active_for_therapy",
+      "functions.0.general.controls_hazardous_therapy_device"
+    ]
   }
 }

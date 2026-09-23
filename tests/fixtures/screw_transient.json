@@ -496,5 +496,17 @@
     "source_text": "Metal fixation screw, intraoperative Holds bone together temporarily during surgery. Metal fixation screw, intraoperative Holds bone together temporarily during surgery. fixture decomposition is fixed by hand",
     "transcript": [],
     "schema_version": "0.12"
+  },
+  "intake": {
+    "cases": {
+      "described": "Metal fixation screw, intraoperative. Holds bone together temporarily during surgery."
+    },
+    "specific": [
+      "core.supplied_sterile",
+      "functions.0.kind",
+      "functions.0.status.therapeutic_purpose",
+      "functions.0.general.invasiveness",
+      "functions.0.general.duration"
+    ]
   }
 }

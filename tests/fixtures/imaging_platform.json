@@ -1404,5 +1404,33 @@
     "source_text": "Radiology reporting platform Stores radiology studies, flags abnormal ones for priority review and suggests a follow-up imaging interval. Study archive Stores and transmits radiology studies without interpretation. Abnormality triage Flags studies showing suspected abnormality for priority review by a radiologist. Follow-up interval suggestion Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist. fixture decomposition is fixed by hand",
     "transcript": [],
     "schema_version": "0.12"
+  },
+  "intake": {
+    "cases": {
+      "described": "Radiology reporting platform. Stores radiology studies, flags abnormal ones for priority review and suggests a follow-up imaging interval. Study archive: Stores and transmits radiology studies without interpretation. Abnormality triage: Flags studies showing suspected abnormality for priority review by a radiologist. Follow-up interval suggestion: Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist.",
+      "founder": "Our cloud platform stores hospital radiology scans. It also flags scans that look abnormal so a radiologist reads them first, and it looks at the images and suggests when the patient should have their next scan. The radiologist always makes the call."
+    },
+    "specific": [
+      "functions.0.kind",
+      "functions.0.is_software",
+      "functions.0.status.therapeutic_purpose",
+      "functions.1.kind",
+      "functions.1.is_software",
+      "functions.1.status.therapeutic_purpose",
+      "functions.1.status.cdss_sole_purpose_recommendation",
+      "functions.1.status.cdss_processes_device_signal_or_image",
+      "functions.1.general.active_for_diagnosis",
+      "functions.1.general.diagnoses_or_screens",
+      "functions.1.general.decision_maker",
+      "functions.1.general.condition_severity",
+      "functions.2.kind",
+      "functions.2.is_software",
+      "functions.2.status.therapeutic_purpose",
+      "functions.2.status.cdss_sole_purpose_recommendation",
+      "functions.2.status.cdss_processes_device_signal_or_image",
+      "functions.2.general.specifies_or_recommends_treatment",
+      "functions.2.general.decision_maker",
+      "functions.2.general.treatment_risk"
+    ]
   }
 }

@@ -496,5 +496,17 @@
     "source_text": "Dressing for chronic extensive ulceration For wounds that have breached the dermis and can only heal by secondary intent. Dressing for chronic extensive ulceration For wounds that have breached the dermis and can only heal by secondary intent. fixture decomposition is fixed by hand",
     "transcript": [],
     "schema_version": "0.12"
+  },
+  "intake": {
+    "cases": {
+      "described": "Dressing for chronic extensive ulceration. For wounds that have breached the dermis and can only heal by secondary intent."
+    },
+    "specific": [
+      "core.supplied_sterile",
+      "functions.0.kind",
+      "functions.0.status.therapeutic_purpose",
+      "functions.0.general.contacts_injured_skin_or_mucous_membrane",
+      "functions.0.general.principally_for_breached_dermis_secondary_intent"
+    ]
   }
 }

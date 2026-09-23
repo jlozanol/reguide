@@ -256,5 +256,15 @@
     "source_text": "Non-assay-specific control plasma Quality control material for coagulation studies, not assay specific. Non-assay-specific control plasma Quality control material for coagulation studies, not assay specific. fixture decomposition is fixed by hand",
     "transcript": [],
     "schema_version": "0.12"
+  },
+  "intake": {
+    "cases": {
+      "described": "Non-assay-specific control plasma. Quality control material for coagulation studies, not assay specific."
+    },
+    "specific": [
+      "functions.0.kind",
+      "functions.0.status.therapeutic_purpose",
+      "functions.0.ivd.is_quality_control_material"
+    ]
   }
 }

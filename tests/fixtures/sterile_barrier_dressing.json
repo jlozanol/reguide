@@ -498,5 +498,18 @@
     "source_text": "Sterile adhesive dressing strip Adhesive dressing strip that absorbs exudate from a wound, supplied sterile. Sterile adhesive dressing strip Adhesive dressing strip that absorbs exudate from a wound, supplied sterile. fixture decomposition is fixed by hand",
     "transcript": [],
     "schema_version": "0.12"
+  },
+  "intake": {
+    "cases": {
+      "described": "Sterile adhesive dressing strip. Adhesive dressing strip that absorbs exudate from a wound, supplied sterile.",
+      "founder": "A plaster for small cuts and grazes. It soaks up fluid from the wound and keeps dirt out while it heals. Each one comes individually wrapped and sterile."
+    },
+    "specific": [
+      "core.supplied_sterile",
+      "functions.0.kind",
+      "functions.0.status.therapeutic_purpose",
+      "functions.0.general.contacts_injured_skin_or_mucous_membrane",
+      "functions.0.general.barrier_compression_or_absorption"
+    ]
   }
 }

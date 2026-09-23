@@ -256,5 +256,16 @@
     "source_text": "HIV blood donor screening assay Screens donated blood for HIV before transfusion. HIV blood donor screening assay Screens donated blood for HIV before transfusion. fixture decomposition is fixed by hand",
     "transcript": [],
     "schema_version": "0.12"
+  },
+  "intake": {
+    "cases": {
+      "described": "HIV blood donor screening assay. Screens donated blood for HIV before transfusion."
+    },
+    "specific": [
+      "functions.0.kind",
+      "functions.0.status.therapeutic_purpose",
+      "functions.0.ivd.detects_infectious_agent",
+      "functions.0.ivd.screens_donations_for_transmissible_agents"
+    ]
   }
 }

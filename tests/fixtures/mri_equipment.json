@@ -496,5 +496,19 @@
     "source_text": "Magnetic resonance equipment Supplies energy absorbed by the patient's body for diagnostic imaging. Magnetic resonance equipment Supplies energy absorbed by the patient's body for diagnostic imaging. fixture decomposition is fixed by hand",
     "transcript": [],
     "schema_version": "0.12"
+  },
+  "intake": {
+    "cases": {
+      "described": "Magnetic resonance equipment. Supplies energy absorbed by the patient's body for diagnostic imaging."
+    },
+    "specific": [
+      "functions.0.kind",
+      "functions.0.status.therapeutic_purpose",
+      "functions.0.general.is_active_device",
+      "functions.0.general.active_for_diagnosis",
+      "functions.0.general.supplies_absorbed_energy_for_diagnosis",
+      "functions.0.general.records_images_or_anatomical_model",
+      "functions.0.general.records_patient_images_outside_visible_spectrum"
+    ]
   }
 }

@@ -496,5 +496,17 @@
     "source_text": "Long-term indwelling orifice device Invasive device used through a body orifice for longer than 30 days. Long-term indwelling orifice device Invasive device used through a body orifice for longer than 30 days. fixture decomposition is fixed by hand",
     "transcript": [],
     "schema_version": "0.12"
+  },
+  "intake": {
+    "cases": {
+      "described": "Long-term indwelling orifice device. Invasive device used through a body orifice for longer than 30 days."
+    },
+    "specific": [
+      "functions.0.kind",
+      "functions.0.status.therapeutic_purpose",
+      "functions.0.general.invasiveness",
+      "functions.0.general.duration",
+      "functions.0.general.orifice_site"
+    ]
   }
 }

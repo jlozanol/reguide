@@ -496,5 +496,18 @@
     "source_text": "Volumetric infusion pump Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous. Volumetric infusion pump Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous. fixture decomposition is fixed by hand",
     "transcript": [],
     "schema_version": "0.12"
+  },
+  "intake": {
+    "cases": {
+      "described": "Volumetric infusion pump. Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous."
+    },
+    "specific": [
+      "functions.0.kind",
+      "functions.0.status.therapeutic_purpose",
+      "functions.0.general.is_active_device",
+      "functions.0.general.active_for_therapy",
+      "functions.0.general.administers_or_removes_substances",
+      "functions.0.general.substance_administration_potentially_hazardous"
+    ]
   }
 }

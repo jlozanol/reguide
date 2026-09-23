@@ -496,5 +496,19 @@
     "source_text": "Cognitive behavioural therapy app Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm. Cognitive behavioural therapy app Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm. fixture decomposition is fixed by hand",
     "transcript": [],
     "schema_version": "0.12"
+  },
+  "intake": {
+    "cases": {
+      "described": "Cognitive behavioural therapy app. Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm.",
+      "founder": "MoodPath is an app that delivers cognitive behavioural therapy sessions to people living with bipolar disorder. We wrote the program ourselves rather than following a published clinical guideline, and if it is used wrongly the therapy could cause harm."
+    },
+    "specific": [
+      "functions.0.kind",
+      "functions.0.is_software",
+      "functions.0.status.therapeutic_purpose",
+      "functions.0.status.cdss_replaces_clinical_judgement",
+      "functions.0.general.provides_therapy_through_information",
+      "functions.0.general.information_therapy_harm"
+    ]
   }
 }

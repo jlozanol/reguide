@@ -494,5 +494,16 @@
     "source_text": "Sleep and activity tracker Records sleep and activity for general wellbeing. Sleep and activity tracker Records sleep and activity for general wellbeing. fixture decomposition is fixed by hand",
     "transcript": [],
     "schema_version": "0.12"
+  },
+  "intake": {
+    "cases": {
+      "described": "Sleep and activity tracker. Records sleep and activity for general wellbeing.",
+      "founder": "Our app tracks your sleep and daily activity to help you feel your best. It is a lifestyle product for general wellbeing."
+    },
+    "specific": [
+      "functions.0.kind",
+      "functions.0.is_software",
+      "functions.0.status.therapeutic_purpose"
+    ]
   }
 }

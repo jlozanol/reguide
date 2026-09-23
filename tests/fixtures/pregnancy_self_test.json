@@ -256,5 +256,17 @@
     "source_text": "Pregnancy self-test Self-test for pregnancy used by a lay person at home; the result does not determine a serious condition. Pregnancy self-test Self-test for pregnancy used by a lay person at home; the result does not determine a serious condition. fixture decomposition is fixed by hand",
     "transcript": [],
     "schema_version": "0.12"
+  },
+  "intake": {
+    "cases": {
+      "described": "Pregnancy self-test. Self-test for pregnancy used by a lay person at home; the result does not determine a serious condition.",
+      "founder": "Our pregnancy test is a stick you pee on at home. Two lines means pregnant. It is designed for women to use themselves, and it only tells you whether you are pregnant."
+    },
+    "specific": [
+      "functions.0.kind",
+      "functions.0.status.therapeutic_purpose",
+      "functions.0.ivd.is_self_test",
+      "functions.0.ivd.result_not_determining_serious_condition"
+    ]
   }
 }

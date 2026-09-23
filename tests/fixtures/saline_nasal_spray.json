@@ -496,5 +496,19 @@
     "source_text": "Isotonic saline nasal spray Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose. Isotonic saline nasal spray Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose. fixture decomposition is fixed by hand",
     "transcript": [],
     "schema_version": "0.12"
+  },
+  "intake": {
+    "cases": {
+      "described": "Isotonic saline nasal spray. Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose."
+    },
+    "specific": [
+      "functions.0.kind",
+      "functions.0.status.therapeutic_purpose",
+      "functions.0.general.invasiveness",
+      "functions.0.general.duration",
+      "functions.0.general.orifice_site",
+      "functions.0.general.is_substance_through_orifice_or_skin",
+      "functions.0.general.substance_acts_in_nose_mouth_or_on_skin"
+    ]
   }
 }

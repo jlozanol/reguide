@@ -256,5 +256,17 @@
     "source_text": "Chlamydia trachomatis assay Detects Chlamydia trachomatis in a clinical specimen for diagnosis. Chlamydia trachomatis assay Detects Chlamydia trachomatis in a clinical specimen for diagnosis. fixture decomposition is fixed by hand",
     "transcript": [],
     "schema_version": "0.12"
+  },
+  "intake": {
+    "cases": {
+      "described": "Chlamydia trachomatis assay. Detects Chlamydia trachomatis in a clinical specimen for diagnosis.",
+      "founder": "A laboratory test kit that picks up chlamydia from a patient swab, so doctors can diagnose the infection."
+    },
+    "specific": [
+      "functions.0.kind",
+      "functions.0.status.therapeutic_purpose",
+      "functions.0.ivd.detects_infectious_agent",
+      "functions.0.ivd.detects_sexually_transmitted_agent"
+    ]
   }
 }

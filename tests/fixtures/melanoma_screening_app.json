@@ -496,5 +496,21 @@
     "source_text": "Consumer melanoma screening app Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer. Consumer melanoma screening app Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer. fixture decomposition is fixed by hand",
     "transcript": [],
     "schema_version": "0.12"
+  },
+  "intake": {
+    "cases": {
+      "described": "Consumer melanoma screening app. Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer.",
+      "founder": "SpotCheck lets anyone check a worrying mole at home. You point your phone at the mole and our AI tells you whether it looks like it could be melanoma, so you know whether you need to see a doctor. The result goes straight to you; no clinician reviews it."
+    },
+    "specific": [
+      "functions.0.kind",
+      "functions.0.is_software",
+      "functions.0.status.therapeutic_purpose",
+      "functions.0.status.cdss_replaces_clinical_judgement",
+      "functions.0.general.active_for_diagnosis",
+      "functions.0.general.diagnoses_or_screens",
+      "functions.0.general.decision_maker",
+      "functions.0.general.condition_severity"
+    ]
   }
 }

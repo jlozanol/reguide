@@ -496,5 +496,18 @@
     "source_text": "Collagen dressing for deep ulcers Dressing for deep wounds and ulcers that have breached the dermis, containing collagen for wound healing. Collagen dressing for deep ulcers Dressing for deep wounds and ulcers that have breached the dermis, containing collagen for wound healing. fixture decomposition is fixed by hand",
     "transcript": [],
     "schema_version": "0.12"
+  },
+  "intake": {
+    "cases": {
+      "described": "Collagen dressing for deep ulcers. Dressing for deep wounds and ulcers that have breached the dermis, containing collagen for wound healing."
+    },
+    "specific": [
+      "core.supplied_sterile",
+      "functions.0.kind",
+      "functions.0.status.therapeutic_purpose",
+      "functions.0.general.contacts_injured_skin_or_mucous_membrane",
+      "functions.0.general.principally_for_breached_dermis_secondary_intent",
+      "functions.0.general.contains_non_viable_animal_material"
+    ]
   }
 }

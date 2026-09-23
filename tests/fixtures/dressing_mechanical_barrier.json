@@ -496,5 +496,16 @@
     "source_text": "Absorbent pad Acts as a barrier to and absorbs exudate from a wound. Absorbent pad Acts as a barrier to and absorbs exudate from a wound. fixture decomposition is fixed by hand",
     "transcript": [],
     "schema_version": "0.12"
+  },
+  "intake": {
+    "cases": {
+      "described": "Absorbent pad. Acts as a barrier to and absorbs exudate from a wound."
+    },
+    "specific": [
+      "functions.0.kind",
+      "functions.0.status.therapeutic_purpose",
+      "functions.0.general.contacts_injured_skin_or_mucous_membrane",
+      "functions.0.general.barrier_compression_or_absorption"
+    ]
   }
 }

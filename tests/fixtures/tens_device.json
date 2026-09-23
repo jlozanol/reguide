@@ -496,5 +496,18 @@
     "source_text": "TENS device Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way. TENS device Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way. fixture decomposition is fixed by hand",
     "transcript": [],
     "schema_version": "0.12"
+  },
+  "intake": {
+    "cases": {
+      "described": "TENS device. Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way.",
+      "founder": "PainAway is a small battery-powered unit with sticky pads. You put the pads on your lower back and it sends gentle electrical pulses through the skin to ease back pain. The pulses are low power and are not dangerous."
+    },
+    "specific": [
+      "functions.0.kind",
+      "functions.0.status.therapeutic_purpose",
+      "functions.0.general.is_active_device",
+      "functions.0.general.active_for_therapy",
+      "functions.0.general.administers_or_exchanges_energy"
+    ]
   }
 }

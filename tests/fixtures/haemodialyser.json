@@ -496,5 +496,16 @@
     "source_text": "Haemodialyser Removes undesirable substances from blood by exchange of solutes before the blood is returned to the patient. Haemodialyser Removes undesirable substances from blood by exchange of solutes before the blood is returned to the patient. fixture decomposition is fixed by hand",
     "transcript": [],
     "schema_version": "0.12"
+  },
+  "intake": {
+    "cases": {
+      "described": "Haemodialyser. Removes undesirable substances from blood by exchange of solutes before the blood is returned to the patient."
+    },
+    "specific": [
+      "functions.0.kind",
+      "functions.0.status.therapeutic_purpose",
+      "functions.0.general.handles_substances_for_administration",
+      "functions.0.general.modifies_composition_of_blood_or_infusion"
+    ]
   }
 }

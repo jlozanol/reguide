@@ -15,12 +15,26 @@ classification never runs for it.
 The therapeutic purpose limb recorded on each function is for the citation
 only. The gate does not branch on which limb, only on whether one is reached.
 
+Every fixture also carries intake cases: descriptions for stage 1 to read,
+scored by scripts/score_intake.py against the fixture's own profile. The
+"described" case is built from the fixture's name and descriptions, in the
+regulatory wording the fixture was written in. A few fixtures add a
+"founder" case, the same device described the way a founder would pitch it,
+with no Regulations vocabulary; those are the fairer test of extraction. A
+founder text must never state anything the fixture contradicts.
+
+"specific" lists the fields a fixture sets on purpose, as opposed to the
+defaults the builder fills in (mostly "no" for things the description never
+mentions). Intake coverage is measured against these, and only against the
+ones extraction is allowed to claim.
+
 Run:  python scripts/build_fixtures.py
 """
 
 import json
 from pathlib import Path
 
+from reguide.intake_fields import EXTRACTABLE
 from reguide.profile import (
     Answer,
     Basis,
@@ -907,6 +921,113 @@ add("cdss_followup_from_report_text", None, "Schedule 4 Part 2", GATE_TEXT,
     verified=False, status=EXEMPT_CDSS)
 
 
+# -- Intake cases. -------------------------------------------------------------
+
+# The same device, as a founder would describe it. Plain words, no clause
+# vocabulary, and nothing the fixture's profile contradicts.
+FOUNDER_TEXTS = {
+    "melanoma_screening_app": (
+        "SpotCheck lets anyone check a worrying mole at home. You point your "
+        "phone at the mole and our AI tells you whether it looks like it could "
+        "be melanoma, so you know whether you need to see a doctor. The result "
+        "goes straight to you; no clinician reviews it."
+    ),
+    "screw_long_term": (
+        "We make titanium bone screws that surgeons put in to hold a broken "
+        "bone together. They stay in the patient permanently. Every screw is "
+        "packed sterile."
+    ),
+    "sterile_barrier_dressing": (
+        "A plaster for small cuts and grazes. It soaks up fluid from the wound "
+        "and keeps dirt out while it heals. Each one comes individually wrapped "
+        "and sterile."
+    ),
+    "pregnancy_self_test": (
+        "Our pregnancy test is a stick you pee on at home. Two lines means "
+        "pregnant. It is designed for women to use themselves, and it only "
+        "tells you whether you are pregnant."
+    ),
+    "tens_device": (
+        "PainAway is a small battery-powered unit with sticky pads. You put the "
+        "pads on your lower back and it sends gentle electrical pulses through "
+        "the skin to ease back pain. The pulses are low power and are not "
+        "dangerous."
+    ),
+    "cbt_app_bipolar": (
+        "MoodPath is an app that delivers cognitive behavioural therapy "
+        "sessions to people living with bipolar disorder. We wrote the program "
+        "ourselves rather than following a published clinical guideline, and "
+        "if it is used wrongly the therapy could cause harm."
+    ),
+    "chlamydia_test": (
+        "A laboratory test kit that picks up chlamydia from a patient swab, so "
+        "doctors can diagnose the infection."
+    ),
+    "imaging_platform": (
+        "Our cloud platform stores hospital radiology scans. It also flags "
+        "scans that look abnormal so a radiologist reads them first, and it "
+        "looks at the images and suggests when the patient should have their "
+        "next scan. The radiologist always makes the call."
+    ),
+    "wellness_sleep_tracker": (
+        "Our app tracks your sleep and daily activity to help you feel your "
+        "best. It is a lifestyle product for general wellbeing."
+    ),
+}
+
+
+def described_text(profile):
+    """The fixture's own wording, as one description."""
+    core = profile.core
+    parts = [f"{core.product_name.value}. {core.intended_purpose.value}"]
+    if len(profile.functions) > 1:
+        parts += [f"{f.name.value}: {f.description.value}" for f in profile.functions]
+    return " ".join(parts)
+
+
+SECTION_DEFAULTS = {"status": STATUS_DEFAULTS, "general": GENERAL_DEFAULTS,
+                    "ivd": IVD_DEFAULTS}
+
+
+def _plain(value):
+    return getattr(value, "value", value)
+
+
+def specific_fields(profile):
+    """Dotted names of the facts this fixture sets on purpose.
+
+    Kind and therapeutic purpose always count. Otherwise a field counts when
+    its value differs from the builder default, or is a yes on the product.
+    Fields extraction may never claim are left out.
+    """
+    names = []
+    for field in ("supplied_sterile", "has_measuring_function"):
+        if getattr(profile.core, field).value is Tri.YES:
+            names.append(f"core.{field}")
+    for index, function in enumerate(profile.functions):
+        names.append(f"functions.{index}.kind")
+        if function.is_software.value is Tri.YES:
+            names.append(f"functions.{index}.is_software")
+        for section, defaults in SECTION_DEFAULTS.items():
+            part = getattr(function, section)
+            if part is None:
+                continue
+            for name in type(part).model_fields:
+                answer = getattr(part, name)
+                if not answer.resolved or f"{section}.{name}" not in EXTRACTABLE:
+                    continue
+                if name not in defaults or _plain(defaults[name]) != _plain(answer.value):
+                    names.append(f"functions.{index}.{section}.{name}")
+    return names
+
+
+def intake_cases(slug, profile):
+    cases = {"described": described_text(profile)}
+    if slug in FOUNDER_TEXTS:
+        cases["founder"] = FOUNDER_TEXTS[slug]
+    return cases
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
 
@@ -942,6 +1063,10 @@ def main():
             "verified": verified,
             "note": note,
             "profile": profile.model_dump(mode="json"),
+            "intake": {
+                "cases": intake_cases(slug, profile),
+                "specific": specific_fields(profile),
+            },
         }
         (OUT / f"{slug}.json").write_text(json.dumps(payload, indent=2) + "\n")
         flag = "  " if verified else " ?"
@@ -954,6 +1079,9 @@ def main():
             summary = f"{summary} [{status.value}]"
         warn = f"  MISSING: {missing}" if missing else ""
         print(f"{flag} {slug:34} {count} {summary}{warn}")
+
+    unknown = set(FOUNDER_TEXTS) - {slug for slug, *_ in F}
+    assert not unknown, f"founder texts for fixtures that do not exist: {unknown}"
 
     verified_count = sum(1 for f in F if f[4])
     multi = sum(1 for f in F if len(f[5]) > 1)

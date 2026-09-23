@@ -925,5 +925,23 @@
     "source_text": "Prothrombin time self-testing pack Procedure pack for prothrombin time self-testing at home, containing a portable meter, test strips and a lancet. Portable prothrombin time meter Instrument that reads prothrombin time test strips. Prothrombin time test strips Test strips for prothrombin time self-testing by a lay person. Lancet Single-use lancet for obtaining a capillary blood specimen. fixture decomposition is fixed by hand",
     "transcript": [],
     "schema_version": "0.12"
+  },
+  "intake": {
+    "cases": {
+      "described": "Prothrombin time self-testing pack. Procedure pack for prothrombin time self-testing at home, containing a portable meter, test strips and a lancet. Portable prothrombin time meter: Instrument that reads prothrombin time test strips. Prothrombin time test strips: Test strips for prothrombin time self-testing by a lay person. Lancet: Single-use lancet for obtaining a capillary blood specimen."
+    },
+    "specific": [
+      "core.supplied_sterile",
+      "functions.0.kind",
+      "functions.0.status.therapeutic_purpose",
+      "functions.0.ivd.is_ivd_instrument",
+      "functions.1.kind",
+      "functions.1.status.therapeutic_purpose",
+      "functions.1.ivd.is_self_test",
+      "functions.2.kind",
+      "functions.2.status.therapeutic_purpose",
+      "functions.2.general.invasiveness",
+      "functions.2.general.duration"
+    ]
   }
 }

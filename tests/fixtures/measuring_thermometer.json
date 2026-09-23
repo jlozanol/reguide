@@ -498,5 +498,15 @@
     "source_text": "Non-powered clinical thermometer Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin. Non-powered clinical thermometer Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin. fixture decomposition is fixed by hand",
     "transcript": [],
     "schema_version": "0.12"
+  },
+  "intake": {
+    "cases": {
+      "described": "Non-powered clinical thermometer. Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+    },
+    "specific": [
+      "core.has_measuring_function",
+      "functions.0.kind",
+      "functions.0.status.therapeutic_purpose"
+    ]
   }
 }

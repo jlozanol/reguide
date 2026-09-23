@@ -496,5 +496,18 @@
     "source_text": "Fixation screw contacting central circulatory system Direct contact with the central circulatory or central nervous system. Fixation screw contacting central circulatory system Direct contact with the central circulatory or central nervous system. fixture decomposition is fixed by hand",
     "transcript": [],
     "schema_version": "0.12"
+  },
+  "intake": {
+    "cases": {
+      "described": "Fixation screw contacting central circulatory system. Direct contact with the central circulatory or central nervous system."
+    },
+    "specific": [
+      "core.supplied_sterile",
+      "functions.0.kind",
+      "functions.0.status.therapeutic_purpose",
+      "functions.0.general.invasiveness",
+      "functions.0.general.duration",
+      "functions.0.general.direct_contact_heart_circulation_or_nervous_system"
+    ]
   }
 }
