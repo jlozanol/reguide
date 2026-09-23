@@ -1,0 +1,58 @@
+{
+  "key": "783e29d9a7f27dc7f07e1a912eee30e9fe33273d5831ac9e5f4dc3f7edf84c53",
+  "model": "gpt-6-sol",
+  "input": "Haemodialyser. Removes undesirable substances from blood by exchange of solutes before the blood is returned to the patient.",
+  "output": {
+    "functions": [
+      {
+        "name": "Haemodialyser",
+        "name_evidence": "Haemodialyser",
+        "description": "Removes undesirable substances from blood by exchange of solutes before the blood is returned to the patient."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.product_name",
+        "value": "Haemodialyser",
+        "evidence": "Haemodialyser"
+      },
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Removes undesirable substances from blood by exchange of solutes before the blood is returned to the patient.",
+        "evidence": "Removes undesirable substances from blood by exchange of solutes before the blood is returned to the patient."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Removes undesirable substances from blood by exchange of solutes before the blood is returned to the patient."
+      },
+      {
+        "function_index": 0,
+        "target": "general.modifies_composition_of_blood_or_infusion",
+        "value": "yes",
+        "evidence": "Removes undesirable substances from blood by exchange of solutes"
+      },
+      {
+        "function_index": 0,
+        "target": "general.treatment_is_filtration_centrifugation_or_exchange",
+        "value": "no",
+        "evidence": "by exchange of solutes"
+      },
+      {
+        "function_index": 0,
+        "target": "general.handles_substances_for_administration",
+        "value": "yes",
+        "evidence": "blood is returned to the patient"
+      },
+      {
+        "function_index": 0,
+        "target": "general.channels_or_stores_blood_for_administration",
+        "value": "yes",
+        "evidence": "blood is returned to the patient"
+      }
+    ]
+  }
+}

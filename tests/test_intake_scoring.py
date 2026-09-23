@@ -212,3 +212,93 @@ class TestRecordedCassettes:
         result = S.score_case(case, output, state, FIXTURES[case.slug])
         assert result.untraceable == []
         assert [(f.field, f.extracted, f.expected) for f in result.contradictions] == []
+
+
+class TestPurposeLimb:
+    def test_a_different_valid_limb_counts_as_agreed(self):
+        result = score(screw_output(
+            claim("function.kind", "general_device", "bone screws"),
+            claim("status.therapeutic_purpose",
+                  "investigation_or_modification_of_anatomy_or_physiological_process",
+                  "hold a broken bone together"),
+        ))
+        [note] = result.of(S.Kind.OTHER_PURPOSE)
+        assert note.expected == "diagnosis_monitoring_treatment_or_compensation_for_injury"
+        assert result.contradictions == []
+        assert "functions.0.status.therapeutic_purpose" in result.covered
+
+    def test_a_limb_where_the_fixture_has_none_is_still_a_contradiction(self):
+        slug = "anatomy_education_app"
+        text = FIXTURES[slug]["intake"]["cases"]["described"]
+        output = {"functions": [{"name": "Anatomy", "name_evidence": "Anatomy",
+                                 "description": "Interactive 3D anatomy lessons"}],
+                  "claims": [claim("function.kind", "general_device", "Anatomy teaching app"),
+                             claim("status.therapeutic_purpose",
+                                   "investigation_or_modification_of_anatomy_or_"
+                                   "physiological_process", "3D anatomy lessons")]}
+        result = S.score_case(S.IntakeCase(slug, "described", text), output,
+                              S.Cassette.OK, FIXTURES[slug])
+        [bad] = result.contradictions
+        assert bad.field == "functions.0.status.therapeutic_purpose"
+        assert bad.expected == "no_therapeutic_purpose"
+
+
+class TestReviewed:
+    def test_a_reviewed_disagreement_is_not_a_contradiction(self):
+        slug = "wellness_sleep_tracker"
+        text = FIXTURES[slug]["intake"]["cases"]["founder"]
+        output = {"functions": [{"name": "Tracker", "name_evidence": "Our app",
+                                 "description": "Our app tracks your sleep"}],
+                  "claims": [claim("function.kind", "general_device", "Our app"),
+                             claim("general.monitors_disease_state", "yes",
+                                   "tracks your sleep and daily activity")]}
+        result = S.score_case(S.IntakeCase(slug, "founder", text), output,
+                              S.Cassette.OK, FIXTURES[slug])
+        [reviewed] = result.of(S.Kind.REVIEWED)
+        assert reviewed.field == "functions.0.general.monitors_disease_state"
+        assert result.contradictions == []
+
+    def test_only_the_reviewed_value_is_accepted(self):
+        """The screw has no reviewed entries: the same kind of claim still fails."""
+        result = score(screw_output(
+            claim("function.kind", "general_device", "bone screws"),
+            claim("general.monitors_disease_state", "yes", "hold a broken bone together"),
+        ))
+        assert result.of(S.Kind.REVIEWED) == []
+
+    @pytest.mark.parametrize("key", sorted(S.REVIEWED), ids=lambda k: f"{k[0]}:{k[1]}")
+    def test_every_entry_names_a_real_field_and_gives_a_reason(self, key):
+        slug, dotted, value = key
+        assert slug in FIXTURES
+        profile = DeviceProfile.model_validate(FIXTURES[slug]["profile"])
+        answer = profile.answer_at(dotted)
+        assert answer is not None and answer.resolved
+        assert str(getattr(answer.value, "value", answer.value)) != value
+        assert len(S.REVIEWED[key]) > 40
+
+    def test_unused_entries_are_reported_only_for_fully_recorded_fixtures(self):
+        slug = "wellness_sleep_tracker"
+        cases = [c for c in CASES if c.slug == slug]
+        empty = S.score_case(cases[0], {"functions": [], "claims": []}, S.Cassette.OK,
+                             FIXTURES[slug])
+        missing = S.score_case(cases[1], None, S.Cassette.MISSING, FIXTURES[slug])
+        assert S.unused_reviews([empty, missing]) == []
+        both = [empty, S.score_case(cases[1], {"functions": [], "claims": []},
+                                    S.Cassette.OK, FIXTURES[slug])]
+        assert (slug, "functions.0.general.monitors_disease_state", "yes") in \
+            S.unused_reviews(both)
+
+
+class TestFieldGuideFixes:
+    """The wording fixes from the first recording's triage, so none slips back."""
+
+    @pytest.mark.parametrize("target,phrase", [
+        ("general.treatment_is_filtration_centrifugation_or_exchange", "solutes"),
+        ("general.decision_maker", "suggests or recommends something to a professional"),
+        ("general.invasiveness", "not where a substance it delivers goes"),
+        ("general.is_programmed_or_programmable", "automatic behaviour alone"),
+        ("general.records_images_or_anatomical_model", "Storing, displaying or transmitting"),
+    ])
+    def test_the_fix_is_in_the_guide_and_the_instructions(self, target, phrase):
+        assert phrase in F.EXTRACTABLE[target]
+        assert phrase in F.INSTRUCTIONS

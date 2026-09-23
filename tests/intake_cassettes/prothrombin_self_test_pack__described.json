@@ -1,0 +1,92 @@
+{
+  "key": "7aafd81c02665ce3972de68b19420630962e247e8588ee9c729416bebf11079e",
+  "model": "gpt-6-sol",
+  "input": "Prothrombin time self-testing pack. Procedure pack for prothrombin time self-testing at home, containing a portable meter, test strips and a lancet. Portable prothrombin time meter: Instrument that reads prothrombin time test strips. Prothrombin time test strips: Test strips for prothrombin time self-testing by a lay person. Lancet: Single-use lancet for obtaining a capillary blood specimen.",
+  "output": {
+    "functions": [
+      {
+        "name": "Portable prothrombin time meter",
+        "name_evidence": "Portable prothrombin time meter",
+        "description": "Instrument that reads prothrombin time test strips."
+      },
+      {
+        "name": "Prothrombin time test strips",
+        "name_evidence": "Prothrombin time test strips",
+        "description": "Test strips for prothrombin time self-testing by a lay person."
+      },
+      {
+        "name": "Lancet",
+        "name_evidence": "Lancet",
+        "description": "Single-use lancet for obtaining a capillary blood specimen."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.product_name",
+        "value": "Prothrombin time self-testing pack",
+        "evidence": "Prothrombin time self-testing pack"
+      },
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Procedure pack for prothrombin time self-testing at home, containing a portable meter, test strips and a lancet.",
+        "evidence": "Procedure pack for prothrombin time self-testing at home, containing a portable meter, test strips and a lancet."
+      },
+      {
+        "function_index": -1,
+        "target": "funding.care_setting",
+        "value": "home_or_self_use",
+        "evidence": "self-testing at home"
+      },
+      {
+        "function_index": -1,
+        "target": "funding.operator",
+        "value": "patient_or_carer",
+        "evidence": "self-testing by a lay person"
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "ivd",
+        "evidence": "Instrument that reads prothrombin time test strips."
+      },
+      {
+        "function_index": 0,
+        "target": "ivd.is_ivd_instrument",
+        "value": "yes",
+        "evidence": "Instrument that reads prothrombin time test strips."
+      },
+      {
+        "function_index": 1,
+        "target": "function.kind",
+        "value": "ivd",
+        "evidence": "Test strips for prothrombin time self-testing by a lay person."
+      },
+      {
+        "function_index": 1,
+        "target": "ivd.is_self_test",
+        "value": "yes",
+        "evidence": "self-testing by a lay person"
+      },
+      {
+        "function_index": 1,
+        "target": "status.therapeutic_purpose",
+        "value": "in_vitro_examination_of_specimen_for_medical_purpose",
+        "evidence": "Test strips for prothrombin time self-testing by a lay person."
+      },
+      {
+        "function_index": 2,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Single-use lancet for obtaining a capillary blood specimen."
+      },
+      {
+        "function_index": 2,
+        "target": "general.invasiveness",
+        "value": "surgically_invasive",
+        "evidence": "lancet for obtaining a capillary blood specimen"
+      }
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "key": "4ede4fdafac2c27cc05c7323ab9f2ead7c930ea07863e85b26d151e779cac0f8",
+  "model": "gpt-6-sol",
+  "input": "Dressing for chronic extensive ulceration. For wounds that have breached the dermis and can only heal by secondary intent.",
+  "output": {
+    "functions": [
+      {
+        "name": "Dressing",
+        "name_evidence": "Dressing",
+        "description": "Dressing for chronic extensive ulceration."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Dressing for chronic extensive ulceration.",
+        "evidence": "Dressing for chronic extensive ulceration."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Dressing for chronic extensive ulceration."
+      },
+      {
+        "function_index": 0,
+        "target": "general.principally_for_breached_dermis_secondary_intent",
+        "value": "yes",
+        "evidence": "For wounds that have breached the dermis and can only heal by secondary intent."
+      },
+      {
+        "function_index": 0,
+        "target": "general.contacts_injured_skin_or_mucous_membrane",
+        "value": "yes",
+        "evidence": "For wounds that have breached the dermis and can only heal by secondary intent."
+      }
+    ]
+  }
+}

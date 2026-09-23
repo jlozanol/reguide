@@ -125,12 +125,15 @@ EXTRACTABLE: dict[str, str] = {
 
     # ---------------------------------------------- general: route and contact
     "general.invasiveness":
-        "How the function enters the body: non_invasive (does not enter it); "
+        "How the device itself enters the body: non_invasive (does not enter it); "
         "invasive_body_orifice (through a natural opening such as the mouth, "
         "nose, ear canal, anus, vagina or urethra, or through a stoma); "
         "surgically_invasive (through the skin or a body surface, by or during "
         "surgery, including needles and cannulas); implantable (placed in the "
-        "body, or replacing a surface of it, to stay there after the procedure).",
+        "body, or replacing a surface of it, to stay there after the procedure). "
+        "Judge where the device goes, not where a substance it delivers goes: a "
+        "mist the patient inhales or a liquid it infuses does not make the "
+        "device invasive.",
     "general.duration":
         "How long it is in continuous use: transient (under 60 minutes), "
         "short_term (60 minutes to 30 days), long_term (over 30 days). Convert a "
@@ -164,7 +167,8 @@ EXTRACTABLE: dict[str, str] = {
         "liquids, or liquids for infusion into the body (clause 2.3).",
     "general.treatment_is_filtration_centrifugation_or_exchange":
         "That change is made only by filtration, centrifugation, or exchange of "
-        "gas or heat (clause 2.3(2)).",
+        "gas or of heat (clause 2.3(2)). Exchange of solutes or of any other "
+        "substance, as in dialysis, is none of these.",
     "general.contacts_injured_skin_or_mucous_membrane":
         "It comes into contact with injured skin or a mucous membrane (clause "
         "2.4).",
@@ -217,7 +221,9 @@ EXTRACTABLE: dict[str, str] = {
         "It depends on a source of energy other than the human body or gravity: "
         "a battery, mains power, compressed gas.",
     "general.is_programmed_or_programmable":
-        "The hardware runs firmware or software, or can be programmed.",
+        "The hardware runs firmware or software, or can be programmed. Claim it "
+        "only when the text mentions software, firmware, a processor or "
+        "programming; controlled or automatic behaviour alone is not enough.",
     "general.is_active_implantable":
         "It is an active device intended to be implanted.",
     "general.active_for_therapy":
@@ -273,12 +279,13 @@ EXTRACTABLE: dict[str, str] = {
         "It gives therapy to a person by providing information, as a "
         "psychological therapy app does.",
     "general.decision_maker":
-        "Who acts on the output: device_gives_the_decision_to_a_lay_user (the "
-        "device gives the result or recommendation directly to a patient or "
-        "consumer); device_gives_the_decision_to_a_health_professional (the "
-        "device gives the result to a professional to act on); "
-        "informs_a_health_professional_who_decides (the device only informs a "
-        "professional who makes the decision).",
+        "Who acts on the output: device_gives_the_decision_to_a_lay_user (a "
+        "patient or consumer receives the result or recommendation and acts on "
+        "it); device_gives_the_decision_to_a_health_professional (the device "
+        "itself specifies the result or treatment, and the professional carries "
+        "it out as given); informs_a_health_professional_who_decides (the device "
+        "suggests or recommends something to a professional, who then makes the "
+        "decision, clause 4.7(2)).",
     "general.condition_severity":
         "How serious the disease or condition is, only when the text itself "
         "says so: death_or_severe_deterioration_without_urgent_treatment, "
@@ -312,7 +319,9 @@ EXTRACTABLE: dict[str, str] = {
     "general.disinfects_another_device":
         "It is for disinfecting another medical device.",
     "general.records_images_or_anatomical_model":
-        "It records images of a patient, or is or produces an anatomical model.",
+        "It captures images of a patient, or is or produces an anatomical model. "
+        "Storing, displaying or transmitting images that something else captured "
+        "does not count.",
     "general.records_patient_images_outside_visible_spectrum":
         "It records patient images using radiation outside the visible spectrum "
         "(X-ray, infrared, ultraviolet).",

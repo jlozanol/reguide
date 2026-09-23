@@ -1,0 +1,46 @@
+{
+  "key": "164e9f892b13b5a7bb6551686c00224d5db0b125aad1549519d8993c0e47d6e6",
+  "model": "gpt-6-sol",
+  "input": "Sterile adhesive dressing strip. Adhesive dressing strip that absorbs exudate from a wound, supplied sterile.",
+  "output": {
+    "functions": [
+      {
+        "name": "Adhesive dressing strip",
+        "name_evidence": "Adhesive dressing strip",
+        "description": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile.",
+        "evidence": "Adhesive dressing strip that absorbs exudate from a wound, supplied sterile."
+      },
+      {
+        "function_index": -1,
+        "target": "core.supplied_sterile",
+        "value": "yes",
+        "evidence": "supplied sterile"
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Adhesive dressing strip that absorbs exudate from a wound"
+      },
+      {
+        "function_index": 0,
+        "target": "general.contacts_injured_skin_or_mucous_membrane",
+        "value": "yes",
+        "evidence": "Adhesive dressing strip that absorbs exudate from a wound"
+      },
+      {
+        "function_index": 0,
+        "target": "general.barrier_compression_or_absorption",
+        "value": "yes",
+        "evidence": "absorbs exudate from a wound"
+      }
+    ]
+  }
+}

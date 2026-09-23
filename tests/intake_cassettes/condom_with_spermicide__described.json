@@ -1,0 +1,52 @@
+{
+  "key": "ee885d6faf501ac8833ecf8d71daccc8304abfb1c48585d8720b437f2e92ea8c",
+  "model": "gpt-6-sol",
+  "input": "Condom with spermicide. Barrier contraceptive incorporating a spermicidal agent.",
+  "output": {
+    "functions": [
+      {
+        "name": "Barrier contraceptive",
+        "name_evidence": "Barrier contraceptive",
+        "description": "Barrier contraceptive incorporating a spermicidal agent."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.product_name",
+        "value": "Condom with spermicide",
+        "evidence": "Condom with spermicide"
+      },
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Barrier contraceptive incorporating a spermicidal agent.",
+        "evidence": "Barrier contraceptive incorporating a spermicidal agent."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Barrier contraceptive"
+      },
+      {
+        "function_index": 0,
+        "target": "general.contraceptive_or_sti_prevention",
+        "value": "yes",
+        "evidence": "Barrier contraceptive"
+      },
+      {
+        "function_index": 0,
+        "target": "general.incorporates_medicine",
+        "value": "yes",
+        "evidence": "incorporating a spermicidal agent"
+      },
+      {
+        "function_index": 0,
+        "target": "status.therapeutic_purpose",
+        "value": "control_or_support_of_conception",
+        "evidence": "Barrier contraceptive"
+      }
+    ]
+  }
+}

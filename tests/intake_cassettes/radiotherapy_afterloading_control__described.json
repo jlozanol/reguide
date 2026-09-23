@@ -1,0 +1,40 @@
+{
+  "key": "a4135e7b8daa2a0d7cb946ab8338ef9935acd609e6da5b45b6bc89f956397bc1",
+  "model": "gpt-6-sol",
+  "input": "Radiotherapy after-loading control system. Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way.",
+  "output": {
+    "functions": [
+      {
+        "name": "After-loading control",
+        "name_evidence": "after-loading control system",
+        "description": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way.",
+        "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "after-loading control system"
+      },
+      {
+        "function_index": 0,
+        "target": "general.controls_hazardous_therapy_device",
+        "value": "yes",
+        "evidence": "Controls and monitors the performance of a radioactive source for after-loading therapy, which delivers radiation in a potentially hazardous way."
+      },
+      {
+        "function_index": 0,
+        "target": "status.therapeutic_purpose",
+        "value": "diagnosis_prevention_monitoring_prediction_treatment_of_disease",
+        "evidence": "after-loading therapy"
+      }
+    ]
+  }
+}

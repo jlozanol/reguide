@@ -1,0 +1,46 @@
+{
+  "key": "9598b821ffd6fd3e51aac23810b91502c142b8d0e4a2f6c3ab90416d638d9522",
+  "model": "gpt-6-sol",
+  "input": "Metal fixation screw, permanent. Holds bone together for longer than 30 days, permanently implanted.",
+  "output": {
+    "functions": [
+      {
+        "name": "Bone fixation",
+        "name_evidence": "Holds bone together",
+        "description": "Holds bone together for longer than 30 days, permanently implanted."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Holds bone together for longer than 30 days, permanently implanted.",
+        "evidence": "Holds bone together for longer than 30 days, permanently implanted."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Metal fixation screw"
+      },
+      {
+        "function_index": 0,
+        "target": "general.duration",
+        "value": "long_term",
+        "evidence": "longer than 30 days"
+      },
+      {
+        "function_index": 0,
+        "target": "general.invasiveness",
+        "value": "implantable",
+        "evidence": "permanently implanted"
+      },
+      {
+        "function_index": 0,
+        "target": "status.therapeutic_purpose",
+        "value": "investigation_or_modification_of_anatomy_or_physiological_process",
+        "evidence": "Holds bone together"
+      }
+    ]
+  }
+}

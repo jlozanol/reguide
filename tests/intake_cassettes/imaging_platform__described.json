@@ -1,0 +1,128 @@
+{
+  "key": "13e9d51dee3fc40671bc7020ed606588feb4e8c56a8a657a45374561c2293a4e",
+  "model": "gpt-6-sol",
+  "input": "Radiology reporting platform. Stores radiology studies, flags abnormal ones for priority review and suggests a follow-up imaging interval. Study archive: Stores and transmits radiology studies without interpretation. Abnormality triage: Flags studies showing suspected abnormality for priority review by a radiologist. Follow-up interval suggestion: Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist.",
+  "output": {
+    "functions": [
+      {
+        "name": "Study archive",
+        "name_evidence": "Study archive",
+        "description": "Stores and transmits radiology studies without interpretation."
+      },
+      {
+        "name": "Abnormality triage",
+        "name_evidence": "Abnormality triage",
+        "description": "Flags studies showing suspected abnormality for priority review by a radiologist."
+      },
+      {
+        "name": "Follow-up interval suggestion",
+        "name_evidence": "Follow-up interval suggestion",
+        "description": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Stores radiology studies, flags abnormal ones for priority review and suggests a follow-up imaging interval.",
+        "evidence": "Stores radiology studies, flags abnormal ones for priority review and suggests a follow-up imaging interval."
+      },
+      {
+        "function_index": 0,
+        "target": "function.is_software",
+        "value": "yes",
+        "evidence": "Radiology reporting platform"
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Stores and transmits radiology studies without interpretation."
+      },
+      {
+        "function_index": 1,
+        "target": "function.is_software",
+        "value": "yes",
+        "evidence": "Radiology reporting platform"
+      },
+      {
+        "function_index": 1,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+      },
+      {
+        "function_index": 1,
+        "target": "general.active_for_diagnosis",
+        "value": "yes",
+        "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+      },
+      {
+        "function_index": 1,
+        "target": "general.diagnoses_or_screens",
+        "value": "yes",
+        "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+      },
+      {
+        "function_index": 1,
+        "target": "general.decision_maker",
+        "value": "informs_a_health_professional_who_decides",
+        "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+      },
+      {
+        "function_index": 1,
+        "target": "status.cdss_processes_device_signal_or_image",
+        "value": "yes",
+        "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+      },
+      {
+        "function_index": 1,
+        "target": "status.therapeutic_purpose",
+        "value": "diagnosis_prevention_monitoring_prediction_treatment_of_disease",
+        "evidence": "Flags studies showing suspected abnormality for priority review by a radiologist."
+      },
+      {
+        "function_index": 2,
+        "target": "function.is_software",
+        "value": "yes",
+        "evidence": "Radiology reporting platform"
+      },
+      {
+        "function_index": 2,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
+      },
+      {
+        "function_index": 2,
+        "target": "general.active_for_diagnosis",
+        "value": "yes",
+        "evidence": "Analyses the scan images and suggests a follow-up imaging interval to the reporting radiologist."
+      },
+      {
+        "function_index": 2,
+        "target": "general.specifies_or_recommends_treatment",
+        "value": "yes",
+        "evidence": "suggests a follow-up imaging interval to the reporting radiologist"
+      },
+      {
+        "function_index": 2,
+        "target": "general.decision_maker",
+        "value": "informs_a_health_professional_who_decides",
+        "evidence": "suggests a follow-up imaging interval to the reporting radiologist"
+      },
+      {
+        "function_index": 2,
+        "target": "status.cdss_processes_device_signal_or_image",
+        "value": "yes",
+        "evidence": "Analyses the scan images"
+      },
+      {
+        "function_index": 2,
+        "target": "status.therapeutic_purpose",
+        "value": "diagnosis_prevention_monitoring_prediction_treatment_of_disease",
+        "evidence": "suggests a follow-up imaging interval to the reporting radiologist"
+      }
+    ]
+  }
+}

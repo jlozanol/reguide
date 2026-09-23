@@ -1,0 +1,64 @@
+{
+  "key": "ff65a159b3a475b928d438943e5820e356b6ce5e38effe279bd7f37e7eda0b64",
+  "model": "gpt-6-sol",
+  "input": "Pregnancy self-test. Self-test for pregnancy used by a lay person at home; the result does not determine a serious condition.",
+  "output": {
+    "functions": [
+      {
+        "name": "Pregnancy self-test",
+        "name_evidence": "Pregnancy self-test",
+        "description": "Self-test for pregnancy used by a lay person at home; the result does not determine a serious condition."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.product_name",
+        "value": "Pregnancy self-test",
+        "evidence": "Pregnancy self-test"
+      },
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Self-test for pregnancy used by a lay person at home; the result does not determine a serious condition.",
+        "evidence": "Self-test for pregnancy used by a lay person at home; the result does not determine a serious condition."
+      },
+      {
+        "function_index": -1,
+        "target": "funding.care_setting",
+        "value": "home_or_self_use",
+        "evidence": "at home"
+      },
+      {
+        "function_index": -1,
+        "target": "funding.operator",
+        "value": "patient_or_carer",
+        "evidence": "used by a lay person"
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "ivd",
+        "evidence": "Pregnancy self-test"
+      },
+      {
+        "function_index": 0,
+        "target": "ivd.is_self_test",
+        "value": "yes",
+        "evidence": "Self-test for pregnancy used by a lay person at home"
+      },
+      {
+        "function_index": 0,
+        "target": "ivd.result_not_determining_serious_condition",
+        "value": "yes",
+        "evidence": "the result does not determine a serious condition"
+      },
+      {
+        "function_index": 0,
+        "target": "status.therapeutic_purpose",
+        "value": "in_vitro_examination_of_specimen_for_medical_purpose",
+        "evidence": "Pregnancy self-test"
+      }
+    ]
+  }
+}

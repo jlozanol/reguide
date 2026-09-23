@@ -1,0 +1,40 @@
+{
+  "key": "8d8eaf4071f73263e419af77404479a6b1c1d76104179855421a59182a64ca5f",
+  "model": "gpt-6-sol",
+  "input": "Reagent red blood cells for ABO reverse grouping. Kit of red blood cells for performing ABO reverse groups in pretransfusion testing.",
+  "output": {
+    "functions": [
+      {
+        "name": "ABO reverse grouping",
+        "name_evidence": "ABO reverse grouping",
+        "description": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing.",
+        "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "ivd",
+        "evidence": "Kit of red blood cells for performing ABO reverse groups in pretransfusion testing."
+      },
+      {
+        "function_index": 0,
+        "target": "ivd.types_blood_or_tissue",
+        "value": "yes",
+        "evidence": "performing ABO reverse groups in pretransfusion testing"
+      },
+      {
+        "function_index": 0,
+        "target": "status.therapeutic_purpose",
+        "value": "in_vitro_examination_of_specimen_for_medical_purpose",
+        "evidence": "performing ABO reverse groups in pretransfusion testing"
+      }
+    ]
+  }
+}

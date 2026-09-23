@@ -1,0 +1,58 @@
+{
+  "key": "a2987d8b9e021f3195dc7c681c5919858538aac57b72dafa5dd7e7fe08c1e874",
+  "model": "gpt-6-sol",
+  "input": "MoodPath is an app that delivers cognitive behavioural therapy sessions to people living with bipolar disorder. We wrote the program ourselves rather than following a published clinical guideline, and if it is used wrongly the therapy could cause harm.",
+  "output": {
+    "functions": [
+      {
+        "name": "cognitive behavioural therapy sessions",
+        "name_evidence": "cognitive behavioural therapy sessions",
+        "description": "delivers cognitive behavioural therapy sessions to people living with bipolar disorder"
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.product_name",
+        "value": "MoodPath",
+        "evidence": "MoodPath"
+      },
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "MoodPath is an app that delivers cognitive behavioural therapy sessions to people living with bipolar disorder.",
+        "evidence": "MoodPath is an app that delivers cognitive behavioural therapy sessions to people living with bipolar disorder."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "delivers cognitive behavioural therapy sessions to people living with bipolar disorder"
+      },
+      {
+        "function_index": 0,
+        "target": "function.is_software",
+        "value": "yes",
+        "evidence": "is an app"
+      },
+      {
+        "function_index": 0,
+        "target": "general.provides_therapy_through_information",
+        "value": "yes",
+        "evidence": "app that delivers cognitive behavioural therapy sessions"
+      },
+      {
+        "function_index": 0,
+        "target": "general.information_therapy_harm",
+        "value": "harm",
+        "evidence": "if it is used wrongly the therapy could cause harm"
+      },
+      {
+        "function_index": 0,
+        "target": "status.therapeutic_purpose",
+        "value": "diagnosis_prevention_monitoring_prediction_treatment_of_disease",
+        "evidence": "delivers cognitive behavioural therapy sessions to people living with bipolar disorder"
+      }
+    ]
+  }
+}

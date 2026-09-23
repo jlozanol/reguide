@@ -1,0 +1,58 @@
+{
+  "key": "3518e9a58c45f811723bfb3c1b7cfc258066671f27b7491fd1333b1803acf0f0",
+  "model": "gpt-6-sol",
+  "input": "We make titanium bone screws that surgeons put in to hold a broken bone together. They stay in the patient permanently. Every screw is packed sterile.",
+  "output": {
+    "functions": [
+      {
+        "name": "titanium bone screws",
+        "name_evidence": "titanium bone screws",
+        "description": "We make titanium bone screws that surgeons put in to hold a broken bone together."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "We make titanium bone screws that surgeons put in to hold a broken bone together.",
+        "evidence": "We make titanium bone screws that surgeons put in to hold a broken bone together."
+      },
+      {
+        "function_index": -1,
+        "target": "core.supplied_sterile",
+        "value": "yes",
+        "evidence": "Every screw is packed sterile."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "titanium bone screws that surgeons put in to hold a broken bone together"
+      },
+      {
+        "function_index": 0,
+        "target": "function.is_software",
+        "value": "no",
+        "evidence": "titanium bone screws"
+      },
+      {
+        "function_index": 0,
+        "target": "general.invasiveness",
+        "value": "implantable",
+        "evidence": "They stay in the patient permanently."
+      },
+      {
+        "function_index": 0,
+        "target": "general.duration",
+        "value": "long_term",
+        "evidence": "They stay in the patient permanently."
+      },
+      {
+        "function_index": 0,
+        "target": "status.therapeutic_purpose",
+        "value": "diagnosis_monitoring_treatment_or_compensation_for_injury",
+        "evidence": "hold a broken bone together"
+      }
+    ]
+  }
+}

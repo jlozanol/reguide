@@ -1,0 +1,128 @@
+{
+  "key": "250bb277c457882adac9278bccfd4e7c5b0e7ef2b4013ff4e11bae3b0ce06297",
+  "model": "gpt-6-sol",
+  "input": "Our cloud platform stores hospital radiology scans. It also flags scans that look abnormal so a radiologist reads them first, and it looks at the images and suggests when the patient should have their next scan. The radiologist always makes the call.",
+  "output": {
+    "functions": [
+      {
+        "name": "Stores radiology scans",
+        "name_evidence": "stores hospital radiology scans",
+        "description": "Our cloud platform stores hospital radiology scans."
+      },
+      {
+        "name": "Flags abnormal scans",
+        "name_evidence": "flags scans that look abnormal",
+        "description": "It also flags scans that look abnormal so a radiologist reads them first"
+      },
+      {
+        "name": "Suggests next scan timing",
+        "name_evidence": "suggests when the patient should have their next scan",
+        "description": "it looks at the images and suggests when the patient should have their next scan."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "It also flags scans that look abnormal so a radiologist reads them first, and it looks at the images and suggests when the patient should have their next scan.",
+        "evidence": "It also flags scans that look abnormal so a radiologist reads them first, and it looks at the images and suggests when the patient should have their next scan."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "stores hospital radiology scans"
+      },
+      {
+        "function_index": 0,
+        "target": "function.is_software",
+        "value": "yes",
+        "evidence": "cloud platform"
+      },
+      {
+        "function_index": 1,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "flags scans that look abnormal"
+      },
+      {
+        "function_index": 1,
+        "target": "function.is_software",
+        "value": "yes",
+        "evidence": "cloud platform"
+      },
+      {
+        "function_index": 1,
+        "target": "general.active_for_diagnosis",
+        "value": "yes",
+        "evidence": "flags scans that look abnormal so a radiologist reads them first"
+      },
+      {
+        "function_index": 1,
+        "target": "general.diagnoses_or_screens",
+        "value": "yes",
+        "evidence": "flags scans that look abnormal"
+      },
+      {
+        "function_index": 1,
+        "target": "status.cdss_processes_device_signal_or_image",
+        "value": "yes",
+        "evidence": "flags scans that look abnormal"
+      },
+      {
+        "function_index": 1,
+        "target": "general.decision_maker",
+        "value": "informs_a_health_professional_who_decides",
+        "evidence": "The radiologist always makes the call."
+      },
+      {
+        "function_index": 2,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "looks at the images and suggests when the patient should have their next scan"
+      },
+      {
+        "function_index": 2,
+        "target": "function.is_software",
+        "value": "yes",
+        "evidence": "cloud platform"
+      },
+      {
+        "function_index": 2,
+        "target": "general.active_for_diagnosis",
+        "value": "yes",
+        "evidence": "looks at the images and suggests when the patient should have their next scan"
+      },
+      {
+        "function_index": 2,
+        "target": "general.specifies_or_recommends_treatment",
+        "value": "yes",
+        "evidence": "suggests when the patient should have their next scan"
+      },
+      {
+        "function_index": 2,
+        "target": "general.decision_maker",
+        "value": "informs_a_health_professional_who_decides",
+        "evidence": "The radiologist always makes the call."
+      },
+      {
+        "function_index": 2,
+        "target": "status.cdss_processes_device_signal_or_image",
+        "value": "yes",
+        "evidence": "looks at the images"
+      },
+      {
+        "function_index": 2,
+        "target": "status.cdss_sole_purpose_recommendation",
+        "value": "yes",
+        "evidence": "suggests when the patient should have their next scan"
+      },
+      {
+        "function_index": 2,
+        "target": "status.cdss_replaces_clinical_judgement",
+        "value": "no",
+        "evidence": "The radiologist always makes the call."
+      }
+    ]
+  }
+}

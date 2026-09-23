@@ -1,0 +1,28 @@
+{
+  "key": "565600131536938ec1981eea5a233e65fcb0698fb36a8b226993492c97f8e3e8",
+  "model": "gpt-6-sol",
+  "input": "Anatomy teaching app. Interactive 3D anatomy lessons for medical students, used for study only and never on a patient.",
+  "output": {
+    "functions": [
+      {
+        "name": "Interactive 3D anatomy lessons",
+        "name_evidence": "Interactive 3D anatomy lessons",
+        "description": "Interactive 3D anatomy lessons for medical students, used for study only and never on a patient."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Interactive 3D anatomy lessons for medical students, used for study only and never on a patient.",
+        "evidence": "Interactive 3D anatomy lessons for medical students, used for study only and never on a patient."
+      },
+      {
+        "function_index": 0,
+        "target": "function.is_software",
+        "value": "yes",
+        "evidence": "Anatomy teaching app."
+      }
+    ]
+  }
+}

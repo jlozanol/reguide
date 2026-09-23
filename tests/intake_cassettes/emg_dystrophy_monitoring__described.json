@@ -1,0 +1,70 @@
+{
+  "key": "c717cd644b3d3ed1170f7e271c64f6e420d4e6e001c7982e2cf1cabbd7a1c26c",
+  "model": "gpt-6-sol",
+  "input": "Muscle response monitoring app. Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy.",
+  "output": {
+    "functions": [
+      {
+        "name": "Muscle response monitoring",
+        "name_evidence": "Muscle response monitoring app",
+        "description": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.product_name",
+        "value": "Muscle response monitoring app",
+        "evidence": "Muscle response monitoring app"
+      },
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy.",
+        "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response in a person with muscular dystrophy."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "monitor muscle fibre response in a person"
+      },
+      {
+        "function_index": 0,
+        "target": "function.is_software",
+        "value": "yes",
+        "evidence": "app"
+      },
+      {
+        "function_index": 0,
+        "target": "general.is_active_device",
+        "value": "yes",
+        "evidence": "Receives electromyography data by Bluetooth"
+      },
+      {
+        "function_index": 0,
+        "target": "general.active_for_diagnosis",
+        "value": "yes",
+        "evidence": "monitor muscle fibre response in a person with muscular dystrophy"
+      },
+      {
+        "function_index": 0,
+        "target": "general.monitors_disease_state",
+        "value": "yes",
+        "evidence": "monitor muscle fibre response in a person with muscular dystrophy"
+      },
+      {
+        "function_index": 0,
+        "target": "status.therapeutic_purpose",
+        "value": "diagnosis_prevention_monitoring_prediction_treatment_of_disease",
+        "evidence": "monitor muscle fibre response in a person with muscular dystrophy"
+      },
+      {
+        "function_index": 0,
+        "target": "status.cdss_processes_device_signal_or_image",
+        "value": "yes",
+        "evidence": "Receives electromyography data by Bluetooth to monitor muscle fibre response"
+      }
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "key": "a2f576ab10f4c0ac10090c8b73819683dbbd404be90721b78f91798594416df7",
+  "model": "gpt-6-sol",
+  "input": "Sleep and activity tracker. Records sleep and activity for general wellbeing.",
+  "output": {
+    "functions": [
+      {
+        "name": "Sleep and activity tracking",
+        "name_evidence": "Sleep and activity tracker",
+        "description": "Records sleep and activity for general wellbeing."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Records sleep and activity for general wellbeing.",
+        "evidence": "Records sleep and activity for general wellbeing."
+      }
+    ]
+  }
+}

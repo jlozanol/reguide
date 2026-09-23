@@ -1,0 +1,34 @@
+{
+  "key": "39e3929b38bef91715d9d0264bf712b1490efcd9d0e0a255fface964be1dbcfe",
+  "model": "gpt-6-sol",
+  "input": "Long-term indwelling orifice device. Invasive device used through a body orifice for longer than 30 days.",
+  "output": {
+    "functions": [
+      {
+        "name": "Long-term indwelling orifice device",
+        "name_evidence": "Long-term indwelling orifice device",
+        "description": "Invasive device used through a body orifice for longer than 30 days."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Invasive device used through a body orifice for longer than 30 days."
+      },
+      {
+        "function_index": 0,
+        "target": "general.invasiveness",
+        "value": "invasive_body_orifice",
+        "evidence": "used through a body orifice"
+      },
+      {
+        "function_index": 0,
+        "target": "general.duration",
+        "value": "long_term",
+        "evidence": "longer than 30 days"
+      }
+    ]
+  }
+}

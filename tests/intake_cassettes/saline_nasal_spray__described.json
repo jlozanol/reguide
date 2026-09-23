@@ -1,0 +1,52 @@
+{
+  "key": "33d7f280c385745d44cd3ad37b0cb76b5e9816f115f302c980445fdd6f075e8f",
+  "model": "gpt-6-sol",
+  "input": "Isotonic saline nasal spray. Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose.",
+  "output": {
+    "functions": [
+      {
+        "name": "Isotonic saline nasal spray",
+        "name_evidence": "Isotonic saline nasal spray",
+        "description": "Isotonic saline solution sprayed into the nasal cavity, where it achieves its intended purpose."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.product_name",
+        "value": "Isotonic saline nasal spray",
+        "evidence": "Isotonic saline nasal spray"
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Isotonic saline nasal spray"
+      },
+      {
+        "function_index": 0,
+        "target": "general.invasiveness",
+        "value": "invasive_body_orifice",
+        "evidence": "nasal spray"
+      },
+      {
+        "function_index": 0,
+        "target": "general.orifice_site",
+        "value": "nasal_cavity",
+        "evidence": "sprayed into the nasal cavity"
+      },
+      {
+        "function_index": 0,
+        "target": "general.is_substance_through_orifice_or_skin",
+        "value": "yes",
+        "evidence": "Isotonic saline solution sprayed into the nasal cavity"
+      },
+      {
+        "function_index": 0,
+        "target": "general.substance_acts_in_nose_mouth_or_on_skin",
+        "value": "yes",
+        "evidence": "sprayed into the nasal cavity, where it achieves its intended purpose"
+      }
+    ]
+  }
+}

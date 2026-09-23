@@ -1,0 +1,58 @@
+{
+  "key": "ba7e4c5a2aee32d68062d1a6362403b48629a5f74caf802eec18ef7be353ff04",
+  "model": "gpt-6-sol",
+  "input": "Prothrombin time self-test strips. Test strips for prothrombin time self-testing by a lay person at home.",
+  "output": {
+    "functions": [
+      {
+        "name": "Prothrombin time self-test strips",
+        "name_evidence": "Prothrombin time self-test strips",
+        "description": "Test strips for prothrombin time self-testing by a lay person at home."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.product_name",
+        "value": "Prothrombin time self-test strips",
+        "evidence": "Prothrombin time self-test strips"
+      },
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Test strips for prothrombin time self-testing by a lay person at home.",
+        "evidence": "Test strips for prothrombin time self-testing by a lay person at home."
+      },
+      {
+        "function_index": -1,
+        "target": "funding.care_setting",
+        "value": "home_or_self_use",
+        "evidence": "at home"
+      },
+      {
+        "function_index": -1,
+        "target": "funding.operator",
+        "value": "patient_or_carer",
+        "evidence": "by a lay person"
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "ivd",
+        "evidence": "Test strips for prothrombin time self-testing"
+      },
+      {
+        "function_index": 0,
+        "target": "ivd.is_self_test",
+        "value": "yes",
+        "evidence": "self-testing by a lay person at home"
+      },
+      {
+        "function_index": 0,
+        "target": "status.therapeutic_purpose",
+        "value": "in_vitro_examination_of_specimen_for_medical_purpose",
+        "evidence": "Test strips for prothrombin time self-testing"
+      }
+    ]
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "key": "4426a6beab72bf32829212b1c737194857a889294891954b55daddea9da15a6d",
+  "model": "gpt-6-sol",
+  "input": "SpotCheck lets anyone check a worrying mole at home. You point your phone at the mole and our AI tells you whether it looks like it could be melanoma, so you know whether you need to see a doctor. The result goes straight to you; no clinician reviews it.",
+  "output": {
+    "functions": [
+      {
+        "name": "Mole assessment",
+        "name_evidence": "check a worrying mole",
+        "description": "You point your phone at the mole and our AI tells you whether it looks like it could be melanoma, so you know whether you need to see a doctor."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.product_name",
+        "value": "SpotCheck",
+        "evidence": "SpotCheck"
+      },
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "SpotCheck lets anyone check a worrying mole at home.",
+        "evidence": "SpotCheck lets anyone check a worrying mole at home."
+      },
+      {
+        "function_index": -1,
+        "target": "funding.care_setting",
+        "value": "home_or_self_use",
+        "evidence": "at home"
+      },
+      {
+        "function_index": -1,
+        "target": "funding.operator",
+        "value": "patient_or_carer",
+        "evidence": "You point your phone at the mole"
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "our AI tells you whether it looks like it could be melanoma"
+      },
+      {
+        "function_index": 0,
+        "target": "function.is_software",
+        "value": "yes",
+        "evidence": "our AI tells you whether it looks like it could be melanoma"
+      },
+      {
+        "function_index": 0,
+        "target": "general.is_active_device",
+        "value": "yes",
+        "evidence": "our AI tells you whether it looks like it could be melanoma"
+      },
+      {
+        "function_index": 0,
+        "target": "general.active_for_diagnosis",
+        "value": "yes",
+        "evidence": "our AI tells you whether it looks like it could be melanoma"
+      },
+      {
+        "function_index": 0,
+        "target": "general.diagnoses_or_screens",
+        "value": "yes",
+        "evidence": "our AI tells you whether it looks like it could be melanoma"
+      },
+      {
+        "function_index": 0,
+        "target": "general.decision_maker",
+        "value": "device_gives_the_decision_to_a_lay_user",
+        "evidence": "The result goes straight to you; no clinician reviews it."
+      },
+      {
+        "function_index": 0,
+        "target": "status.therapeutic_purpose",
+        "value": "diagnosis_prevention_monitoring_prediction_treatment_of_disease",
+        "evidence": "our AI tells you whether it looks like it could be melanoma"
+      },
+      {
+        "function_index": 0,
+        "target": "general.specifies_or_recommends_treatment",
+        "value": "yes",
+        "evidence": "so you know whether you need to see a doctor"
+      }
+    ]
+  }
+}

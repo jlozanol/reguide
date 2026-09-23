@@ -1,0 +1,34 @@
+{
+  "key": "7266b4c34e3a71c1ba11d1c855ad9b8dd56767f71144e8a6e9bda8950f5a8e0b",
+  "model": "gpt-6-sol",
+  "input": "Microbiological culture medium. Prepared culture medium for microbiological laboratory use.",
+  "output": {
+    "functions": [
+      {
+        "name": "Microbiological culture medium",
+        "name_evidence": "Microbiological culture medium",
+        "description": "Prepared culture medium for microbiological laboratory use."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "ivd",
+        "evidence": "Prepared culture medium for microbiological laboratory use."
+      },
+      {
+        "function_index": 0,
+        "target": "ivd.is_culture_medium",
+        "value": "yes",
+        "evidence": "Microbiological culture medium"
+      },
+      {
+        "function_index": -1,
+        "target": "funding.care_setting",
+        "value": "pathology_lab",
+        "evidence": "microbiological laboratory use"
+      }
+    ]
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "key": "6ad7c8d02335dff439fa57ae1931e57b2685eef7e088504b36f9ba86440099d2",
+  "model": "gpt-6-sol",
+  "input": "Infusion pump syringe. Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient.",
+  "output": {
+    "functions": [
+      {
+        "name": "Infusion pump syringe",
+        "name_evidence": "Infusion pump syringe",
+        "description": "Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.product_name",
+        "value": "Infusion pump syringe",
+        "evidence": "Infusion pump syringe"
+      },
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient.",
+        "evidence": "Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Syringe for use with an infusion pump, holding liquid medicine to be administered to a patient."
+      },
+      {
+        "function_index": 0,
+        "target": "general.handles_substances_for_administration",
+        "value": "yes",
+        "evidence": "holding liquid medicine to be administered to a patient"
+      },
+      {
+        "function_index": 0,
+        "target": "general.channels_or_stores_liquid_or_gas_for_administration",
+        "value": "yes",
+        "evidence": "holding liquid medicine to be administered to a patient"
+      },
+      {
+        "function_index": 0,
+        "target": "general.connected_to_an_active_device",
+        "value": "yes",
+        "evidence": "for use with an infusion pump"
+      }
+    ]
+  }
+}

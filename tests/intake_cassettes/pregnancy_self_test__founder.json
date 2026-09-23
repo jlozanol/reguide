@@ -1,0 +1,52 @@
+{
+  "key": "482fc6b9ebf250b9865cb272016a6c1826da6f12449a94852d010ea543247097",
+  "model": "gpt-6-sol",
+  "input": "Our pregnancy test is a stick you pee on at home. Two lines means pregnant. It is designed for women to use themselves, and it only tells you whether you are pregnant.",
+  "output": {
+    "functions": [
+      {
+        "name": "Pregnancy test",
+        "name_evidence": "pregnancy test",
+        "description": "Our pregnancy test is a stick you pee on at home."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "It is designed for women to use themselves, and it only tells you whether you are pregnant.",
+        "evidence": "It is designed for women to use themselves, and it only tells you whether you are pregnant."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "ivd",
+        "evidence": "a stick you pee on"
+      },
+      {
+        "function_index": -1,
+        "target": "funding.care_setting",
+        "value": "home_or_self_use",
+        "evidence": "at home"
+      },
+      {
+        "function_index": -1,
+        "target": "funding.operator",
+        "value": "patient_or_carer",
+        "evidence": "women to use themselves"
+      },
+      {
+        "function_index": 0,
+        "target": "ivd.is_self_test",
+        "value": "yes",
+        "evidence": "women to use themselves"
+      },
+      {
+        "function_index": 0,
+        "target": "status.therapeutic_purpose",
+        "value": "in_vitro_examination_of_specimen_for_medical_purpose",
+        "evidence": "a stick you pee on at home. Two lines means pregnant"
+      }
+    ]
+  }
+}

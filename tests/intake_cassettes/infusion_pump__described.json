@@ -1,0 +1,70 @@
+{
+  "key": "18598d27013cec6f841c969bd5cb0c06952472bfb548f0b53c6f5c398b78b144",
+  "model": "gpt-6-sol",
+  "input": "Volumetric infusion pump. Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous.",
+  "output": {
+    "functions": [
+      {
+        "name": "Administer medicines",
+        "name_evidence": "Administers medicines to a patient at a controlled rate",
+        "description": "Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.product_name",
+        "value": "Volumetric infusion pump",
+        "evidence": "Volumetric infusion pump"
+      },
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous.",
+        "evidence": "Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Administers medicines to a patient"
+      },
+      {
+        "function_index": 0,
+        "target": "general.administers_medicine",
+        "value": "yes",
+        "evidence": "Administers medicines to a patient"
+      },
+      {
+        "function_index": 0,
+        "target": "general.administers_medicine_hazardously_by_delivery_system",
+        "value": "yes",
+        "evidence": "Administers medicines to a patient at a controlled rate, where the manner of administration is potentially hazardous"
+      },
+      {
+        "function_index": 0,
+        "target": "general.administers_or_removes_substances",
+        "value": "yes",
+        "evidence": "Volumetric infusion pump. Administers medicines to a patient"
+      },
+      {
+        "function_index": 0,
+        "target": "general.substance_administration_potentially_hazardous",
+        "value": "yes",
+        "evidence": "the manner of administration is potentially hazardous"
+      },
+      {
+        "function_index": 0,
+        "target": "general.is_active_device",
+        "value": "yes",
+        "evidence": "Volumetric infusion pump"
+      },
+      {
+        "function_index": 0,
+        "target": "status.therapeutic_purpose",
+        "value": "investigation_or_modification_of_anatomy_or_physiological_process",
+        "evidence": "Administers medicines to a patient at a controlled rate"
+      }
+    ]
+  }
+}

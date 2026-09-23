@@ -1,0 +1,64 @@
+{
+  "key": "51339894f15fcc2c8d74c0544799e31ef0fe831a6aa44d2ea6ab4a3cddbeb59c",
+  "model": "gpt-6-sol",
+  "input": "Emphysema detection software. Diagnoses emphysema, a serious disease, from computed tomography scans.",
+  "output": {
+    "functions": [
+      {
+        "name": "Emphysema detection",
+        "name_evidence": "Emphysema detection software",
+        "description": "Diagnoses emphysema, a serious disease, from computed tomography scans."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Diagnoses emphysema, a serious disease, from computed tomography scans.",
+        "evidence": "Diagnoses emphysema, a serious disease, from computed tomography scans."
+      },
+      {
+        "function_index": 0,
+        "target": "function.is_software",
+        "value": "yes",
+        "evidence": "Emphysema detection software"
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Diagnoses emphysema, a serious disease, from computed tomography scans."
+      },
+      {
+        "function_index": 0,
+        "target": "general.condition_severity",
+        "value": "serious_disease_or_condition",
+        "evidence": "a serious disease"
+      },
+      {
+        "function_index": 0,
+        "target": "general.diagnoses_or_screens",
+        "value": "yes",
+        "evidence": "Diagnoses emphysema"
+      },
+      {
+        "function_index": 0,
+        "target": "general.active_for_diagnosis",
+        "value": "yes",
+        "evidence": "Emphysema detection software. Diagnoses emphysema, a serious disease, from computed tomography scans."
+      },
+      {
+        "function_index": 0,
+        "target": "status.cdss_processes_device_signal_or_image",
+        "value": "yes",
+        "evidence": "from computed tomography scans"
+      },
+      {
+        "function_index": 0,
+        "target": "status.therapeutic_purpose",
+        "value": "diagnosis_prevention_monitoring_prediction_treatment_of_disease",
+        "evidence": "Diagnoses emphysema"
+      }
+    ]
+  }
+}

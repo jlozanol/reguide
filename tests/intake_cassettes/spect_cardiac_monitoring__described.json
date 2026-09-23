@@ -1,0 +1,70 @@
+{
+  "key": "c6de555a3f2de3403d4855366d92bf964ba232fc0dbb47affe784169ee5be5c6",
+  "model": "gpt-6-sol",
+  "input": "SPECT cardiac monitoring software. Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow.",
+  "output": {
+    "functions": [
+      {
+        "name": "SPECT cardiac monitoring",
+        "name_evidence": "SPECT cardiac monitoring software",
+        "description": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.product_name",
+        "value": "SPECT cardiac monitoring software",
+        "evidence": "SPECT cardiac monitoring software"
+      },
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow.",
+        "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease from cardiac muscle blood flow."
+      },
+      {
+        "function_index": 0,
+        "target": "function.is_software",
+        "value": "yes",
+        "evidence": "software"
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Analyses gamma camera imagery from a SPECT scan"
+      },
+      {
+        "function_index": 0,
+        "target": "general.is_active_device",
+        "value": "yes",
+        "evidence": "software"
+      },
+      {
+        "function_index": 0,
+        "target": "general.active_for_diagnosis",
+        "value": "yes",
+        "evidence": "Analyses gamma camera imagery from a SPECT scan to track progression of heart disease"
+      },
+      {
+        "function_index": 0,
+        "target": "general.monitors_disease_state",
+        "value": "yes",
+        "evidence": "track progression of heart disease"
+      },
+      {
+        "function_index": 0,
+        "target": "status.cdss_processes_device_signal_or_image",
+        "value": "yes",
+        "evidence": "Analyses gamma camera imagery from a SPECT scan"
+      },
+      {
+        "function_index": 0,
+        "target": "status.therapeutic_purpose",
+        "value": "diagnosis_prevention_monitoring_prediction_treatment_of_disease",
+        "evidence": "track progression of heart disease"
+      }
+    ]
+  }
+}

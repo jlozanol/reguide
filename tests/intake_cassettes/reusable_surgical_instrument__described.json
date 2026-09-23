@@ -1,0 +1,52 @@
+{
+  "key": "a7e6a551d198ada58574b989b4c4abafc977806f492641a89031384e12b90252",
+  "model": "gpt-6-sol",
+  "input": "Reusable surgical scissors. Reusable surgical instrument for transient use during surgery.",
+  "output": {
+    "functions": [
+      {
+        "name": "Reusable surgical scissors",
+        "name_evidence": "Reusable surgical scissors",
+        "description": "Reusable surgical instrument for transient use during surgery."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Reusable surgical instrument for transient use during surgery.",
+        "evidence": "Reusable surgical instrument for transient use during surgery."
+      },
+      {
+        "function_index": -1,
+        "target": "core.product_name",
+        "value": "Reusable surgical scissors",
+        "evidence": "Reusable surgical scissors"
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Reusable surgical instrument"
+      },
+      {
+        "function_index": 0,
+        "target": "function.is_software",
+        "value": "no",
+        "evidence": "Reusable surgical scissors"
+      },
+      {
+        "function_index": 0,
+        "target": "general.reusable_surgical_instrument",
+        "value": "yes",
+        "evidence": "Reusable surgical instrument"
+      },
+      {
+        "function_index": 0,
+        "target": "general.duration",
+        "value": "transient",
+        "evidence": "transient use"
+      }
+    ]
+  }
+}

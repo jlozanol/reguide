@@ -1,0 +1,46 @@
+{
+  "key": "4f2f2e03f0868ab8b8cdd2bc97664b6a43528f8e18ae4059c1472b3b3aeddf49",
+  "model": "gpt-6-sol",
+  "input": "A laboratory test kit that picks up chlamydia from a patient swab, so doctors can diagnose the infection.",
+  "output": {
+    "functions": [
+      {
+        "name": "chlamydia test",
+        "name_evidence": "test kit that picks up chlamydia",
+        "description": "picks up chlamydia from a patient swab, so doctors can diagnose the infection"
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "A laboratory test kit that picks up chlamydia from a patient swab, so doctors can diagnose the infection.",
+        "evidence": "A laboratory test kit that picks up chlamydia from a patient swab, so doctors can diagnose the infection."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "ivd",
+        "evidence": "test kit that picks up chlamydia from a patient swab"
+      },
+      {
+        "function_index": 0,
+        "target": "ivd.detects_infectious_agent",
+        "value": "yes",
+        "evidence": "picks up chlamydia from a patient swab"
+      },
+      {
+        "function_index": 0,
+        "target": "ivd.detects_sexually_transmitted_agent",
+        "value": "yes",
+        "evidence": "picks up chlamydia"
+      },
+      {
+        "function_index": 0,
+        "target": "status.therapeutic_purpose",
+        "value": "in_vitro_examination_of_specimen_for_medical_purpose",
+        "evidence": "picks up chlamydia from a patient swab, so doctors can diagnose the infection"
+      }
+    ]
+  }
+}

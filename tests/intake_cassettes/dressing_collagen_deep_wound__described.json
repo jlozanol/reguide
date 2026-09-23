@@ -1,0 +1,40 @@
+{
+  "key": "76d27b44ac49b073ce0b4ed92217e64013165a3da286bf29245749adb2aa190f",
+  "model": "gpt-6-sol",
+  "input": "Collagen dressing for deep ulcers. Dressing for deep wounds and ulcers that have breached the dermis, containing collagen for wound healing.",
+  "output": {
+    "functions": [
+      {
+        "name": "Collagen dressing",
+        "name_evidence": "Collagen dressing",
+        "description": "Dressing for deep wounds and ulcers that have breached the dermis, containing collagen for wound healing."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Dressing for deep wounds and ulcers that have breached the dermis, containing collagen for wound healing.",
+        "evidence": "Dressing for deep wounds and ulcers that have breached the dermis, containing collagen for wound healing."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Dressing for deep wounds and ulcers that have breached the dermis, containing collagen for wound healing."
+      },
+      {
+        "function_index": 0,
+        "target": "general.contacts_injured_skin_or_mucous_membrane",
+        "value": "yes",
+        "evidence": "Dressing for deep wounds and ulcers that have breached the dermis"
+      },
+      {
+        "function_index": 0,
+        "target": "status.therapeutic_purpose",
+        "value": "diagnosis_prevention_monitoring_prediction_treatment_of_disease",
+        "evidence": "ulcers that have breached the dermis, containing collagen for wound healing"
+      }
+    ]
+  }
+}

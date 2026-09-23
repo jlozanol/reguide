@@ -1,0 +1,82 @@
+{
+  "key": "07b39addcd7c4111425a539f77bcd0e9d2eb95a86b195fd5a54d09094942b656",
+  "model": "gpt-6-sol",
+  "input": "Consumer melanoma screening app. Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer.",
+  "output": {
+    "functions": [
+      {
+        "name": "Melanoma screening",
+        "name_evidence": "melanoma screening",
+        "description": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer.",
+        "evidence": "Analyses an image of a mole to screen for malignant melanoma, giving the screening decision to the consumer."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Analyses an image of a mole"
+      },
+      {
+        "function_index": 0,
+        "target": "function.is_software",
+        "value": "yes",
+        "evidence": "app"
+      },
+      {
+        "function_index": 0,
+        "target": "general.diagnoses_or_screens",
+        "value": "yes",
+        "evidence": "to screen for malignant melanoma"
+      },
+      {
+        "function_index": 0,
+        "target": "general.decision_maker",
+        "value": "device_gives_the_decision_to_a_lay_user",
+        "evidence": "giving the screening decision to the consumer"
+      },
+      {
+        "function_index": 0,
+        "target": "status.cdss_processes_device_signal_or_image",
+        "value": "yes",
+        "evidence": "Analyses an image of a mole"
+      },
+      {
+        "function_index": 0,
+        "target": "status.therapeutic_purpose",
+        "value": "diagnosis_prevention_monitoring_prediction_treatment_of_disease",
+        "evidence": "to screen for malignant melanoma"
+      },
+      {
+        "function_index": 0,
+        "target": "general.active_for_diagnosis",
+        "value": "yes",
+        "evidence": "app. Analyses an image of a mole to screen for malignant melanoma"
+      },
+      {
+        "function_index": 0,
+        "target": "general.diagnostic_function_determines_patient_management",
+        "value": "yes",
+        "evidence": "giving the screening decision to the consumer"
+      },
+      {
+        "function_index": -1,
+        "target": "funding.operator",
+        "value": "patient_or_carer",
+        "evidence": "Consumer melanoma screening app"
+      },
+      {
+        "function_index": -1,
+        "target": "core.product_name",
+        "value": "Consumer melanoma screening app",
+        "evidence": "Consumer melanoma screening app."
+      }
+    ]
+  }
+}

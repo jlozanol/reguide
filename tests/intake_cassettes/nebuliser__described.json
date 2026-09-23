@@ -1,0 +1,52 @@
+{
+  "key": "a4af11029a39724ba4da6add00ac7bff8577ccec232ac60ddd9b453979500058",
+  "model": "gpt-6-sol",
+  "input": "Nebuliser. Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy.",
+  "output": {
+    "functions": [
+      {
+        "name": "Aerosolises medicine",
+        "name_evidence": "Aerosolises a liquid medicine",
+        "description": "Aerosolises a liquid medicine for the patient to inhale"
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.product_name",
+        "value": "Nebuliser",
+        "evidence": "Nebuliser"
+      },
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy.",
+        "evidence": "Aerosolises a liquid medicine for the patient to inhale; failure to aerosolise the medicine would affect its efficacy."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Aerosolises a liquid medicine for the patient to inhale"
+      },
+      {
+        "function_index": 0,
+        "target": "general.administers_by_inhalation",
+        "value": "yes",
+        "evidence": "Aerosolises a liquid medicine for the patient to inhale"
+      },
+      {
+        "function_index": 0,
+        "target": "general.administers_medicine",
+        "value": "yes",
+        "evidence": "Aerosolises a liquid medicine for the patient to inhale"
+      },
+      {
+        "function_index": 0,
+        "target": "general.inhalation_mode_of_action_essential",
+        "value": "yes",
+        "evidence": "failure to aerosolise the medicine would affect its efficacy"
+      }
+    ]
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "key": "23753f78d5ea957a8badc43f8d69b7c41ed886dd13339d965826e26964eb9db7",
+  "model": "gpt-6-sol",
+  "input": "Cognitive behavioural therapy app. Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm.",
+  "output": {
+    "functions": [
+      {
+        "name": "Cognitive behavioural therapy app",
+        "name_evidence": "Cognitive behavioural therapy app",
+        "description": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm.",
+        "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder, without referencing an established clinical practice guideline; the therapy may cause harm."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Provides cognitive behavioural therapy to a patient for treating bipolar disorder"
+      },
+      {
+        "function_index": 0,
+        "target": "function.is_software",
+        "value": "yes",
+        "evidence": "Cognitive behavioural therapy app"
+      },
+      {
+        "function_index": 0,
+        "target": "general.provides_therapy_through_information",
+        "value": "yes",
+        "evidence": "Cognitive behavioural therapy app. Provides cognitive behavioural therapy to a patient"
+      },
+      {
+        "function_index": 0,
+        "target": "general.information_therapy_harm",
+        "value": "harm",
+        "evidence": "the therapy may cause harm"
+      },
+      {
+        "function_index": 0,
+        "target": "status.therapeutic_purpose",
+        "value": "diagnosis_prevention_monitoring_prediction_treatment_of_disease",
+        "evidence": "treating bipolar disorder"
+      }
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "key": "f1db5f632edad947ef45499577b9977f66d0395c3581622cb28f1ddeaaee0a23",
+  "model": "gpt-6-sol",
+  "input": "Negative wound therapy dressing bandage. Used together with an active medical device to manage the microenvironment of a wound.",
+  "output": {
+    "functions": [
+      {
+        "name": "Negative wound therapy dressing bandage",
+        "name_evidence": "Negative wound therapy dressing bandage",
+        "description": "Used together with an active medical device to manage the microenvironment of a wound."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Used together with an active medical device to manage the microenvironment of a wound.",
+        "evidence": "Used together with an active medical device to manage the microenvironment of a wound."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Negative wound therapy dressing bandage"
+      },
+      {
+        "function_index": 0,
+        "target": "general.connected_to_an_active_device",
+        "value": "yes",
+        "evidence": "Used together with an active medical device"
+      },
+      {
+        "function_index": 0,
+        "target": "general.contacts_injured_skin_or_mucous_membrane",
+        "value": "yes",
+        "evidence": "dressing bandage. Used together with an active medical device to manage the microenvironment of a wound."
+      }
+    ]
+  }
+}

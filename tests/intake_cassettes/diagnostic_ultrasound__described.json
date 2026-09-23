@@ -1,0 +1,64 @@
+{
+  "key": "69c6704a99b22f934dba4af0d7b0ca3c99b3d271ea664cf439573e75b630460a",
+  "model": "gpt-6-sol",
+  "input": "General purpose diagnostic ultrasound. Supplies ultrasonic energy absorbed by the patient for imaging.",
+  "output": {
+    "functions": [
+      {
+        "name": "diagnostic ultrasound imaging",
+        "name_evidence": "diagnostic ultrasound",
+        "description": "Supplies ultrasonic energy absorbed by the patient for imaging."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "General purpose diagnostic ultrasound.",
+        "evidence": "General purpose diagnostic ultrasound."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "diagnostic ultrasound"
+      },
+      {
+        "function_index": 0,
+        "target": "general.administers_or_exchanges_energy",
+        "value": "yes",
+        "evidence": "Supplies ultrasonic energy absorbed by the patient"
+      },
+      {
+        "function_index": 0,
+        "target": "general.supplies_absorbed_energy_for_diagnosis",
+        "value": "yes",
+        "evidence": "General purpose diagnostic ultrasound. Supplies ultrasonic energy absorbed by the patient for imaging."
+      },
+      {
+        "function_index": 0,
+        "target": "general.active_for_diagnosis",
+        "value": "yes",
+        "evidence": "General purpose diagnostic ultrasound. Supplies ultrasonic energy absorbed by the patient for imaging."
+      },
+      {
+        "function_index": 0,
+        "target": "general.diagnoses_or_screens",
+        "value": "yes",
+        "evidence": "General purpose diagnostic ultrasound."
+      },
+      {
+        "function_index": 0,
+        "target": "general.is_active_device",
+        "value": "yes",
+        "evidence": "Supplies ultrasonic energy absorbed by the patient for imaging."
+      },
+      {
+        "function_index": 0,
+        "target": "status.therapeutic_purpose",
+        "value": "diagnosis_prevention_monitoring_prediction_treatment_of_disease",
+        "evidence": "General purpose diagnostic ultrasound."
+      }
+    ]
+  }
+}

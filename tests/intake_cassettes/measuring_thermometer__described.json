@@ -1,0 +1,52 @@
+{
+  "key": "f201c5b67bd30d00a6514f70baeb81a2c0133e334345b020cd2d33fb78ed9d48",
+  "model": "gpt-6-sol",
+  "input": "Non-powered clinical thermometer. Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin.",
+  "output": {
+    "functions": [
+      {
+        "name": "Body temperature measurement",
+        "name_evidence": "measures body temperature",
+        "description": "measures body temperature by contact with intact skin"
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.product_name",
+        "value": "Clinical thermometer",
+        "evidence": "Clinical thermometer"
+      },
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin.",
+        "evidence": "Clinical thermometer, not battery-powered, that measures body temperature by contact with intact skin."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "measures body temperature by contact with intact skin"
+      },
+      {
+        "function_index": 0,
+        "target": "function.is_software",
+        "value": "no",
+        "evidence": "Clinical thermometer"
+      },
+      {
+        "function_index": 0,
+        "target": "general.contacts_intact_skin_only",
+        "value": "yes",
+        "evidence": "by contact with intact skin"
+      },
+      {
+        "function_index": 0,
+        "target": "general.invasiveness",
+        "value": "non_invasive",
+        "evidence": "by contact with intact skin"
+      }
+    ]
+  }
+}

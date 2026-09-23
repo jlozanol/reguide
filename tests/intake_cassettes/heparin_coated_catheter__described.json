@@ -1,0 +1,40 @@
+{
+  "key": "d2a79c865859714d1af143dfbcb79810d845fcc83a69ce6e0bc296ee276e5fbb",
+  "model": "gpt-6-sol",
+  "input": "Heparin-coated catheter. Catheter incorporating heparin as an ancillary medicinal substance.",
+  "output": {
+    "functions": [
+      {
+        "name": "Heparin-coated catheter",
+        "name_evidence": "Heparin-coated catheter",
+        "description": "Catheter incorporating heparin as an ancillary medicinal substance."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.product_name",
+        "value": "Heparin-coated catheter",
+        "evidence": "Heparin-coated catheter"
+      },
+      {
+        "function_index": 0,
+        "target": "function.is_software",
+        "value": "no",
+        "evidence": "Catheter"
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Catheter incorporating heparin as an ancillary medicinal substance."
+      },
+      {
+        "function_index": 0,
+        "target": "general.incorporates_medicine",
+        "value": "yes",
+        "evidence": "incorporating heparin as an ancillary medicinal substance"
+      }
+    ]
+  }
+}

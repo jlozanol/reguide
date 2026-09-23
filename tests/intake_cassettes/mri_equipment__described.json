@@ -1,0 +1,58 @@
+{
+  "key": "2be4fd4dd2b23ecfb88a1301542b991c0bc7723389eb40d88724c96a9cf6b566",
+  "model": "gpt-6-sol",
+  "input": "Magnetic resonance equipment. Supplies energy absorbed by the patient's body for diagnostic imaging.",
+  "output": {
+    "functions": [
+      {
+        "name": "Magnetic resonance equipment",
+        "name_evidence": "Magnetic resonance equipment",
+        "description": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Supplies energy absorbed by the patient's body for diagnostic imaging.",
+        "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Magnetic resonance equipment"
+      },
+      {
+        "function_index": 0,
+        "target": "general.supplies_absorbed_energy_for_diagnosis",
+        "value": "yes",
+        "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+      },
+      {
+        "function_index": 0,
+        "target": "general.administers_or_exchanges_energy",
+        "value": "yes",
+        "evidence": "Supplies energy absorbed by the patient's body"
+      },
+      {
+        "function_index": 0,
+        "target": "general.active_for_diagnosis",
+        "value": "yes",
+        "evidence": "Supplies energy absorbed by the patient's body for diagnostic imaging."
+      },
+      {
+        "function_index": 0,
+        "target": "general.is_active_device",
+        "value": "yes",
+        "evidence": "Magnetic resonance equipment"
+      },
+      {
+        "function_index": 0,
+        "target": "status.therapeutic_purpose",
+        "value": "investigation_or_modification_of_anatomy_or_physiological_process",
+        "evidence": "diagnostic imaging"
+      }
+    ]
+  }
+}

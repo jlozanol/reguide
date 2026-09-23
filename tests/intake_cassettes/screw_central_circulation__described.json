@@ -1,0 +1,34 @@
+{
+  "key": "ea0d3f92625dd6a1ceb2923d56da2da70d36744605559957ff07024bfb199dcf",
+  "model": "gpt-6-sol",
+  "input": "Fixation screw contacting central circulatory system. Direct contact with the central circulatory or central nervous system.",
+  "output": {
+    "functions": [
+      {
+        "name": "Fixation screw",
+        "name_evidence": "Fixation screw",
+        "description": "Fixation screw contacting central circulatory system."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Fixation screw contacting central circulatory system.",
+        "evidence": "Fixation screw contacting central circulatory system."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Fixation screw"
+      },
+      {
+        "function_index": 0,
+        "target": "general.direct_contact_heart_circulation_or_nervous_system",
+        "value": "yes",
+        "evidence": "Direct contact with the central circulatory or central nervous system."
+      }
+    ]
+  }
+}

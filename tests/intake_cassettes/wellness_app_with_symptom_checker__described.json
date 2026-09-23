@@ -1,0 +1,69 @@
+{
+  "key": "ced337ea1dca86031710ea7311e7187089c8ce4496a52aac5f641532c2e7b01f",
+  "model": "gpt-6-sol",
+  "input": "Consumer wellbeing app. Tracks sleep and activity for general wellbeing and includes a symptom checker that suggests whether to seek care. Activity and sleep tracking: Records sleep and activity for general wellbeing. Symptom checker: Asks a consumer about symptoms and suggests whether to seek medical care.",
+  "output": {
+    "functions": [
+      {
+        "name": "Activity and sleep tracking",
+        "name_evidence": "Activity and sleep tracking",
+        "description": "Records sleep and activity for general wellbeing."
+      },
+      {
+        "name": "Symptom checker",
+        "name_evidence": "Symptom checker",
+        "description": "Asks a consumer about symptoms and suggests whether to seek medical care."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Tracks sleep and activity for general wellbeing and includes a symptom checker that suggests whether to seek care.",
+        "evidence": "Tracks sleep and activity for general wellbeing and includes a symptom checker that suggests whether to seek care."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Records sleep and activity for general wellbeing."
+      },
+      {
+        "function_index": 0,
+        "target": "function.is_software",
+        "value": "yes",
+        "evidence": "Consumer wellbeing app."
+      },
+      {
+        "function_index": 0,
+        "target": "general.monitors_disease_state",
+        "value": "yes",
+        "evidence": "Tracks sleep and activity"
+      },
+      {
+        "function_index": 1,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
+      },
+      {
+        "function_index": 1,
+        "target": "function.is_software",
+        "value": "yes",
+        "evidence": "Consumer wellbeing app."
+      },
+      {
+        "function_index": 1,
+        "target": "general.specifies_or_recommends_treatment",
+        "value": "yes",
+        "evidence": "suggests whether to seek medical care"
+      },
+      {
+        "function_index": 1,
+        "target": "general.decision_maker",
+        "value": "device_gives_the_decision_to_a_lay_user",
+        "evidence": "Asks a consumer about symptoms and suggests whether to seek medical care."
+      }
+    ]
+  }
+}

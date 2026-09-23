@@ -1,0 +1,46 @@
+{
+  "key": "5627d727cf1061073f5c4ba1d35ff154d33993575a9220463233b5e6a70051a7",
+  "model": "gpt-6-sol",
+  "input": "Trauma covering with anaesthetic gel. Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic.",
+  "output": {
+    "functions": [
+      {
+        "name": "Trauma covering",
+        "name_evidence": "trauma covering",
+        "description": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic.",
+        "evidence": "Non-sterile trauma covering to maintain stability of a burn patient en route to hospital, coated in a gel containing anaesthetic."
+      },
+      {
+        "function_index": -1,
+        "target": "core.supplied_sterile",
+        "value": "no",
+        "evidence": "Non-sterile"
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "trauma covering"
+      },
+      {
+        "function_index": 0,
+        "target": "general.incorporates_medicine",
+        "value": "yes",
+        "evidence": "coated in a gel containing anaesthetic"
+      },
+      {
+        "function_index": 0,
+        "target": "status.therapeutic_purpose",
+        "value": "diagnosis_monitoring_treatment_or_compensation_for_injury",
+        "evidence": "to maintain stability of a burn patient"
+      }
+    ]
+  }
+}

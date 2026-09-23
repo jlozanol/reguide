@@ -1,0 +1,40 @@
+{
+  "key": "f8af16952076e1207bc1ad6d5a46a657064677bca25fb13d7017f79ecebf90e1",
+  "model": "gpt-6-sol",
+  "input": "Non-assay-specific control plasma. Quality control material for coagulation studies, not assay specific.",
+  "output": {
+    "functions": [
+      {
+        "name": "Control plasma",
+        "name_evidence": "control plasma",
+        "description": "Quality control material for coagulation studies, not assay specific."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.product_name",
+        "value": "Non-assay-specific control plasma",
+        "evidence": "Non-assay-specific control plasma"
+      },
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Quality control material for coagulation studies, not assay specific.",
+        "evidence": "Quality control material for coagulation studies, not assay specific."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "ivd",
+        "evidence": "Quality control material for coagulation studies"
+      },
+      {
+        "function_index": 0,
+        "target": "ivd.is_quality_control_material",
+        "value": "yes",
+        "evidence": "Quality control material for coagulation studies, not assay specific."
+      }
+    ]
+  }
+}

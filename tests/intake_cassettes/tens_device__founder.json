@@ -1,0 +1,82 @@
+{
+  "key": "a02c545a3c02dfb8d50bad00ad9cded998adcde6669456ecc107d2065e5956ba",
+  "model": "gpt-6-sol",
+  "input": "PainAway is a small battery-powered unit with sticky pads. You put the pads on your lower back and it sends gentle electrical pulses through the skin to ease back pain. The pulses are low power and are not dangerous.",
+  "output": {
+    "functions": [
+      {
+        "name": "Electrical pulse pain relief",
+        "name_evidence": "sends gentle electrical pulses through the skin to ease back pain",
+        "description": "You put the pads on your lower back and it sends gentle electrical pulses through the skin to ease back pain."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.product_name",
+        "value": "PainAway",
+        "evidence": "PainAway"
+      },
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "You put the pads on your lower back and it sends gentle electrical pulses through the skin to ease back pain.",
+        "evidence": "You put the pads on your lower back and it sends gentle electrical pulses through the skin to ease back pain."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "sends gentle electrical pulses through the skin to ease back pain"
+      },
+      {
+        "function_index": 0,
+        "target": "function.is_software",
+        "value": "no",
+        "evidence": "a small battery-powered unit with sticky pads"
+      },
+      {
+        "function_index": 0,
+        "target": "general.is_active_device",
+        "value": "yes",
+        "evidence": "battery-powered unit"
+      },
+      {
+        "function_index": 0,
+        "target": "general.administers_or_exchanges_energy",
+        "value": "yes",
+        "evidence": "sends gentle electrical pulses through the skin"
+      },
+      {
+        "function_index": 0,
+        "target": "general.delivers_hazardous_energy",
+        "value": "no",
+        "evidence": "The pulses are low power and are not dangerous."
+      },
+      {
+        "function_index": 0,
+        "target": "general.active_for_therapy",
+        "value": "yes",
+        "evidence": "sends gentle electrical pulses through the skin to ease back pain"
+      },
+      {
+        "function_index": 0,
+        "target": "general.contacts_intact_skin_only",
+        "value": "yes",
+        "evidence": "sticky pads. You put the pads on your lower back"
+      },
+      {
+        "function_index": 0,
+        "target": "general.invasiveness",
+        "value": "non_invasive",
+        "evidence": "You put the pads on your lower back"
+      },
+      {
+        "function_index": 0,
+        "target": "status.therapeutic_purpose",
+        "value": "diagnosis_prevention_monitoring_prediction_treatment_of_disease",
+        "evidence": "to ease back pain"
+      }
+    ]
+  }
+}

@@ -15,6 +15,21 @@ every field the result states is compared with the fixture's profile:
 - extra: the fixture has no answer there, usually because gating pruned the
   field. Not wrong, listed for review.
 
+Two refinements came from triaging the first recording (23 Sep 2026):
+
+- A different therapeutic purpose limb is not a contradiction. Several limbs
+  can be true at once (a bone screw treats an injury and modifies anatomy),
+  and the gate only asks whether one is reached. It is scored as agreement
+  and listed as a note. Claiming a limb where the fixture has none, or no
+  limb where the fixture has one, is still a contradiction.
+- REVIEWED lists disagreements that were checked by hand and accepted, each
+  with its reason. Every entry was run through the gate and engine: none
+  changes a verdict, and the ones that add questions reach the fixture's
+  class once those questions are answered. An entry matches the fixture,
+  field and extracted value, in any of that fixture's cases. Anything not on
+  the list still fails. Entries no recorded case produces are removed, so
+  every entry matches a reading in a committed cassette.
+
 Coverage is how many of the fixture's specific facts extraction recovered.
 It is reported, not required: a description does not state everything, and
 anything it does not state is asked.
@@ -45,6 +60,49 @@ FIXTURE_DIR = ROOT / "tests" / "fixtures"
 NOT_COMPARED = {"core.product_name", "core.intended_purpose",
                 "funding.replaces_existing_service"}
 
+NO_PURPOSE = {"no_therapeutic_purpose", "unknown"}
+
+# (fixture, field, extracted value) -> why the disagreement is accepted.
+REVIEWED: dict[tuple[str, str, str], str] = {
+    ("haemodialyser", "functions.0.general.channels_or_stores_blood_for_administration",
+     "yes"):
+        "Clause 2.2(1)(a) covers channelling blood that is to be introduced into a "
+        "patient, and the dialyser returns the blood to the patient. 2.2 gives "
+        "Class IIa, so the higher 2.3(1) class still governs: stays IIb.",
+    ("imaging_platform", "functions.2.general.active_for_diagnosis", "yes"):
+        "Reads interval-suggesting software as supplying information for "
+        "monitoring. Adds six questions; answered, the class stays IIa.",
+    ("melanoma_screening_app", "functions.0.status.cdss_processes_device_signal_or_image",
+     "yes"):
+        "Reads the mole photo as an image the software analyses. The function "
+        "fails the CDSS exemption either way, since it replaces judgement. No "
+        "change to the verdict.",
+    ("melanoma_screening_app", "functions.0.general.specifies_or_recommends_treatment",
+     "yes"):
+        "Reads 'whether you need to see a doctor' as recommending an "
+        "intervention. Adds one question; answered, the class stays III.",
+    ("virtual_anatomical_model_software", "functions.0.general.diagnoses_or_screens",
+     "yes"):
+        "The text says the model is for 'diagnosing a stress fracture'. Adds the "
+        "clause 4.5 questions; answered, the class stays IIa under 5.4(3).",
+    ("virtual_anatomical_model_software",
+     "functions.0.general.is_anatomical_model_for_diagnosis", "yes"):
+        "A virtual model used for diagnosis read as an anatomical model for "
+        "diagnosis. No change to the verdict.",
+    ("wellness_app_with_symptom_checker", "functions.0.general.monitors_disease_state",
+     "yes"):
+        "Clause 4.6 covers monitoring 'the parameters in relation to a person', "
+        "which a sleep tracker does. The gate excludes the function anyway. No "
+        "change to the verdict.",
+    ("wellness_app_with_symptom_checker",
+     "functions.1.general.specifies_or_recommends_treatment", "yes"):
+        "Reads 'suggests whether to seek medical care' as recommending an "
+        "intervention. Adds one question; answered, the class stays IIa.",
+    ("wellness_sleep_tracker", "functions.0.general.monitors_disease_state", "yes"):
+        "Clause 4.6 covers monitoring 'the parameters in relation to a person'. "
+        "The gate excludes the product anyway. No change to the verdict.",
+}
+
 
 class Cassette(StrEnum):
     OK = "ok"
@@ -54,6 +112,8 @@ class Cassette(StrEnum):
 
 class Kind(StrEnum):
     AGREED = "agreed"
+    OTHER_PURPOSE = "other_purpose_limb"
+    REVIEWED = "reviewed"
     CONTRADICTS_SPECIFIC = "contradicts_specific"
     CONTRADICTS_DEFAULT = "contradicts_default"
     EXTRA = "extra"
@@ -102,7 +162,7 @@ class CaseScore:
 
     @property
     def covered(self) -> list[str]:
-        agreed = {f.field for f in self.of(Kind.AGREED)}
+        agreed = {f.field for f in self.of(Kind.AGREED, Kind.OTHER_PURPOSE)}
         return [name for name in self.specific if name in agreed]
 
     @property
@@ -176,8 +236,14 @@ def stated_fields(profile: DeviceProfile) -> list[tuple[str, Answer]]:
     return out
 
 
+def _other_purpose(dotted: str, got: Any, want: Any) -> bool:
+    """Two different limbs of the therapeutic purpose definition, both reached."""
+    return (dotted.endswith(".status.therapeutic_purpose")
+            and got not in NO_PURPOSE and want not in NO_PURPOSE)
+
+
 def compare(extracted: DeviceProfile, expected: DeviceProfile,
-            specific: set[str]) -> tuple[list[Finding], bool]:
+            specific: set[str], slug: str = "") -> tuple[list[Finding], bool]:
     """Findings for every stated field, and whether the function split matched."""
     split_matches = len(extracted.functions) == len(expected.functions)
     findings = []
@@ -194,6 +260,10 @@ def compare(extracted: DeviceProfile, expected: DeviceProfile,
         want = _plain(target.value)
         if got == want:
             kind = Kind.AGREED
+        elif _other_purpose(dotted, got, want):
+            kind = Kind.OTHER_PURPOSE
+        elif (slug, dotted, str(got)) in REVIEWED:
+            kind = Kind.REVIEWED
         elif dotted in specific:
             kind = Kind.CONTRADICTS_SPECIFIC
         else:
@@ -211,12 +281,28 @@ def score_case(case: IntakeCase, output: dict[str, Any] | None, cassette: Casset
     if cassette is not Cassette.OK or output is None:
         return score
     extracted, rejections = build_profile(output, case.text)
-    score.findings, score.split_matches = compare(extracted, expected, set(specific))
+    score.findings, score.split_matches = compare(extracted, expected, set(specific),
+                                                  case.slug)
     score.extracted_functions = len(extracted.functions)
     score.untraceable = extracted.untraceable_evidence()
     score.rejections = rejections
     score.askable = len(extracted.askable())
     return score
+
+
+def unused_reviews(scores: list[CaseScore]) -> list[tuple[str, str, str]]:
+    """REVIEWED entries no recorded case produced. Worth pruning, not an error.
+
+    Only fixtures whose cases are all recorded are considered, so a partial
+    recording does not make every entry look unused.
+    """
+    recorded: dict[str, bool] = {}
+    for score in scores:
+        recorded[score.case.slug] = recorded.get(score.case.slug, True) and \
+            score.cassette is Cassette.OK
+    seen = {(s.case.slug, f.field, str(f.extracted))
+            for s in scores for f in s.of(Kind.REVIEWED)}
+    return [key for key in REVIEWED if recorded.get(key[0]) and key not in seen]
 
 
 def score_all(fixtures: Path = FIXTURE_DIR, cassettes: Path = CASSETTE_DIR,

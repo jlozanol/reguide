@@ -1,0 +1,40 @@
+{
+  "key": "f318f97035526e729809baa08058027996892b8754196be2e0ad8abd2cb00b5e",
+  "model": "gpt-6-sol",
+  "input": "Assay wash solution. Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself.",
+  "output": {
+    "functions": [
+      {
+        "name": "Assay wash solution",
+        "name_evidence": "Assay wash solution",
+        "description": "Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself.",
+        "evidence": "Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "ivd",
+        "evidence": "for use in a specific immunoassay examination"
+      },
+      {
+        "function_index": 0,
+        "target": "ivd.is_ancillary_reagent_or_article",
+        "value": "yes",
+        "evidence": "an ancillary reagent, not the test itself"
+      },
+      {
+        "function_index": 0,
+        "target": "status.therapeutic_purpose",
+        "value": "in_vitro_examination_of_specimen_for_medical_purpose",
+        "evidence": "for use in a specific immunoassay examination"
+      }
+    ]
+  }
+}

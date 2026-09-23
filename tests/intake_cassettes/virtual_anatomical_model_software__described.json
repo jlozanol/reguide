@@ -1,0 +1,76 @@
+{
+  "key": "71399dc4a5c9453b877276a76bcf4dd933d1f22732c3ebfc9b9719b80fe33971",
+  "model": "gpt-6-sol",
+  "input": "Virtual anatomical model software. Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture.",
+  "output": {
+    "functions": [
+      {
+        "name": "3D anatomical model generation",
+        "name_evidence": "Generates a 3D anatomical virtual model",
+        "description": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture.",
+        "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
+      },
+      {
+        "function_index": 0,
+        "target": "function.is_software",
+        "value": "yes",
+        "evidence": "Virtual anatomical model software."
+      },
+      {
+        "function_index": 0,
+        "target": "general.generates_virtual_anatomical_model",
+        "value": "yes",
+        "evidence": "Generates a 3D anatomical virtual model from patient scans"
+      },
+      {
+        "function_index": 0,
+        "target": "general.is_anatomical_model_for_diagnosis",
+        "value": "yes",
+        "evidence": "3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture"
+      },
+      {
+        "function_index": 0,
+        "target": "general.records_images_or_anatomical_model",
+        "value": "yes",
+        "evidence": "Generates a 3D anatomical virtual model"
+      },
+      {
+        "function_index": 0,
+        "target": "general.diagnoses_or_screens",
+        "value": "yes",
+        "evidence": "for a health professional diagnosing a stress fracture"
+      },
+      {
+        "function_index": 0,
+        "target": "general.active_for_diagnosis",
+        "value": "yes",
+        "evidence": "Generates a 3D anatomical virtual model from patient scans for a health professional diagnosing a stress fracture."
+      },
+      {
+        "function_index": 0,
+        "target": "status.therapeutic_purpose",
+        "value": "diagnosis_monitoring_treatment_or_compensation_for_injury",
+        "evidence": "diagnosing a stress fracture"
+      },
+      {
+        "function_index": 0,
+        "target": "general.decision_maker",
+        "value": "informs_a_health_professional_who_decides",
+        "evidence": "for a health professional diagnosing a stress fracture"
+      }
+    ]
+  }
+}

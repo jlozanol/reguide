@@ -1,0 +1,58 @@
+{
+  "key": "a7e740029ac2640d1d46b194616132cbe37b03940baa135ab2864d82600a1eeb",
+  "model": "gpt-6-sol",
+  "input": "Long-term nasal splint. Non-absorbable splint used in a nasal cavity for longer than 30 days.",
+  "output": {
+    "functions": [
+      {
+        "name": "nasal splint",
+        "name_evidence": "nasal splint",
+        "description": "Non-absorbable splint used in a nasal cavity for longer than 30 days."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.product_name",
+        "value": "Long-term nasal splint",
+        "evidence": "Long-term nasal splint"
+      },
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Non-absorbable splint used in a nasal cavity for longer than 30 days.",
+        "evidence": "Non-absorbable splint used in a nasal cavity for longer than 30 days."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "splint used in a nasal cavity"
+      },
+      {
+        "function_index": 0,
+        "target": "general.invasiveness",
+        "value": "invasive_body_orifice",
+        "evidence": "used in a nasal cavity"
+      },
+      {
+        "function_index": 0,
+        "target": "general.orifice_site",
+        "value": "nasal_cavity",
+        "evidence": "nasal cavity"
+      },
+      {
+        "function_index": 0,
+        "target": "general.duration",
+        "value": "long_term",
+        "evidence": "longer than 30 days"
+      },
+      {
+        "function_index": 0,
+        "target": "general.wholly_or_mostly_absorbed",
+        "value": "no",
+        "evidence": "Non-absorbable"
+      }
+    ]
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "key": "e3c7353b308a4a89d407d0fad67a8bf4606743a12df416827a4a658d32218de2",
+  "model": "gpt-6-sol",
+  "input": "Follow-up interval recommender. Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides.",
+  "output": {
+    "functions": [
+      {
+        "name": "Follow-up interval recommender",
+        "name_evidence": "Follow-up interval recommender",
+        "description": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.product_name",
+        "value": "Follow-up interval recommender",
+        "evidence": "Follow-up interval recommender"
+      },
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides.",
+        "evidence": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides."
+      },
+      {
+        "function_index": 0,
+        "target": "general.decision_maker",
+        "value": "informs_a_health_professional_who_decides",
+        "evidence": "recommends a follow-up imaging interval to the reporting radiologist, who decides"
+      },
+      {
+        "function_index": 0,
+        "target": "general.specifies_or_recommends_treatment",
+        "value": "yes",
+        "evidence": "recommends a follow-up imaging interval"
+      },
+      {
+        "function_index": 0,
+        "target": "status.cdss_sole_purpose_recommendation",
+        "value": "yes",
+        "evidence": "Reads the written radiology report and recommends a follow-up imaging interval to the reporting radiologist, who decides."
+      }
+    ]
+  }
+}

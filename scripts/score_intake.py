@@ -18,7 +18,7 @@ import argparse
 import sys
 from collections import Counter
 
-from reguide.intake_scoring import Cassette, Kind, score_all
+from reguide.intake_scoring import REVIEWED, Cassette, Kind, score_all, unused_reviews
 
 
 def main(argv=None):
@@ -56,6 +56,10 @@ def main(argv=None):
         print(f"Coverage of specific facts: {covered}/{specific}"
               f" ({100 * covered / specific:.0f}%)" if specific else "")
         print(f"Split matches: {sum(s.split_matches for s in recorded)}/{len(recorded)}")
+        others = sum(len(s.of(Kind.OTHER_PURPOSE)) for s in recorded)
+        reviewed = sum(len(s.of(Kind.REVIEWED)) for s in recorded)
+        print(f"Different purpose limb (counted as agreed): {others}")
+        print(f"Reviewed and accepted disagreements: {reviewed}")
         drops = Counter(r.reason.value for s in recorded for r in s.rejections)
         print("Dropped claims by reason: " +
               (", ".join(f"{k} {v}" for k, v in drops.most_common()) or "none"))
@@ -72,7 +76,20 @@ def main(argv=None):
     for s, name in untraceable:
         print(f"  [untraceable] {s.case.name}  {name}")
 
+    unused = unused_reviews(scores)
+    if unused:
+        print("\nReviewed entries no case produced any more (can be removed):")
+        for slug, name, value in unused:
+            print(f"  {slug}  {name} = {value!r}")
+
     if args.details:
+        for s in recorded:
+            for f in s.of(Kind.OTHER_PURPOSE):
+                print(f"\n{s.case.name}\n  note     {f.field}: extracted {f.extracted!r}, "
+                      f"fixture {f.expected!r}")
+            for f in s.of(Kind.REVIEWED):
+                reason = REVIEWED[(s.case.slug, f.field, str(f.extracted))]
+                print(f"\n{s.case.name}\n  reviewed {f.field} = {f.extracted!r}: {reason}")
         for s in recorded:
             extras = s.of(Kind.EXTRA)
             missed = [n for n in s.specific if n not in set(s.covered)]

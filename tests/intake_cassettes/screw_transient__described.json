@@ -1,0 +1,40 @@
+{
+  "key": "262a1f1b2b01596c63b551375282d52ba701a33c6b66ebef3f7846737fa18bf5",
+  "model": "gpt-6-sol",
+  "input": "Metal fixation screw, intraoperative. Holds bone together temporarily during surgery.",
+  "output": {
+    "functions": [
+      {
+        "name": "Metal fixation screw",
+        "name_evidence": "Metal fixation screw",
+        "description": "Holds bone together temporarily during surgery."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Holds bone together temporarily during surgery.",
+        "evidence": "Holds bone together temporarily during surgery."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Metal fixation screw"
+      },
+      {
+        "function_index": 0,
+        "target": "general.invasiveness",
+        "value": "surgically_invasive",
+        "evidence": "Metal fixation screw, intraoperative."
+      },
+      {
+        "function_index": 0,
+        "target": "status.therapeutic_purpose",
+        "value": "investigation_or_modification_of_anatomy_or_physiological_process",
+        "evidence": "Holds bone together temporarily during surgery."
+      }
+    ]
+  }
+}

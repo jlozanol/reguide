@@ -1,0 +1,64 @@
+{
+  "key": "d7c689865f68cfce22484c7649aaac543a0e73239acce845e52cb46a697120d1",
+  "model": "gpt-6-sol",
+  "input": "TENS device. Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way.",
+  "output": {
+    "functions": [
+      {
+        "name": "Transcutaneous electrical nerve stimulator",
+        "name_evidence": "Transcutaneous electrical nerve stimulator",
+        "description": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.product_name",
+        "value": "TENS device",
+        "evidence": "TENS device"
+      },
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way.",
+        "evidence": "Transcutaneous electrical nerve stimulator that administers electrical energy to a patient for pain relief, not in a potentially hazardous way."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Transcutaneous electrical nerve stimulator"
+      },
+      {
+        "function_index": 0,
+        "target": "general.is_active_device",
+        "value": "yes",
+        "evidence": "administers electrical energy"
+      },
+      {
+        "function_index": 0,
+        "target": "general.active_for_therapy",
+        "value": "yes",
+        "evidence": "administers electrical energy to a patient for pain relief"
+      },
+      {
+        "function_index": 0,
+        "target": "general.administers_or_exchanges_energy",
+        "value": "yes",
+        "evidence": "administers electrical energy to a patient"
+      },
+      {
+        "function_index": 0,
+        "target": "general.delivers_hazardous_energy",
+        "value": "no",
+        "evidence": "not in a potentially hazardous way"
+      },
+      {
+        "function_index": 0,
+        "target": "status.therapeutic_purpose",
+        "value": "diagnosis_prevention_monitoring_prediction_treatment_of_disease",
+        "evidence": "for pain relief"
+      }
+    ]
+  }
+}

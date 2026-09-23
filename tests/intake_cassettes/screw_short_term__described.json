@@ -1,0 +1,46 @@
+{
+  "key": "7f743c413648577b9962f4d13a6722e215d4673463df0d99e953fff0e95da753",
+  "model": "gpt-6-sol",
+  "input": "Metal fixation screw, short term. Holds bone together for up to 30 days to support fracture healing.",
+  "output": {
+    "functions": [
+      {
+        "name": "Bone fixation",
+        "name_evidence": "Holds bone together",
+        "description": "Holds bone together for up to 30 days to support fracture healing."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Holds bone together for up to 30 days to support fracture healing.",
+        "evidence": "Holds bone together for up to 30 days to support fracture healing."
+      },
+      {
+        "function_index": -1,
+        "target": "core.product_name",
+        "value": "Metal fixation screw",
+        "evidence": "Metal fixation screw"
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Metal fixation screw"
+      },
+      {
+        "function_index": 0,
+        "target": "general.duration",
+        "value": "short_term",
+        "evidence": "short term"
+      },
+      {
+        "function_index": 0,
+        "target": "status.therapeutic_purpose",
+        "value": "diagnosis_monitoring_treatment_or_compensation_for_injury",
+        "evidence": "support fracture healing"
+      }
+    ]
+  }
+}

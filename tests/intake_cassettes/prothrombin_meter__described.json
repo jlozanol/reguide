@@ -1,0 +1,40 @@
+{
+  "key": "544ac906eb8b982fbcdfafdec33117cb262a6db6f1cb538114a92e03f05dfb46",
+  "model": "gpt-6-sol",
+  "input": "Portable prothrombin time meter. Instrument that reads prothrombin time test strips.",
+  "output": {
+    "functions": [
+      {
+        "name": "prothrombin time meter",
+        "name_evidence": "prothrombin time meter",
+        "description": "Instrument that reads prothrombin time test strips."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.product_name",
+        "value": "Portable prothrombin time meter",
+        "evidence": "Portable prothrombin time meter"
+      },
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Instrument that reads prothrombin time test strips.",
+        "evidence": "Instrument that reads prothrombin time test strips."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "ivd",
+        "evidence": "Instrument that reads prothrombin time test strips."
+      },
+      {
+        "function_index": 0,
+        "target": "ivd.is_ivd_instrument",
+        "value": "yes",
+        "evidence": "Instrument that reads prothrombin time test strips."
+      }
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "key": "b9c455143493c88f7b500b0baa4f54fdc3bd9f0c6211c172d052c00daea3b117",
+  "model": "gpt-6-sol",
+  "input": "Our app tracks your sleep and daily activity to help you feel your best. It is a lifestyle product for general wellbeing.",
+  "output": {
+    "functions": [
+      {
+        "name": "Sleep and activity tracking",
+        "name_evidence": "tracks your sleep and daily activity",
+        "description": "tracks your sleep and daily activity to help you feel your best"
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Our app tracks your sleep and daily activity to help you feel your best.",
+        "evidence": "Our app tracks your sleep and daily activity to help you feel your best."
+      },
+      {
+        "function_index": 0,
+        "target": "function.is_software",
+        "value": "yes",
+        "evidence": "Our app"
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Our app tracks your sleep and daily activity"
+      },
+      {
+        "function_index": 0,
+        "target": "general.monitors_disease_state",
+        "value": "yes",
+        "evidence": "tracks your sleep and daily activity"
+      }
+    ]
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "key": "3b307abf55827111a947f7282ae193cb404bc70298cd4f3579f699fe39ebb23a",
+  "model": "gpt-6-sol",
+  "input": "A plaster for small cuts and grazes. It soaks up fluid from the wound and keeps dirt out while it heals. Each one comes individually wrapped and sterile.",
+  "output": {
+    "functions": [
+      {
+        "name": "plaster for small cuts and grazes",
+        "name_evidence": "A plaster for small cuts and grazes.",
+        "description": "It soaks up fluid from the wound and keeps dirt out while it heals."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "A plaster for small cuts and grazes.",
+        "evidence": "A plaster for small cuts and grazes."
+      },
+      {
+        "function_index": -1,
+        "target": "core.supplied_sterile",
+        "value": "yes",
+        "evidence": "sterile"
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "A plaster for small cuts and grazes."
+      },
+      {
+        "function_index": 0,
+        "target": "general.contacts_injured_skin_or_mucous_membrane",
+        "value": "yes",
+        "evidence": "fluid from the wound"
+      },
+      {
+        "function_index": 0,
+        "target": "general.barrier_compression_or_absorption",
+        "value": "yes",
+        "evidence": "It soaks up fluid from the wound and keeps dirt out while it heals."
+      },
+      {
+        "function_index": 0,
+        "target": "general.invasiveness",
+        "value": "non_invasive",
+        "evidence": "A plaster for small cuts and grazes."
+      },
+      {
+        "function_index": 0,
+        "target": "status.therapeutic_purpose",
+        "value": "diagnosis_monitoring_treatment_or_compensation_for_injury",
+        "evidence": "A plaster for small cuts and grazes."
+      }
+    ]
+  }
+}

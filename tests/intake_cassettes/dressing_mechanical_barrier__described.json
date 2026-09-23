@@ -1,0 +1,34 @@
+{
+  "key": "596e4c702b63e1f99df72992300ac868bd44b541354a0765eeff6e2004e67591",
+  "model": "gpt-6-sol",
+  "input": "Absorbent pad. Acts as a barrier to and absorbs exudate from a wound.",
+  "output": {
+    "functions": [
+      {
+        "name": "Absorbent pad",
+        "name_evidence": "Absorbent pad",
+        "description": "Acts as a barrier to and absorbs exudate from a wound."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "general_device",
+        "evidence": "Acts as a barrier to and absorbs exudate from a wound."
+      },
+      {
+        "function_index": 0,
+        "target": "general.barrier_compression_or_absorption",
+        "value": "yes",
+        "evidence": "Acts as a barrier to and absorbs exudate from a wound."
+      },
+      {
+        "function_index": 0,
+        "target": "general.contacts_injured_skin_or_mucous_membrane",
+        "value": "yes",
+        "evidence": "from a wound"
+      }
+    ]
+  }
+}

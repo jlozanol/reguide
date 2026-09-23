@@ -1,0 +1,46 @@
+{
+  "key": "46e6b1d8fc9efb0c81531f7412423a67176a364fc7c5517ea84bea8df13dfbfb",
+  "model": "gpt-6-sol",
+  "input": "Chlamydia trachomatis assay. Detects Chlamydia trachomatis in a clinical specimen for diagnosis.",
+  "output": {
+    "functions": [
+      {
+        "name": "Chlamydia trachomatis assay",
+        "name_evidence": "Chlamydia trachomatis assay",
+        "description": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.product_name",
+        "value": "Chlamydia trachomatis assay",
+        "evidence": "Chlamydia trachomatis assay"
+      },
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis.",
+        "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "ivd",
+        "evidence": "in a clinical specimen for diagnosis"
+      },
+      {
+        "function_index": 0,
+        "target": "ivd.detects_infectious_agent",
+        "value": "yes",
+        "evidence": "Detects Chlamydia trachomatis"
+      },
+      {
+        "function_index": 0,
+        "target": "status.therapeutic_purpose",
+        "value": "in_vitro_examination_of_specimen_for_medical_purpose",
+        "evidence": "Detects Chlamydia trachomatis in a clinical specimen for diagnosis."
+      }
+    ]
+  }
+}

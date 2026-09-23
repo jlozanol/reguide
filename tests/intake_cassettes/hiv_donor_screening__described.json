@@ -1,0 +1,52 @@
+{
+  "key": "2313d544ecd784aaede533f4e5016be0925399102b6a5faed04cc6e0176a9bb1",
+  "model": "gpt-6-sol",
+  "input": "HIV blood donor screening assay. Screens donated blood for HIV before transfusion.",
+  "output": {
+    "functions": [
+      {
+        "name": "HIV blood donor screening assay",
+        "name_evidence": "HIV blood donor screening assay",
+        "description": "Screens donated blood for HIV before transfusion."
+      }
+    ],
+    "claims": [
+      {
+        "function_index": -1,
+        "target": "core.product_name",
+        "value": "HIV blood donor screening assay",
+        "evidence": "HIV blood donor screening assay"
+      },
+      {
+        "function_index": -1,
+        "target": "core.intended_purpose",
+        "value": "Screens donated blood for HIV before transfusion.",
+        "evidence": "Screens donated blood for HIV before transfusion."
+      },
+      {
+        "function_index": 0,
+        "target": "function.kind",
+        "value": "ivd",
+        "evidence": "Screens donated blood for HIV before transfusion."
+      },
+      {
+        "function_index": 0,
+        "target": "ivd.screens_donations_for_transmissible_agents",
+        "value": "yes",
+        "evidence": "Screens donated blood for HIV before transfusion."
+      },
+      {
+        "function_index": 0,
+        "target": "ivd.detects_infectious_agent",
+        "value": "yes",
+        "evidence": "Screens donated blood for HIV"
+      },
+      {
+        "function_index": 0,
+        "target": "status.therapeutic_purpose",
+        "value": "in_vitro_examination_of_specimen_for_medical_purpose",
+        "evidence": "Screens donated blood for HIV before transfusion."
+      }
+    ]
+  }
+}
