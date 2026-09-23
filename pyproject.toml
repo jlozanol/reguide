@@ -9,7 +9,10 @@ license = { text = "MIT" }
 dependencies = [
     # Profile schema and validation
     "pydantic>=2.9",
-    # Intake and report assembly, the only two model calls in the pipeline
+    # Intake: the extraction call (reguide/llm.py). OpenAI Responses API,
+    # gpt-6-sol with reasoning off and temperature 0.
+    "openai>=3.0",
+    # Report assembly, the other model call. Not built yet.
     "anthropic>=0.40",
     # openFDA requests
     "httpx>=0.27",

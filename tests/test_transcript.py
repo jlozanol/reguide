@@ -345,11 +345,10 @@ class TestQuestion:
 
 
 class TestContract:
-    """The three entry points exist with their stage 1 signatures."""
+    """The two interview entry points exist with their stage 1 signatures.
 
-    def test_extract_is_not_built_yet(self):
-        with pytest.raises(NotImplementedError):
-            X.extract("a dressing")
+    extract() is built in step 2 and tested in test_extract.py.
+    """
 
     def test_next_question_is_not_built_yet(self):
         with pytest.raises(NotImplementedError):
