@@ -254,6 +254,7 @@
     ],
     "funding": null,
     "source_text": "Assay wash solution Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself. Assay wash solution Wash solution with specific characteristics for use in a specific immunoassay examination; an ancillary reagent, not the test itself. fixture decomposition is fixed by hand",
-    "schema_version": "0.11"
+    "transcript": [],
+    "schema_version": "0.12"
   }
 }

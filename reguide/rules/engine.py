@@ -185,12 +185,19 @@ def qualify(profile: DeviceProfile, function: FunctionProfile,
     product shares them. An unanswered input leaves the result standing but
     not confident, because the conformity route of a Class I device is not
     known until both are answered.
+
+    Software cannot be supplied sterile, so a software function is never
+    held up by that input and never carries that qualifier. The intake
+    gating (relevant_core_fields) does not ask it of an all-software product.
     """
     if function.branch() is not DeviceKind.GENERAL or outcome.result != "Class I":
         return outcome
     if not outcome.confident:
         return outcome
+    software = known(function.is_software) is Tri.YES
     for field_name, code, label, citation in QUALIFIERS:
+        if software and field_name == "supplied_sterile":
+            continue
         answer = getattr(profile.core, field_name)
         value = known(answer)
         if value is None:

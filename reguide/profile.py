@@ -82,6 +82,22 @@ test itself. Read literally, 1.6(1) would catch almost every test kit and
 leave clause 1.7 nearly empty; it is read the way the international model
 the rules came from reads it (IMDRF/GHTF rule 5: wash solutions, general
 culture media, plain urine cups).
+
+Version 0.12 is the first intake schema. The profile carries a transcript of
+every question put to the founder and the reply, word for word. An ANSWERED
+field's evidence has to be a phrase from the reply to a question that covered
+that field, the same way a STATED field's evidence has to be a phrase from
+source_text; before the transcript there was nowhere to check it against.
+A reply can also be "not sure": the field stays unknown, the turn records
+that it was asked, and askable() stops offering it, so an interview cannot
+loop on a question the founder cannot answer. The engine's Pending for that
+field then reaches the report as something for a regulatory adviser.
+
+The two regulation 3.9 qualifiers are asked only where the engine can read
+them: both only for a product with a general device function (regulation
+1.4(2) and 3.9A keep IVDs out), and sterile supply never for a product whose
+general functions are all software, which cannot be supplied sterile. A
+product whose functions are not yet known is asked both.
 """
 
 from enum import Enum
@@ -885,6 +901,41 @@ def highest_class(classes) -> dict[str, str]:
     return result
 
 
+class Turn(BaseModel):
+    """One question put to the founder, and the reply.
+
+    fields holds the dotted names the question covers, relative to the
+    product ("core.supplied_sterile", "functions.0.general.duration"). One
+    question can cover several fields, as a "which of these apply" checklist
+    does. reply is kept word for word: it is the evidence for every field the
+    turn answered.
+    """
+
+    question_id: str
+    fields: list[str]
+    asked: str
+    reply: str
+    unsure: bool = False
+
+
+def relevant_core_fields(functions: list["FunctionProfile"]) -> list[str]:
+    """Which product-level fields this product needs.
+
+    The regulation 3.9 qualifiers are read only for a general device function
+    (engine.qualify), and sterile supply never for software. A function whose
+    kind or software status is still open counts as possibly needing both, so
+    nothing is dropped on a guess.
+    """
+    names = ["product_name", "intended_purpose"]
+    general = [f for f in functions if f.branch() is not DeviceKind.IVD]
+    if not functions or any(_value(f.is_software) is not Tri.YES for f in general):
+        names.append("supplied_sterile")
+    if not functions or general:
+        names.append("has_measuring_function")
+    names.append("functions_confirmed")
+    return names
+
+
 class DeviceProfile(BaseModel):
     """A product, made of one or more functions.
 
@@ -898,7 +949,8 @@ class DeviceProfile(BaseModel):
     funding: FundingProfile | None = None
 
     source_text: str = ""
-    schema_version: Literal["0.11"] = "0.11"
+    transcript: list[Turn] = Field(default_factory=list)
+    schema_version: Literal["0.12"] = "0.12"
 
     @property
     def single_function(self) -> bool:
@@ -910,7 +962,7 @@ class DeviceProfile(BaseModel):
 
     def relevant(self) -> list[str]:
         """Dotted names of every field this product requires."""
-        names = [f"core.{n}" for n in CoreProfile.model_fields]
+        names = [f"core.{n}" for n in relevant_core_fields(self.functions)]
         for index, function in enumerate(self.functions):
             names += [f"functions.{index}.{n}" for n in function.relevant()]
         return names
@@ -924,7 +976,7 @@ class DeviceProfile(BaseModel):
         """
         out = [
             f"core.{name}"
-            for name in CoreProfile.model_fields
+            for name in relevant_core_fields(self.functions)
             if not getattr(self.core, name).resolved
         ]
         for index, function in enumerate(self.functions):
@@ -935,23 +987,63 @@ class DeviceProfile(BaseModel):
         """Unresolved fields for one function, so it can be completed alone."""
         return self.functions[index].missing()
 
-    def untraceable_evidence(self) -> list[str]:
-        """Fields whose evidence is not a phrase from source_text.
+    def unsure(self) -> list[str]:
+        """Missing fields the founder has already said they cannot answer.
 
-        Extraction is meant to quote, not paraphrase. Anything listed here is
-        a field where the model wrote its own words into the evidence slot,
-        which is the shape a fabricated fact takes.
+        Only while the field is still unresolved: a later answer, from the
+        founder or from an adviser, takes it off this list.
         """
+        marked = {name for turn in self.transcript if turn.unsure for name in turn.fields}
+        return [name for name in self.missing() if name in marked]
+
+    def askable(self) -> list[str]:
+        """Missing fields still worth asking: missing() less unsure()."""
+        marked = set(self.unsure())
+        return [name for name in self.missing() if name not in marked]
+
+    def answer_at(self, dotted: str) -> "Answer | None":
+        """The Answer at a dotted name, or None if the path does not reach one."""
+        node = self
+        for part in dotted.split("."):
+            if part.isdigit():
+                index = int(part)
+                if not isinstance(node, list) or index >= len(node):
+                    return None
+                node = node[index]
+            else:
+                node = getattr(node, part, None)
+            if node is None:
+                return None
+        return node if isinstance(node, Answer) else None
+
+    def untraceable_evidence(self) -> list[str]:
+        """Fields whose evidence is not a phrase from where it claims to come from.
+
+        STATED and DEFAULTED evidence has to be a phrase of source_text.
+        ANSWERED evidence has to be a phrase of the reply to a question that
+        covered that field; a phrase that happens to appear in the original
+        description, or in the reply to a different question, does not count.
+        Anything listed here is a field where someone else's words went into
+        the evidence slot, which is the shape a fabricated fact takes.
+
+        Funding fields are checked too when the funding section exists, even
+        though no stage asks them yet.
+        """
+        names = list(self.relevant())
+        if self.funding is not None:
+            names += [f"funding.{n}" for n in FundingProfile.model_fields]
         out = []
-        for dotted in self.relevant():
-            answer = self
-            for part in dotted.split("."):
-                answer = answer[int(part)] if part.isdigit() else getattr(answer, part, None)
-                if answer is None:
-                    break
-            if isinstance(answer, Answer) and answer.evidence:
-                if answer.evidence not in self.source_text:
-                    out.append(dotted)
+        for dotted in names:
+            answer = self.answer_at(dotted)
+            if answer is None or not answer.evidence:
+                continue
+            if answer.basis is Basis.ANSWERED:
+                replies = [t.reply for t in self.transcript if dotted in t.fields]
+                traced = any(answer.evidence in reply for reply in replies)
+            else:
+                traced = answer.evidence in self.source_text
+            if not traced:
+                out.append(dotted)
         return out
 
     def unresolved_in(self, section: BaseModel) -> list[str]:

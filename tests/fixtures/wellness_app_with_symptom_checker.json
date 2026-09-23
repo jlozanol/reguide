@@ -948,6 +948,7 @@
     ],
     "funding": null,
     "source_text": "Consumer wellbeing app Tracks sleep and activity for general wellbeing and includes a symptom checker that suggests whether to seek care. Activity and sleep tracking Records sleep and activity for general wellbeing. Symptom checker Asks a consumer about symptoms and suggests whether to seek medical care. fixture decomposition is fixed by hand",
-    "schema_version": "0.11"
+    "transcript": [],
+    "schema_version": "0.12"
   }
 }

@@ -494,6 +494,7 @@
     ],
     "funding": null,
     "source_text": "Long-term nasal splint Non-absorbable splint used in a nasal cavity for longer than 30 days. Long-term nasal splint Non-absorbable splint used in a nasal cavity for longer than 30 days. fixture decomposition is fixed by hand",
-    "schema_version": "0.11"
+    "transcript": [],
+    "schema_version": "0.12"
   }
 }
