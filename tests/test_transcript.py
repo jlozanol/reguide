@@ -347,12 +347,14 @@ class TestQuestion:
 class TestContract:
     """The two interview entry points exist with their stage 1 signatures.
 
-    extract() is built in step 2 and tested in test_extract.py.
+    extract() is built in step 2 and tested in test_extract.py; next_question
+    in step 4, tested in test_interview.py.
     """
 
-    def test_next_question_is_not_built_yet(self):
-        with pytest.raises(NotImplementedError):
-            X.next_question(DeviceProfile())
+    def test_next_question_is_built_and_starts_with_the_product_name(self):
+        question = X.next_question(DeviceProfile())
+        assert question is not None
+        assert question.fields == ["core.product_name"]
 
     def test_apply_answer_is_not_built_yet(self):
         with pytest.raises(NotImplementedError):

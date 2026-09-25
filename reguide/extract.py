@@ -452,9 +452,13 @@ def extract(source_text: str, client: Any = None) -> DeviceProfile:
 def next_question(profile: DeviceProfile) -> Question | None:
     """The most useful unresolved question, phrased for a non-regulatory reader.
 
-    Returns None when nothing askable remains (profile.askable() is empty).
+    Returns None when nothing is left to ask. The order, the gate early stop
+    and the definitions that settle fields without a question live in
+    interview.py; this is the entry point the interview loop calls.
     """
-    raise NotImplementedError
+    from .interview import next_question as _next_question
+
+    return _next_question(profile)
 
 
 def apply_answer(
