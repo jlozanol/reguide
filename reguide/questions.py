@@ -1062,6 +1062,109 @@ def checklist_reply(question: Question, chosen: list[str]) -> str:
 
 
 # --------------------------------------------------------------------------
+# "Same as an earlier part?" for multi-function products
+# --------------------------------------------------------------------------
+#
+# Parts of one product often share their basic facts. Before asking a later
+# function's gate questions, and again before its Schedule 2 or 2A
+# questions, the founder can confirm on one screen that a set of facts is the
+# same as an earlier function's. The screen shows every value it would copy,
+# so nothing is copied unseen. The founder ticks the facts that are the
+# same; each unticked fact is asked on its own later. Only facts about what
+# the part is are offered, never its purpose-specific rule answers. The
+# branch screen comes after the part's kind is answered and only lends facts
+# from an earlier part of the same kind; a specific exclusion item is never
+# lent, only "none of these".
+
+SAME_AS_NONE = "none_same"
+
+# Paths relative to a function, with a short name for the fact.
+SAME_AS_GATE: dict[str, str] = {
+    "is_software": "Software or an app",
+    "status.therapeutic_purpose": "What it is intended for",
+    "status.principal_action_pharmacological": "Main action achieved the way a medicine works",
+    "status.is_accessory_to_device": "Made to be used with a medical device",
+    "status.excluded_item": "Excluded goods item",
+}
+SAME_AS_BRANCH: dict[str, str] = {
+    "general.is_export_only": "For export only",
+    "general.invasiveness": "How it goes into the body",
+    "general.duration": "How long it is used continuously",
+    "general.orifice_site": "Which opening it goes into",
+    "general.connected_to_an_active_device": "Connected to a powered medical device",
+    "general.is_active_device": "Relies on a power source",
+    "general.is_programmed_or_programmable": "Runs software or firmware",
+    "general.is_active_implantable": "Powered and stays in the body",
+    "general.incorporates_medicine": "Includes a medicine as an integral part",
+    "general.human_blood_derivative": "Includes a human blood or plasma derivative",
+    "general.contains_non_viable_animal_material": "Contains animal tissue or cells",
+    "general.contacts_intact_skin_only": "Touches intact skin only",
+    "ivd.is_export_only": "For export only",
+    "ivd.is_self_test": "For self-testing",
+}
+SAME_AS_GROUPS = {"gate": SAME_AS_GATE, "branch": SAME_AS_BRANCH}
+
+
+def same_as_id(index: int, group: str) -> str:
+    return f"functions.{index}.same_as.{group}"
+
+
+def _value_label(target: str, value) -> str:
+    if target == "status.excluded_item":
+        return "None of these" if str(value) == "none" else str(value)
+    raw = getattr(value, "value", value)
+    for _, label, choice_value in CATALOGUE[target].choices:
+        if choice_value == raw:
+            return label
+    return str(raw)
+
+
+def same_as_lines(copies: dict[str, object]) -> list[str]:
+    """'Fact: value' for each dotted field to copy, in group order."""
+    lines = []
+    for dotted, value in copies.items():
+        target, _ = target_of(dotted)
+        rest = dotted.split(".", 2)[2]
+        name = SAME_AS_GATE.get(rest) or SAME_AS_BRANCH[rest]
+        lines.append(f"{name}: {_value_label(target, value)}")
+    return lines
+
+
+def render_same_as(profile: DeviceProfile, index: int, source: int, group: str,
+                   copies: dict[str, object]) -> Question:
+    """One screen offering to copy these values from function source to index.
+
+    A "tick the ones that are the same" list: each ticked fact is copied,
+    each unticked one is asked on its own later. "None of these are the
+    same" must be chosen to submit nothing ticked.
+    """
+    here, there = _function_label(profile, index), _function_label(profile, source)
+    text = (f'Which of these are the same for "{here}" as for "{there}"? '
+            "Tick every one that is the same.")
+    lines = same_as_lines(copies)
+    options = [Option(id=dotted.split(".", 2)[2], label=line, sets={dotted: value})
+               for (dotted, value), line in zip(copies.items(), lines, strict=True)]
+    options.append(Option(id=SAME_AS_NONE, label="None of these are the same"))
+    return Question(id=same_as_id(index, group), text=text, fields=list(copies),
+                    options=options, multi=True, clause="Product decomposition",
+                    hint="Each part of a product is assessed on its own, so only tick a line "
+                         "that is true of this part too. Anything left unticked is asked on "
+                         "its own.")
+
+
+def same_as_reply(question: Question, chosen: list[str]) -> str:
+    """The reply recorded: the facts ticked as the same, and the rest."""
+    items = [o for o in question.options if o.id != SAME_AS_NONE]
+    same = [o.label for o in items if o.id in chosen]
+    rest = [o.label for o in items if o.id not in chosen]
+    parts = []
+    if same:
+        parts.append("The same: " + "; ".join(same) + ".")
+    if rest:
+        parts.append("Not the same, or not sure: " + "; ".join(rest) + ".")
+    return " ".join(parts)
+
+# --------------------------------------------------------------------------
 # The review document
 # --------------------------------------------------------------------------
 
@@ -1176,4 +1279,16 @@ def review_markdown(clauses: dict | None) -> str:
             lines.append(f"- {ITEM_LABELS[target]} [`{target}`]")
         lines.extend(["", "**Also offered:** None of these apply; I'm not sure about some "
                       "of these", ""])
+    lines.extend(["## Same as an earlier part", "",
+                  "On a later part of a multi-part product, the gate and the Schedule 2 or 2A "
+                  "questions each open with one screen listing an earlier part's answers to "
+                  "these facts, as \"Fact: answer\". The founder ticks the ones that are the "
+                  "same for this part; each unticked fact is asked on its own. \"None of these "
+                  "are the same\" must be chosen to submit nothing ticked. The branch screen "
+                  "comes after the part's kind is answered and lends only from a part of the "
+                  "same kind; an exclusion item is lent only when it is \"none\".", ""])
+    for group, facts in SAME_AS_GROUPS.items():
+        lines.extend([f"### Same-as facts: {group}", ""])
+        lines.extend(f"- {name} [`{path}`]" for path, name in facts.items())
+        lines.append("")
     return "\n".join(lines).rstrip() + "\n"

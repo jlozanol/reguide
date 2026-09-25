@@ -40,6 +40,12 @@ particular kinds of device in Parts 3 and 5), every open field of that
 checklist is asked on the same screen, once per function (decision C).
 Fields it leaves open come back as single questions.
 
+Same as an earlier part (piece 4e). On a later function of a multi-function
+product, the gate and the branch each open with one screen offering to copy
+the basic facts of an earlier function (questions.py SAME_AS_GATE and
+SAME_AS_BRANCH), with every value shown. "No" copies nothing and the facts
+are asked one at a time.
+
 Definitions settle some fields without a question. settle() records them
 with basis DEFAULTED (a legal consequence, not a claim about the device):
 
@@ -68,7 +74,16 @@ from .profile import (
     Tri,
     relevant_status_fields,
 )
-from .questions import CHECKLIST_OF, checklist_id, render, render_checklist, target_of
+from .questions import (
+    CHECKLIST_OF,
+    SAME_AS_GROUPS,
+    checklist_id,
+    render,
+    render_checklist,
+    render_same_as,
+    same_as_id,
+    target_of,
+)
 from .rules.engine import classify_function
 from .status import status_of
 
@@ -338,16 +353,80 @@ def _checklist_fields(profile: DeviceProfile, order: list[str], first: str) -> l
     return members if len(members) >= 2 else []
 
 
+def _group_of(dotted: str) -> str | None:
+    """Which same-as group a function's field belongs to, if any."""
+    parts = dotted.split(".", 2)
+    if parts[0] != "functions" or len(parts) < 3:
+        return None
+    return next((g for g, facts in SAME_AS_GROUPS.items() if parts[2] in facts), None)
+
+
+def _copies(profile: DeviceProfile, source: int, index: int, group: str) -> dict:
+    """The values function source can lend function index for this group.
+
+    Only facts the founder gave (stated or answered, never a definition's
+    default) for source, and still open for index and not marked unsure. A
+    source the gate has stopped lends nothing, branch facts come only from a
+    source of the same kind once index's kind is known, and an exclusion item
+    is lent only when it is "none".
+    """
+    unsure = set(profile.unsure())
+    if stopped(profile.functions[source], source):
+        return {}
+    source_kind = profile.functions[source].branch()
+    target_kind = profile.functions[index].branch()
+    if group == "branch" and (target_kind is None or target_kind != source_kind):
+        return {}
+    copies = {}
+    for rest in SAME_AS_GROUPS[group]:
+        want = profile.answer_at(f"functions.{source}.{rest}")
+        if want is None or not want.resolved or want.basis is Basis.DEFAULTED:
+            continue
+        if rest == "status.excluded_item" and str(want.value) != "none":
+            continue
+        dotted = f"functions.{index}.{rest}"
+        have = profile.answer_at(dotted)
+        if (have is not None and have.resolved) or dotted in unsure:
+            continue
+        copies[dotted] = want.value
+    return copies
+
+
+def _same_as(profile: DeviceProfile, first: str) -> Question | None:
+    """Offer to copy an earlier function's facts, if first opens a group.
+
+    Shown once per function and group, from the earliest earlier function
+    that can lend at least two facts.
+    """
+    group = _group_of(first)
+    index = target_of(first)[1]
+    if group is None or not index:
+        return None
+    shown = same_as_id(index, group)
+    if any(turn.question_id == shown for turn in profile.transcript):
+        return None
+    for source in range(index):
+        copies = _copies(profile, source, index, group)
+        if len(copies) >= 2:
+            return render_same_as(profile, index, source, group, copies)
+    return None
+
+
 def next_question(profile: DeviceProfile) -> Question | None:
     """The next question for this profile, or None when nothing is left to ask.
 
-    When the next field belongs to a checklist, every open field of that
-    checklist comes with it on one screen.
+    On a later function of a multi-function product, the first gate or branch
+    question can come as one "same as an earlier part?" screen. When the next
+    field belongs to a checklist, every open field of that checklist comes
+    with it on one screen.
     """
     settled = settle(profile.model_copy(deep=True))
     order = plan(settled)
     if not order:
         return None
+    same = _same_as(settled, order[0])
+    if same is not None:
+        return same
     members = _checklist_fields(settled, order, order[0])
     if members:
         index = target_of(order[0])[1]

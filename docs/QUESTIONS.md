@@ -1765,3 +1765,32 @@ Each checklist puts the open fields of its group on one screen. A ticked item se
 - It is made up of a substance, or a combination of substances, that is put into the body through a natural opening, or applied to the skin and absorbed by it [`general.is_substance_through_orifice_or_skin`]
 
 **Also offered:** None of these apply; I'm not sure about some of these
+
+## Same as an earlier part
+
+On a later part of a multi-part product, the gate and the Schedule 2 or 2A questions each open with one screen listing an earlier part's answers to these facts, as "Fact: answer". The founder ticks the ones that are the same for this part; each unticked fact is asked on its own. "None of these are the same" must be chosen to submit nothing ticked. The branch screen comes after the part's kind is answered and lends only from a part of the same kind; an exclusion item is lent only when it is "none".
+
+### Same-as facts: gate
+
+- Software or an app [`is_software`]
+- What it is intended for [`status.therapeutic_purpose`]
+- Main action achieved the way a medicine works [`status.principal_action_pharmacological`]
+- Made to be used with a medical device [`status.is_accessory_to_device`]
+- Excluded goods item [`status.excluded_item`]
+
+### Same-as facts: branch
+
+- For export only [`general.is_export_only`]
+- How it goes into the body [`general.invasiveness`]
+- How long it is used continuously [`general.duration`]
+- Which opening it goes into [`general.orifice_site`]
+- Connected to a powered medical device [`general.connected_to_an_active_device`]
+- Relies on a power source [`general.is_active_device`]
+- Runs software or firmware [`general.is_programmed_or_programmable`]
+- Powered and stays in the body [`general.is_active_implantable`]
+- Includes a medicine as an integral part [`general.incorporates_medicine`]
+- Includes a human blood or plasma derivative [`general.human_blood_derivative`]
+- Contains animal tissue or cells [`general.contains_non_viable_animal_material`]
+- Touches intact skin only [`general.contacts_intact_skin_only`]
+- For export only [`ivd.is_export_only`]
+- For self-testing [`ivd.is_self_test`]

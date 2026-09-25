@@ -42,7 +42,13 @@ from .profile import (
     Tri,
     Turn,
 )
-from .questions import CHECKLIST_NONE, CHECKLIST_PARTIAL, checklist_reply
+from .questions import (
+    CHECKLIST_NONE,
+    CHECKLIST_PARTIAL,
+    SAME_AS_NONE,
+    checklist_reply,
+    same_as_reply,
+)
 from .scoring import AGREE, FIXTURE_DIR, score_fixture
 
 MAX_QUESTIONS = 400
@@ -56,6 +62,7 @@ class OracleRun:
     unsure: list[str] = field(default_factory=list)
     asked: list[str] = field(default_factory=list)
     checklists: list[str] = field(default_factory=list)
+    same_as: list[str] = field(default_factory=list)
     profile: DeviceProfile | None = None
     verdicts: list[str] = field(default_factory=list)
 
@@ -138,6 +145,27 @@ def _answer_checklist(run: OracleRun, profile: DeviceProfile, full: DeviceProfil
                                    asked=question.text, reply=reply))
 
 
+def _answer_same_as(run: OracleRun, profile: DeviceProfile, full: DeviceProfile,
+                    question: Question) -> None:
+    """Tick each fact the fixture agrees with; the rest come back singly."""
+    run.asked.append(question.id)
+    run.same_as.append(question.id)
+    items = [o for o in question.options if o.id != SAME_AS_NONE]
+    ticked = []
+    for option in items:
+        [(dotted, value)] = option.sets.items()
+        answer = full.answer_at(dotted)
+        if answer is not None and answer.resolved and answer.value == value:
+            ticked.append(option)
+    reply = same_as_reply(question, [o.id for o in ticked] or [SAME_AS_NONE])
+    for option in ticked:
+        [(dotted, value)] = option.sets.items()
+        _set(profile, dotted, Answer(value=value, basis=Basis.ANSWERED, evidence=option.label))
+    profile.transcript.append(Turn(question_id=question.id,
+                                   fields=[d for o in ticked for d in o.sets],
+                                   asked=question.text, reply=reply))
+
+
 def interview(slug: str, data: dict, start: DeviceProfile, label: str = "blank") -> OracleRun:
     """Answer every question the interview asks, from the fixture."""
     full = DeviceProfile.model_validate(data["profile"])
@@ -147,6 +175,10 @@ def interview(slug: str, data: dict, start: DeviceProfile, label: str = "blank")
         if run.questions >= MAX_QUESTIONS:
             raise RuntimeError(f"{slug}: more than {MAX_QUESTIONS} questions")
         run.questions += 1
+        if ".same_as." in question.id:
+            _answer_same_as(run, profile, full, question)
+            settle(profile)
+            continue
         if question.multi:
             _answer_checklist(run, profile, full, question)
             settle(profile)
