@@ -52,10 +52,10 @@ FIXTURES = ROOT / "tests" / "fixtures"
 
 # Ratchet. Lower these when a piece of step 4 brings the counts down; a test
 # fails if a change makes the interview longer without anyone deciding to.
-BLANK_MEDIAN_AT_MOST = 27.5
-BLANK_MAX_AT_MOST = 67
-EXTRACTED_MEDIAN_AT_MOST = 20
-EXTRACTED_MAX_AT_MOST = 52
+BLANK_MEDIAN_AT_MOST = 19
+BLANK_MAX_AT_MOST = 49
+EXTRACTED_MEDIAN_AT_MOST = 12
+EXTRACTED_MAX_AT_MOST = 37
 
 
 @pytest.fixture(scope="module", autouse=True)

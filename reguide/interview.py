@@ -34,6 +34,12 @@ report.
 The regulation 3.9 qualifiers matter only for a Class I general device, so
 they are asked only while some general function could still end at Class I.
 
+Checklists. Where the next field belongs to one of the checklists in
+questions.py (IVD 1.3, the software purposes of 4.5 to 4.8, 4.3, and the
+particular kinds of device in Parts 3 and 5), every open field of that
+checklist is asked on the same screen, once per function (decision C).
+Fields it leaves open come back as single questions.
+
 Definitions settle some fields without a question. settle() records them
 with basis DEFAULTED (a legal consequence, not a claim about the device):
 
@@ -62,7 +68,7 @@ from .profile import (
     Tri,
     relevant_status_fields,
 )
-from .questions import render
+from .questions import CHECKLIST_OF, checklist_id, render, render_checklist, target_of
 from .rules.engine import classify_function
 from .status import status_of
 
@@ -314,9 +320,37 @@ def plan(profile: DeviceProfile) -> list[str]:
     return [dotted for _, dotted in sorted(keyed)]
 
 
+def _checklist_fields(profile: DeviceProfile, order: list[str], first: str) -> list[str]:
+    """The open fields of first's checklist, if it should be shown now.
+
+    A checklist is shown once per function, and only when at least two of
+    its fields are open; otherwise first is asked on its own.
+    """
+    target, index = target_of(first)
+    checklist = CHECKLIST_OF.get(target)
+    if checklist is None or index is None:
+        return []
+    shown = checklist_id(index, checklist)
+    if any(turn.question_id == shown for turn in profile.transcript):
+        return []
+    members = [d for d in order if target_of(d)[1] == index
+               and CHECKLIST_OF.get(target_of(d)[0]) is checklist]
+    return members if len(members) >= 2 else []
+
+
 def next_question(profile: DeviceProfile) -> Question | None:
-    """The next question for this profile, or None when nothing is left to ask."""
+    """The next question for this profile, or None when nothing is left to ask.
+
+    When the next field belongs to a checklist, every open field of that
+    checklist comes with it on one screen.
+    """
     settled = settle(profile.model_copy(deep=True))
     order = plan(settled)
-    return render(settled, order[0]) if order else None
+    if not order:
+        return None
+    members = _checklist_fields(settled, order, order[0])
+    if members:
+        index = target_of(order[0])[1]
+        return render_checklist(settled, index, CHECKLIST_OF[target_of(order[0])[0]], members)
+    return render(settled, order[0])
 

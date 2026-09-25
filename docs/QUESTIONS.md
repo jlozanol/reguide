@@ -1666,3 +1666,102 @@ For each question, check three things: it asks what the clause asks, no wider an
 **Options:** Yes; No; Not sure
 
 **Feeds:** Therapeutic Goods (Medical Devices) Regulations 2002 Schedule 2A clause 1.8
+
+## Checklists
+
+Each checklist puts the open fields of its group on one screen. A ticked item sets its field to yes; an unticked one sets it to no, unless the founder chose "I'm not sure about some of these", which leaves the unticked items to come back as single questions. "None of these apply" must be chosen to submit nothing ticked. Only the items still open for the function are shown. Check each item says what its single question says.
+
+### Checklist `ivd_1_3`
+
+**Asked:** Which of these does it do? Tick every one that applies.
+
+**Feeds:** Therapeutic Goods (Medical Devices) Regulations 2002 Schedule 2A clause 1.3
+
+**Items:**
+
+- It detects the presence of, or exposure to, a sexually transmitted agent [`ivd.detects_sexually_transmitted_agent`]
+- It detects, in cerebrospinal fluid or blood, an infectious agent with a risk of limited propagation (spread) [`ivd.detects_limited_propagation_agent_in_csf_or_blood`]
+- It detects an infectious agent where there is a significant risk that a wrong result would cause death or severe disability to the person or foetus being tested [`ivd.error_could_cause_death_or_severe_disability`]
+- It is for pre-natal screening of women to find their immune status towards transmissible agents [`ivd.prenatal_immune_status_screening`]
+- It determines infective disease status or immune status, where there is a risk that a wrong result will lead to a patient management decision resulting in an imminent life-threatening situation for the patient [`ivd.infective_status_error_life_threatening`]
+- It is used in managing patients who have a life-threatening infectious disease [`ivd.manages_life_threatening_infectious_disease`]
+- It is used to select patients for selective therapy and management [`ivd.selects_patients_for_therapy`]
+- It is used to select patients for disease staging [`ivd.selects_patients_for_disease_staging`]
+- It is used to select patients in the diagnosis of cancer [`ivd.selects_patients_in_cancer_diagnosis`]
+- It is an IVD companion diagnostic, a test that gives information needed for the safe and effective use of a particular medicine or biological [`ivd.is_companion_diagnostic`]
+- It is for human genetic testing [`ivd.is_human_genetic_test`]
+- It monitors levels of medicines, substances or biological components, where there is a risk that a wrong result will lead to a patient management decision resulting in an immediate life-threatening situation for the patient [`ivd.monitors_levels_error_life_threatening`]
+- It is for screening a foetus for congenital disorders [`ivd.screens_foetus_for_congenital_disorders`]
+
+**Also offered:** None of these apply; I'm not sure about some of these
+
+### Checklist `software_purposes`
+
+**Asked:** Which of these does it do? Tick every one that applies.
+
+**Feeds:** Therapeutic Goods (Medical Devices) Regulations 2002 Schedule 2 clauses 4.5 to 4.8
+
+**Items:**
+
+- It diagnoses or screens for a disease or condition, or gives a health professional information for making a diagnosis [`general.diagnoses_or_screens`]
+- It provides information used for monitoring the state or progression of a disease or condition, or a person's parameters, such as heart rate [`general.monitors_disease_state`]
+- It specifies or recommends a treatment or intervention [`general.specifies_or_recommends_treatment`]
+- It provides therapy to a person through information given to that person, as a guided therapy app does [`general.provides_therapy_through_information`]
+
+**Also offered:** None of these apply; I'm not sure about some of these
+
+### Checklist `active_diagnosis_4_3`
+
+**Asked:** Which of these does it do? Tick every one that applies.
+
+**Feeds:** Therapeutic Goods (Medical Devices) Regulations 2002 Schedule 2 clause 4.3
+
+**Items:**
+
+- It supplies energy that will be absorbed by the patient's body (only lighting up the body with visible light does not count) [`general.supplies_absorbed_energy_for_diagnosis`]
+- It images how a radiopharmaceutical is distributed inside the patient's body [`general.images_radiopharmaceutical_distribution`]
+- It allows direct diagnosis or monitoring of the patient's vital physiological processes [`general.diagnoses_or_monitors_vital_processes`]
+- It is specifically for monitoring vital physiological parameters, where the kind of change it monitors could put the patient in immediate danger, such as changes in heart performance, breathing or central nervous system activity [`general.monitors_vital_parameters_immediate_danger`]
+- It emits ionising radiation and is used for diagnostic or therapeutic interventional radiology [`general.emits_ionising_radiation_for_interventional_radiology`]
+- It controls or monitors, or directly influences, the performance of a device that emits ionising radiation for interventional radiology [`general.controls_interventional_radiology_device`]
+
+**Also offered:** None of these apply; I'm not sure about some of these
+
+### Checklist `particular_kinds`
+
+**Asked:** Do any of these describe it? Tick every one that applies.
+
+**Hint:** Most products tick none of these.
+
+**Feeds:** Therapeutic Goods (Medical Devices) Regulations 2002 Schedule 2 Parts 3 and 5
+
+**Items:**
+
+- It is specifically for diagnosing, monitoring, controlling or correcting a defect of the heart or of the central circulatory system, through direct contact with those parts of the body [`general.corrects_heart_or_circulatory_defect_by_contact`]
+- It is specifically for use in direct contact with the heart, the central circulatory system or the central nervous system [`general.direct_contact_heart_circulation_or_nervous_system`]
+- It is a reusable surgical instrument, made to be cleaned and sterilised and used again [`general.reusable_surgical_instrument`]
+- It supplies energy in the form of ionising radiation, such as X-rays, gamma rays or a radioactive source [`general.delivers_ionising_radiation`]
+- It is intended to have a biological effect on the body [`general.has_biological_effect`]
+- It is intended to be wholly, or mostly, absorbed by the patient's body [`general.wholly_or_mostly_absorbed`]
+- It is intended to undergo a chemical change in the patient's body [`general.undergoes_chemical_change`]
+- It is intended to be placed in the teeth (going into a tooth counts; going through a tooth into the gum or bone beyond it does not) [`general.placed_in_teeth`]
+- It gives a medicine through a delivery system, in a way that is potentially hazardous to the patient because of the characteristics of the device [`general.administers_medicine_hazardously_by_delivery_system`]
+- It is intended to give a medicine to the patient [`general.administers_medicine`]
+- It is a joint replacement device, or surgical mesh [`general.joint_replacement_or_surgical_mesh`]
+- It is a motion-preserving device for the spine, such as a spinal disc replacement [`general.spinal_motion_preserving`]
+- It includes, as an integral part, a substance that would be a medicine if used on its own and that is liable to act on the body in support of the device's own action (saline alone is not a medicine here) [`general.incorporates_medicine`]
+- It includes, as an integral part, a stable derivative of human blood or human plasma [`general.human_blood_derivative`]
+- It is for contraception, or for preventing sexually transmitted diseases [`general.contraceptive_or_sti_prevention`]
+- It is specifically for disinfecting, cleaning, rinsing or hydrating contact lenses [`general.cares_for_contact_lenses`]
+- It is specifically for disinfecting another medical device (cleaning another device only by physical action, such as brushing, does not count) [`general.disinfects_another_device`]
+- It captures images of patients, or is, or produces, an anatomical model (storing, showing or sending images that something else captured does not count) [`general.records_images_or_anatomical_model`]
+- It contains non-viable (not living) tissue or cells of animal origin, or anything derived from them (tissue or cells from hair or wool, sintered hydroxyapatite and tallow derivatives do not count) [`general.contains_non_viable_animal_material`]
+- It is a blood bag [`general.is_blood_bag`]
+- It is a powered (active) device intended to be put wholly or partly into the body and to stay there after the procedure, such as a pacemaker [`general.is_active_implantable`]
+- It is an implantable accessory to an active implantable medical device, such as a pacemaker [`general.implantable_accessory_to_active_implantable`]
+- It controls or monitors, or directly influences, the performance of an active implantable medical device, such as a pacemaker or a cochlear implant [`general.controls_active_implantable`]
+- It is a breast (mammary) implant [`general.is_mammary_implant`]
+- It is used to give medicines or biologicals by inhalation [`general.administers_by_inhalation`]
+- It is made up of a substance, or a combination of substances, that is put into the body through a natural opening, or applied to the skin and absorbed by it [`general.is_substance_through_orifice_or_skin`]
+
+**Also offered:** None of these apply; I'm not sure about some of these

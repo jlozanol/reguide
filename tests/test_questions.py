@@ -280,5 +280,6 @@ def test_the_review_document_is_current(corpus):
 def test_the_review_document_builds_without_the_corpus():
     text = Q.review_markdown(None)
     assert "Clause text is not shown" in text
-    assert text.count("### ") == len(Q.CATALOGUE)
+    assert text.count("### `") == len(Q.CATALOGUE)
+    assert text.count("### Checklist") == len(Q.CHECKLISTS)
     assert EM not in text

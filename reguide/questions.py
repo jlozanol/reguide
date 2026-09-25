@@ -805,6 +805,263 @@ def entry_for(dotted: str) -> Entry:
 
 
 # --------------------------------------------------------------------------
+# Checklists: several fields on one screen
+# --------------------------------------------------------------------------
+#
+# A checklist puts every still-open field of one group on one screen as
+# "tick every one that applies" (decision C, 24 Sep 2026):
+#
+# - a ticked item sets its field to yes;
+# - an unticked item sets its field to no, unless the founder chose
+#   "I'm not sure about some of these", in which case unticked items are
+#   left open and come back later as single questions;
+# - "None of these apply" must be chosen to submit nothing ticked, so an
+#   empty checklist is never an accident; it sets every field to no.
+#
+# The reply records the ticked and the unticked items by label
+# (checklist_reply), so each field's evidence is its own label in the
+# founder's reply. A checklist is shown once per function; after that, any
+# field it left open is asked on its own.
+
+CHECKLIST_NONE = "none"
+CHECKLIST_PARTIAL = "not_sure_some"
+
+
+@dataclass(frozen=True)
+class Checklist:
+    id: str
+    section: str                      # "general" or "ivd"
+    text: str
+    clause: str
+    fields: tuple[str, ...]           # field names inside the section
+    hint: str = ""
+
+
+# Each item as a statement the founder ticks. Carve-outs from the clause stay
+# in the item, as they do in the single question.
+ITEM_LABELS: dict[str, str] = {
+    # Schedule 2A clause 1.3
+    "ivd.detects_sexually_transmitted_agent":
+        "It detects the presence of, or exposure to, a sexually transmitted agent",
+    "ivd.detects_limited_propagation_agent_in_csf_or_blood":
+        "It detects, in cerebrospinal fluid or blood, an infectious agent with a risk of "
+        "limited propagation (spread)",
+    "ivd.error_could_cause_death_or_severe_disability":
+        "It detects an infectious agent where there is a significant risk that a wrong result "
+        "would cause death or severe disability to the person or foetus being tested",
+    "ivd.prenatal_immune_status_screening":
+        "It is for pre-natal screening of women to find their immune status towards "
+        "transmissible agents",
+    "ivd.infective_status_error_life_threatening":
+        "It determines infective disease status or immune status, where there is a risk that a "
+        "wrong result will lead to a patient management decision resulting in an imminent "
+        "life-threatening situation for the patient",
+    "ivd.manages_life_threatening_infectious_disease":
+        "It is used in managing patients who have a life-threatening infectious disease",
+    "ivd.selects_patients_for_therapy":
+        "It is used to select patients for selective therapy and management",
+    "ivd.selects_patients_for_disease_staging": "It is used to select patients for disease staging",
+    "ivd.selects_patients_in_cancer_diagnosis":
+        "It is used to select patients in the diagnosis of cancer",
+    "ivd.is_companion_diagnostic":
+        "It is an IVD companion diagnostic, a test that gives information needed for the safe "
+        "and effective use of a particular medicine or biological",
+    "ivd.is_human_genetic_test": "It is for human genetic testing",
+    "ivd.monitors_levels_error_life_threatening":
+        "It monitors levels of medicines, substances or biological components, where there is a "
+        "risk that a wrong result will lead to a patient management decision resulting in an "
+        "immediate life-threatening situation for the patient",
+    "ivd.screens_foetus_for_congenital_disorders":
+        "It is for screening a foetus for congenital disorders",
+    # Schedule 2 clauses 4.5 to 4.8
+    "general.diagnoses_or_screens":
+        "It diagnoses or screens for a disease or condition, or gives a health professional "
+        "information for making a diagnosis",
+    "general.monitors_disease_state":
+        "It provides information used for monitoring the state or progression of a disease or "
+        "condition, or a person's parameters, such as heart rate",
+    "general.specifies_or_recommends_treatment":
+        "It specifies or recommends a treatment or intervention",
+    "general.provides_therapy_through_information":
+        "It provides therapy to a person through information given to that person, as a guided "
+        "therapy app does",
+    # Schedule 2 clause 4.3
+    "general.supplies_absorbed_energy_for_diagnosis":
+        "It supplies energy that will be absorbed by the patient's body (only lighting up the "
+        "body with visible light does not count)",
+    "general.images_radiopharmaceutical_distribution":
+        "It images how a radiopharmaceutical is distributed inside the patient's body",
+    "general.diagnoses_or_monitors_vital_processes":
+        "It allows direct diagnosis or monitoring of the patient's vital physiological processes",
+    "general.monitors_vital_parameters_immediate_danger":
+        "It is specifically for monitoring vital physiological parameters, where the kind of "
+        "change it monitors could put the patient in immediate danger, such as changes in heart "
+        "performance, breathing or central nervous system activity",
+    "general.emits_ionising_radiation_for_interventional_radiology":
+        "It emits ionising radiation and is used for diagnostic or therapeutic interventional "
+        "radiology",
+    "general.controls_interventional_radiology_device":
+        "It controls or monitors, or directly influences, the performance of a device that "
+        "emits ionising radiation for interventional radiology",
+    # Schedule 2 Parts 3 and 5: particular kinds of device
+    "general.corrects_heart_or_circulatory_defect_by_contact":
+        "It is specifically for diagnosing, monitoring, controlling or correcting a defect of "
+        "the heart or of the central circulatory system, through direct contact with those parts "
+        "of the body",
+    "general.direct_contact_heart_circulation_or_nervous_system":
+        "It is specifically for use in direct contact with the heart, the central circulatory "
+        "system or the central nervous system",
+    "general.reusable_surgical_instrument":
+        "It is a reusable surgical instrument, made to be cleaned and sterilised and used again",
+    "general.delivers_ionising_radiation":
+        "It supplies energy in the form of ionising radiation, such as X-rays, gamma rays or a "
+        "radioactive source",
+    "general.has_biological_effect": "It is intended to have a biological effect on the body",
+    "general.wholly_or_mostly_absorbed":
+        "It is intended to be wholly, or mostly, absorbed by the patient's body",
+    "general.undergoes_chemical_change":
+        "It is intended to undergo a chemical change in the patient's body",
+    "general.placed_in_teeth":
+        "It is intended to be placed in the teeth (going into a tooth counts; going through a "
+        "tooth into the gum or bone beyond it does not)",
+    "general.administers_medicine_hazardously_by_delivery_system":
+        "It gives a medicine through a delivery system, in a way that is potentially hazardous "
+        "to the patient because of the characteristics of the device",
+    "general.administers_medicine": "It is intended to give a medicine to the patient",
+    "general.joint_replacement_or_surgical_mesh":
+        "It is a joint replacement device, or surgical mesh",
+    "general.spinal_motion_preserving":
+        "It is a motion-preserving device for the spine, such as a spinal disc replacement",
+    "general.incorporates_medicine":
+        "It includes, as an integral part, a substance that would be a medicine if used on its "
+        "own and that is liable to act on the body in support of the device's own action "
+        "(saline alone is not a medicine here)",
+    "general.human_blood_derivative":
+        "It includes, as an integral part, a stable derivative of human blood or human plasma",
+    "general.contraceptive_or_sti_prevention":
+        "It is for contraception, or for preventing sexually transmitted diseases",
+    "general.cares_for_contact_lenses":
+        "It is specifically for disinfecting, cleaning, rinsing or hydrating contact lenses",
+    "general.disinfects_another_device":
+        "It is specifically for disinfecting another medical device (cleaning another device "
+        "only by physical action, such as brushing, does not count)",
+    "general.records_images_or_anatomical_model":
+        "It captures images of patients, or is, or produces, an anatomical model (storing, "
+        "showing or sending images that something else captured does not count)",
+    "general.contains_non_viable_animal_material":
+        "It contains non-viable (not living) tissue or cells of animal origin, or anything "
+        "derived from them (tissue or cells from hair or wool, sintered hydroxyapatite and "
+        "tallow derivatives do not count)",
+    "general.is_blood_bag": "It is a blood bag",
+    "general.is_active_implantable":
+        "It is a powered (active) device intended to be put wholly or partly into the body and "
+        "to stay there after the procedure, such as a pacemaker",
+    "general.implantable_accessory_to_active_implantable":
+        "It is an implantable accessory to an active implantable medical device, such as a "
+        "pacemaker",
+    "general.controls_active_implantable":
+        "It controls or monitors, or directly influences, the performance of an active "
+        "implantable medical device, such as a pacemaker or a cochlear implant",
+    "general.is_mammary_implant": "It is a breast (mammary) implant",
+    "general.administers_by_inhalation":
+        "It is used to give medicines or biologicals by inhalation",
+    "general.is_substance_through_orifice_or_skin":
+        "It is made up of a substance, or a combination of substances, that is put into the body "
+        "through a natural opening, or applied to the skin and absorbed by it",
+}
+
+TICK = "Tick every one that applies."
+
+CHECKLISTS: list[Checklist] = [
+    Checklist(
+        "ivd_1_3", "ivd", f"Which of these does it do? {TICK}", f"{S2A} clause 1.3",
+        ("detects_sexually_transmitted_agent",
+         "detects_limited_propagation_agent_in_csf_or_blood",
+         "error_could_cause_death_or_severe_disability", "prenatal_immune_status_screening",
+         "infective_status_error_life_threatening",
+         "manages_life_threatening_infectious_disease", "selects_patients_for_therapy",
+         "selects_patients_for_disease_staging", "selects_patients_in_cancer_diagnosis",
+         "is_companion_diagnostic", "is_human_genetic_test",
+         "monitors_levels_error_life_threatening", "screens_foetus_for_congenital_disorders")),
+    Checklist(
+        "software_purposes", "general", f"Which of these does it do? {TICK}",
+        f"{S2} clauses 4.5 to 4.8",
+        ("diagnoses_or_screens", "monitors_disease_state", "specifies_or_recommends_treatment",
+         "provides_therapy_through_information")),
+    Checklist(
+        "active_diagnosis_4_3", "general", f"Which of these does it do? {TICK}",
+        f"{S2} clause 4.3",
+        ("supplies_absorbed_energy_for_diagnosis", "images_radiopharmaceutical_distribution",
+         "diagnoses_or_monitors_vital_processes", "monitors_vital_parameters_immediate_danger",
+         "emits_ionising_radiation_for_interventional_radiology",
+         "controls_interventional_radiology_device")),
+    Checklist(
+        "particular_kinds", "general", f"Do any of these describe it? {TICK}",
+        f"{S2} Parts 3 and 5",
+        ("corrects_heart_or_circulatory_defect_by_contact",
+         "direct_contact_heart_circulation_or_nervous_system", "reusable_surgical_instrument",
+         "delivers_ionising_radiation", "has_biological_effect", "wholly_or_mostly_absorbed",
+         "undergoes_chemical_change", "placed_in_teeth",
+         "administers_medicine_hazardously_by_delivery_system", "administers_medicine",
+         "joint_replacement_or_surgical_mesh", "spinal_motion_preserving",
+         "incorporates_medicine", "human_blood_derivative", "contraceptive_or_sti_prevention",
+         "cares_for_contact_lenses", "disinfects_another_device",
+         "records_images_or_anatomical_model", "contains_non_viable_animal_material",
+         "is_blood_bag", "is_active_implantable", "implantable_accessory_to_active_implantable",
+         "controls_active_implantable", "is_mammary_implant", "administers_by_inhalation",
+         "is_substance_through_orifice_or_skin"),
+        hint="Most products tick none of these."),
+]
+
+CHECKLIST_OF: dict[str, Checklist] = {
+    f"{c.section}.{name}": c for c in CHECKLISTS for name in c.fields
+}
+
+
+def checklist_id(index: int, checklist: Checklist) -> str:
+    return f"functions.{index}.checklist.{checklist.id}"
+
+
+def render_checklist(profile: DeviceProfile, index: int, checklist: Checklist,
+                     fields: list[str]) -> Question:
+    """One screen for the open fields of a checklist, in checklist order."""
+    order = {f"functions.{index}.{checklist.section}.{name}": n
+             for n, name in enumerate(checklist.fields)}
+    fields = sorted(fields, key=order.__getitem__)
+    options = [Option(id=target_of(d)[0].split(".", 1)[1], label=ITEM_LABELS[target_of(d)[0]],
+                      sets={d: Tri.YES}) for d in fields]
+    options.append(Option(id=CHECKLIST_NONE, label="None of these apply",
+                          sets={d: Tri.NO for d in fields}))
+    options.append(Option(id=CHECKLIST_PARTIAL, label="I'm not sure about some of these"))
+    text = checklist.text
+    if len(profile.functions) > 1:
+        text = f'About "{_function_label(profile, index)}": {text}'
+    return Question(id=checklist_id(index, checklist), text=text, fields=fields,
+                    options=options, multi=True, clause=checklist.clause, hint=checklist.hint)
+
+
+def checklist_reply(question: Question, chosen: list[str]) -> str:
+    """The reply recorded for a checklist: what was ticked and what was not.
+
+    Every item's label appears in it, so each field's evidence is its own
+    label. With "I'm not sure about some of these" the unticked items are
+    named as not sure rather than not ticked.
+    """
+    items = [o for o in question.options if o.id not in (CHECKLIST_NONE, CHECKLIST_PARTIAL)]
+    ticked = [o.label for o in items if o.id in chosen]
+    rest = [o.label for o in items if o.id not in chosen]
+    if CHECKLIST_NONE in chosen:
+        return "None of these apply. Not ticked: " + "; ".join(rest) + "."
+    parts = []
+    if ticked:
+        parts.append("Ticked: " + "; ".join(ticked) + ".")
+    if rest:
+        label = "Not sure about" if CHECKLIST_PARTIAL in chosen else "Not ticked"
+        parts.append(f"{label}: " + "; ".join(rest) + ".")
+    return " ".join(parts)
+
+
+# --------------------------------------------------------------------------
 # The review document
 # --------------------------------------------------------------------------
 
@@ -901,4 +1158,22 @@ def review_markdown(clauses: dict | None) -> str:
         title = clause.citation.removeprefix(f"{REGS} ")
         section(_plain_legislation(f"{title}: {clause.heading}"), groups[clause_id],
                 _plain_legislation(body))
+    lines.extend(["## Checklists", "",
+                  "Each checklist puts the open fields of its group on one screen. A ticked "
+                  "item sets its field to yes; an unticked one sets it to no, unless the "
+                  "founder chose \"I'm not sure about some of these\", which leaves the "
+                  "unticked items to come back as single questions. \"None of these apply\" "
+                  "must be chosen to submit nothing ticked. Only the items still open for the "
+                  "function are shown. Check each item says what its single question says.",
+                  ""])
+    for checklist in CHECKLISTS:
+        lines.extend([f"### Checklist `{checklist.id}`", "", f"**Asked:** {checklist.text}", ""])
+        if checklist.hint:
+            lines.extend([f"**Hint:** {checklist.hint}", ""])
+        lines.extend([f"**Feeds:** {checklist.clause}", "", "**Items:**", ""])
+        for name in checklist.fields:
+            target = f"{checklist.section}.{name}"
+            lines.append(f"- {ITEM_LABELS[target]} [`{target}`]")
+        lines.extend(["", "**Also offered:** None of these apply; I'm not sure about some "
+                      "of these", ""])
     return "\n".join(lines).rstrip() + "\n"

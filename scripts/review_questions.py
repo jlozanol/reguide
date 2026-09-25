@@ -39,7 +39,7 @@ def main(argv=None) -> int:
         return 0
     OUT.write_text(text, encoding="utf-8")
     print(f"Wrote {OUT} ({len(text.splitlines())} lines, "
-          f"{text.count('### ')} questions).")
+          f"{text.count('### `')} questions, {text.count('### Checklist')} checklists).")
     return 0
 
 
