@@ -10,7 +10,11 @@ What is checked:
 - the order: name and purpose first, then function names, the split, the
   gate for every function, and only then kinds and branch questions; the
   "Despite" questions lead each branch; rule questions come highest class
-  first; the qualifiers come last;
+  first; the qualifiers come last, and only while a Class I result is still
+  possible;
+- the class stop (piece 4c): a function whose class the engine can already
+  give is asked nothing more, and an unanswered "Despite" question is still
+  asked;
 - the gate early stop: a function the gate has decided is asked nothing
   past the gate, and a product whose functions have all stopped is not
   asked the qualifiers;
@@ -48,10 +52,10 @@ FIXTURES = ROOT / "tests" / "fixtures"
 
 # Ratchet. Lower these when a piece of step 4 brings the counts down; a test
 # fails if a change makes the interview longer without anyone deciding to.
-BLANK_MEDIAN_AT_MOST = 33
-BLANK_MAX_AT_MOST = 71
-EXTRACTED_MEDIAN_AT_MOST = 25
-EXTRACTED_MAX_AT_MOST = 56
+BLANK_MEDIAN_AT_MOST = 27.5
+BLANK_MAX_AT_MOST = 67
+EXTRACTED_MEDIAN_AT_MOST = 20
+EXTRACTED_MAX_AT_MOST = 52
 
 
 @pytest.fixture(scope="module", autouse=True)
@@ -250,6 +254,49 @@ def test_without_the_exclusion_table_nothing_stops_on_an_exclusion(monkeypatch):
     monkeypatch.setattr(S, "EXCLUSION_TABLE", {})
     profile = DeviceProfile.model_validate(fixture("wellness_sleep_tracker")["profile"])
     assert not I.stopped(profile.functions[0], 0)
+
+
+# --------------------------------------------------------------------------
+# Class stop and qualifiers
+# --------------------------------------------------------------------------
+
+
+def test_every_regulated_function_ends_settled(blank_runs):
+    for run in blank_runs.values():
+        for index, function in enumerate(run.profile.functions):
+            if I.stopped(function, index):
+                continue
+            assert I.settled(function), (run.slug, index)
+
+
+def test_a_question_that_cannot_change_the_class_is_not_asked():
+    profile = DeviceProfile.model_validate(fixture("mri_equipment")["profile"])
+    profile.functions[0].general.supplies_absorbed_energy_for_diagnosis = Answer()
+    assert I.next_question(profile) is None
+
+
+def test_an_unanswered_despite_question_is_still_asked():
+    profile = DeviceProfile.model_validate(fixture("mri_equipment")["profile"])
+    profile.functions[0].general.is_export_only = Answer()
+    assert I.next_question(profile).fields == ["functions.0.general.is_export_only"]
+
+
+@pytest.mark.parametrize("slug", ["measuring_thermometer", "sterile_barrier_dressing",
+                                  "reusable_surgical_instrument"])
+def test_a_class_i_device_is_asked_the_qualifiers(blank_runs, slug):
+    asked = blank_runs[slug].asked
+    assert set(I.CORE_LAST) <= set(asked)
+
+
+@pytest.mark.parametrize("slug", ["tens_device", "screw_central_circulation", "mri_equipment"])
+def test_a_device_above_class_i_is_not(blank_runs, slug):
+    assert not set(I.CORE_LAST) & set(blank_runs[slug].asked)
+
+
+def test_an_open_export_question_keeps_class_i_possible():
+    function = software_function(Tri.NO)
+    function.general.is_active_device = answered(Tri.YES)
+    assert I.could_be_class_i(function)
 
 
 # --------------------------------------------------------------------------

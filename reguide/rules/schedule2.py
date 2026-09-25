@@ -50,6 +50,10 @@ absence, 4.8 the harm of the therapy. Where a paragraph splits into (i) and
 (ii), each is its own rule, so the citation names the limb that applies. A
 decision_maker that informs a relevant health professional selects 4.5(2)
 and 4.7(2); anything else selects (1).
+
+Every paragraph except 5.8 has a ceiling in CEILINGS, the class it gives, so
+an unanswered paragraph stops blocking once a live hit is already at or above
+it (regulation 3.3(7): the highest class wins, and only 5.8 can lower one).
 """
 
 from ..flags import Flag, Severity
@@ -69,7 +73,16 @@ from ..profile import (
     invasive_band,
 )
 from ..profile import Severity as ConditionSeverity
-from .engine import REGULATIONS, Classification, Pending, RuleHit, clauses, known, resolve
+from .engine import (
+    REGULATIONS,
+    Classification,
+    Pending,
+    RuleHit,
+    apply_ceilings,
+    clauses,
+    known,
+    resolve,
+)
 
 PREFIX = "s2"
 
@@ -2103,12 +2116,68 @@ def _flags(function: FunctionProfile, result: Classification) -> list[Flag]:
     return flags
 
 
+# The class each paragraph gives, which is the most an unresolved one could
+# give. Clause 5.8 opens "Despite" and is left out: it can displace a higher
+# class, so an unresolved 5.8 always blocks.
+DESPITE = frozenset({f"{PREFIX}-5.8"})
+
+CEILINGS = {f"{PREFIX}-{reference}": result for reference, result in {
+    "2.1": "Class I",
+    "2.2(1)(a)": "Class IIa", "2.2(1)(b)": "Class IIa", "2.2(1)(c)": "Class IIa",
+    "2.2A": "Class IIa",
+    "2.3(1)": "Class IIb", "2.3(2)": "Class IIa",
+    "2.4(2)": "Class IIa", "2.4(3)": "Class I", "2.4(4)": "Class IIb",
+    "3.1(2)(a)": "Class I", "3.1(2)(b)(i)": "Class IIa", "3.1(2)(b)(ii)": "Class I",
+    "3.1(2)(c)(i)": "Class IIb", "3.1(2)(c)(ii)": "Class IIa", "3.1(3)": "Class IIa",
+    "3.2(2)": "Class IIa", "3.2(3)": "Class III", "3.2(3A)": "Class III",
+    "3.2(4)": "Class I",
+    "3.2(5)(a)": "Class IIb", "3.2(5)(b)": "Class IIb", "3.2(5)(c)": "Class IIb",
+    "3.2(5)(d)": "Class IIb",
+    "3.3(2)": "Class IIa",
+    "3.3(3)(a)": "Class IIb", "3.3(3)(b)": "Class IIb", "3.3(3)(c)": "Class IIb",
+    "3.3(4)(a)": "Class III", "3.3(4)(b)": "Class III", "3.3(4)(c)": "Class III",
+    "3.3(4)(d)": "Class III",
+    "3.4(2)": "Class IIb", "3.4(3)": "Class IIa",
+    "3.4(4)(a)": "Class III", "3.4(4)(b)": "Class III", "3.4(4)(c)": "Class III",
+    "3.4(4)(d)": "Class III", "3.4(4)(e)": "Class III",
+    "3.4(4A)": "Class III", "3.4(4B)": "Class III",
+    "4.1": "Class I",
+    "4.2(1)": "Class IIa", "4.2(2)": "Class IIb", "4.2(3)": "Class IIb",
+    "4.2(4)": "Class III",
+    "4.3(2)(a)": "Class IIa", "4.3(2)(b)": "Class IIa", "4.3(2)(c)": "Class IIa",
+    "4.3(3)(a)": "Class IIb", "4.3(3)(b)": "Class IIb", "4.3(3)(c)": "Class IIb",
+    "4.4(1)": "Class IIa", "4.4(2)": "Class IIb",
+    "4.5(1)(c)(i)": "Class III", "4.5(1)(c)(ii)": "Class III",
+    "4.5(1)(d)": "Class IIb", "4.5(1)(e)": "Class IIa",
+    "4.5(2)(a)(i)": "Class IIb", "4.5(2)(a)(ii)": "Class IIb",
+    "4.5(2)(b)": "Class IIa", "4.5(2)(c)": "Class I",
+    "4.6(a)": "Class IIb", "4.6(b)": "Class IIa", "4.6(c)": "Class I",
+    "4.7(1)(a)(i)": "Class III", "4.7(1)(a)(ii)": "Class III",
+    "4.7(1)(b)(i)": "Class IIb", "4.7(1)(b)(ii)": "Class IIb", "4.7(1)(c)": "Class IIa",
+    "4.7(2)(a)(i)": "Class IIb", "4.7(2)(a)(ii)": "Class IIb",
+    "4.7(2)(b)(i)": "Class IIa", "4.7(2)(b)(ii)": "Class IIa", "4.7(2)(c)": "Class I",
+    "4.8(a)": "Class III", "4.8(b)": "Class IIb", "4.8(c)": "Class IIa",
+    "4.8(d)": "Class I",
+    "5.1(2)": "Class III",
+    "5.2(1)": "Class IIb", "5.2(2)": "Class III",
+    "5.3(1)": "Class IIb", "5.3(2)": "Class IIb",
+    "5.4(1)": "Class IIa", "5.4(2)": "Class IIa", "5.4(3)": "Class IIa",
+    "5.5(3)": "Class III",
+    "5.6": "Class IIb",
+    "5.7(1)": "Class III", "5.7(2)": "Class III", "5.7(3)": "Class III",
+    "5.9": "Class III",
+    "5.10(a)": "Class IIb", "5.10(b)": "Class IIb", "5.10(c)": "Class IIa",
+    "5.11(c)": "Class IIa", "5.11(d)": "Class IIb",
+}.items()}
+
+
 def evaluate(function: FunctionProfile) -> Classification:
     general = function.general
     outcomes = [rule(general) for rule in PART_2]
     outcomes += [rule(function) for rule in PART_3]
     outcomes += [rule(function) for rule in PART_4]
     outcomes += [rule(function) for rule in PART_5]
+    outcomes = apply_ceilings(outcomes, CEILINGS, DESPITE)
     result = resolve(outcomes, GENERAL_ORDER)
     result.flags = _flags(function, result)
     return result

@@ -22,11 +22,17 @@ cannot ask the gate (status.py imports profile.py), so the stop lives here.
 The gate needs the exclusion table loaded (status.load_exclusions); without
 it no function can be found excluded and nothing stops on an exclusion.
 
-Highest class first. Rule questions are ordered by the highest class the
-paragraphs they feed can give, so a Class III paragraph is asked before a
-Class IIa one. The early stop that makes that ordering pay, leaving out
-questions that can no longer change the class, is piece 4c; until then every
-relevant field is still asked.
+Highest class first, then stop. Rule questions are ordered by the highest
+class the paragraphs they feed can give, so a Class III paragraph is asked
+before a Class IIa one. Every paragraph without "Despite" has a ceiling in
+the engine, so once a live hit is at or above everything still unanswered the
+engine gives a confident class, and the function is asked nothing more. The
+"Despite" questions lead, because an unanswered one always blocks. What was
+left unasked appears in the classification's could_not_change list, for the
+report.
+
+The regulation 3.9 qualifiers matter only for a Class I general device, so
+they are asked only while some general function could still end at Class I.
 
 Definitions settle some fields without a question. settle() records them
 with basis DEFAULTED (a legal consequence, not a claim about the device):
@@ -49,6 +55,7 @@ from .extract import Question
 from .profile import (
     Answer,
     Basis,
+    DeviceKind,
     DeviceProfile,
     FunctionProfile,
     Invasiveness,
@@ -56,6 +63,7 @@ from .profile import (
     relevant_status_fields,
 )
 from .questions import render
+from .rules.engine import classify_function
 from .status import status_of
 
 # --------------------------------------------------------------------------
@@ -222,7 +230,35 @@ def stopped(function: FunctionProfile, index: int) -> bool:
     return status_of(function, index).outcome.terminal
 
 
-def _function_key(profile: DeviceProfile, index: int, rest: str, position: int):
+def settled(function: FunctionProfile) -> bool:
+    """Does the engine already give this function a confident class."""
+    if function.general is None and function.ivd is None:
+        return False
+    return classify_function(function).confident
+
+
+def could_be_class_i(function: FunctionProfile) -> bool:
+    """Could this function still end as a Class I general device.
+
+    Only then do the regulation 3.9 qualifiers matter. A live hit above
+    Class I rules it out unless an unanswered "Despite" clause (5.8, export
+    only, Class I) could still displace it.
+    """
+    if function.branch() is DeviceKind.IVD:
+        return False
+    if function.general is None:
+        return True
+    outcome = classify_function(function)
+    if outcome.confident:
+        return outcome.result == "Class I"
+    live = [h for h in outcome.hits if h.rule_id not in outcome.displaced]
+    above_i = any(h.result != "Class I" for h in live)
+    export_open = "general.is_export_only" in outcome.unresolved
+    return not above_i or export_open
+
+
+def _function_key(profile: DeviceProfile, index: int, rest: str, position: int,
+                  gate_stopped: set[int], class_settled: set[int]):
     """The sort key for one of a function's fields, or None to leave it out."""
     function = profile.functions[index]
     if rest in ("name", "description"):
@@ -233,10 +269,12 @@ def _function_key(profile: DeviceProfile, index: int, rest: str, position: int):
         order = relevant_status_fields(function)
         name = rest.split(".", 1)[1]
         return (3, index, 1, order.index(name) if name in order else len(order))
-    if stopped(function, index):
+    if index in gate_stopped:
         return None
     if rest == "kind":
         return (4, index, 0, 0, 0)
+    if index in class_settled:
+        return None
     section, name = rest.split(".", 1)
     despite, openers, rank = BRANCH_ORDER[section]
     if name in despite:
@@ -252,8 +290,10 @@ def plan(profile: DeviceProfile) -> list[str]:
     Works on the profile as given; next_question settles a copy first.
     """
     askable = profile.askable()
-    all_stopped = bool(profile.functions) and all(
-        stopped(f, i) for i, f in enumerate(profile.functions))
+    gate_stopped = {i for i, f in enumerate(profile.functions) if stopped(f, i)}
+    live = [i for i in range(len(profile.functions)) if i not in gate_stopped]
+    class_settled = {i for i in live if settled(profile.functions[i])}
+    qualifiers_needed = any(could_be_class_i(profile.functions[i]) for i in live)
     keyed = []
     for position, dotted in enumerate(askable):
         if dotted in CORE_FIRST:
@@ -261,12 +301,13 @@ def plan(profile: DeviceProfile) -> list[str]:
         elif dotted == "core.functions_confirmed":
             key = (2,)
         elif dotted in CORE_LAST:
-            if all_stopped:
+            if not qualifiers_needed:
                 continue
             key = (5, CORE_LAST.index(dotted))
         else:
             _, index, rest = dotted.split(".", 2)
-            key = _function_key(profile, int(index), rest, position)
+            key = _function_key(profile, int(index), rest, position,
+                                gate_stopped, class_settled)
             if key is None:
                 continue
         keyed.append((key, dotted))

@@ -18,10 +18,13 @@ FIXTURES = Path(__file__).resolve().parent / "fixtures"
 
 
 def refused() -> dict:
-    """The MRI fixture with one Part 4 answer blanked, so the engine refuses."""
+    """The MRI fixture with its export-only answer blanked, so the engine refuses.
+
+    Clause 5.8 opens "Despite", so an unanswered 5.8 blocks whatever else hits.
+    """
     data = fixture("mri_equipment")
     profile = DeviceProfile.model_validate(data["profile"])
-    profile.functions[0].general.supplies_absorbed_energy_for_diagnosis = Answer()
+    profile.functions[0].general.is_export_only = Answer()
     data["profile"] = json.loads(profile.model_dump_json())
     return data
 
@@ -84,7 +87,7 @@ class TestVerdicts:
     def test_no_result_names_what_stopped_it(self):
         [row] = SC.score_fixture("mri_equipment", refused())
         assert row.verdict == SC.NO_RESULT
-        assert row.detail == "general.supplies_absorbed_energy_for_diagnosis"
+        assert row.detail == "general.is_export_only"
 
     def test_an_excluded_function_agrees_without_being_classified(self, monkeypatch):
         seen = []

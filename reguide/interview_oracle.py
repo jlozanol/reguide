@@ -10,6 +10,9 @@ things:
 - whether the answers it gathered are enough: the finished profile is
   scored like the fixture itself, so an ordering or an early stop that skips
   a question the engine needs shows up as a failure, not as a short count.
+  Once the class is settled the interview stops, so the fixture's rule may
+  be one left unasked at the same class; that still agrees (see
+  scoring.score_fixture, unasked_rule_ok).
 
 It starts either from nothing but the right number of functions (blank), or
 from a recorded extraction of one of the fixture's intake texts (extracted),
@@ -121,7 +124,7 @@ def interview(slug: str, data: dict, start: DeviceProfile, label: str = "blank")
 
     run.profile = profile
     scored = dict(data, profile=profile.model_dump(mode="json"))
-    run.verdicts = [row.verdict for row in score_fixture(slug, scored)]
+    run.verdicts = [row.verdict for row in score_fixture(slug, scored, unasked_rule_ok=True)]
     return run
 
 

@@ -113,7 +113,14 @@ def rule_matches(expected: str, got: str) -> bool:
     return got == expected or got.startswith(expected + "(")
 
 
-def score_fixture(slug: str, data: dict) -> list[Row]:
+def score_fixture(slug: str, data: dict, unasked_rule_ok: bool = False) -> list[Row]:
+    """Score one fixture's functions.
+
+    unasked_rule_ok is for an interview that stopped once the class could
+    not change: a paragraph at the result's class that was left unanswered
+    (relieved by its ceiling) then counts as the fixture's rule, and the row
+    agrees with a note. A fixture's own complete profile never needs it.
+    """
     profile = DeviceProfile.model_validate(data["profile"])
     verdict = S.gate(profile)
     classifiable = verdict.classifiable
@@ -161,6 +168,12 @@ def score_fixture(slug: str, data: dict) -> list[Row]:
             continue
         wanted = expected_rule_id(function.branch(), row.expected_rule)
         if wanted is None or not any(rule_matches(wanted, got) for got in row.got_rules):
+            unasked = wanted is not None and unasked_rule_ok and any(
+                rule_matches(wanted, p.rule_id) and p.ceiling == outcome.result
+                for p in outcome.relieved)
+            if unasked:
+                row.detail = f"fixture's {row.expected_rule} not asked, could not change the class"
+                continue
             row.verdict = WRONG_RULE
             row.detail = f"fixture cites {row.expected_rule}"
     return rows

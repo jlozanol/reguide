@@ -36,7 +36,16 @@ from dataclasses import replace
 
 from ..flags import Flag, Severity
 from ..profile import IVD_ORDER, IvdProfile, Tri
-from .engine import REGULATIONS, Classification, Pending, RuleHit, clauses, known, resolve
+from .engine import (
+    REGULATIONS,
+    Classification,
+    Pending,
+    RuleHit,
+    apply_ceilings,
+    clauses,
+    known,
+    resolve,
+)
 
 PREFIX = "s2a"
 
@@ -574,8 +583,28 @@ def _note_to_1_3_f(ivd: IvdProfile, result: Classification) -> list[Flag]:
     return [NOTE_1_3_F]
 
 
+# The class each paragraph gives. Clauses 1.5, 1.6(2) and 1.8 open "Despite"
+# and are left out: each displaces a higher class, so an unresolved one
+# always blocks. 1.6(1) sets its own ceiling; 1.7 only runs once every other
+# clause is answered, so it is never pending.
+DESPITE = frozenset({f"{PREFIX}-1.5", f"{PREFIX}-1.6(2)(a)", f"{PREFIX}-1.6(2)(b)",
+                     f"{PREFIX}-1.6(2)(c)", f"{PREFIX}-1.8"})
+
+CEILINGS = {f"{PREFIX}-{reference}": result for reference, result in {
+    "1.1(a)": "Class 4 IVD", "1.1(b)": "Class 4 IVD",
+    "1.2(1)": "Class 3 IVD", "1.2(2)": "Class 4 IVD",
+    "1.3(a)": "Class 3 IVD", "1.3(b)": "Class 3 IVD", "1.3(c)": "Class 3 IVD",
+    "1.3(d)": "Class 3 IVD", "1.3(e)": "Class 3 IVD",
+    "1.3(f)(i)": "Class 3 IVD", "1.3(f)(ii)": "Class 3 IVD", "1.3(f)(iii)": "Class 3 IVD",
+    "1.3(fa)": "Class 3 IVD", "1.3(g)": "Class 3 IVD", "1.3(h)": "Class 3 IVD",
+    "1.3(i)": "Class 3 IVD", "1.3(j)": "Class 3 IVD",
+    "1.4": "Class 3 IVD",
+    "1.6(1)": "Class 1 IVD",
+}.items()}
+
+
 def evaluate(ivd: IvdProfile) -> Classification:
-    outcomes = [rule(ivd) for rule in ALL_RULES]
+    outcomes = apply_ceilings([rule(ivd) for rule in ALL_RULES], CEILINGS, DESPITE)
     result = resolve(outcomes, IVD_ORDER)
     live = [h for h in result.hits if h.rule_id not in result.displaced]
     if not live and not result.unresolved:

@@ -17,7 +17,16 @@ Pending. A Pending blocks the result unless a hit displaces its clause,
 because a rule nobody could evaluate might have applied. A partial answer here
 is worse than no answer. The one relief is a Pending that carries a ceiling:
 a rule with no "despite" can only change the result by outranking it, so once
-a live hit is at or above its ceiling it no longer blocks.
+a live hit is at or above its ceiling it no longer blocks. It is kept in
+relieved, so the report can say which rules were not needed (at an equal
+class, which other paragraph would also have applied) rather than leave them
+looking unanswered.
+
+Every paragraph of Schedules 2 and 2A has a ceiling, the class it gives,
+except the clauses that open "Despite": Schedule 2 clause 5.8 and Schedule 2A
+clauses 1.5, 1.6(2) and 1.8. Those can displace a higher class, so an
+unresolved one always blocks. apply_ceilings() stamps the ceilings onto a
+schedule's Pendings; each schedule keeps its own table.
 
 Rule functions never call a model and never read free text. They read
 resolved profile fields and nothing else.
@@ -78,10 +87,21 @@ class Classification:
     displaced: list[str] = field(default_factory=list)   # rule ids set aside
     flags: list[Flag] = field(default_factory=list)      # shown beside the class
     qualifiers: list[Qualifier] = field(default_factory=list)
+    # Rules left unresolved that could not outrank the result: not needed,
+    # whether or not anyone was asked. Kept so the report can name them.
+    relieved: list[Pending] = field(default_factory=list)
 
     @property
     def confident(self) -> bool:
         return self.result is not None and not self.unresolved
+
+    @property
+    def could_not_change(self) -> list[str]:
+        """The unresolved inputs of the relieved rules, for "not asked"."""
+        fields = []
+        for p in self.relieved:
+            fields += [f for f in p.fields if f not in fields and f not in self.unresolved]
+        return fields
 
     @property
     def governing(self) -> list[RuleHit]:
@@ -112,6 +132,24 @@ def known(answer) -> Tri | None:
     return None
 
 
+def apply_ceilings(outcomes: list[Outcome], ceilings: dict[str, str],
+                   despite: frozenset[str]) -> list[Outcome]:
+    """Give every Pending without a "despite" the ceiling its paragraph has.
+
+    A rule id missing from the table raises, so a new paragraph cannot slip
+    through without one.
+    """
+    stamped = []
+    for outcome in outcomes:
+        if isinstance(outcome, Pending) and outcome.ceiling is None \
+                and outcome.rule_id not in despite:
+            if outcome.rule_id not in ceilings:
+                raise KeyError(f"no ceiling for {outcome.rule_id}")
+            outcome = replace(outcome, ceiling=ceilings[outcome.rule_id])
+        stamped.append(outcome)
+    return stamped
+
+
 def resolve(outcomes: list[Outcome], order: list[str]) -> Classification:
     """Combine rule outcomes into one Classification.
 
@@ -124,10 +162,12 @@ def resolve(outcomes: list[Outcome], order: list[str]) -> Classification:
     set_aside = {c for h in hits for c in h.displaces}
     live = [h for h in hits if clause_of(h.rule_id) not in set_aside]
     blocking = [p for p in pending if clause_of(p.rule_id) not in set_aside]
+    relieved = []
     if live:
         best = max((h.result for h in live), key=order.index)
-        blocking = [p for p in blocking
-                    if p.ceiling is None or order.index(p.ceiling) > order.index(best)]
+        relieved = [p for p in blocking
+                    if p.ceiling is not None and order.index(p.ceiling) <= order.index(best)]
+        blocking = [p for p in blocking if p not in relieved]
 
     unresolved = []
     for p in blocking:
@@ -143,6 +183,7 @@ def resolve(outcomes: list[Outcome], order: list[str]) -> Classification:
         hits=hits,
         unresolved=unresolved,
         displaced=[h.rule_id for h in hits if h not in live],
+        relieved=relieved if result is not None else [],
     )
 
 
